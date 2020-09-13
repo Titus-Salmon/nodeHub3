@@ -1,0 +1,128 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+		include vw-dashboard.pug
+
+	div(style="display:block")
+		form#nhcrtEdiCSVPost(action='/signFilterChecker/save2CSVreviewSfAud' method='POST' accept-charset='UTF-8')
+			if nhcrtInfraSF_Join !== undefined
+				label.input-label-1(for='csv') filename:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				//- label.input-label-1(for='csvHeaders') CSV Headers
+				//- 	input#csvHeaders.input-unit-1(type='text', placeholder='enter data', name='csvHeadersPost', value='ri_t0d,invScanCode,ordSupplierStockNumber,invName,invSize,invReceiptAlias,posTimeStamp,invDateCreated,ordQuantityInOrderUnit,oupName,stoName,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastcost,sibBasePrice,pi1Description,pi2Description,pi3Description,invPowerField3,invPowerField4,ediCost')
+				label.input-label-1(for='csvData') CSV Body data
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=nhcrtInfraSF_Join)
+				button#saveCSVnhcrtEdi(type="submit" form="nhcrtEdiCSVPost") Save Results as CSV - NHCRT/InfraSF joined tables
+
+		div.rslt-tbl-1
+			table#resTbl
+				thead
+					tr
+						th ri_t0d
+						th invPK
+						th invCPK
+						th invScanCode
+						th invName
+						th ordSupplierStockNumber
+						th invSize
+						th invReceiptAlias
+						th posTimeStamp
+						th invDateCreated
+						th invEmpFkCreatedBy
+						th ordQuantityInOrderUnit
+						th oupName
+						th stoName
+						th brdName
+						th dptName
+						th dptNumber
+						th sibIdealMargin
+						th venCompanyname
+						th invLastreceived
+						th invLastsold
+						th invLastcost
+						th sibBasePrice
+						th invOnhand
+						th invOnorder
+						th invIntransit
+						th pi1Description
+						th pi2Description
+						th pi3Description
+						th pi4Description
+						th invPowerField3
+						th invPowerField4
+						th Dept
+						th Brand
+						th Product
+						th Size
+						th SalePrice
+						th EDLP
+						th RBPrice
+						th percentOff
+						th GL
+						th IND
+						th MT
+						th SH
+						th SM
+						th Stores
+						
+
+				tbody#resTblBdy
+					if nhcrtInfraSF_Join !== undefined
+						each elmnt in nhcrtInfraSF_Join
+							tr
+								td= elmnt.ri_t0d
+								td= elmnt.invPK
+								td= elmnt.invCPK
+								td= elmnt.invScanCode
+								td= elmnt.invName
+								td= elmnt.ordSupplierStockNumber
+								td= elmnt.invSize
+								td= elmnt.invReceiptAlias
+								td= elmnt.posTimeStamp
+								td= elmnt.invDateCreated
+								td= elmnt.invEmpFkCreatedBy
+								td= elmnt.ordQuantityInOrderUnit
+								td= elmnt.oupName
+								td= elmnt.stoName
+								td= elmnt.brdName
+								td= elmnt.dptName
+								td= elmnt.dptNumber
+								td= elmnt.sibIdealMargin
+								td= elmnt.venCompanyname
+								td= elmnt.invLastreceived
+								td= elmnt.invLastsold
+								td= elmnt.invLastcost
+								td= elmnt.sibBasePrice
+								td= elmnt.invOnhand
+								td= elmnt.invOnorder
+								td= elmnt.invIntransit
+								td= elmnt.pi1Description
+								td= elmnt.pi2Description
+								td= elmnt.pi3Description
+								td= elmnt.pi4Description
+								td= elmnt.invPowerField3
+								td= elmnt.invPowerField4
+								td= elmnt.Dept
+								td= elmnt.Brand
+								td= elmnt.Product
+								td= elmnt.Size
+								td= elmnt.SalePrice
+								td= elmnt.EDLP
+								td= elmnt.RBPrice
+								td= elmnt.percentOff
+								td= elmnt.GL
+								td= elmnt.IND
+								td= elmnt.MT
+								td= elmnt.SH
+								td= elmnt.SM
+								td= elmnt.Stores
+								
+
+//- testing for clone
+//- change made from home computer
+
+
+

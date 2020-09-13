@@ -1,0 +1,29 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+		include vw-dashboard.pug
+		div.rslt-tbl-1
+			table#resTbl
+				thead
+					tr
+						th Table Qualifier
+						th Table Owner
+						th Table Name
+						th Table Type
+						th Table Remarks
+
+				tbody#resTblBdy
+					if catapultTables !== undefined
+						each elmnt in catapultTables
+							tr
+								td= elmnt.tableQualifier
+								td= elmnt.tableOwner
+								td= elmnt.tableName
+								td= elmnt.tableType
+								td= elmnt.tableRemarks
+
+
+

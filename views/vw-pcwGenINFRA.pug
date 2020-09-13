@@ -1,0 +1,161 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //v// loads table column names for specified table
+		div(style="display:block")
+			form#loadTable(action='/pcwGenINFRA/loadTable_calcResPcwGenINFRA' method='POST' accept-charset="UTF-8")
+				label.input-label-1(for='ldTblName') Table Name to Load (loads column names)
+				input#ldTblName.input-unit-1(type='text', placeholder='enter data1', name='ldTblNamePost', value='')
+
+				button#ldTblBtn(type='submit', form='loadTable') Load Table
+
+		if loadedTable !== undefined
+			input#loadedTblName.input-unit-1(type='text', placeholder='enter data2', name='loadedTblNamePost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+			input#ldTblFields.input-unit-1(type='text', placeholder='enter data', name='ldTblFieldsPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+			p= `Loaded Table: ${loadedTable.tableNameToLoad}`
+			p Errors:
+			if loadedTable.tableLoadError.length > 0
+				each thing in loadedTable.tableLoadError
+					- console.log(`thing==> ${thing}`)
+					p= thing
+		//- //^// loads table column names for specified table
+
+
+		//-*********************************************************************************************************
+
+
+		form#calcResPcwGenINFRA(action='/pcwGenINFRA/calcResPcwGenINFRA' method='POST' accept-charset="UTF-8")
+
+			if sqlTableCreated !== undefined
+
+				input#tblColumnNames.input-unit-1(type='text', placeholder='enter data', name='tblColumnNamesPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.basicColumnNames)
+				input#tblPopulated.input-unit-1(type='text', placeholder='enter data', name='tblPopulatedPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.tableName)
+			if loadedTable !== undefined
+
+				input#tblNameToPost.input-unit-1(type='text', placeholder='enter data', name='tblNameToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+				input#fldArrToPost.input-unit-1(type='text', placeholder='enter data', name='fldArrToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+			//- div(style="display:block")
+			//- 	label.input-label-1(for='salePct') Sale Percentage (decimal)
+			//- 	input#salePct.input-unit-1(type='text', placeholder='enter data', name='salePctPost', value='')
+		button(type='submit', form='calcResPcwGenINFRA', style="display: block; float: left") pcwGenINFRA
+
+		br
+		br
+
+		div(style="display:block")
+		form#save2CSVpcwGenIND(action='/pcwGen/save2CSVpcwGen' method='POST' accept-charset='UTF-8')
+			if searchResultsIND_SplitParsedArr !== undefined
+				label.input-label-1(for='csv') filename - IND:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data - IND
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResultsIND_SplitParsedArr)
+				button#saveCSVpcwGen(type="submit" form="save2CSVpcwGenIND") Save Results as CSV - pcwGen
+
+		div(style="display:block")
+		form#save2CSVpcwGenSM(action='/pcwGen/save2CSVpcwGen' method='POST' accept-charset='UTF-8')
+			if searchResultsSM_SplitParsedArr !== undefined
+				label.input-label-1(for='csv') filename - SM:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data - SM
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResultsSM_SplitParsedArr)
+				button#saveCSVpcwGen(type="submit" form="save2CSVpcwGenSM") Save Results as CSV - pcwGen
+
+		div(style="display:block")
+		form#save2CSVpcwGenMT(action='/pcwGen/save2CSVpcwGen' method='POST' accept-charset='UTF-8')
+			if searchResultsMT_SplitParsedArr !== undefined
+				label.input-label-1(for='csv') filename - MT:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data - MT
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResultsMT_SplitParsedArr)
+				button#saveCSVpcwGen(type="submit" form="save2CSVpcwGenMT") Save Results as CSV - pcwGen
+
+		div(style="display:block")
+		form#save2CSVpcwGenSH(action='/pcwGen/save2CSVpcwGen' method='POST' accept-charset='UTF-8')
+			if searchResultsSH_SplitParsedArr !== undefined
+				label.input-label-1(for='csv') filename - SH:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data - SH
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResultsSH_SplitParsedArr)
+				button#saveCSVpcwGen(type="submit" form="save2CSVpcwGenSH") Save Results as CSV - pcwGen
+
+		div(style="display:block")
+		form#save2CSVpcwGenGL(action='/pcwGen/save2CSVpcwGen' method='POST' accept-charset='UTF-8')
+			if searchResultsGL_SplitParsedArr !== undefined
+				label.input-label-1(for='csv') filename - GL:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data - GL
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResultsGL_SplitParsedArr)
+				button#saveCSVpcwGen(type="submit" form="save2CSVpcwGenGL") Save Results as CSV - pcwGen
+
+		div.rslt-tbl-1
+			table
+				thead
+					tr
+						th ItemID IND
+						th Receipt Alias IND
+				tbody
+					if srcRsINDstocked !== undefined
+						each elmnt in srcRsINDstocked
+							tr
+								td= elmnt.ItemID
+								td= elmnt.ReceiptAlias
+
+		div.rslt-tbl-1(style="margin-left: 10px")
+			table
+				thead
+					tr
+						th ItemID SM
+						th Receipt Alias SM
+				tbody
+					if srcRsSMstocked !== undefined
+						each elmnt in srcRsSMstocked
+							tr
+								td= elmnt.ItemID
+								td= elmnt.ReceiptAlias
+
+		div.rslt-tbl-1(style="margin-left: 10px")
+			table
+				thead
+					tr
+						th ItemID MT
+						th Receipt Alias MT
+				tbody
+					if srcRsMTstocked !== undefined
+						each elmnt in srcRsMTstocked
+							tr
+								td= elmnt.ItemID
+								td= elmnt.ReceiptAlias
+
+		div.rslt-tbl-1(style="margin-left: 10px")
+			table
+				thead
+					tr
+						th ItemID SH
+						th Receipt Alias SH
+				tbody
+					if srcRsSHstocked !== undefined
+						each elmnt in srcRsSHstocked
+							tr
+								td= elmnt.ItemID
+								td= elmnt.ReceiptAlias
+
+		div.rslt-tbl-1(style="margin-left: 10px")
+			table
+				thead
+					tr
+						th ItemID GL
+						th Receipt Alias GL
+				tbody
+					if srcRsGLstocked !== undefined
+						each elmnt in srcRsGLstocked
+							tr
+								td= elmnt.ItemID
+								td= elmnt.ReceiptAlias
+
+		script(src='/javascripts/modules/adminM0d.js')

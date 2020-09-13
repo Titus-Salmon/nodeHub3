@@ -1,0 +1,498 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //v// loads table column names for specified table
+		div(style="display:block")
+			form#loadTable(action='/MySqlTableHub/loadTable_MySqlHub' method='POST' accept-charset="UTF-8")
+				label.input-label-1(for='ldTblName') Table Name to Load (loads column names) AND (loads ongDisco_WS & ongDisco_Rtl data from rainbowcat)
+				input#ldTblName.input-unit-1(type='text', placeholder='enter data1', name='ldTblNamePost', value='')
+				//- label.input-label-1(for='discountToApplyCarryOver') % Discount To Apply To Entire Catalog (CarryOver)
+				//- input#discountToApplyCarryOver.input-unit-1(type='number', placeholder='0', step='.01', name='discountToApplyPost', value=loadedTable.ongDisco_WS)
+
+				button#ldTblBtn(type='submit', form='loadTable') Load Table
+
+		if loadedTable !== undefined
+			input#loadedTblName.input-unit-1(type='text', placeholder='enter data2', name='loadedTblNamePost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+			input#ldTblFields.input-unit-1(type='text', placeholder='enter data', name='ldTblFieldsPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+			p= `Loaded Table: ${loadedTable.tableNameToLoad}`
+			p Errors:
+			if loadedTable.tableLoadError.length > 0
+				each thing in loadedTable.tableLoadError
+					- console.log(`thing==> ${thing}`)
+					p= thing
+		//- //^// loads table column names for specified table
+
+
+		//- //v// queries RB DB - default query here is 'show tables;'
+		form#queryRBdb(action='/MySqlTableHub/queryRBdb' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dbQuery') Enter Query for Rainbow DB
+				textarea#dbQuery.input-unit-1(name="dbQueryPost", cols="30", rows="1", wrap="soft") show tables;
+				button#crtTblBtn1(type='submit', form='queryRBdb', style="display: block; float: left") QUERY Rainbow DB
+		//- //^// queries RB DB - default query here is 'show tables;'
+
+		br
+
+		//- //v// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+		form#nhcrtDisplay(action='/MySqlTableHub/nhcrtDisplay' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtDisplay') Enter NodeHub Catapult Results Table to Display
+				textarea#nhcrtDisplayTextArea.input-unit-1(name="nhcrtDisplayPost", cols="30", rows="1", wrap="soft") SELECT * FROM nhcrt_badger20191127;
+				button#crtTblBtn2(type='submit', form='nhcrtDisplay', style="display: block; float: left") Display NHCRT
+		//- //^// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+
+		br
+
+		//- //v// joins nhcrt table to edi table
+		form#nhcrtEdiJoin(action='/MySqlTableHub/nhcrtEdiJoin' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtEdiJoin') This query joins nhcrt & edi tables
+				textarea#nhcrtEdiJoinTextArea.input-unit-1(name="nhcrtEdiJoinPost", cols="30", rows="1", wrap="soft") SELECT nhcrt.ri_t0d, nhcrt.invPK, nhcrt.invCPK, nhcrt.invScanCode, nhcrt.ordSupplierStockNumber, nhcrt.invName, nhcrt.invSize, nhcrt.invReceiptAlias, nhcrt.posTimeStamp, nhcrt.invDateCreated, nhcrt.ordQuantityInOrderUnit, nhcrt.oupName, nhcrt.stoNumber, nhcrt.brdName, nhcrt.dptName, nhcrt.dptNumber, nhcrt.sibIdealMargin, nhcrt.actualMargT0d, nhcrt.venCompanyname, nhcrt.invLastcost, nhcrt.sibBasePrice, nhcrt.pi1Description, nhcrt.pi2Description, nhcrt.pi3Description, nhcrt.invPowerField3, nhcrt.invPowerField4, edi_table.* FROM ${nhcrtTableName} nhcrt JOIN ${ediTableName} edi_table ON nhcrt.invScanCode WHERE nhcrt.invScanCode = edi_table.${ediPrefix_upc} ORDER BY nhcrt.pi1Description, nhcrt.pi2Description;
+				button#crtTblBtn3(type='submit', form='nhcrtEdiJoin', style="display: block; float: left") Display NHCRT/EDI joined tables
+		//- //^// joins nhcrt table to edi table
+
+		br
+
+		//- //v// creates empty nhcrt mysql table
+		form#createNhcrtTable(action='/MySqlTableHub/createRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtNhcrtTbl') Enter MySql nhcrt Table Name to CREATE
+				input#crtNhcrtTbl.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtNhcrtTblInput') Enter Table Headers (as csv) - default headers for nhcrt (Node Hub Catalog Results Table) provided
+				input#crtNhcrtTblInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='invPK,invCPK,invScanCode,invName,ordSupplierStockNumber,invSize,invReceiptAlias,posTimeStamp,invDateCreated,invEmpFkCreatedBy,ordQuantityInOrderUnit,oupName,stoNumber,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastreceived,invLastsold,invLastcost,sibBasePrice,invOnhand,invOnorder,invIntransit,invMemo,pi1Description,pi2Description,pi3Description,pi4Description,invPowerField3,invPowerField4')
+				button#crtNhcrtTblBtn(type='submit', form='createNhcrtTable', style="display: block") CREATE NHCRT Table
+		//- //^// creates empty mysql table
+
+		br
+
+		//- //- //v// creates empty nhcrtInfraSalesJoin mysql table
+		//- form#createNhcrtInfraSalesJoinTable(action='/MySqlTableHub/createRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+		//- 	div(style="display:block")
+		//- 		label.input-label-1(for='crtNhcrtInfraSalesJoinTbl') Enter MySql nhcrtInfraSalesJoin Table Name to CREATE
+		//- 		input#crtNhcrtInfraSalesJoinTbl.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+		//- 		label.input-label-1(for='crtNhcrtInfraSalesJoinTblInput') Enter Table Headers (as csv) - default headers for nhcrtInfraSales provided
+		//- 		input#crtNhcrtInfraSalesJoinTblInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='invPK,invCPK,invScanCode,invName,ordSupplierStockNumber,invSize,invReceiptAlias,posTimeStamp,invDateCreated,invEmpFkCreatedBy,ordQuantityInOrderUnit,oupName,stoNumber,stoName,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastreceived,invLastsold,invLastcost,sibBasePrice,invOnhand,invOnorder,invIntransit,pi1Description,pi2Description,pi3Description,invPowerField3,invPowerField4,infra_sale')
+		//- 		button#crtNhcrtInfraSalesJoinTblBtn(type='submit', form='createNhcrtInfraSalesJoinTable', style="display: block") CREATE NHCRTINFRASALESJOIN Table
+		//- //- //^// creates empty nhcrtInfraSales mysql table
+
+		//- br
+
+		//- //v// creates empty nhcrtEdiJoin mysql table
+		form#createNhcrtEdiTable(action='/MySqlTableHub/createRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtNhcrtEdiTbl') Enter MySql nej Table Name to CREATE
+				input#crtNhcrtEdiTbl.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtNhcrtEdiInput') Enter Table Headers (as csv) - default headers for nhcrtEdiJoin provided
+				input#crtNhcrtEdiInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='invPK,invCPK,invScanCode,ordSupplierStockNumber,ediSKU,invName,invSize,invReceiptAlias,posTimeStamp,invDateCreated,ordQuantityInOrderUnit,oupName,stoNumber,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastcost,ediCost,sibBasePrice,ediPrice,pi1Description,pi2Description,pi3Description,invPowerField3,invPowerField4')
+				button#crtNhcrtEdiBtn(type='submit', form='createNhcrtEdiTable', style="display: block; float: left") CREATE nhcrtEdiJoin Table
+		//- //^// creates empty mysql table
+
+		br
+		br
+
+		if sqlTableCreated !== undefined
+			- console.log(`sqlTableCreated.columnNames==> ${sqlTableCreated.columnNames}`)
+			p= 'Created Table: ' + sqlTableCreated.tableName
+			p Column Names:
+			each elmnt in sqlTableCreated.basicColumnNames
+				p= elmnt
+
+		form#deleteTable(action='/MySqlTableHub/deleteRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dltTblName') Enter RB Table Name to DELETE
+				input#dltTblName.input-unit-1(type='text', placeholder='enter data', name='delTblNamePost', value='')
+
+				button#dltTblBtn(type='submit', form='deleteTable', style="display: block; float: left") DELETE Table
+		br
+		br
+
+		if sqlTableDeleted !== undefined
+			- console.log(`sqlTableDeleted==> ${sqlTableCreated}`)
+			p= 'Deleted Table: ' + sqlTableDeleted
+
+
+		br
+		form#populateTable(ref="populateTable" action='/MySqlTableHub/populateRBTable' method='POST' encType="multipart/form-data" accept-charset="UTF-8")
+			div(style="display:block")
+				label.input-label-1(for='popTbl') Populate Table
+				input#popTbl.input-unit-1(type='file', name='popTblPost')
+
+				label.input-label-1(for='popTblName') Table to Populate
+				input#popTblName.input-unit-1(type='text', name='popTblNamePost')
+
+				label.input-label-1(for='tblColName') Loaded Column Names
+				input#tblColName.input-unit-1(type='text', name='tblColNamePost', value=tableColNames)
+
+				button#popTblBtn(type='submit', form='populateTable', style="display: block") Populate Table
+
+		if sqlTablePopulated !== undefined
+			p= 'Table Populated: ' + sqlTablePopulated.tablePopulated
+
+
+		form#retailCalcUniversal(action='/MySqlTableHub/calcResults' method='POST' accept-charset="UTF-8")
+
+			if sqlTableCreated !== undefined
+
+				input#tblColumnNames.input-unit-1(type='text', placeholder='enter data', name='tblColumnNamesPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.basicColumnNames)
+				input#tblPopulated.input-unit-1(type='text', placeholder='enter data', name='tblPopulatedPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.tableName)
+			if loadedTable !== undefined
+
+				input#tblNameToPost.input-unit-1(type='text', placeholder='enter data', name='tblNameToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+				input#fldArrToPost.input-unit-1(type='text', placeholder='enter data', name='fldArrToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+
+
+			if pageLinkArray == undefined
+				//- div.pagination-1(style="display: none")
+				div.pagination-1
+					label.input-label-1(for='currentPageDummy') Current Page (of #)
+					input#currentPageDummy.input-unit-1(type='text', placeholder='enter data1', name='currentPagePost', value='0')
+
+			if pageLinkArray !== undefined
+				div.pagination-1
+					//- p(style="font-weight:bold; margin:0") TOTAL PAGES: #{lastPage}
+					label.input-label-1(for='currentPage') Current Page (of #{lastPage})
+					input#currentPage.input-unit-1(type='text', placeholder='enter data1', name='currentPagePost', value=currentPage)
+
+					if currentPage != 0
+						a(href=`/MySqlTableHub/calcResults?page=${firstPage}&tableName=${tableName}&numQueryRes=${numQueryRes}`) FIRST PAGE
+						a(href=`/MySqlTableHub/calcResults?page=${currentPage-1}&tableName=${tableName}&numQueryRes=${numQueryRes}`) PREV
+					a(href=`/MySqlTableHub/calcResults?page=${currentPage+1}&tableName=${tableName}&numQueryRes=${numQueryRes}`) NEXT
+					a(href=`/MySqlTableHub/calcResults?page=${lastPage}&tableName=${tableName}&numQueryRes=${numQueryRes}`) LAST PAGE
+
+
+			label.input-label-1(for='numQueryRes') Number of Results to Show
+			input#numQueryRes.input-unit-1(type='text', placeholder='enter data1', name='numQueryResPost', value=numQueryRes, required)
+
+			label.input-label-1(for='beerAlcMarg') Beer & Alcohol Margin
+			input#beerAlcMarg.input-unit-1(type='number', placeholder='.20', step='.01', name='beerAlcMargPost', value='.20')
+
+			label.input-label-1(for='bodyCareMarg') Body Care Margin
+			input#bodyCareMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='bodyCareMargPost', value='.45')
+
+			label.input-label-1(for='booksMarg') Books Margin
+			input#booksMarg.input-unit-1(type='number', placeholder='.40', step='.01', name='booksMargPost', value='.40')
+
+			label.input-label-1(for='bulkMarg') Bulk Margin
+			input#bulkMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='bulkMargPost', value='.45')
+
+			label.input-label-1(for='bulkHrbPrpkMarg') Bulk & Herb Prepack Margin
+			input#bulkHrbPrpkMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='bulkHrbPrpkMargPost', value='.45')
+
+			label.input-label-1(for='cbdGrocMarg') CBD - Grocery Margin
+			input#cbdGrocMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='cbdGrocMargPost', value='.45')
+
+			label.input-label-1(for='cbdSuppMarg') CBD - Supplements Margin
+			input#cbdSuppMarg.input-unit-1(type='number', placeholder='.40', step='.01', name='cbdSuppMargPost', value='.50')
+
+			label.input-label-1(for='cbdTopMarg') CBD - Topicals Margin
+			input#cbdTopMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='cbdTopMargPost', value='.45')
+
+			label.input-label-1(for='consignMarg') Consignments Margin
+			input#consignMarg.input-unit-1(type='number', placeholder='.20', step='.01', name='consignMargPost', value='.20')
+
+			label.input-label-1(for='frozenMarg') Frozen Margin
+			input#frozenMarg.input-unit-1(type='number', placeholder='.38', step='.01', name='frozenMargPost', value='.38')
+
+			label.input-label-1(for='genMerchMarg') General Merchandise Margin
+			input#genMerchMarg.input-unit-1(type='number', placeholder='.38', step='.01', name='genMerchMargPost', value='.38')
+
+			label.input-label-1(for='grabGoMarg') Grab & Go Margin
+			input#grabGoMarg.input-unit-1(type='number', placeholder='.33', step='.01', name='grabGoMargPost', value='.33')
+
+			label.input-label-1(for='giftMarg') Gift Items Margin
+			input#giftMarg.input-unit-1(type='number', placeholder='.50', step='.01', name='giftMargPost', value='.50')
+
+			label.input-label-1(for='grocMarg') Grocery Margin
+			input#grocMarg.input-unit-1(type='number', placeholder='.38', step='.01', name='grocMargPost', value='.38')
+
+			label.input-label-1(for='grocLocMarg') Grocery - Local Margin
+			input#grocLocMarg.input-unit-1(type='number', placeholder='.33', step='.01', name='grocLocMargPost', value='.33')
+
+			label.input-label-1(for='grocLcMtMarg') Grocery - Local Meat Margin
+			input#grocLcMtMarg.input-unit-1(type='number', placeholder='.25', step='.01', name='grocLcMtMargPost', value='.25')
+
+			label.input-label-1(for='hbaMarg') HBA Margin
+			input#hbaMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='hbaMargPost', value='.45')
+
+			//- label.input-label-1(for='herbsHomeoMarg') Herbs & Homeo Margin
+			//- input#herbsHomeoMarg.input-unit-1(type='number', placeholder='.40', step='.01', name='herbsHomeoMargPost', value='.40')
+			label.input-label-1(for='herbsHomeoMarg') Herbs & Homeo Margin
+			input#herbsHomeoMarg.input-unit-1(type='number', placeholder='.50', step='.01', name='herbsHomeoMargPost', value='.50')
+
+			label.input-label-1(for='lfBrMarg') LifeBar Margin
+			input#lfBrMarg.input-unit-1(type='number', placeholder='0', step='.01', name='lfBrMargPost', value='0')
+
+			label.input-label-1(for='otherMarg') Other Margin
+			input#otherMarg.input-unit-1(type='number', placeholder='.45', step='.01', name='otherMargPost', value='.45')
+
+			label.input-label-1(for='refrigMarg') Refrigerated Margin
+			input#refrigMarg.input-unit-1(type='number', placeholder='.33', step='.01', name='refrigMargPost', value='.33')
+
+			//- label.input-label-1(for='vitSuppMarg') Vit & Supp Margin
+			//- input#vitSuppMarg.input-unit-1(type='number', placeholder='.40', step='.01', name='vitSuppMargPost', value='.40')
+			label.input-label-1(for='vitSuppMarg') Vit & Supp Margin
+			input#vitSuppMarg.input-unit-1(type='number', placeholder='.50', step='.01', name='vitSuppMargPost', value='.50')
+
+			label.input-label-1(for='globalMarg') Global Margin to Apply
+			input#globalMarg.input-unit-1(type='number', placeholder='enter margin as decimal', step='.01', name='globalMargPost', value=null)
+
+			label.input-label-1(for='lowerCutRqdRtlAndrea') ANDREA Lower Cutoff Req'd Rtl
+			input#lowerCutRqdRtlAndrea.input-unit-1(type='number', placeholder='10', step='.01', name='lowerCutRqdRtlAndreaPost', value='10')
+
+			label.input-label-1(for='lowerCutRqdRtlBrad') BRAD Lower Cutoff Req'd Rtl
+			input#lowerCutRqdRtlBrad.input-unit-1(type='number', placeholder='2', step='.01', name='lowerCutRqdRtlBradPost', value='2')
+
+			label.input-label-1(for='lowerCutoffCharm1Andrea') ANDREA Lower Cutoff Charm 1
+			input#lowerCutoffCharm1Andrea.input-unit-1(type='number', placeholder='.29', step='.01', name='lowerCutoffCharm1AndreaPost', value='.29')
+
+			label.input-label-1(for='lowerCutoffCharm1Brad') BRAD Lower Cutoff Charm 1
+			input#lowerCutoffCharm1Brad.input-unit-1(type='number', placeholder='.19', step='.01', name='lowerCutoffCharm1BradPost', value='.19')
+
+			label.input-label-1(for='lowerCutoffCharm2Andrea') ANDREA Lower Cutoff Charm 2
+			input#lowerCutoffCharm2Andrea.input-unit-1(type='number', placeholder='.29', step='.01', name='lowerCutoffCharm2AndreaPost', value='.29')
+
+			label.input-label-1(for='lowerCutoffCharm2Brad') BRAD Lower Cutoff Charm 2
+			input#lowerCutoffCharm2Brad.input-unit-1(type='number', placeholder='.29', step='.01', name='lowerCutoffCharm2BradPost', value='.29')
+
+			label.input-label-1(for='lowerCutoffCharm3Andrea') ANDREA Lower Cutoff Charm 3
+			input#lowerCutoffCharm3Andrea.input-unit-1(type='number', placeholder='.49', step='.01', name='lowerCutoffCharm3AndreaPost', value='.49')
+
+			label.input-label-1(for='lowerCutoffCharm3Brad') BRAD Lower Cutoff Charm 3
+			input#lowerCutoffCharm3Brad.input-unit-1(type='number', placeholder='.39', step='.01', name='lowerCutoffCharm3BradPost', value='.39')
+
+			label.input-label-1(for='lowerCutoffCharm4Andrea') ANDREA Lower Cutoff Charm 4
+			input#lowerCutoffCharm4Andrea.input-unit-1(type='number', placeholder='.49', step='.01', name='lowerCutoffCharm4AndreaPost', value='.49')
+
+			label.input-label-1(for='lowerCutoffCharm4Brad') BRAD Lower Cutoff Charm 4
+			input#lowerCutoffCharm4Brad.input-unit-1(type='number', placeholder='.49', step='.01', name='lowerCutoffCharm4BradPost', value='.49')
+
+			label.input-label-1(for='lowerCutoffCharm5Andrea') ANDREA Lower Cutoff Charm 5
+			input#lowerCutoffCharm5Andrea.input-unit-1(type='number', placeholder='.79', step='.01', name='lowerCutoffCharm5AndreaPost', value='.79')
+
+			label.input-label-1(for='lowerCutoffCharm5Brad') BRAD Lower Cutoff Charm 5
+			input#lowerCutoffCharm5Brad.input-unit-1(type='number', placeholder='.59', step='.01', name='lowerCutoffCharm5BradPost', value='.59')
+
+			label.input-label-1(for='lowerCutoffCharm6Andrea') ANDREA Lower Cutoff Charm 6
+			input#lowerCutoffCharm6Andrea.input-unit-1(type='number', placeholder='.79', step='.01', name='lowerCutoffCharm6AndreaPost', value='.79')
+
+			label.input-label-1(for='lowerCutoffCharm6Brad') BRAD Lower Cutoff Charm 6
+			input#lowerCutoffCharm6Brad.input-unit-1(type='number', placeholder='.79', step='.01', name='lowerCutoffCharm6BradPost', value='.79')
+
+			label.input-label-1(for='lowerCutoffCharm7Andrea') ANDREA Lower Cutoff Charm 7
+			input#lowerCutoffCharm7Andrea.input-unit-1(type='number', placeholder='.99', step='.01', name='lowerCutoffCharm7AndreaPost', value='.99')
+
+			label.input-label-1(for='lowerCutoffCharm7Brad') BRAD Lower Cutoff Charm 7
+			input#lowerCutoffCharm7Brad.input-unit-1(type='number', placeholder='.99', step='.01', name='lowerCutoffCharm7BradPost', value='.99')
+
+			label.input-label-1(for='upperCharmRqdRtlAndrea') ANDREA Upper Charm Cutoff
+			input#upperCharmRqdRtlAndrea.input-unit-1(type='number', placeholder='9999', name='upperCharmRqdRtlAndreaPost', value='9999')
+
+			label.input-label-1(for='upperCharmRqdRtlBrad') BRAD Upper Charm Cutoff
+			input#upperCharmRqdRtlBrad.input-unit-1(type='number', placeholder='12', name='upperCharmRqdRtlBradPost', value='12')
+
+			label.input-label-1(for='defaultCharm1Andrea') ANDREA Default Charm1
+			input#defaultCharm1Andrea.input-unit-1(type='number', placeholder='.49', step='.01', name='defaultCharm1AndreaPost', value='.49')
+
+			label.input-label-1(for='defaultCharm1Brad') BRAD Default Charm1
+			input#defaultCharm1Brad.input-unit-1(type='number', placeholder='.29', step='.01', name='defaultCharm1BradPost', value='.29')
+
+			label.input-label-1(for='defaultCharm2Andrea') ANDREA Default Charm2
+			input#defaultCharm2Andrea.input-unit-1(type='number', placeholder='.49', step='.01', name='defaultCharm2AndreaPost', value='.49')
+
+			label.input-label-1(for='defaultCharm2Brad') BRAD Default Charm2
+			input#defaultCharm2Brad.input-unit-1(type='number', placeholder='.49', step='.01', name='defaultCharm2BradPost', value='.49')
+
+			label.input-label-1(for='defaultCharm3Andrea') ANDREA Default Charm3
+			input#defaultCharm3Andrea.input-unit-1(type='number', placeholder='.99', step='.01', name='defaultCharm3AndreaPost', value='.99')
+
+			label.input-label-1(for='defaultCharm3Brad') BRAD Default Charm3
+			input#defaultCharm3Brad.input-unit-1(type='number', placeholder='.79', step='.01', name='defaultCharm3BradPost', value='.79')
+
+			label.input-label-1(for='defaultCharm4Andrea') ANDREA Default Charm4
+			input#defaultCharm4Andrea.input-unit-1(type='number', placeholder='.99', step='.01', name='defaultCharm4AndreaPost', value='.99')
+
+			label.input-label-1(for='defaultCharm4Brad') BRAD Default Charm4
+			input#defaultCharm4Brad.input-unit-1(type='number', placeholder='.99', step='.01', name='defaultCharm4BradPost', value='.99')
+
+			if loadedTable !== undefined
+				label.input-label-1(for='discountToApply_WS') % WHOLESALE Discount To Apply To Entire Catalog (as decimal)
+				input#discountToApply_WS.input-unit-1(type='number', placeholder='0', step='.01', name='discountToApplyPost_WS', value=loadedTable.ongDisco_WS)
+				label.input-label-1(for='discountToApply_Rtl') % RETAIL Discount To Apply To Entire Catalog (as decimal)
+				input#discountToApply_Rtl.input-unit-1(type='number', placeholder='0', step='.01', name='discountToApplyPost_Rtl', value=loadedTable.ongDisco_Rtl)
+
+			label.input-label-1(for='edlpDisco') % EDLP Disco To Apply To EDLP Items Only (as decimal)
+			input#edlpDisco.input-unit-1(type='number', placeholder='0', step='.01', name='edlpDiscoPost', value='0')
+
+
+			select#typeOfIMW.input-unit-1(name='typeOfIMWPost')
+				option(value='wholesale') Wholesale Update IMW
+				option(value='retail') Retail Update IMW
+				option(value='new') New Item(s) IMW
+
+			select#skuOveride.input-unit-1(name='skuOveridePost')
+				option(value='allowMismatch') Allow SKU Mismatches
+				option(value='matchOnly') Require SKU Match
+
+			div(style="display:block")
+				label.input-label-1(for='deptFilter') Dept Filter
+				input#deptFilter.input-unit-1(type='text', name='deptFilterPost' value='')
+
+			div(style="display:block")
+				label.input-label-1(for='edlpSwitch') Include EDLP?
+				select#edlpSwitch.input-unit-1(name='edlpSwitchPost')
+					option(value='no') no
+					option(value='yes') yes
+
+			div(style="display:block")
+				label.input-label-1(for='skuToggle') Use EDI or Catapult SKU for IMW
+				select#skuToggle.input-unit-1(name='skuTogglePost')
+					option(value='edi') edi
+					option(value='catapult') catapult
+
+			div(style="display:block")
+				label.input-label-1(for='ediTblName') EDI Table Name (EDI-VENDORNAME) - used to extract data from rainbow--cat (from RB DB)
+				input#ediTblName.input-unit-1(type='text' name='ediTblNamePost' value='EDI-VENDORNAME')
+
+			div(style="display:block")
+				label.input-label-1(for='skuMismatchOption') Flag SKU mismatch for IMW?
+				select#skuMismatchOption.input-unit-1(name='skuMismatchOptionPost')
+					option(value='no') no
+					option(value='yes') yes
+
+			div(style="display:block")
+				label.input-label-1(for='divideCostByEachOption') Divide Cost by #n in EA-#n?
+				select#divideCostByEachOption.input-unit-1(name='divideCostByEachOptionPost')
+					option(value='no') no
+					option(value='yes') yes
+
+			div(style="display:block")
+				label.input-label-1(for='divideCostByCaseOption') Divide Cost by #n in CS-#n?
+				select#divideCostByCaseOption.input-unit-1(name='divideCostByCaseOptionPost')
+					option(value='no') no
+					option(value='yes') yes
+
+
+		button#searchDB(type='submit', form='retailCalcUniversal', style="display: block; float: left") Search Loaded Table
+		br
+		br
+		button.adminButton#saveCSV(type="submit" form="saveCSVPost") Save Results as CSV - Inv Mnt Wksht (for WS, Retail, or New Item Update)
+		form#saveCSVPost(action='/MySqlTableHub/saveIMW_CSV' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='csv') filename:
+				input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+			if loadedTable !== undefined
+				label.input-label-1(for='csvHeaders') CSV headers:
+					input#csvHeaders.input-unit-1(type='text', placeholder='enter data', name='csvHeadersPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+		button.adminButton#saveCSVreview(type="submit" form="saveCSVreviewPost") Save Results as CSV - Retail Price Review
+		form#saveCSVreviewPost(action='/MySqlTableHub/save2CSVreviewNEJ' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='csvReview') filename:
+				input#csvReview.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+		button.adminButton#saveXLSreview(type="submit" form="saveXLSreviewPost") Save Results as XLS - Retail Price Review
+		form#saveXLSreviewPost(action='/MySqlTableHub/save2XLSreviewNEJ' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='xlsReview') filename:
+				input#xlsReview.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+			
+		if searchResRows !== undefined
+			div.rslt-tbl-1-absolute-z1
+				table#resTbl
+					thead
+						tr
+							th ri_t0d
+							th invPK
+							th invCPK
+							th UPC
+							th SKU (Cplt)
+							th SKU (EDI)
+							th SKU MISMATCH
+							th imwSKU
+							th Description (Cplt)
+							th oupName (Cplt)
+							th numPkgs (calcResults)
+							th csPkgMltpl (calcResults)
+							th ovr (calcResults)
+							th stoNum
+							//- th stoName
+							th Exst WS (Cplt)
+							th Updtd WS (EDI)
+							th ediCostMod
+							th Global Margin
+							th Rtl Rqd
+							th Charm Price
+							th MSRP (EDI)
+							th CrntPr(Cplt)
+							th dptName (Catapult)
+							th dptNumber (Cplt)
+							th sibIdealMargin (Cplt)
+							th actualMargT0d
+							th rb dflt margin
+							th Applied Margin
+							th wsDiff
+							th Appld WS Disco
+							th Appld Rtl Disco
+							th EDLP
+							th pf1
+							th pf2
+							th pf3
+							th pf4
+							th pf5
+							th pf6
+							th pf7
+							th pf8
+
+
+					tbody#resTblBdy
+						if searchResRows !== undefined
+							each elmnt in searchResRows
+								tr
+									td= elmnt.ri_t0d
+									td= elmnt.invPK
+									td= elmnt.invCPK
+									td= elmnt.upc
+									td= elmnt.cpltSKU
+									td= elmnt.ediSKU
+									td= elmnt.skuMismatch
+									td= elmnt.imwSKU
+									td= elmnt.name
+									td= elmnt.oupName
+									td= elmnt.numPkgs
+									td= elmnt.csPkgMltpl
+									td= elmnt.ovr
+									td= elmnt.stoNumber
+									//- td= elmnt.stoName
+									td= elmnt.cpltCost
+									td= elmnt.ediCost
+									td= elmnt.ediCostMod
+									td= elmnt.globalMargin
+									td= elmnt.reqdRetail
+									td= elmnt.charm
+									td= elmnt.ediPrice
+									td= elmnt.sibBasePrice
+									td= elmnt.dptName
+									td= elmnt.dptNumber
+									td= elmnt.sibIdealMargin
+									td= elmnt.actualMargT0d
+									td= elmnt.defaultMarg
+									td= elmnt.appldMrgn
+									td= elmnt.wsDiff_t0d
+									td= elmnt.discountToApply_WS
+									td= elmnt.discountToApply_Rtl
+									td= elmnt.edlpVar
+									td= elmnt.pf1
+									td= elmnt.pf2
+									td= elmnt.pf3
+									td= elmnt.pf4
+									td= elmnt.pf5
+									td= elmnt.pf6
+									td= elmnt.pf7
+									td= elmnt.pf8
+
+		script(src='/jsModules_t0d/tableHighlight.js')
+		script(src='/javascripts/modules/adminM0d.js')

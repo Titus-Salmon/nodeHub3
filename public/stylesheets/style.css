@@ -1,0 +1,118 @@
+body {
+  /* padding: 50px; */
+  font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00b7ff;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+input,
+label {
+  display: block;
+}
+
+.input-field-1 {
+  float: left;
+  /* margin-left: 3rem; */
+}
+
+.input-field-noFloat {
+  /* float: left; */
+  margin-left: 3rem;
+}
+
+.input-unit-1 {
+  margin-bottom: 0.5rem;
+}
+
+.input-label-1 {
+  font-weight: bold;
+  /* max-width: 150px; */
+}
+
+/* .rslt-tbl-1 {
+  float: left;
+  margin: 3rem 0 0 3rem;
+} */
+
+.rslt-tbl-1 {
+  float: left;
+  /* margin-left: 3rem; */
+  max-width: 1000px;
+}
+
+.row-hilite-toggle {
+  background-color: #99ccff !important;
+}
+
+.pagination-1 {
+  position: absolute;
+  top: 200px;
+  left: 810px;
+}
+
+.horiz-1-abs {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+}
+
+.horiz-2-abs {
+  position: absolute;
+  top: 200px;
+  left: 405px;
+}
+
+.horiz-3-abs {
+  position: absolute;
+  top: 200px;
+  left: 640px;
+}
+
+.horiz-4-abs {
+  position: absolute;
+  top: 200px;
+  left: 800px;
+}
+
+/* .horiz-a-rel {
+  position: relative;
+  top: 0px;
+  left: 0px;
+}
+
+.horiz-b-rel {
+  position: relative;
+  top: -70px;
+  left: 250px;
+}
+
+.horiz-c-rel {
+  position: relative;
+  top: -150px;
+  left: 500px;
+} */
+
+.rslt-tbl-1-absolute {
+  position: absolute;
+  top: 330px;
+  left: 200px;
+  max-width: 1000px;
+}
+
+.rslt-tbl-1-absolute-z1 {
+  position: absolute;
+  top: 330px;
+  left: 200px;
+  /* max-width: 1000px; */
+  z-index: 1;
+  background-color: white;
+  border-style: solid;
+}

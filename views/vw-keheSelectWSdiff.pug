@@ -1,0 +1,68 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //- //v//
+		//- form#keheSelectJoin(action='/keheSelectWSdiff/keheSelectWSdiff' method='POST' accept-charset="UTF-8" style="display:block")
+		//- 	div(style="display:block")
+		//- 		label.input-label-1(for='keheSelectJoin') This query joins kehe & SELECT tables
+		//- 		textarea#keheSelectJoinTextArea.input-unit-1(name="keheSelectJoinPost", cols="30", rows="1", wrap="soft") SELECT kehe.kehe_upc, kehe.kehe_unit_type, kehe.kehe_tier3, kehe.kehe_name, selct.s_upc, selct.s_unit_type, selct.s_unit_cost, selct.s_name FROM edi_kehe_data kehe JOIN edi_select_data selct ON kehe.kehe_upc WHERE kehe.kehe_upc = selct.s_upc;
+		//- 		button#crtTblBtn3(type='submit', form='keheSelectJoin', style="display: block; float: left") Display kehe/SELECT joined tables
+		//- //- //^//
+
+		//- //v//
+		form#nhcrtName(action='/keheSelectWSdiff/keheSelectWSdiff' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtName') Enter NHCRT table name
+				input#nhcrtName.input-unit-1(type='text', placeholder='enter data', name="nhcrtNamePost", value='') 
+				button#crtTblBtn3(type='submit', form='nhcrtName', style="display: block; float: left") Submit
+		//- //^//
+
+		button.adminButton#saveXLSreview(type="submit" form="saveXLSreviewPost") Save Results as XLS
+		form#saveXLSreviewPost(action='/keheSelectWSdiff/save2XLS_keheSelectWSdiff' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='xlsReview') filename:
+				input#xlsReview.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+
+		div.rslt-tbl-1-absolute
+			if srsObjArr !== undefined
+				table#resTbl_loadedTable
+					thead
+						tr
+							th #
+							th kehe_upc
+							th s_upc
+							th kehe_unit_type
+							th s_unit_type
+							th kehe_unit_cost
+							th s_unit_cost
+							th lower_cost
+							th note
+							th kehe_name
+							th s_name
+							th invReceiptAlias
+							th venCompanyname
+
+					tbody#resTblBdy_loadedTable
+						each elmnt in srsObjArr
+							tr
+								td= elmnt.ri_t0d
+								td= elmnt.kehe_upc
+								td= elmnt.s_upc
+								td= elmnt.kehe_unit_type
+								td= elmnt.s_unit_type
+								td= elmnt.kehe_unit_cost
+								td= elmnt.s_unit_cost
+								td= elmnt.lower_cost
+								td= elmnt.note
+								td= elmnt.kehe_name
+								td= elmnt.s_name
+								td= elmnt.invReceiptAlias
+								td= elmnt.venCompanyname
+
+
+		script(src='/jsModules_t0d/tableHighlight_keheSelect.js')

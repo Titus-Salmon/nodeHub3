@@ -1,0 +1,49 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //v// displays rainbowcat_update_tracker table
+		form#rbCatUpdtTrkrDisplay(action='/rbCatUpdtTrkr/rbCatUpdtTrkrDisplay' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='rbCatUpdtTrkrDisplay') This query selects all from rainbowcat_update_tracker table
+				textarea#rbCatUpdtTrkrDisplayTextArea.input-unit-1(name="rbCatUpdtTrkrDisplayPost", cols="30", rows="1", wrap="soft") SELECT * FROM rainbowcat_update_tracker;
+				button(type='submit', form='rbCatUpdtTrkrDisplay', style="display: block; float: left") Display rainbowcat_update_tracker table
+		//- //^// displays rainbowcat_update_tracker table
+
+		button.adminButton#saveXLSrbcut(type="submit" form="saveXLSrbcutPost") Save Results as XLS - rainbowcat_update_tracker
+		form#saveXLSrbcutPost(action='/rbCatUpdtTrkr/save2XLSrbcut' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='xlsRBcut') filename:
+				input#xlsRBcut.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+
+		if rbCatUpdtTrkrDisplay !== undefined
+			div.rslt-tbl-1-absolute-z1
+				table#resTbl
+					thead
+						tr
+							th ri_t0d
+							th date
+							th edi_vendor_name
+							th wsImw
+							th rtlImw
+							th items_updtd_ws
+							th items_updtd_rtl
+							th note1
+
+
+					tbody#resTblBdy
+						if rbCatUpdtTrkrDisplay !== undefined
+							each elmnt in rbCatUpdtTrkrDisplay
+								tr
+									td= elmnt.ri_t0d
+									td= elmnt.date
+									td= elmnt.edi_vendor_name
+									td= elmnt.wsImw
+									td= elmnt.rtlImw
+									td= elmnt.items_updtd_ws
+									td= elmnt.items_updtd_rtl
+									td= elmnt.note1

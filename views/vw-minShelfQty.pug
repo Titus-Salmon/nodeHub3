@@ -1,0 +1,143 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		div(style="display:block")
+			form#minShelfQty(action='/minShelfQty/generateMinShelfQtyIMW' method='POST' accept-charset="UTF-8")
+				label.input-label-1(for='movementTable') movement Table
+				input#movementTable.input-unit-1(type='text', placeholder='enter data1', name='movementTablePost', value='')
+				label.input-label-1(for='movementTable') nhcrt Table
+				input#nhcrtTable.input-unit-1(type='text', placeholder='enter data1', name='nhcrtTablePost', value='')
+				label.input-label-1(for='storeAbbrev') Store Abbrev
+				input#storeAbbrev.input-unit-1(type='text', placeholder='enter data1', name='storeAbbrevPost', value='')
+				//- label.input-label-1(for='storeName') Full Store Name
+				//- input#storeName.input-unit-1(type='text', placeholder='enter data1', name='storeNamePost', value='')
+				label.input-label-1(for='storeNumber') Store Number (GL, IN, MT, SM, SPR)
+				input#storeNumber.input-unit-1(type='text', placeholder='enter data1', name='storeNumberPost', value='')
+				label.input-label-1(for='totalDays') total days of movement
+				input#totalDays.input-unit-1(type='text', placeholder='enter data1', name='totalDaysPost', value='')
+				label.input-label-1(for='arFreq') Auto Reorder frequency (days)
+				input#arFreq.input-unit-1(type='text', placeholder='enter data1', name='arFreqPost', value='')
+				button#minShelfQtyBtn(type='submit', form='minShelfQty') Generate MinShelfQty IMW
+
+			form#imwGenerator(action='/minShelfQty/saveCSVminShelfQty' method='POST' accept-charset="UTF-8")
+				div.horiz-2-abs
+					label.input-label-1(for='productArray') Product Array for saving IMW
+					//- input#productArray.input-unit-1(type='text', placeholder='enter data1', name='productArrayPost', value=imwProductArr)
+					input#productArray.input-unit-1(type='text', placeholder='enter data1', name='productArrayPost', value=srsObjArr)
+				div.horiz-3-abs
+					label.input-label-1(for='csv') filename:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='', required)
+					button#imwGeneratorButton(type='submit', form='imwGenerator') Save IMW as CSV
+
+			div.rslt-tbl-1-absolute
+				if srsObjArr !== undefined
+					table#resTbl_loadedTable
+						thead
+							tr
+								th #
+								th item_id
+								th dept_id
+								th dept_name
+								th recpt_alias
+								th brand
+								th item_name
+								th size
+								th sugg_retail
+								th last_cost
+								th base_price
+								th auto_discount
+								th ideal_margin
+								th weight_profile
+								th tax1
+								th tax2
+								th tax3
+								th spec_tndr1
+								th spec_tndr2
+								th pos_prompt
+								th location
+								th alternate_id
+								th alt_rcpt_alias
+								th pkg_qty
+								th supp_unit_id
+								th supplier_id
+								th unit
+								th num_pkgs
+								th category
+								th sub_category
+								th product_group
+								th product_flag
+								th rb_note
+								th edi_default
+								th powerfield_7
+								th temp_group
+								th onhand_qty
+								th reorder_point
+								th mcl
+								th reorder_qty
+								th memo
+								th flrRsn
+								th dsd
+								th disc_mult
+								th case_pk_mult
+								th ovr
+
+						tbody#resTblBdy_loadedTable
+							each elmnt in srsObjArr
+								tr
+									td= elmnt.ri_t0d
+									td= elmnt.item_id
+									td= elmnt.dept_id
+									td= elmnt.dept_name
+									td= elmnt.recpt_alias
+									td= elmnt.brand
+									td= elmnt.item_name
+									td= elmnt.size
+									td= elmnt.sugg_retail
+									td= elmnt.last_cost
+									td= elmnt.base_price
+									td= elmnt.auto_discount
+									td= elmnt.ideal_margin
+									td= elmnt.weight_profile
+									td= elmnt.tax1
+									td= elmnt.tax2
+									td= elmnt.tax3
+									td= elmnt.spec_tndr1
+									td= elmnt.spec_tndr2
+									td= elmnt.pos_prompt
+									td= elmnt.location
+									td= elmnt.alternate_id
+									td= elmnt.alt_rcpt_alias
+									td= elmnt.pkg_qty
+									td= elmnt.supp_unit_id
+									td= elmnt.supplier_id
+									td= elmnt.unit
+									td= elmnt.num_pkgs
+									td= elmnt.category
+									td= elmnt.sub_category
+									td= elmnt.product_group
+									td= elmnt.product_flag
+									td= elmnt.rb_note
+									td= elmnt.edi_default
+									td= elmnt.powerfield_7
+									td= elmnt.temp_group
+									td= elmnt.onhand_qty
+									td= elmnt.reorder_point
+									td= elmnt.mcl
+									td= elmnt.reorder_qty
+									td= elmnt.memo
+									td= elmnt.flrRsn
+									td= elmnt.dsd
+									td= elmnt.disc_mult
+									td= elmnt.case_pk_mult
+									td= elmnt.ovr
+
+
+		//- script(src='/jsModules_t0d/imwGenLocStorM0d.js')
+		script(src='/jsModules_t0d/itemSelectM0d.js')
+		script(src='/jsModules_t0d/removeItemM0d.js')

@@ -1,0 +1,63 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+		include vw-dashboard.pug
+
+	div(style="display:block")
+		form#save2CSVreviewSfAud(action='/signFilterChecker/save2CSVreviewSfAud' method='POST' accept-charset='UTF-8')
+			if searchResRows !== undefined
+				label.input-label-1(for='csv') filename:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=searchResRows)
+				button#saveCSVSfAud(type="submit" form="save2CSVreviewSfAud") Save Results as CSV - sfAud
+
+		div.rslt-tbl-1
+			table#resTbl
+				thead
+					tr
+						th ri_t0d
+						th invMismatchUPC
+						th invMismatchSKU
+						th invMismatchName
+						th invMismatchStore
+						th invMismatchSFdata
+						th invMismatchCPLTdata
+						th invMismatchLastRecd
+						th invMismatchLastSold
+						th LastRecd0_3
+						th LastRecd3_6
+						th LastRecd6_9
+						th LastRecd9_12
+						th LastRecd12plus
+						th Comments1
+						th Comments2
+
+
+				tbody#resTblBdy
+					if searchResRows !== undefined
+						each elmnt in searchResRows
+							tr
+								td= elmnt.ri_t0d
+								td= elmnt.invMismatchUPC
+								td= elmnt.invMismatchSKU
+								td= elmnt.invMismatchName
+								td= elmnt.invMismatchStore
+								td= elmnt.invMismatchSFdata
+								td= elmnt.invMismatchCPLTdata
+								td= elmnt.invMismatchLastRecd
+								td= elmnt.invMismatchLastSold
+								td= elmnt.LastRecd0_3
+								td= elmnt.LastRecd3_6
+								td= elmnt.LastRecd6_9
+								td= elmnt.LastRecd9_12
+								td= elmnt.LastRecd12plus
+								td= elmnt.Comments1
+								td= elmnt.Comments2
+
+
+
+

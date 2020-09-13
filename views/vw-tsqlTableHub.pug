@@ -1,0 +1,122 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+		h3 #{title}
+		//- script.
+		//- 	console.log('locstor from retailCalcUniversal_brandTargeting==>', localStorage)
+		include vw-dashboard.pug
+		//- div(style='display:block; margin:0 0 2.5rem 2.5rem')
+		//- 	a(href="/users/logout") Logout
+
+		//- h3(style="margin-top: 0")= title
+		hr
+
+
+		div(style="display:block")
+			form#queryInvMasterTable(action='/tsqlTableHub/queryInvMasterTable' method='POST' accept-charset="UTF-8" style="display:block")
+				div(style="display:block")
+					label.input-label-1(for='tblQry') Enter Query for Catapult v_InventoryMaster
+					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT INV_PK, INV_CPK, INV_ScanCode, ORD_SupplierStockNumber, INV_Name, INV_Size, INV_ReceiptAlias, inv_default, convert(varchar(10), POS_TimeStamp, 120), INV_DateCreated, INV_EMP_FK_CreatedBy, ord_quantityinorderunit, oup_name, sto_number, sto_name, brd_name, dpt_name, dpt_number, SIB_IdealMargin, ven_companyname, convert(varchar(10), inv_lastreceived, 120), convert(varchar(10), inv_lastsold, 120), inv_lastcost, SIB_BasePrice, inv_onhand, inv_onorder, inv_intransit, inv_memo, PI1_Description, PI2_Description, PI3_Description, PI4_Description, INV_PowerField1, INV_PowerField2, INV_PowerField3, INV_PowerField4 FROM catapult.ecrs.v_InventoryMaster WHERE trim(ven_companyname) IN ('EDI-ALOE') AND trim(dpt_number) != '999999' ORDER BY PI1_Description, PI2_Description 
+					button(type='submit', form='queryInvMasterTable', style="display: block; float: left") QUERY v_InventoryMaster
+
+		div(style="display:block")
+			form#rbInvUpdaterTsql(action='/tsqlTableHub/rbInvUpdaterTsql' method='POST' accept-charset="UTF-8" style="display:block")
+				div(style="display:block")
+					label.input-label-1(for='rbInvUpdtr') rb_inventory UPC array to POST
+					input#rbInvUpdtr.input-unit-1(type='text' name="rbInvUpdtrPost", value=rb_inv_UPCs)
+					button(type='submit', form='rbInvUpdaterTsql', style="display: block; float: left") POST rb_inventory UPC array
+
+		br
+
+		div(style="display:block")
+			form#saveCSVreviewPost(action='/tsqlTableHub/save2CSV' method='POST' accept-charset='UTF-8')
+				if catapultTables !== undefined
+					label.input-label-1(for='csvReview') filename:
+					input#csvReview.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+					button#saveCSVreview(type="submit" form="saveCSVreviewPost") Save Results as CSV - Catapult Inventory Master Query
+
+		//- div(style="display:block")
+		//- 	form#saveXLSreviewPost(action='/tsqlTableHub/save2XLS_tsql' method='POST' accept-charset='UTF-8')
+		//- 		if catapultTables !== undefined
+		//- 			label.input-label-1(for='xlsReview') filename:
+		//- 			input#xlsReview.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+		//- 			button#saveXLSreview(type="submit" form="saveXLSreviewPost") Save Results as XLS - NHCRT
+
+
+		//-/v// NEW STUFF FOR TSQL
+
+		form#queryCatapultDB(action='/tsqlTableHub/queryCatapultDB' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dbQuery') Enter Query for Catapult DB
+				textarea#dbQuery.input-unit-1(name="dbQueryPost", cols="30", rows="1", wrap="soft") sp_tables
+
+				button(type='submit', form='queryCatapultDB', style="display: block; float: left") QUERY Catapult DB
+
+		div(style="display:block")
+			form#queryOrderingInfoTable(action='/tsqlTableHub/queryOrderingInfoTable' method='POST' accept-charset="UTF-8" style="display:block")
+				div(style="display:block")
+					label.input-label-1(for='tblQry') Enter Query for Catapult OrderingInfo
+					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT ORD_VEN_FK, ORD_PK, ORD_SupplierStockNumber, ORD_INV_FK, ORD_CPK, ORD_INV_CFK, ORD_Primary, ORD_QuantityInOrderUnit, ORD_ASC_FK, ORD_ASC_CFK, ORD_OUP_FK, ORD_OUP_CFK, convert(varchar(10), ORD_TimeStamp, 120), ORD_DSDItem, ORD_DefaultSupplier, ORD_Discontinued, convert(varchar(10), ORD_DateDiscontinued, 120), ORD_MinimumOrder, ORD_FirstOrdRecordDSDFlagSet, ORD_SuggestedMultiple, ORD_AllowOverrideOfMultiple FROM catapult.ecrs.OrderingInfo WHERE trim(ORD_INV_FK) IN ('129809')
+					button(type='submit', form='queryOrderingInfoTable', style="display: block; float: left") QUERY OrderingInfo
+
+		br
+
+		form#createTable(action='/tsqlTableHub/createEmptyTsqlTable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtTblName') Enter Table Name to CREATE
+				input.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtTblInput') Enter Table Headers (as csv)
+				input.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='')
+				button(type='submit', form='createTable', style="display: block; float: left") CREATE Table
+		br
+		br
+
+		if sqlTableCreated !== undefined
+			- console.log(`sqlTableCreated.columnNames==> ${sqlTableCreated.columnNames}`)
+			p= 'Created Table: ' + sqlTableCreated.tableName
+			p Column Names:
+			each elmnt in sqlTableCreated.basicColumnNames
+				p= elmnt
+
+
+
+		form#deleteTable(action='/tsqlTableHub/deleteTsqlTable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dltTblName') Enter Table Name to DELETE
+				input.input-unit-1(type='text', placeholder='enter data', name='delTblNamePost', value='')
+
+				button(type='submit', form='deleteTable', style="display: block; float: left") DELETE Table
+		br
+		br
+
+		if sqlTableDeleted !== undefined
+			- console.log(`sqlTableDeleted==> ${sqlTableCreated}`)
+			p= 'Deleted Table: ' + sqlTableDeleted
+
+		//-/^// NEW STUFF FOR TSQL
+
+
+		br
+		form#populateTable(ref="populateTable" action='/tsqlTableHub/populateTsqlTable' method='POST' encType="multipart/form-data" accept-charset="UTF-8")
+			div(style="display:block")
+				label.input-label-1(for='popTbl') Populate Table
+				input.input-unit-1(type='file', name='popTblPost')
+
+				label.input-label-1(for='popTblName') Table to Populate
+				input.input-unit-1(type='text', name='popTblNamePost')
+
+				label.input-label-1(for='tblColName') Loaded Column Names
+				input.input-unit-1(type='text', name='tblColNamePost', value=tableColNames)
+
+				button(type='submit', form='populateTable', style="display: block") Populate Table
+
+		if sqlTablePopulated !== undefined
+			p= 'Table Populated: ' + sqlTablePopulated.tablePopulated
+
+
+
+		script(src='/javascripts/modules/adminM0d.js')

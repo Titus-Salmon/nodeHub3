@@ -1,0 +1,85 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+
+		include vw-dashboard.pug
+
+		p #{title}
+
+		//- div(style="display:block")
+		//- 	form#queryCatapultDB(action='/tsqlTableHub/queryTable' method='POST' accept-charset="UTF-8" style="display:block")
+		//- 		div(style="display:block")
+		//- 			label.input-label-1(for='tblQry') Enter Query for Catapult DB
+		//- 			textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT INV_PK, INV_CPK, INV_ScanCode, ORD_SupplierStockNumber, INV_Name, INV_Size, INV_ReceiptAlias, convert(varchar(10), POS_TimeStamp, 120), INV_DateCreated, INV_EMP_FK_CreatedBy, ord_quantityinorderunit, oup_name, sto_name, brd_name, dpt_name, dpt_number, ven_companyname, convert(varchar(10), inv_lastreceived, 120), convert(varchar(10), inv_lastsold, 120), inv_lastcost, SIB_BasePrice, inv_onhand, inv_onorder, inv_intransit, PI1_Description, PI2_Description, PI3_Description, PI4_Description, INV_PowerField1, INV_PowerField2, INV_PowerField3, INV_PowerField4 FROM catapult.ecrs.v_InventoryMaster WHERE trim(ven_companyname) IN ('EDI-ALOE')
+		//- 			button#crtTblBtn(type='submit', form='queryCatapultDB', style="display: block; float: left") QUERY Catapult DB
+
+		//- div(style="display:block")
+		//- 	form#saveCSVreviewPost(action='/tsqlTableHub/save2CSV' method='POST' accept-charset='UTF-8' style="display:block")
+		//- 		if catapultResults !== undefined
+		//- 			label.input-label-1(for='csv') filename:
+		//- 				input#csvReview.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+		//- 			//- label.input-label-1(for='csvReviewHeaders') CSV Review headers:
+		//- 			//- 	input#csvReviewHeaders.input-unit-1(type='text', placeholder='enter data', name='csvHeadersPost', readonly, style="background-color:#c2d6d6", value="upc, sku, name, pf2, pf3, cost, charm, edlp_flag, sale_flag")
+		//- 			label.input-label-1(for='save2CSVArr') Catapult Table Query Results Array:
+		//- 				input#save2CSVArr.input-unit-1(type='text', placeholder='enter data', name='save2CSVArrPost', readonly, style="background-color:#c2d6d6", value=catapultResults)
+		//- 			button#saveCSVreview(type="submit" form="saveCSVreviewPost") Save Results as CSV - Catapult Inventory Master Query2
+
+		div.rslt-tbl-1
+			table#resTbl
+				thead
+					tr
+						th ORD_VEN_FK
+						th ORD_PK
+						th ORD_SupplierStockNumber
+						th ORD_INV_FK
+						th ORD_CPK
+						th ORD_INV_CFK
+						th ORD_VEN_CFK
+						th ORD_Primary
+						th ORD_QuantityInOrderUnit
+						th ORD_ASC_FK
+						th ORD_ASC_CFK
+						th ORD_OUP_FK
+						th ORD_OUP_CFK
+						th ORD_TimeStamp
+						th ORD_DSDItem
+						th ORD_DefaultSupplier
+						th ORD_Discontinued
+						th ORD_DateDiscontinued
+						th ORD_MinimumOrder
+						th ORD_FirstOrdRecordDSDFlagSet
+						th ORD_SuggestedMultiple
+						th ORD_AllowOverrideOfMultiple
+
+				tbody#resTblBdy
+					if catapultResults !== undefined
+						each elmnt in catapultResults
+							tr
+								td= elmnt.ORD_VEN_FK
+								td= elmnt.ORD_PK
+								td= elmnt.ORD_SupplierStockNumber
+								td= elmnt.ORD_INV_FK
+								td= elmnt.ORD_CPK
+								td= elmnt.ORD_INV_CFK
+								td= elmnt.ORD_VEN_CFK
+								td= elmnt.ORD_Primary
+								td= elmnt.ORD_QuantityInOrderUnit
+								td= elmnt.ORD_ASC_FK
+								td= elmnt.ORD_ASC_CFK
+								td= elmnt.ORD_OUP_FK
+								td= elmnt.ORD_OUP_CFK
+								td= elmnt.ORD_TimeStamp
+								td= elmnt.ORD_DSDItem
+								td= elmnt.ORD_DefaultSupplier
+								td= elmnt.ORD_Discontinued
+								td= elmnt.ORD_DateDiscontinued
+								td= elmnt.ORD_MinimumOrder
+								td= elmnt.ORD_FirstOrdRecordDSDFlagSet
+								td= elmnt.ORD_SuggestedMultiple
+								td= elmnt.ORD_AllowOverrideOfMultiple
+
+
+

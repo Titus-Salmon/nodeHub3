@@ -1,0 +1,12 @@
+.env
+node_modules
+csv
+csv-to-insert
+csvToInsert
+images
+misc-scratch
+ARCHIVE
+InventoryMaintenanceWorksheets
+package-lock.json
+package.json
+

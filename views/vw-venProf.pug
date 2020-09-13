@@ -1,0 +1,49 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //- //v// joins nhcrt table to edi table
+		//- form#nhcrtOptItemSales(action='/optItemSales/nhcrtOptItemSales' method='POST' accept-charset="UTF-8" style="display:block")
+		//- 	div(style="display:block")
+		//- 		label.input-label-1(for='nhcrtOptItemSales') This query joins nhcrt & optItemSales tables
+		//- 		textarea#nhcrtOptItemSalesTextArea.input-unit-1(name="nhcrtOptItemSalesPost", cols="30", rows="1", wrap="soft") SELECT nhcrt.*, optItemSales.* FROM ${nhcrtTableName} nhcrt JOIN ${optItemSalesTable} optItemSales ON nhcrt.invScanCode WHERE nhcrt.invScanCode = optItemSales.itemID ORDER BY nhcrt.venCompanyname, nhcrt.pi1Description, nhcrt.pi2Description
+		//- 		button#crtTblBtn3(type='submit', form='nhcrtOptItemSales', style="display: block; float: left") Display NHCRT/optItemSales joined tables
+		//- //- //^// joins nhcrt table to edi table
+
+		//- //v// select vendor
+		form#selectVendor(action='/venProf/venProf' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='slctVnd') Enter Vendor(s) to display monthly profits for
+				input#slctVnd.input-unit-1(type='text', placeholder='enter data', name='vendorNamePost', value='')
+				button#slctVndBtn(type='submit', form='selectVendor', style="display: block") SUBMIT
+		//- //^// select vendor
+
+		br
+
+		if venProfArr !== undefined
+			include includes/venProfResults.html
+
+		if venProfArr !== undefined
+			div
+				table
+					thead
+						tr
+							th date
+							th kehe
+
+
+					tbody#resTblBdy
+						if venProfArr !== undefined
+							each elmnt in venProfArr
+								tr
+									td= elmnt.date
+									td= elmnt.kehe
+
+
+		//- script(src='/jsModules_t0d/tableHighlight.js')
+		//- script(src='/javascripts/modules/adminM0d.js')

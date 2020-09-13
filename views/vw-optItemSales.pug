@@ -1,0 +1,113 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //v// joins nhcrt table to edi table
+		form#nhcrtOptItemSales(action='/optItemSales/nhcrtOptItemSales' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtOptItemSales') This query joins nhcrt & optItemSales tables
+				textarea#nhcrtOptItemSalesTextArea.input-unit-1(name="nhcrtOptItemSalesPost", cols="30", rows="1", wrap="soft") SELECT nhcrt.*, optItemSales.* FROM ${nhcrtTableName} nhcrt JOIN ${optItemSalesTable} optItemSales ON nhcrt.invScanCode WHERE nhcrt.invScanCode = optItemSales.itemID ORDER BY nhcrt.venCompanyname, nhcrt.pi1Description, nhcrt.pi2Description
+				button#crtTblBtn3(type='submit', form='nhcrtOptItemSales', style="display: block; float: left") Display NHCRT/optItemSales joined tables
+		//- //^// joins nhcrt table to edi table
+
+		br
+
+		if vendorTotalsObjArr !== undefined
+			div
+				table
+					thead
+						tr
+							th vendor
+							th salesTot
+							th marginTot
+
+
+					tbody#resTblBdy
+						if vendorTotalsObjArr !== undefined
+							each elmnt in vendorTotalsObjArr
+								tr
+									td= elmnt.vendor
+									td= elmnt.salesTot
+									td= elmnt.marginTot
+
+
+		//- if nhcrtOptItemSales !== undefined
+		//- 	div
+		//- 		table#resTbl
+		//- 			thead
+		//- 				tr
+		//- 					th ri_t0d
+		//- 					th invScanCode
+		//- 					th ordSupplierStockNumber
+		//- 					th invSize
+		//- 					th invReceiptAlias
+		//- 					th invDateCreated
+		//- 					th qtyOrdUnit
+		//- 					th oupName
+		//- 					th stoNumber
+		//- 					th brdName
+		//- 					th dptName
+		//- 					th dptNumber
+		//- 					th sibIdealMargin
+		//- 					th actualMargT0d
+		//- 					th venCompanyname
+		//- 					th invLastreceived
+		//- 					th invLastsold
+		//- 					th invLastcost
+		//- 					th sibBasePrice
+		//- 					th invOnhand
+		//- 					th invOnorder
+		//- 					th invIntransit
+		//- 					th pi1Description
+		//- 					th pi2Description
+		//- 					th qtySold (OIS)
+		//- 					th ExtCost (OIS)
+		//- 					th Sales (OIS)
+		//- 					//- th SalesTot
+		//- 					th Margin
+		//- 					th percMargin
+
+
+		//- 			tbody#resTblBdy
+		//- 				if nhcrtOptItemSales !== undefined
+		//- 					each elmnt in nhcrtOptItemSales
+		//- 						tr
+		//- 							td= elmnt.ri_t0d
+		//- 							td= elmnt.invScanCode
+		//- 							td= elmnt.ordSupplierStockNumber
+		//- 							td= elmnt.invSize
+		//- 							td= elmnt.invReceiptAlias
+		//- 							td= elmnt.invDateCreated
+		//- 							td= elmnt.ordQuantityInOrderUnit
+		//- 							td= elmnt.oupName
+		//- 							td= elmnt.stoNumber
+		//- 							td= elmnt.brdName
+		//- 							td= elmnt.dptName
+		//- 							td= elmnt.dptNumber
+		//- 							td= elmnt.sibIdealMargin
+		//- 							td= elmnt.actualMargT0d
+		//- 							td= elmnt.venCompanyname
+		//- 							td= elmnt.invLastreceived
+		//- 							td= elmnt.invLastsold
+		//- 							td= elmnt.invLastcost
+		//- 							td= elmnt.sibBasePrice
+		//- 							td= elmnt.invOnhand
+		//- 							td= elmnt.invOnorder
+		//- 							td= elmnt.invIntransit
+		//- 							td= elmnt.pi1Description
+		//- 							td= elmnt.pi2Description
+		//- 							td= elmnt.Quantity
+		//- 							td= elmnt.ExtCost
+		//- 							td= elmnt.Sales
+		//- 							//- td= elmnt.SalesTot
+		//- 							td= elmnt.Margin
+		//- 							td= elmnt.percMargin
+
+
+		//- script(src='/jsModules_t0d/tableHighlight.js')
+		//- script(src='/javascripts/modules/adminM0d.js')

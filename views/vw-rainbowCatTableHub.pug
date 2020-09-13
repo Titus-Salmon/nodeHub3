@@ -1,0 +1,120 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		br
+
+		//- //v// queries Heroku rainbow--cat table - default query here is 'SELECT ongDisco FROM rainbowcat WHERE ediName = 'EDI-VENDORNAME';'
+		form#rbCatExtractor(action='/rainbowCatTableHub/rbCatExtractor' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='rbCatExtractor') Enter query to extract data from Heroku rainbow--cat
+				textarea#rbCatExtractor.input-unit-1(name="rbCatExtractorPost", cols="30", rows="1", wrap="soft") SELECT ongDisco FROM rainbowcat WHERE ediName = 'EDI-VENDORNAME';
+				button(type='submit', form='rbCatExtractor', style="display: block; float: left") Extract rainbow--cat data
+		//- //^// queries Heroku rainbow--cat table - default query here is 'SELECT ongDisco FROM rainbowcat WHERE ediName = 'EDI-VENDORNAME';'
+
+		br
+
+		//- //v// creates empty Rainbow Cat table
+		form#createRainbowCatTbl(action='/rainbowCatTableHub/createRainbowCatTbl' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtRBcat') Enter RB DB Rainbow Cat Table Name to CREATE
+				input#crtRBcat.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtRBcatInput') Enter Table Headers (as csv) - default headers for nhcrt (Node Hub Catalog Results Table) provided
+				input#crtRBcatInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='prim_key,vendorName,ediName,issueDate,needNewCat,updatedWLatest,reporter,comments,andrea,vendorEmail,ongDisco')
+				button#crtRBcatBtn(type='submit', form='createRainbowCatTbl', style="display: block") CREATE Rainbow Cat Table
+		//- //^// creates empty Rainbow Cat table
+
+		if sqlTableCreated !== undefined
+			- console.log(`sqlTableCreated.columnNames==> ${sqlTableCreated.columnNames}`)
+			p= 'Created Table: ' + sqlTableCreated.tableName
+			p Column Names:
+			each elmnt in sqlTableCreated.basicColumnNames
+				p= elmnt
+
+		br
+
+		//- //- //v// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+		form#rainbowCatDisplay(action='/rainbowCatTableHub/rainbowCatDisplay' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='rainbowCatDisplay') Enter HEROKU rainbow--cat Results Table to Display
+				textarea#rainbowCatDisplay.input-unit-1(name="rainbowCatDisplayPost", cols="30", rows="1", wrap="soft") SELECT * FROM rainbowcat;
+				button#crtTblBtn(type='submit', form='rainbowCatDisplay', style="display: block; float: left") Display rainbow--cat
+		//- //^// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+
+		br
+
+		div(style="display:block")
+		form#save2CSVrbCatTblPost(action='/rainbowCatTableHub/save2CSVrbCatTbl' method='POST' accept-charset='UTF-8')
+			if rainbowCatDisplay !== undefined
+				label.input-label-1(for='csv') filename:
+					input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+				label.input-label-1(for='csvData') CSV Body data
+					input#csvData.input-unit-1(type='text', placeholder='enter data', name='csvDataPost', value=rainbowCatDisplay)
+				button#save2CSVrbCatTbl(type="submit" form="save2CSVrbCatTblPost") Save Results as CSV - Rainbow Cat table
+
+		br
+
+		form#populateTable(ref="populateTable" action='/rainbowCatTableHub/populateRainbowCatTable' method='POST' encType="multipart/form-data" accept-charset="UTF-8")
+			div(style="display:block")
+				label.input-label-1(for='popTbl') Populate Table
+				input#popTbl.input-unit-1(type='file', name='popTblPost')
+
+				label.input-label-1(for='popTblName') Table to Populate
+				input#popTblName.input-unit-1(type='text', name='popTblNamePost')
+
+				label.input-label-1(for='tblColName') Loaded Column Names
+				input#tblColName.input-unit-1(type='text', name='tblColNamePost', value=tableColNames)
+
+				button#popTblBtn(type='submit', form='populateTable', style="display: block") Populate Table
+
+		if sqlTablePopulated !== undefined
+			p= 'Table Populated: ' + sqlTablePopulated.tablePopulated
+
+		br
+
+		div.rslt-tbl-1
+			table#resTbl
+				thead
+					tr
+						th(onclick="sortTable(0)") Primary Key
+						th(onclick="sortTable(1)") Vendor Name
+						th(onclick="sortTable(2)") EDI Name
+						th(onclick="sortTable(3)") Issue Date
+						th(onclick="sortTable(4)") Need New Catalog?
+						th(onclick="sortTable(5)") Updated w/ Latest?
+						th(onclick="sortTable(6)" style="min-width:15rem") Reporter Comments
+						th(onclick="sortTable(7)" style="min-width:10rem") General Comments
+						th(onclick="sortTable(8)") User Comments
+						th(onclick="sortTable(9)") Vendor Email
+						th(onclick="sortTable(10)") Ongoing Disco
+
+
+
+				tbody#resTblBdy
+					if rainbowCatDisplay !== undefined
+						each elmnt in rainbowCatDisplay
+							tr
+								td= elmnt.prim_key
+								td= elmnt.vendorName
+								td= elmnt.ediName
+								td= elmnt.issueDate
+								td= elmnt.needNewCat
+								td= elmnt.updatedWLatest
+								td= elmnt.reporter
+								td= elmnt.comments
+								td= elmnt.andrea
+								td= elmnt.vendorEmail
+								td= elmnt.ongDisco
+
+
+		//- script(src='/javascripts/modules/sortTableM0d.js')
+		//- script(src='/javascripts/modules/tblHiliteM0d.js')
+		//- script(src='/javascripts/modules/dateCalcM0d.js')
+		//- script(src='/javascripts/modules/editDBM0d.js')
+		script(src='/javascripts/modules/adminM0d.js')

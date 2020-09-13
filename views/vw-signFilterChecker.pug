@@ -1,0 +1,245 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //v// loads table column names for specified table
+		div(style="display:block")
+			form#loadTable(action='/signFilterChecker/loadTable_signFilterChecker' method='POST' accept-charset="UTF-8")
+				label.input-label-1(for='ldTblName') Table Name to Load (loads column names)
+				input#ldTblName.input-unit-1(type='text', placeholder='enter data1', name='ldTblNamePost', value='')
+
+				button#ldTblBtn(type='submit', form='loadTable') Load Table
+
+		if loadedTable !== undefined
+			input#loadedTblName.input-unit-1(type='text', placeholder='enter data2', name='loadedTblNamePost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+			input#ldTblFields.input-unit-1(type='text', placeholder='enter data', name='ldTblFieldsPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+			p= `Loaded Table: ${loadedTable.tableNameToLoad}`
+			p Errors:
+			if loadedTable.tableLoadError.length > 0
+				each thing in loadedTable.tableLoadError
+					- console.log(`thing==> ${thing}`)
+					p= thing
+		//- //^// loads table column names for specified table
+
+
+		//- //v// queries RB DB - default query here is 'show tables;'
+		form#queryRBdb(action='/signFilterChecker/queryRBdb' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dbQuery') Enter Query for Rainbow DB
+				textarea#dbQuery.input-unit-1(name="dbQueryPost", cols="30", rows="1", wrap="soft") show tables;
+				button#crtTblBtn1(type='submit', form='queryRBdb', style="display: block; float: left") QUERY Rainbow DB
+		//- //^// queries RB DB - default query here is 'show tables;'
+
+		br
+
+		//- //v// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+		form#nhcrtDisplay(action='/signFilterChecker/nhcrtDisplay' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtDisplay') Enter NodeHub Catapult Results Table to Display
+				textarea#nhcrtDisplayTextArea.input-unit-1(name="nhcrtDisplayPost", cols="30", rows="1", wrap="soft") SELECT * FROM nhcrt_badger20191127;
+				button#crtTblBtn2(type='submit', form='nhcrtDisplay', style="display: block; float: left") Display NHCRT
+		//- //^// queries RB DB - default query here is 'SELECT * FROM ${nhcrtTableName};'
+
+		br
+
+		//- //v// joins nhcrt table to edi table
+		form#nhcrtInfraSF_Join(action='/signFilterChecker/nhcrtInfraSF_Join' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtInfraSF_Join') This query joins nhcrt & InfraSF tables
+				textarea#nhcrtInfraSF_JoinTextArea.input-unit-1(name="nhcrtInfraSF_JoinPost", cols="30", rows="1", wrap="soft") SELECT nhcrt.*, infra_sf_table.* FROM ${nhcrtTableName} nhcrt JOIN ${infra_sf_tableName} infra_sf_table ON nhcrt.invScanCode WHERE nhcrt.invScanCode = infra_sf_table.infra_upc ORDER BY nhcrt.ri_t0d;
+				button#crtTblBtn3(type='submit', form='nhcrtInfraSF_Join', style="display: block; float: left") Display nhcrtInfraSF joined tables
+		//- //^// joins nhcrt table to edi table
+
+		br
+
+		//- //v// creates empty nhcrt mysql table
+		form#createNhcrtTable(action='/signFilterChecker/createRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtNhcrtTbl') Enter MySql nhcrt Table Name to CREATE
+				input#crtNhcrtTbl.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtNhcrtTblInput') Enter Table Headers (as csv) - default headers for nhcrt (Node Hub Catalog Results Table) provided
+				input#crtNhcrtTblInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='invPK,invCPK,invScanCode,invName,ordSupplierStockNumber,invSize,invReceiptAlias,posTimeStamp,invDateCreated,invEmpFkCreatedBy,ordQuantityInOrderUnit,oupName,stoName,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastreceived,invLastsold,invLastcost,sibBasePrice,invOnhand,invOnorder,invIntransit,pi1Description,pi2Description,pi3Description,invPowerField3,invPowerField4')
+				button#crtNhcrtTblBtn(type='submit', form='createNhcrtTable', style="display: block") CREATE NHCRT Table
+		//- //^// creates empty mysql table
+
+		br
+
+		//- //v// creates empty nhcrtInfraSF_Join mysql table
+		form#createNhcrtEdiTable(action='/signFilterChecker/createRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='crtNhcrtEdiTbl') Enter MySql nisf Table Name to CREATE
+				input#crtNhcrtEdiTbl.input-unit-1(type='text', placeholder='enter data', name='tblNamePost', value='')
+
+				label.input-label-1(for='crtNhcrtEdiInput') Enter Table Headers (as csv) - default headers for nhcrtInfraSF_Join provided
+				input#crtNhcrtEdiInput.input-unit-1(type='text', placeholder='enter data', name='crtTblPost', value='invPK,invCPK,invScanCode,invName,ordSupplierStockNumber,invSize,invReceiptAlias,posTimeStamp,invDateCreated,invEmpFkCreatedBy,ordQuantityInOrderUnit,oupName,stoName,brdName,dptName,dptNumber,sibIdealMargin,venCompanyname,invLastreceived,invLastsold,invLastcost,sibBasePrice,invOnhand,invOnorder,invIntransit,pi1Description,pi2Description,pi3Description,pi4Description,invPowerField3,invPowerField4,Dept,Brand,Product,Size,SalePrice,EDLP,RBPrice,percentOff,GL,IND,MT,SH,SM,Stores')
+				button#crtNhcrtEdiBtn(type='submit', form='createNhcrtEdiTable', style="display: block; float: left") CREATE nhcrtInfraSF_Join Table
+		//- //^// creates empty mysql table
+
+		br
+		br
+
+		if sqlTableCreated !== undefined
+			- console.log(`sqlTableCreated.columnNames==> ${sqlTableCreated.columnNames}`)
+			p= 'Created Table: ' + sqlTableCreated.tableName
+			p Column Names:
+			each elmnt in sqlTableCreated.basicColumnNames
+				p= elmnt
+
+		form#deleteTable(action='/signFilterChecker/deleteRBtable' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='dltTblName') Enter RB Table Name to DELETE
+				input#dltTblName.input-unit-1(type='text', placeholder='enter data', name='delTblNamePost', value='')
+
+				button#dltTblBtn(type='submit', form='deleteTable', style="display: block; float: left") DELETE Table
+		br
+		br
+
+		if sqlTableDeleted !== undefined
+			- console.log(`sqlTableDeleted==> ${sqlTableCreated}`)
+			p= 'Deleted Table: ' + sqlTableDeleted
+
+
+		br
+		form#populateTable(ref="populateTable" action='/signFilterChecker/populateRBTable' method='POST' encType="multipart/form-data" accept-charset="UTF-8")
+			div(style="display:block")
+				label.input-label-1(for='popTbl') Populate Table
+				input#popTbl.input-unit-1(type='file', name='popTblPost')
+
+				label.input-label-1(for='popTblName') Table to Populate
+				input#popTblName.input-unit-1(type='text', name='popTblNamePost')
+
+				label.input-label-1(for='tblColName') Loaded Column Names
+				input#tblColName.input-unit-1(type='text', name='tblColNamePost', value=tableColNames)
+
+				button#popTblBtn(type='submit', form='populateTable', style="display: block") Populate Table
+
+		if sqlTablePopulated !== undefined
+			p= 'Table Populated: ' + sqlTablePopulated.tablePopulated
+
+		//-*********************************************************************************************************
+
+		form#calcResultsSfAud3(action='/signFilterChecker/calcResultsSfAud3' method='POST' accept-charset="UTF-8")
+			if sqlTableCreated !== undefined
+				input#tblColumnNames.input-unit-1(type='text', placeholder='enter data', name='tblColumnNamesPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.basicColumnNames)
+				input#tblPopulated.input-unit-1(type='text', placeholder='enter data', name='tblPopulatedPost', readonly, style="background-color:#c2d6d6", value=sqlTableCreated.tableName)
+			if loadedTable !== undefined
+				input#tblNameToPost.input-unit-1(type='text', placeholder='enter data', name='tblNameToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableNameToLoad)
+				input#fldArrToPost.input-unit-1(type='text', placeholder='enter data', name='fldArrToPostPost', readonly, style="background-color:#c2d6d6", value=loadedTable.tableFields)
+		button(type='submit', form='calcResultsSfAud3', style="display: block; float: left") sfAud3
+
+		br
+		br
+
+		div.rslt-tbl-1
+			table#resTbl
+				label.input-label-1(for='ldSqlTbl') Loaded Sql Table:
+				input#ldSqlTbl.input-unit-1(type='text', placeholder='loaded sql table', name='ldSqlTblPost', value=loadedSqlTbl)
+				thead
+					tr
+						th ri_t0d
+						th invPK
+						th invCPK
+						th invScanCode
+						th invName
+						th ordSupplierStockNumber
+						th invSize
+						th invReceiptAlias
+						th posTimeStamp
+						th invDateCreated
+						th invEmpFkCreatedBy
+						th ordQuantityInOrderUnit
+						th oupName
+						th stoName
+						th brdName
+						th dptName
+						th dptNumber
+						th sibIdealMargin
+						th venCompanyname
+						th invLastreceived
+						th invLastsold
+						th invLastcost
+						th sibBasePrice
+						th invOnhand
+						th invOnorder
+						th invIntransit
+						th pi1Description
+						th pi2Description
+						th pi3Description
+						th pi4Description
+						th invPowerField3
+						th invPowerField4
+						th Dept
+						th Brand
+						th Product
+						th Size
+						th SalePrice
+						th EDLP
+						th RBPrice
+						th percentOff
+						th GL
+						th IND
+						th MT
+						th SH
+						th SM
+						th Stores
+
+
+				tbody#resTblBdy
+					if nhcrtInfraSF_Join !== undefined
+						each elmnt in nhcrtInfraSF_Join
+							tr
+								td= elmnt.ri_t0d
+								td= elmnt.invPK
+								td= elmnt.invCPK
+								td= elmnt.invScanCode
+								td= elmnt.invName
+								td= elmnt.ordSupplierStockNumber
+								td= elmnt.invSize
+								td= elmnt.invReceiptAlias
+								td= elmnt.posTimeStamp
+								td= elmnt.invDateCreated
+								td= elmnt.invEmpFkCreatedBy
+								td= elmnt.ordQuantityInOrderUnit
+								td= elmnt.oupName
+								td= elmnt.stoName
+								td= elmnt.brdName
+								td= elmnt.dptName
+								td= elmnt.dptNumber
+								td= elmnt.sibIdealMargin
+								td= elmnt.venCompanyname
+								td= elmnt.invLastreceived
+								td= elmnt.invLastsold
+								td= elmnt.invLastcost
+								td= elmnt.sibBasePrice
+								td= elmnt.invOnhand
+								td= elmnt.invOnorder
+								td= elmnt.invIntransit
+								td= elmnt.pi1Description
+								td= elmnt.pi2Description
+								td= elmnt.pi3Description
+								td= elmnt.pi4Description
+								td= elmnt.invPowerField3
+								td= elmnt.invPowerField4
+								td= elmnt.Dept
+								td= elmnt.Brand
+								td= elmnt.Product
+								td= elmnt.Size
+								td= elmnt.SalePrice
+								td= elmnt.EDLP
+								td= elmnt.RBPrice
+								td= elmnt.percentOff
+								td= elmnt.GL
+								td= elmnt.IND
+								td= elmnt.MT
+								td= elmnt.SH
+								td= elmnt.SM
+								td= elmnt.Stores
+
+
+		script(src='/javascripts/modules/adminM0d.js')

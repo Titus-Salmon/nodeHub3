@@ -1,0 +1,68 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+		title #{title}
+
+	body
+		include vw-dashboard.pug
+
+		//- //- //v// joins nhcrt table to edi table
+		//- form#keheUnfiJoin(action='/keheUnfiWSdiff/keheUnfiWSdiff' method='POST' accept-charset="UTF-8" style="display:block")
+		//- 	div(style="display:block")
+		//- 		label.input-label-1(for='keheUnfiJoin') This query joins kehe & unfi tables
+		//- 		textarea#keheUnfiJoinTextArea.input-unit-1(name="keheUnfiJoinPost", cols="30", rows="1", wrap="soft") SELECT kehe.kehe_upc, kehe.kehe_unit_type, kehe.kehe_tier3, kehe.kehe_name, unfi.unfi_upc, unfi.unfi_unit_type, unfi.unfi_unit_cost, unfi.unfi_name FROM edi_kehe_data kehe JOIN edi_unfi_data unfi ON kehe.kehe_upc WHERE kehe.kehe_upc = unfi.unfi_upc;
+		//- 		button#crtTblBtn3(type='submit', form='keheUnfiJoin', style="display: block; float: left") Display kehe/unfi joined tables
+		//- //- //^// joins nhcrt table to edi table
+
+		//- //v//
+		form#nhcrtName(action='/keheUnfiWSdiff/keheUnfiWSdiff' method='POST' accept-charset="UTF-8" style="display:block")
+			div(style="display:block")
+				label.input-label-1(for='nhcrtName') Enter NHCRT table name
+				input#nhcrtName.input-unit-1(type='text', placeholder='enter data', name="nhcrtNamePost", value='') 
+				button#crtTblBtn3(type='submit', form='nhcrtName', style="display: block; float: left") Submit
+		//- //^//
+
+		button.adminButton#saveXLSreview(type="submit" form="saveXLSreviewPost") Save Results as XLS
+		form#saveXLSreviewPost(action='/keheUnfiWSdiff/save2XLS_keheUnfiWSdiff' method='POST' accept-charset='UTF-8')
+			label.input-label-1(for='xlsReview') filename:
+				input#xlsReview.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+
+		div.rslt-tbl-1-absolute
+			if srsObjArr !== undefined
+				table#resTbl_loadedTable
+					thead
+						tr
+							th #
+							th kehe_upc
+							th unfi_upc
+							th kehe_unit_type
+							th unfi_unit_type
+							th kehe_unit_cost
+							th unfi_unit_cost
+							th lower_cost
+							th note
+							th kehe_name
+							th unfi_name
+							th invReceiptAlias
+							th venCompanyname
+
+					tbody#resTblBdy_loadedTable
+						each elmnt in srsObjArr
+							tr
+								td= elmnt.ri_t0d
+								td= elmnt.kehe_upc
+								td= elmnt.unfi_upc
+								td= elmnt.kehe_unit_type
+								td= elmnt.unfi_unit_type
+								td= elmnt.kehe_unit_cost
+								td= elmnt.unfi_unit_cost
+								td= elmnt.lower_cost
+								td= elmnt.note
+								td= elmnt.kehe_name
+								td= elmnt.unfi_name
+								td= elmnt.invReceiptAlias
+								td= elmnt.venCompanyname
+
+
+		script(src='/jsModules_t0d/tableHighlight_keheUnfi.js')
