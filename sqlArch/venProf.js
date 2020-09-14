@@ -128,7 +128,7 @@ module.exports = {
       .attr('fill', '#26963c')
       .attr('id', circleId) // say, this value was dynamically retrieved from some database
 
-    var svgsrc = jsdomT0d.window.document.innerHTML
+    var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
     fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
       if (err) {
         console.log('error saving document', err)
