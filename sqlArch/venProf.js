@@ -110,7 +110,9 @@ module.exports = {
       // })
     })
 
-    const jsdomT0d = new JSDOM(`<div id="dataviz-container"></div>`, {
+    const {
+      jsdomT0d
+    } = new JSDOM(`<div id="dataviz-container"></div>`, {
       runScripts: "dangerously"
     })
     const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
