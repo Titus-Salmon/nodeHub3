@@ -25,7 +25,8 @@ html
 
 		br
 
-		if venProfArrDisplay !== undefined
+		-if venProfArrDisplay !== undefined
+		include includes/venProfResults.html
 			- console.log(`venProfArrDisplay==> ${venProfArrDisplay}`)
 			- console.log(`JSON.stringify(venProfArrDisplay)==> ${JSON.stringify(venProfArrDisplay)}`)
 			- console.log(`typeof venProfArrDisplay==> ${typeof venProfArrDisplay}`)
