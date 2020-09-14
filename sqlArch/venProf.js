@@ -118,7 +118,7 @@ module.exports = {
     const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
       encoding: "utf-8"
     })
-    const jsdomScriptElement = jsdomT0d.document.createElement("script")
+    const jsdomScriptElement = jsdomT0d.window.document.createElement("script")
     jsdomScriptElement.textContent = myLibrary
     jsdomT0d.document.body.appendChild(jsdomScriptElement)
 
