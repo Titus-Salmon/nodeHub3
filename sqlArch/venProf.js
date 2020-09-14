@@ -110,9 +110,7 @@ module.exports = {
       // })
     })
 
-    const {
-      jsdomT0d
-    } = new JSDOM(`<!DOCTYPE html><div id="dataviz-container"></div>`, {
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><div id="dataviz-container"></div>`, {
       runScripts: "dangerously"
     })
     console.log(`jsdomT0d==> ${jsdomT0d}`)
