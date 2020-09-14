@@ -1,3 +1,4 @@
+const d3 = require('d3')
 var el = window.document.querySelector('#dataviz-container'),
   body = window.document.querySelector('body'),
   circleId = 'a2324' // say, this value was dynamically retrieved from some database

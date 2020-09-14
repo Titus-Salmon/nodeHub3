@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 const venProfArrCache = require('../nodeCacheStuff/cache1')
 
-const d3 = require('d3')
+// const d3 = require('d3')
 const jsdom = require('jsdom')
 const {
   JSDOM
