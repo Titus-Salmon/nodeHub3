@@ -113,7 +113,7 @@ module.exports = {
     const jsdomT0d = new JSDOM(``, {
       runScripts: "dangerously"
     })
-    const myLibrary = fs.readFileSync(`${process.cwd()}../jsDomScriptsT0d/jsdomScript1.js`, {
+    const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
       encoding: "utf-8"
     })
     const jsdomScriptElement = jsdomT0d.document.createElement("script")

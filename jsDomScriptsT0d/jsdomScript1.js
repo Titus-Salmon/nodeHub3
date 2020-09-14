@@ -24,7 +24,7 @@ d3.select(body)
 // save result in an html file, we could also keep it in memory, or export the interesting fragment into a database for later use
 var svgsrc = window.document.innerHTML
 console.log(`process.cwd()==> ${process.cwd()}`)
-fs.writeFile(`${process.cwd()}../views/inserts/venProfResults.html`, svgsrc, function (err) {
+fs.writeFile(`${process.cwd()}/views/inserts/venProfResults.html`, svgsrc, function (err) {
   if (err) {
     console.log('error saving document', err)
   } else {
