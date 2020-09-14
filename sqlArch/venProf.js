@@ -119,7 +119,7 @@ module.exports = {
     })
     const jsdomScriptElement = jsdomT0d.window.document.createElement("script")
     jsdomScriptElement.textContent = myLibrary
-    jsdomT0d.document.body.appendChild(jsdomScriptElement)
+    jsdomT0d.window.document.body.appendChild(jsdomScriptElement)
 
     // //v////d3/jsdom stuff////////////////////////////////////////////////////////
     // const jsdomT0d = new JSDOM(``, { runScripts: "dangerously" })
