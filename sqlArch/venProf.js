@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
 
 const venProfArrCache = require('../nodeCacheStuff/cache1')
 
-// const d3 = require('d3')
+const d3 = require('d3')
 const jsdom = require('jsdom')
 const {
   JSDOM
@@ -110,16 +110,32 @@ module.exports = {
       // })
     })
 
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><div id="dataviz-container"></div>`, {
-      runScripts: "dangerously"
-    })
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><div id="dataviz-container"></div>`)
+
+    var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
+      // body = jsdomT0d.window.document.querySelector('body'),
+      circleId = 'a2324' // say, this value was dynamically retrieved from some database
+
+    // generate the dataviz
+    d3.select(el)
+      .append('svg:svg')
+      .attr('width', 600)
+      .attr('height', 300)
+      .append('circle')
+      .attr('cx', 300)
+      .attr('cy', 150)
+      .attr('r', 30)
+      .attr('fill', '#26963c')
+      .attr('id', circleId) // say, this value was dynamically retrieved from some database
+
     console.log(`jsdomT0d==> ${jsdomT0d}`)
-    const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
-      encoding: "utf-8"
-    })
-    const jsdomScriptElement = jsdomT0d.window.document.createElement("script")
-    jsdomScriptElement.textContent = myLibrary
-    jsdomT0d.window.document.body.appendChild(jsdomScriptElement)
+    console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
+    // const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
+    //   encoding: "utf-8"
+    // })
+    // const jsdomScriptElement = jsdomT0d.window.document.createElement("script")
+    // jsdomScriptElement.textContent = myLibrary
+    // jsdomT0d.window.document.body.appendChild(jsdomScriptElement)
 
     // //v////d3/jsdom stuff////////////////////////////////////////////////////////
     // const jsdomT0d = new JSDOM(``, { runScripts: "dangerously" })
