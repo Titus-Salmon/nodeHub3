@@ -110,7 +110,7 @@ module.exports = {
       // })
     })
 
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><div id="dataviz-container"></div>`)
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
     var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
       // body = jsdomT0d.window.document.querySelector('body'),
@@ -128,8 +128,23 @@ module.exports = {
       .attr('fill', '#26963c')
       .attr('id', circleId) // say, this value was dynamically retrieved from some database
 
-    console.log(`jsdomT0d==> ${jsdomT0d}`)
-    console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
+    var svgsrc = jsdomT0d.window.document.innerHTML
+    fs.writeFile(`${process.cwd()}/views/inserts/venProfResults.html`, svgsrc, function (err) {
+      if (err) {
+        console.log('error saving document', err)
+      } else {
+        console.log('The file was saved!')
+        console.log(`jsdomT0d==> ${jsdomT0d}`)
+        console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
+        res.render('vw-venProf', {
+          title: `Monthly profits by vendor: ${vendorName}`,
+          venProfArrDisplay: venProfArr,
+        })
+      }
+    })
+
+    // console.log(`jsdomT0d==> ${jsdomT0d}`)
+    // console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
     // const myLibrary = fs.readFileSync(`${process.cwd()}/jsDomScriptsT0d/jsdomScript1.js`, {
     //   encoding: "utf-8"
     // })
