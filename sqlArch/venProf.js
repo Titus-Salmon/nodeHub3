@@ -64,7 +64,7 @@ module.exports = {
             console.log('The file was saved!')
             res.render('vw-venProf', {
               title: `Monthly profits by vendor: ${vendorName}`,
-              venProfArr: venProfArr,
+              venProfArrDisplay: venProfArr,
             })
           }
         })

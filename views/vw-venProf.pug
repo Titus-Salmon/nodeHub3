@@ -25,10 +25,10 @@ html
 
 		br
 
-		if venProfArr !== undefined
+		if venProfArrDisplay !== undefined
 			include includes/venProfResults.html
 
-		if venProfArr !== undefined
+		if venProfArrDisplay !== undefined
 			div
 				table
 					thead
@@ -38,8 +38,8 @@ html
 
 
 					tbody#resTblBdy
-						if venProfArr !== undefined
-							each elmnt in venProfArr
+						if venProfArrDisplay !== undefined
+							each elmnt in venProfArrDisplay
 								tr
 									td= elmnt.date
 									td= elmnt.kehe
