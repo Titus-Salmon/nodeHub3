@@ -89,12 +89,12 @@ module.exports = {
       console.log(`x==> ${x}`)
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(venProfArr, d => d.value)]).nice()
+        .domain([0, d3.max(venProfArr, d => d.vendorName)]).nice()
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
       var line = d3.line()
-        .defined(d => !isNaN(d.value))
+        .defined(d => !isNaN(d.vendorName))
         .x(d => x(d.date))
         .y(d => y(d.value))
       console.log(`line==> ${line}`)
