@@ -70,34 +70,34 @@ module.exports = {
       // body = jsdomT0d.window.document.querySelector('body'),
       circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
-    let width = 1000
-    let height = 500
+    var width = 1000
+    var height = 500
 
-    let margin = ({
+    var margin = ({
       top: 20,
       right: 30,
       bottom: 30,
       left: 40
     })
 
-    let x = d3.scaleUtc()
+    var x = d3.scaleUtc()
       .domain(d3.extent(venProfArr, d => d.date))
       .range([margin.left, width - margin.right])
 
-    let y = d3.scaleLinear()
+    var y = d3.scaleLinear()
       .domain([0, d3.max(venProfArr, d => d.value)]).nice()
       .range([height - margin.bottom, margin.top])
 
-    let line = d3.line()
+    var line = d3.line()
       .defined(d => !isNaN(d.value))
       .x(d => x(d.date))
       .y(d => y(d.value))
 
-    let xAxis = g => g
+    var xAxis = g => g
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
 
-    let yAxis = g => g
+    var yAxis = g => g
       .attr("transform", `translate(${margin.left},0)`)
       .call(d3.axisLeft(y))
       .call(g => g.select(".domain").remove())
