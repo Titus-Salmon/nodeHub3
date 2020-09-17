@@ -79,11 +79,11 @@ module.exports = {
       .y(d => y(d.value))
 
     let x = d3.scaleUtc()
-      .domain(d3.extent(data, d => d.date))
+      .domain(d3.extent(venProfArr, d => d.date))
       .range([margin.left, width - margin.right])
 
     let y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value)]).nice()
+      .domain([0, d3.max(venProfArr, d => d.value)]).nice()
       .range([height - margin.bottom, margin.top])
 
     let xAxis = g => g
@@ -98,7 +98,7 @@ module.exports = {
         .attr("x", 3)
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
-        .text(data.y))
+        .text(venProfArr.y))
 
     let margin = ({
       top: 20,
