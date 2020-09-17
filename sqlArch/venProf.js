@@ -96,7 +96,7 @@ module.exports = {
       var line = d3.line()
         .defined(d => !isNaN(d.vendorName))
         .x(d => x(d.date))
-        .y(d => y(d.value))
+        .y(d => y(d.vendorName))
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
