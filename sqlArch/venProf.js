@@ -112,9 +112,7 @@ module.exports = {
       // })
 
       var data = venProfArr
-      console.log(`JSON.stringify(data)==> ${JSON.stringify(data)}`)
-
-      console.log(`JSON.stringify(data)==> ${JSON.stringify(data)}`)
+      console.log(`JSON.stringify(data) from createLineChartT0d()==> ${JSON.stringify(data)}`)
 
       var x = d3.scaleUtc()
         .domain(d3.extent(data, d => d.date))
