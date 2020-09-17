@@ -73,6 +73,13 @@ module.exports = {
     let width = 1000
     let height = 500
 
+    let margin = ({
+      top: 20,
+      right: 30,
+      bottom: 30,
+      left: 40
+    })
+
     let line = d3.line()
       .defined(d => !isNaN(d.value))
       .x(d => x(d.date))
@@ -99,13 +106,6 @@ module.exports = {
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
         .text(venProfArr.y))
-
-    let margin = ({
-      top: 20,
-      right: 30,
-      bottom: 30,
-      left: 40
-    })
 
     d3.select(el)
       .append('svg:svg')
