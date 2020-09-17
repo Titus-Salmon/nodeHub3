@@ -101,15 +101,18 @@ module.exports = {
         left: 40
       })
 
-      data = Object.assign((venProfArr).map(({
-        date,
-        vendorName
-      }) => ({
-        date,
-        vendorName
-      })), {
-        y: "profit"
-      })
+      // data = Object.assign((venProfArr).map(({
+      //   date,
+      //   vendorName
+      // }) => ({
+      //   date,
+      //   vendorName
+      // })), {
+      //   y: "profit"
+      // })
+
+      var data = venProfArr
+      console.log(`JSON.stringify(data)==> ${JSON.stringify(data)}`)
 
       console.log(`JSON.stringify(data)==> ${JSON.stringify(data)}`)
 
