@@ -83,10 +83,12 @@ module.exports = {
     var x = d3.scaleUtc()
       .domain(d3.extent(venProfArr, d => d.date))
       .range([margin.left, width - margin.right])
+    console.log(`x==> ${x}`)
 
     var y = d3.scaleLinear()
       .domain([0, d3.max(venProfArr, d => d.value)]).nice()
       .range([height - margin.bottom, margin.top])
+    console.log(`y==> ${y}`)
 
     var line = d3.line()
       .defined(d => !isNaN(d.value))
