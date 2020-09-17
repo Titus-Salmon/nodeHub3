@@ -79,8 +79,6 @@ module.exports = {
           console.log('error saving document', err)
         } else {
           console.log('The file was saved!')
-          console.log(`jsdomT0d==> ${jsdomT0d}`)
-          console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
           console.log(`JSON.stringify(venProfArr) from writeHTMLfileAndRenderPage()==> ${JSON.stringify(venProfArr)}`)
           res.render('vw-venProf', {
             title: `Monthly profits by vendor: ${vendorName}`,
@@ -112,6 +110,8 @@ module.exports = {
       })), {
         y: "profit"
       })
+
+      console.log(`JSON.stringify(data)==> ${JSON.stringify(data)}`)
 
       var x = d3.scaleUtc()
         .domain(d3.extent(data, d => d.date))
