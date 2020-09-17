@@ -63,6 +63,26 @@ module.exports = {
       // })
     })
 
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
+
+    var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
+      // body = jsdomT0d.window.document.querySelector('body'),
+      circleId = 'a2324' // say, this value was dynamically retrieved from some database
+
+    // generate the dataviz
+    d3.select(el)
+      .append('svg:svg')
+    // .attr('width', 600)
+    // .attr('height', 300)
+    // .append('circle')
+    // .attr('cx', 300)
+    // .attr('cy', 150)
+    // .attr('r', 30)
+    // .attr('fill', '#26963c')
+    // .attr('id', circleId) // say, this value was dynamically retrieved from some database
+
+    var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+
     const svg = d3.create("svg")
       .attr("viewBox", [0, 0, width, height])
 
@@ -119,25 +139,25 @@ module.exports = {
 
     let height = 500
 
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
+    // const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
-    var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
-      // body = jsdomT0d.window.document.querySelector('body'),
-      circleId = 'a2324' // say, this value was dynamically retrieved from some database
+    // var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
+    //   // body = jsdomT0d.window.document.querySelector('body'),
+    //   circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
-    // generate the dataviz
-    d3.select(el)
-      .append('svg:svg')
-    // .attr('width', 600)
-    // .attr('height', 300)
-    // .append('circle')
-    // .attr('cx', 300)
-    // .attr('cy', 150)
-    // .attr('r', 30)
-    // .attr('fill', '#26963c')
-    // .attr('id', circleId) // say, this value was dynamically retrieved from some database
+    // // generate the dataviz
+    // d3.select(el)
+    //   .append('svg:svg')
+    // // .attr('width', 600)
+    // // .attr('height', 300)
+    // // .append('circle')
+    // // .attr('cx', 300)
+    // // .attr('cy', 150)
+    // // .attr('r', 30)
+    // // .attr('fill', '#26963c')
+    // // .attr('id', circleId) // say, this value was dynamically retrieved from some database
 
-    var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+    // var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
     fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
       if (err) {
         console.log('error saving document', err)
