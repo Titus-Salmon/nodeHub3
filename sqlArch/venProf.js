@@ -72,7 +72,7 @@ module.exports = {
 
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-      console.log(`jsdomT0d.window.document.documentElement==> ${JSON.stringify(jsdomT0d.window.document.documentElement)}`)
+      console.log(`jsdomT0d.window.document.documentElement.innerHTML==> ${JSON.stringify(jsdomT0d.window.document.documentElement.innerHTML)}`)
       console.log(`svgsrc==> ${svgsrc}`)
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
