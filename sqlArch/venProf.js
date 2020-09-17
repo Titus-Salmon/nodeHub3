@@ -63,6 +63,8 @@ module.exports = {
       // })
     })
 
+    console.log(`venProfArr==> ${venProfArr}`)
+
 
     const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
