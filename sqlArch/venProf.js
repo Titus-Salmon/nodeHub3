@@ -55,7 +55,7 @@ module.exports = {
       // console.log(`rows[0]['invName']==>${rows[0]['invName']}`)
       // console.log('rows==>', rows)
       // res.send(rows)
-      displayvenProf(rows).then(createLineChartT0d())
+      displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
 
       // res.render('vw-venProf', {
       //   title: `Monthly profits by vendor: ${vendorName}`,
@@ -65,13 +65,31 @@ module.exports = {
 
     console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
-    function createLineChartT0d() {
-      const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
+    var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
+      // body = jsdomT0d.window.document.querySelector('body'),
+      circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
-      var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
-        // body = jsdomT0d.window.document.querySelector('body'),
-        circleId = 'a2324' // say, this value was dynamically retrieved from some database
+    async function writeHTMLfileAndRenderPage() {
+      var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+      fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
+        if (err) {
+          console.log('error saving document', err)
+        } else {
+          console.log('The file was saved!')
+          console.log(`jsdomT0d==> ${jsdomT0d}`)
+          console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
+          res.render('vw-venProf', {
+            title: `Monthly profits by vendor: ${vendorName}`,
+            venProfArrDisplay: venProfArr,
+          })
+        }
+      })
+    }
+
+
+    async function createLineChartT0d() {
 
       var width = 1000
       var height = 500
@@ -140,23 +158,6 @@ module.exports = {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line)
-
-      var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-      fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
-        if (err) {
-          console.log('error saving document', err)
-        } else {
-          console.log('The file was saved!')
-          console.log(`jsdomT0d==> ${jsdomT0d}`)
-          console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
-          res.render('vw-venProf', {
-            title: `Monthly profits by vendor: ${vendorName}`,
-            venProfArrDisplay: venProfArr,
-          })
-        }
-      })
     }
-
-
   })
 }
