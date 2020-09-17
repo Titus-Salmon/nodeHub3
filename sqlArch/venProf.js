@@ -73,22 +73,6 @@ module.exports = {
     let width = 1000
     let height = 500
 
-    d3.select(el)
-      .append('svg:svg')
-      .attr("viewBox", [0, 0, width, height])
-      .append("g")
-      .call(xAxis)
-      .append("g")
-      .call(yAxis)
-      .append("path")
-      .datum(venProfArr)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
-      .attr("d", line)
-
     let line = d3.line()
       .defined(d => !isNaN(d.value))
       .x(d => x(d.date))
@@ -122,6 +106,22 @@ module.exports = {
       bottom: 30,
       left: 40
     })
+
+    d3.select(el)
+      .append('svg:svg')
+      .attr("viewBox", [0, 0, width, height])
+      .append("g")
+      .call(xAxis)
+      .append("g")
+      .call(yAxis)
+      .append("path")
+      .datum(venProfArr)
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("stroke-linejoin", "round")
+      .attr("stroke-linecap", "round")
+      .attr("d", line)
 
     // let height = 500
 
