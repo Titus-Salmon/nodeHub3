@@ -70,6 +70,9 @@ module.exports = {
       // body = jsdomT0d.window.document.querySelector('body'),
       circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
+    let width = 1000
+    let height = 500
+
     d3.select(el)
       .append('svg:svg')
       .attr("viewBox", [0, 0, width, height])
@@ -120,7 +123,7 @@ module.exports = {
       left: 40
     })
 
-    let height = 500
+    // let height = 500
 
     // // generate the dataviz
     // d3.select(el)
