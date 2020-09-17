@@ -115,19 +115,19 @@ module.exports = {
       console.log(`JSON.stringify(data) from createLineChartT0d()==> ${JSON.stringify(data)}`)
 
       var x = d3.scaleUtc()
-        .domain(d3.extent(data, d => d.data['date']))
+        .domain(d3.extent(data, d => d.date))
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.data[`${vendorName}`])]).nice()
+        .domain([0, d3.max(data, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
       var line = d3.line()
-        .defined(d => !isNaN(d.data[`${vendorName}`]))
-        .x(d => x(d.data['date']))
-        .y(d => y(d.data[`${vendorName}`]))
+        .defined(d => !isNaN(d.kehe))
+        .x(d => x(d.date))
+        .y(d => y(d.kehe))
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
