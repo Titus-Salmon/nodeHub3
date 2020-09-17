@@ -63,7 +63,7 @@ module.exports = {
       // })
     })
 
-    console.log(`venProfArr==> ${venProfArr}`)
+    console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
 
     const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
@@ -96,10 +96,12 @@ module.exports = {
       .defined(d => !isNaN(d.value))
       .x(d => x(d.date))
       .y(d => y(d.value))
+    console.log(`line==> ${line}`)
 
     var xAxis = g => g
       .attr("transform", `translate(0,${height - margin.bottom})`)
       .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+    console.log(`xAxis==> ${xAxis}`)
 
     var yAxis = g => g
       .attr("transform", `translate(${margin.left},0)`)
@@ -110,6 +112,7 @@ module.exports = {
         .attr("text-anchor", "start")
         .attr("font-weight", "bold")
         .text(venProfArr.y))
+    console.log(`yAxis==> ${yAxis}`)
 
     d3.select(el)
       .append('svg:svg')
