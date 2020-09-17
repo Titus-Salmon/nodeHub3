@@ -69,18 +69,6 @@ module.exports = {
       // body = jsdomT0d.window.document.querySelector('body'),
       circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
-    // generate the dataviz
-    d3.select(el)
-      .append('svg:svg')
-    // .attr('width', 600)
-    // .attr('height', 300)
-    // .append('circle')
-    // .attr('cx', 300)
-    // .attr('cy', 150)
-    // .attr('r', 30)
-    // .attr('fill', '#26963c')
-    // .attr('id', circleId) // say, this value was dynamically retrieved from some database
-
     var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
 
     const svg = d3.create("svg")
@@ -138,6 +126,18 @@ module.exports = {
     })
 
     let height = 500
+
+    // generate the dataviz
+    d3.select(el)
+      .append('svg:svg')
+    // .attr('width', 600)
+    // .attr('height', 300)
+    // .append('circle')
+    // .attr('cx', 300)
+    // .attr('cy', 150)
+    // .attr('r', 30)
+    // .attr('fill', '#26963c')
+    // .attr('id', circleId) // say, this value was dynamically retrieved from some database
 
     // const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
