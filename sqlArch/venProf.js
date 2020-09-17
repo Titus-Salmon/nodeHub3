@@ -72,6 +72,8 @@ module.exports = {
 
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+      console.log(`jsdomT0d1==> ${jsdomT0d}`)
+      console.log(`svgsrc==> ${svgsrc}`)
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
           console.log('error saving document', err)
