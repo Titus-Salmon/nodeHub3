@@ -94,12 +94,12 @@ module.exports = {
       })
 
       var x = d3.scaleUtc()
-        .domain(d3.extent(venProfArr, d => d.date))
+        .domain(d3.extent(data, d => d.date))
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(venProfArr, d => d.vendorName)]).nice()
+        .domain([0, d3.max(data, d => d.vendorName)]).nice()
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
@@ -122,7 +122,7 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text(venProfArr.y))
+          .text(data.y))
       console.log(`yAxis==> ${yAxis}`)
 
       d3.select(el)
@@ -133,7 +133,7 @@ module.exports = {
         .append("g")
         .call(yAxis)
         .append("path")
-        .datum(venProfArr)
+        .datum(data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
