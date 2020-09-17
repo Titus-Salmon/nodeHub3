@@ -42,6 +42,7 @@ module.exports = {
       console.log('rows.length~~~>', rows.length)
       // console.log(`Object.keys(rows)==>${Object.keys(rows)}`)
       console.log(`Object.keys(rows[0])==>${Object.keys(rows[0])}`)
+      console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
 
 
@@ -80,6 +81,7 @@ module.exports = {
           console.log('The file was saved!')
           console.log(`jsdomT0d==> ${jsdomT0d}`)
           console.log(`JSON.stringify(jsdomT0d)==> ${JSON.stringify(jsdomT0d)}`)
+          console.log(`JSON.stringify(venProfArr) from writeHTMLfileAndRenderPage()==> ${JSON.stringify(venProfArr)}`)
           res.render('vw-venProf', {
             title: `Monthly profits by vendor: ${vendorName}`,
             venProfArrDisplay: venProfArr,
@@ -158,6 +160,8 @@ module.exports = {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line)
+
+      console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
   })
 }
