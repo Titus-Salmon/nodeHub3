@@ -83,6 +83,16 @@ module.exports = {
         left: 40
       })
 
+      data = Object.assign((venProfArr).map(({
+        date,
+        vendorName
+      }) => ({
+        date,
+        vendorName
+      })), {
+        y: "profit"
+      })
+
       var x = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
