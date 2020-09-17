@@ -68,9 +68,7 @@ module.exports = {
 
     const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
-    var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
-      // body = jsdomT0d.window.document.querySelector('body'),
-      circleId = 'a2324' // say, this value was dynamically retrieved from some database
+    var el = jsdomT0d.window.document.querySelector('#dataviz-container')
 
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
