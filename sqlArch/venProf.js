@@ -80,11 +80,6 @@ module.exports = {
       left: 40
     })
 
-    let line = d3.line()
-      .defined(d => !isNaN(d.value))
-      .x(d => x(d.date))
-      .y(d => y(d.value))
-
     let x = d3.scaleUtc()
       .domain(d3.extent(venProfArr, d => d.date))
       .range([margin.left, width - margin.right])
@@ -92,6 +87,11 @@ module.exports = {
     let y = d3.scaleLinear()
       .domain([0, d3.max(venProfArr, d => d.value)]).nice()
       .range([height - margin.bottom, margin.top])
+
+    let line = d3.line()
+      .defined(d => !isNaN(d.value))
+      .x(d => x(d.date))
+      .y(d => y(d.value))
 
     let xAxis = g => g
       .attr("transform", `translate(0,${height - margin.bottom})`)
