@@ -69,95 +69,19 @@ module.exports = {
       // body = jsdomT0d.window.document.querySelector('body'),
       circleId = 'a2324' // say, this value was dynamically retrieved from some database
 
-    var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-
-    const svg = d3.create("svg")
-      .attr("viewBox", [0, 0, width, height])
-
-    svg.append("g")
-      .call(xAxis)
-
-    svg.append("g")
-      .call(yAxis)
-
-    svg.append("path")
-      .datum(venProfArr)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr("stroke-linejoin", "round")
-      .attr("stroke-linecap", "round")
-      .attr("d", line)
-
-    // return svg.node()
-
-    let line = d3.line()
-      .defined(d => !isNaN(d.value))
-      .x(d => x(d.date))
-      .y(d => y(d.value))
-
-    let x = d3.scaleUtc()
-      .domain(d3.extent(venProfArr, d => d.date))
-      .range([margin.left, width - margin.right])
-
-    let y = d3.scaleLinear()
-      .domain([0, d3.max(venProfArr, d => d.value)]).nice()
-      .range([height - margin.bottom, margin.top])
-
-    let xAxis = g => g
-      .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-
-    let yAxis = g => g
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
-      .call(g => g.select(".domain").remove())
-      .call(g => g.select(".tick:last-of-type text").clone()
-        .attr("x", 3)
-        .attr("text-anchor", "start")
-        .attr("font-weight", "bold")
-        .text(venProfArr.y))
-
-    let margin = ({
-      top: 20,
-      right: 30,
-      bottom: 30,
-      left: 40
-    })
-
-    let height = 500
-
     // generate the dataviz
     d3.select(el)
       .append('svg:svg')
-    // .attr('width', 600)
-    // .attr('height', 300)
-    // .append('circle')
-    // .attr('cx', 300)
-    // .attr('cy', 150)
-    // .attr('r', 30)
-    // .attr('fill', '#26963c')
-    // .attr('id', circleId) // say, this value was dynamically retrieved from some database
+      .attr('width', 600)
+      .attr('height', 300)
+      .append('circle')
+      .attr('cx', 300)
+      .attr('cy', 150)
+      .attr('r', 30)
+      .attr('fill', '#26963c')
+      .attr('id', circleId) // say, this value was dynamically retrieved from some database
 
-    // const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
-
-    // var el = jsdomT0d.window.document.querySelector('#dataviz-container'),
-    //   // body = jsdomT0d.window.document.querySelector('body'),
-    //   circleId = 'a2324' // say, this value was dynamically retrieved from some database
-
-    // // generate the dataviz
-    // d3.select(el)
-    //   .append('svg:svg')
-    // // .attr('width', 600)
-    // // .attr('height', 300)
-    // // .append('circle')
-    // // .attr('cx', 300)
-    // // .attr('cy', 150)
-    // // .attr('r', 30)
-    // // .attr('fill', '#26963c')
-    // // .attr('id', circleId) // say, this value was dynamically retrieved from some database
-
-    // var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+    var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
     fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
       if (err) {
         console.log('error saving document', err)
