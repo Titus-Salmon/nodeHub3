@@ -97,7 +97,7 @@ module.exports = {
       var margin = ({
         top: 20,
         right: 30,
-        bottom: 100,
+        bottom: 30,
         left: 40
       })
 
@@ -148,7 +148,7 @@ module.exports = {
 
       d3.select(el)
         .append('svg')
-        .attr("viewBox", [0, 500, width, height])
+        .attr("viewBox", [0, 470, width, height])
         .append("g")
         .call(xAxis)
         .append("g")
