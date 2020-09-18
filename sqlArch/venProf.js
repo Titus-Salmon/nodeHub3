@@ -91,8 +91,8 @@ module.exports = {
       var margin = ({
         top: 20,
         right: 30,
-        bottom: 50,
-        left: 150
+        bottom: 150,
+        left: 50
       })
 
       // var data = venProfArr
