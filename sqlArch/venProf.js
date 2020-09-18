@@ -104,8 +104,13 @@ module.exports = {
       // var data = venProfArr
       console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
 
-      var x = d3.scaleLinear()
-        .domain(d3.extent(venProfArr, d => d.date)).nice()
+      // var x = d3.scaleLinear()
+      //   .domain(d3.extent(venProfArr, d => d.date)).nice()
+      //   .range([margin.left, width - margin.right])
+      // console.log(`x==> ${x}`)
+
+      var x = d3.scaleUtc()
+        .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
