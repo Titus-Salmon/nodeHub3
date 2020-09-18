@@ -136,7 +136,8 @@ module.exports = {
           .text(data.y))
       console.log(`yAxis==> ${yAxis}`)
 
-      const svg = d3.create("svg")
+      const svg = d3.select(el)
+        .append('svg')
         .attr("viewBox", [0, 0, width, height]);
 
       svg.append("g")
@@ -154,8 +155,8 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", line);
 
-      d3.select(el)
-        .append(svg)
+      // d3.select(el)
+      //   .append(svg)
 
 
       // d3.select(el)
