@@ -47,7 +47,7 @@ module.exports = {
 
 
     connection.query(`
-    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy
+    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2
     `, function (err, rows, fields) {
       if (err) throw err
       console.log(`rows.length==>${rows.length}`)
