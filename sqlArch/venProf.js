@@ -92,7 +92,7 @@ module.exports = {
         top: 20,
         right: 30,
         bottom: 150,
-        left: 40
+        left: 50
       })
 
       // var data = venProfArr
