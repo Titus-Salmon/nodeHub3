@@ -92,7 +92,7 @@ module.exports = {
     async function createLineChartT0d() {
 
       var width = 1000
-      var height = -500
+      var height = 1000
 
       var margin = ({
         top: 20,
