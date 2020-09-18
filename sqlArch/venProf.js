@@ -101,16 +101,16 @@ module.exports = {
         left: 40
       })
 
-      var data = venProfArr
-      console.log(`JSON.stringify(data) from createLineChartT0d()==> ${JSON.stringify(data)}`)
+      // var data = venProfArr
+      console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
 
       var x = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.date)).nice()
+        .domain(d3.extent(venProfArr, d => d.date)).nice()
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(data, d => d.kehe)]).nice()
+        .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
@@ -133,7 +133,7 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text(data.y))
+          .text(venProfArr.y))
       console.log(`yAxis==> ${yAxis}`)
 
       const svg = d3.select(el)
@@ -147,34 +147,13 @@ module.exports = {
         .call(yAxis);
 
       svg.append("path")
-        .datum(data)
+        .datum(venProfArr)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", line);
-
-      // d3.select(el)
-      //   .append(svg)
-
-
-      // d3.select(el)
-      //   .append('svg')
-      //   .attr("viewBox", [0, 470, width, height])
-      //   .append("g")
-      //   .call(xAxis)
-      //   .append("g")
-      //   .call(yAxis)
-      //   .append("path")
-      //   .datum(data)
-      //   .attr("fill", "none")
-      //   .attr("stroke", "steelblue")
-      //   .attr("stroke-width", 1.5)
-      //   .attr("stroke-linejoin", "round")
-      //   .attr("stroke-linecap", "round")
-      //   .attr("d", line)
-
 
       console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
