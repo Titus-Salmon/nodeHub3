@@ -146,22 +146,25 @@ module.exports = {
           .text(data.y))
       console.log(`yAxis==> ${yAxis}`)
 
-      d3.select(el)
-        .append('svg')
-        .attr("viewBox", [0, 470, width, height])
+      // d3.select(el)
+      //   .append('svg')
+      //   .attr("viewBox", [0, 470, width, height])
 
       d3.select(el)
         .append('svg')
+        .attr("viewBox", [0, 470, width, height])
         .append("g")
         .call(xAxis)
 
       d3.select(el)
         .append('svg')
+        .attr("viewBox", [0, 470, width, height])
         .append("g")
         .call(yAxis)
 
       d3.select(el)
         .append('svg')
+        .attr("viewBox", [0, 470, width, height])
         .append("path")
         .datum(data)
         .attr("fill", "none")
