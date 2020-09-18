@@ -18,8 +18,6 @@ const {
 } = jsdom
 const fs = require('fs')
 
-var htmlStub = `<div id="dataviz-container"></div>` // html file skull with a container div for the d3 dataviz
-
 
 module.exports = {
   venProf: router.post('/venProf', (req, res, next) => {
@@ -52,10 +50,6 @@ module.exports = {
       if (err) throw err
       console.log(`rows.length==>${rows.length}`)
       console.log('rows[0]==>', rows[0])
-      // console.log(`rows[0]['invScanCode']==>${rows[0]['invScanCode']}`)
-      // console.log(`rows[0]['invName']==>${rows[0]['invName']}`)
-      // console.log('rows==>', rows)
-      // res.send(rows)
       displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
 
       // res.render('vw-venProf', {
@@ -98,7 +92,7 @@ module.exports = {
         top: 20,
         right: 30,
         bottom: 30,
-        left: 40
+        left: 50
       })
 
       // var data = venProfArr
