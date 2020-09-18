@@ -131,7 +131,7 @@ module.exports = {
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
-        .attr("transform", `translate(0,${margin.bottom})`)
+        .attr("transform", `translate(0,${height + margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
       console.log(`xAxis==> ${xAxis}`)
 
