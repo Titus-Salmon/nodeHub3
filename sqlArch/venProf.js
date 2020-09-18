@@ -127,11 +127,11 @@ module.exports = {
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
-        .y(d => 500 - y(d.kehe))
+        .y(d => y(d.kehe))
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
-        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .attr("transform", `translate(0,${margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
       console.log(`xAxis==> ${xAxis}`)
 
