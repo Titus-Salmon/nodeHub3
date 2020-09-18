@@ -60,7 +60,7 @@ module.exports = {
 
     console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container" style="margin: 20px 40px"></div></body>`)
 
     var el = jsdomT0d.window.document.querySelector('#dataviz-container')
 
@@ -89,10 +89,10 @@ module.exports = {
       var height = 500
 
       var margin = ({
-        top: 20,
-        right: 30,
-        bottom: 150,
-        left: 50
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0
       })
 
       // var data = venProfArr
