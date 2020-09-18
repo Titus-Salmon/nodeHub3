@@ -115,7 +115,7 @@ module.exports = {
       console.log(`JSON.stringify(data) from createLineChartT0d()==> ${JSON.stringify(data)}`)
 
       var x = d3.scaleLinear()
-        .domain(d3.extent(data, d => d.date))
+        .domain(d3.extent(data, d => d.date)).nice()
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
@@ -131,7 +131,7 @@ module.exports = {
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
-        .attr("transform", `translate(0,${margin.bottom})`)
+        .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
       console.log(`xAxis==> ${xAxis}`)
 
