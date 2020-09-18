@@ -151,8 +151,8 @@ module.exports = {
       //   .attr("viewBox", [0, 470, width, height])
 
       d3.select(el)
-        .attr("viewBox", [0, 470, width, height])
         .append('svg')
+        .attr("viewBox", [0, 470, width, height])
         .append("g")
         .call(xAxis)
         .append("g")
