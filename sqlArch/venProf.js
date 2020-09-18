@@ -97,7 +97,7 @@ module.exports = {
       var margin = ({
         top: 20,
         right: 30,
-        bottom: 100,
+        bottom: 30,
         left: 40
       })
 
@@ -146,21 +146,42 @@ module.exports = {
           .text(data.y))
       console.log(`yAxis==> ${yAxis}`)
 
-      d3.select(el)
-        .append('svg')
-        .attr("viewBox", [0, 0, width, height])
-        .append("g")
-        .call(xAxis)
-        .append("g")
-        .call(yAxis)
-        .append("path")
+      const svg = d3.create("svg")
+        .attr("viewBox", [0, 0, width, height]);
+
+      svg.append("g")
+        .call(xAxis);
+
+      svg.append("g")
+        .call(yAxis);
+
+      svg.append("path")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("d", line)
+        .attr("d", line);
+
+      d3.select(el)
+        .append('svg')
+
+      // d3.select(el)
+      //   .append('svg')
+      //   .attr("viewBox", [0, 0, width, height])
+      //   .append("g")
+      //   .call(xAxis)
+      //   .append("g")
+      //   .call(yAxis)
+      //   .append("path")
+      //   .datum(data)
+      //   .attr("fill", "none")
+      //   .attr("stroke", "steelblue")
+      //   .attr("stroke-width", 1.5)
+      //   .attr("stroke-linejoin", "round")
+      //   .attr("stroke-linecap", "round")
+      //   .attr("d", line)
 
       console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
