@@ -147,6 +147,7 @@ module.exports = {
       console.log(`yAxis==> ${yAxis}`)
 
       d3.select(el)
+        .append('svg')
         .attr("viewBox", [0, 470, width, height])
 
       d3.select(el)
