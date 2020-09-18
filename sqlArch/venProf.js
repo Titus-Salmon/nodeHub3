@@ -92,7 +92,7 @@ module.exports = {
     async function createLineChartT0d() {
 
       var width = 1000
-      var height = 1000
+      var height = 500
 
       var margin = ({
         top: 20,
@@ -147,7 +147,7 @@ module.exports = {
       console.log(`yAxis==> ${yAxis}`)
 
       d3.select(el)
-        .append('svg:svg')
+        .append('svg')
         .attr("viewBox", [0, 0, width, height])
         .append("g")
         .call(xAxis)
