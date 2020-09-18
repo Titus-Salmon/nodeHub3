@@ -101,16 +101,6 @@ module.exports = {
         left: 40
       })
 
-      // data = Object.assign((venProfArr).map(({
-      //   date,
-      //   vendorName
-      // }) => ({
-      //   date,
-      //   vendorName
-      // })), {
-      //   y: "profit"
-      // })
-
       var data = venProfArr
       console.log(`JSON.stringify(data) from createLineChartT0d()==> ${JSON.stringify(data)}`)
 
@@ -131,7 +121,7 @@ module.exports = {
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
-        .attr("transform", `translate(0,${height + margin.bottom})`)
+        .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
       console.log(`xAxis==> ${xAxis}`)
 
@@ -146,25 +136,27 @@ module.exports = {
           .text(data.y))
       console.log(`yAxis==> ${yAxis}`)
 
-      // d3.select(el)
-      //   .append('svg')
-      //   .attr("viewBox", [0, 470, width, height])
+      const svg = d3.create("svg")
+        .attr("viewBox", [0, 0, width, height]);
 
-      d3.select(el)
-        .append('svg')
-        .attr("viewBox", [0, 470, width, height])
-        .append("g")
-        .call(xAxis)
-        .append("g")
-        .call(yAxis)
-        .append("path")
+      svg.append("g")
+        .call(xAxis);
+
+      svg.append("g")
+        .call(yAxis);
+
+      svg.append("path")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", "steelblue")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("d", line)
+        .attr("d", line);
+
+      d3.select(el)
+        .append(svg)
+
 
       // d3.select(el)
       //   .append('svg')
@@ -182,20 +174,6 @@ module.exports = {
       //   .attr("stroke-linecap", "round")
       //   .attr("d", line)
 
-      // svg.append("g")
-      //   .call(xAxis);
-
-      // svg.append("g")
-      //   .call(yAxis);
-
-      // svg.append("path")
-      //   .datum(data)
-      //   .attr("fill", "none")
-      //   .attr("stroke", "steelblue")
-      //   .attr("stroke-width", 1.5)
-      //   .attr("stroke-linejoin", "round")
-      //   .attr("stroke-linecap", "round")
-      //   .attr("d", line);
 
       console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
