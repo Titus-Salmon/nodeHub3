@@ -127,7 +127,7 @@ module.exports = {
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
-        .y(d => y(d.kehe))
+        .y(d => -y(d.kehe))
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
