@@ -52,9 +52,9 @@ module.exports = {
       let rainbowcat_update_tracker_rows = rows[1]
 
       for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
-        let updateDemarcatorfObj = {}
-        updateDemarcatorfObj['ri_t0d'] = i + 1
-        updateDemarcatorfObj['date'] = rainbowcat_update_tracker_rows[i]['date']
+        let updateDemarcatorObj = {}
+        updateDemarcatorObj['ri_t0d'] = i + 1
+        updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date']
         updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         updateDemarcatorObj['wsImw'] = rainbowcat_update_tracker_rows[i]['wsImw']
         updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
