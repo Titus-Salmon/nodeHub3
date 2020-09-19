@@ -52,10 +52,10 @@ module.exports = {
       let rainbowcat_update_tracker_rows = rows[1]
 
       for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
-        // srcRsObj['pf5'] = new Date().toISOString().split('T', 1)[0] + " WS UPDT (pf5)"
         let updateDemarcatorObj = {}
         updateDemarcatorObj['ri_t0d'] = i + 1
-        updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date'].split('T', 1)[0]
+        // updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date'].split('T', 1)[0]
+        updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date']
         updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         updateDemarcatorObj['wsImw'] = rainbowcat_update_tracker_rows[i]['wsImw']
         updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
@@ -127,6 +127,11 @@ module.exports = {
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
+      var xWS = d3.scaleUtc()
+        .domain(d3.extent(updateDemarcatorArr, d => d.date))
+        .range([margin.left, width - margin.right])
+      console.log(`xWS==> ${xWS}`)
+
       var y = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
@@ -136,6 +141,12 @@ module.exports = {
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
         .y(d => y(d.kehe))
+      console.log(`line==> ${line}`)
+
+      var lineWSupdate = d3.line()
+        // .defined(d => !isNaN(d.kehe))
+        .x(d => xWS(d.date))
+        .y(400)
       console.log(`line==> ${line}`)
 
       var xAxis = g => g
@@ -159,10 +170,10 @@ module.exports = {
         .attr("viewBox", [0, 0, width, height]);
 
       svg.append("g")
-        .call(xAxis);
+        .call(xAxis)
 
       svg.append("g")
-        .call(yAxis);
+        .call(yAxis)
 
       svg.append("path")
         .datum(venProfArr)
@@ -171,7 +182,16 @@ module.exports = {
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("d", line);
+        .attr("d", line)
+
+      svg.append("path")
+        .datum(updateDemarcatorArr)
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", lineWSupdate)
 
       // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
