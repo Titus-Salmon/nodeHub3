@@ -23,15 +23,16 @@ const fs = require('fs')
 module.exports = {
   venProf: router.post('/venProf', (req, res, next) => {
 
-    let ois_venprof_mnth_rows = rows[0]
-    let rainbowcat_update_tracker_rows = rows[1]
-
     let vendorName = req.body['vendorNamePost']
     console.log(`vendorName==> ${vendorName}`)
 
     let venProfArr = []
 
     async function displayvenProf(ois_venprof_mnth_rows) {
+
+      let ois_venprof_mnth_rows = rows[0]
+      let rainbowcat_update_tracker_rows = rows[1]
+
       for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
         let venProfObj = {}
         venProfObj['ri_t0d'] = i + 1
