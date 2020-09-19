@@ -55,7 +55,9 @@ module.exports = {
         let updateDemarcatorfObj = {}
         updateDemarcatorfObj['ri_t0d'] = i + 1
         updateDemarcatorfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        updateDemarcatorObj['kehe'] = ois_venprof_mnth_rows[i]['kehe']
+        updateDemarcatorObj['edi_vendor_name'] = ois_venprof_mnth_rows[i]['edi_vendor_name']
+        updateDemarcatorObj['wsImw'] = ois_venprof_mnth_rows[i]['wsImw']
+        updateDemarcatorObj['rtlImw'] = ois_venprof_mnth_rows[i]['rtlImw']
 
         updateDemarcatorArr.push(updateDemarcatorObj)
       }
@@ -72,8 +74,8 @@ module.exports = {
     `, function (err, rows, fields) {
       if (err) throw err
       displayvenProf(rows)
+        .then(updateDemarcator(rows))
         .then(createLineChartT0d())
-        .then(updateDemarcator())
         .then(writeHTMLfileAndRenderPage())
     })
 
