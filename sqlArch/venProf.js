@@ -60,7 +60,7 @@ module.exports = {
 
     console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container" style="margin: 20px 20px 350px 20px"></div></body>`)
+    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container" style="margin: 20px 20px 600px 20px"></div></body>`)
 
     var el = jsdomT0d.window.document.querySelector('#dataviz-container')
 
