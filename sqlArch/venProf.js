@@ -54,10 +54,10 @@ module.exports = {
       for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
         let updateDemarcatorfObj = {}
         updateDemarcatorfObj['ri_t0d'] = i + 1
-        updateDemarcatorfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        updateDemarcatorObj['edi_vendor_name'] = ois_venprof_mnth_rows[i]['edi_vendor_name']
-        updateDemarcatorObj['wsImw'] = ois_venprof_mnth_rows[i]['wsImw']
-        updateDemarcatorObj['rtlImw'] = ois_venprof_mnth_rows[i]['rtlImw']
+        updateDemarcatorfObj['date'] = rainbowcat_update_tracker_rows[i]['date']
+        updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
+        updateDemarcatorObj['wsImw'] = rainbowcat_update_tracker_rows[i]['wsImw']
+        updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
 
         updateDemarcatorArr.push(updateDemarcatorObj)
       }
