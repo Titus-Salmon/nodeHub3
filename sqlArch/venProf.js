@@ -52,9 +52,10 @@ module.exports = {
       let rainbowcat_update_tracker_rows = rows[1]
 
       for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
+        // srcRsObj['pf5'] = new Date().toISOString().split('T', 1)[0] + " WS UPDT (pf5)"
         let updateDemarcatorObj = {}
         updateDemarcatorObj['ri_t0d'] = i + 1
-        updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date']
+        updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date'].toISOString().split('T', 1)[0]
         updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         updateDemarcatorObj['wsImw'] = rainbowcat_update_tracker_rows[i]['wsImw']
         updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
