@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   multipleStatements: true
 })
 
-const venProfArrCache = require('../nodeCacheStuff/cache1')
+// const venProfArrCache = require('../nodeCacheStuff/cache1')
 
 const d3 = require('d3')
 const jsdom = require('jsdom')
@@ -27,11 +27,11 @@ module.exports = {
     console.log(`vendorName==> ${vendorName}`)
 
     let venProfArr = []
+    let updateDemarcatorArr = []
 
     async function displayvenProf(rows) {
 
       let ois_venprof_mnth_rows = rows[0]
-      let rainbowcat_update_tracker_rows = rows[1]
 
       for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
         let venProfObj = {}
@@ -41,10 +41,28 @@ module.exports = {
 
         venProfArr.push(venProfObj)
       }
-      venProfArrCache.set('venProfArrCache_key', venProfArr)
+      // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
       console.log(`Object.keys(ois_venprof_mnth_rows)==>${Object.keys(ois_venprof_mnth_rows)}`)
       console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
+    }
+
+    async function updateDemarcator(rows) {
+
+      let rainbowcat_update_tracker_rows = rows[1]
+
+      for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
+        let updateDemarcatorfObj = {}
+        updateDemarcatorfObj['ri_t0d'] = i + 1
+        updateDemarcatorfObj['date'] = ois_venprof_mnth_rows[i]['date']
+        updateDemarcatorObj['kehe'] = ois_venprof_mnth_rows[i]['kehe']
+
+        updateDemarcatorArr.push(updateDemarcatorObj)
+      }
+      // venProfArrCache.set('venProfArrCache_key', venProfArr)
+      console.log('rainbowcat_update_tracker_rows.length~~~>', rainbowcat_update_tracker_rows.length)
+      console.log(`Object.keys(rainbowcat_update_tracker_rows)==>${Object.keys(rainbowcat_update_tracker_rows)}`)
+      console.log(`JSON.stringify(updateDemarcatorArr) from updateDemarcator()==> ${JSON.stringify(updateDemarcatorArr)}`)
     }
 
 
@@ -52,15 +70,11 @@ module.exports = {
     SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
-      // let ois_venprof_mnth_rows = rows[0]
-      // let rainbowcat_update_tracker_rows = rows[1]
       if (err) throw err
-      // console.log('ois_venprof_mnth_rows[0]==>', ois_venprof_mnth_rows[0])
-      // console.log('rainbowcat_update_tracker_rows[0]==>', rainbowcat_update_tracker_rows[0])
-      displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
+      displayvenProf(rows)
+        .then(createLineChartT0d())
+        .then(writeHTMLfileAndRenderPage())
     })
-
-    // console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
     const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
