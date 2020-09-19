@@ -28,7 +28,7 @@ module.exports = {
 
     let venProfArr = []
 
-    async function displayvenProf(ois_venprof_mnth_rows) {
+    async function displayvenProf(rows) {
 
       let ois_venprof_mnth_rows = rows[0]
       let rainbowcat_update_tracker_rows = rows[1]
