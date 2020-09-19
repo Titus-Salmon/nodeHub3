@@ -149,9 +149,9 @@ module.exports = {
       console.log(`line==> ${line}`)
 
       var lineWSupdate = d3.line()
-        // .defined(d => !isNaN(d.kehe))
+        .defined(d => !isNaN(d.height))
         .x(d => xWS(d.date))
-        .y(d => yWS(400))
+        .y(d => yWS(d.height))
       console.log(`lineWSupdate==> ${lineWSupdate}`)
 
       var xAxis = g => g
