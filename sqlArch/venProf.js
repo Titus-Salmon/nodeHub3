@@ -23,34 +23,38 @@ const fs = require('fs')
 module.exports = {
   venProf: router.post('/venProf', (req, res, next) => {
 
+    let ois_venprof_mnth_rows = rows[0]
+    let rainbowcat_update_tracker_rows = rows[1]
+
     let vendorName = req.body['vendorNamePost']
     console.log(`vendorName==> ${vendorName}`)
 
     let venProfArr = []
 
-    async function displayvenProf(rows) {
-      for (let i = 0; i < rows.length; i++) {
+    async function displayvenProf(ois_venprof_mnth_rows) {
+      for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
         let venProfObj = {}
         venProfObj['ri_t0d'] = i + 1
-        venProfObj['date'] = rows[i]['date']
-        venProfObj['kehe'] = rows[i]['kehe']
+        venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
+        venProfObj['kehe'] = ois_venprof_mnth_rows[i]['kehe']
 
         venProfArr.push(venProfObj)
       }
       venProfArrCache.set('venProfArrCache_key', venProfArr)
-      console.log('rows.length~~~>', rows.length)
-      console.log(`Object.keys(rows[0])==>${Object.keys(rows[0])}`)
+      console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
+      console.log(`Object.keys(ois_venprof_mnth_rows)==>${Object.keys(ois_venprof_mnth_rows)}`)
       console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
 
 
     connection.query(`
-    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2
+    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
+    SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
-      console.log(`rows.length==>${rows.length}`)
-      console.log('rows[0]==>', rows[0])
-      displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
+      console.log('ois_venprof_mnth_rows[0]==>', ois_venprof_mnth_rows[0])
+      console.log('rainbowcat_update_tracker_rows[0]==>', rainbowcat_update_tracker_rows[0])
+      displayvenProf(ois_venprof_mnth_rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
     })
 
     // console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
