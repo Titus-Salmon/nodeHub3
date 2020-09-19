@@ -127,20 +127,20 @@ module.exports = {
         .range([margin.left, width - margin.right])
       console.log(`x==> ${x}`)
 
-      var xWS = d3.scaleUtc()
-        .domain(d3.extent(updateDemarcatorArr, d => d.date))
-        .range([margin.left, width - margin.right])
-      console.log(`xWS==> ${xWS}`)
+      // var xWS = d3.scaleUtc()
+      //   .domain(d3.extent(updateDemarcatorArr, d => d.date))
+      //   .range([margin.left, width - margin.right])
+      // console.log(`xWS==> ${xWS}`)
 
       var y = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
-      var yWS = d3.scaleLinear()
-        .domain([0, 400]).nice()
-        .range(0, 400)
-      console.log(`yWS==> ${yWS}`)
+      // var yWS = d3.scaleLinear()
+      //   .domain([0, 400]).nice()
+      //   .range(0, 400)
+      // console.log(`yWS==> ${yWS}`)
 
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
@@ -148,11 +148,11 @@ module.exports = {
         .y(d => y(d.kehe))
       console.log(`line==> ${line}`)
 
-      var lineWSupdate = d3.line()
-        .defined(d => !isNaN(d.height))
-        .x(d => xWS(d.date))
-        .y(d => yWS(d.height))
-      console.log(`lineWSupdate==> ${lineWSupdate}`)
+      // var lineWSupdate = d3.line()
+      //   .defined(d => !isNaN(d.height))
+      //   .x(d => xWS(d.date))
+      //   .y(d => yWS(d.height))
+      // console.log(`lineWSupdate==> ${lineWSupdate}`)
 
       var xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
@@ -189,14 +189,13 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", line)
 
-      svg.append("path")
-        .datum(updateDemarcatorArr)
-        .attr("fill", "none")
-        .attr("stroke", "red")
-        .attr("stroke-width", 1.5)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("d", lineWSupdate)
+      svg.append('line')
+        .style("stroke", "lightgreen")
+        .style("stroke-width", 1.5)
+        .attr("x1", 50)
+        .attr("y1", 0)
+        .attr("x2", 50)
+        .attr("y2", 400)
 
       // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
