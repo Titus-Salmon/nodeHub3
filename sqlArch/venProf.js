@@ -91,7 +91,7 @@ module.exports = {
       var margin = ({
         top: 20,
         right: 30,
-        bottom: 200,
+        bottom: 150,
         left: 50
       })
 
