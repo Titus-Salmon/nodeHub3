@@ -52,11 +52,11 @@ module.exports = {
     SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
-      let ois_venprof_mnth_rows = rows[0]
-      let rainbowcat_update_tracker_rows = rows[1]
+      // let ois_venprof_mnth_rows = rows[0]
+      // let rainbowcat_update_tracker_rows = rows[1]
       if (err) throw err
-      console.log('ois_venprof_mnth_rows[0]==>', ois_venprof_mnth_rows[0])
-      console.log('rainbowcat_update_tracker_rows[0]==>', rainbowcat_update_tracker_rows[0])
+      // console.log('ois_venprof_mnth_rows[0]==>', ois_venprof_mnth_rows[0])
+      // console.log('rainbowcat_update_tracker_rows[0]==>', rainbowcat_update_tracker_rows[0])
       displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
     })
 
