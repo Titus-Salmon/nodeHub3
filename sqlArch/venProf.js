@@ -73,6 +73,7 @@ module.exports = {
       if (err) throw err
       displayvenProf(rows)
         .then(createLineChartT0d())
+        .then(updateDemarcator())
         .then(writeHTMLfileAndRenderPage())
     })
 
@@ -83,7 +84,7 @@ module.exports = {
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       // console.log(`jsdomT0d.window.document.documentElement.innerHTML==> ${JSON.stringify(jsdomT0d.window.document.documentElement.innerHTML)}`)
-      console.log(`svgsrc==> ${svgsrc}`)
+      // console.log(`svgsrc==> ${svgsrc}`)
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
           console.log('error saving document', err)
