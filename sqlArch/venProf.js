@@ -54,7 +54,7 @@ module.exports = {
       if (err) throw err
       console.log('ois_venprof_mnth_rows[0]==>', ois_venprof_mnth_rows[0])
       console.log('rainbowcat_update_tracker_rows[0]==>', rainbowcat_update_tracker_rows[0])
-      displayvenProf(ois_venprof_mnth_rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
+      displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
     })
 
     // console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
