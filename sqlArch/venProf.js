@@ -137,6 +137,11 @@ module.exports = {
         .range([height - margin.bottom, margin.top])
       console.log(`y==> ${y}`)
 
+      var yWS = d3.scaleLinear()
+        .domain([0, 400]).nice()
+        .range(0, 400)
+      console.log(`yWS==> ${yWS}`)
+
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
@@ -146,8 +151,8 @@ module.exports = {
       var lineWSupdate = d3.line()
         // .defined(d => !isNaN(d.kehe))
         .x(d => xWS(d.date))
-        .y(400)
-      console.log(`line==> ${line}`)
+        .y(d => yWS(400))
+      console.log(`lineWSupdate==> ${lineWSupdate}`)
 
       var xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
