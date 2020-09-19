@@ -6,7 +6,8 @@ const connection = mysql.createConnection({
   host: process.env.RB_HOST,
   user: process.env.RB_USER,
   password: process.env.RB_PW,
-  database: process.env.RB_DB
+  database: process.env.RB_DB,
+  multipleStatements: true
 })
 
 const venProfArrCache = require('../nodeCacheStuff/cache1')
@@ -38,7 +39,6 @@ module.exports = {
       }
       venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('rows.length~~~>', rows.length)
-      // console.log(`Object.keys(rows)==>${Object.keys(rows)}`)
       console.log(`Object.keys(rows[0])==>${Object.keys(rows[0])}`)
       console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
@@ -51,14 +51,9 @@ module.exports = {
       console.log(`rows.length==>${rows.length}`)
       console.log('rows[0]==>', rows[0])
       displayvenProf(rows).then(createLineChartT0d()).then(writeHTMLfileAndRenderPage())
-
-      // res.render('vw-venProf', {
-      //   title: `Monthly profits by vendor: ${vendorName}`,
-      //   venProfArr: venProfArr,
-      // })
     })
 
-    console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
+    // console.log(`JSON.stringify(venProfArr)==> ${JSON.stringify(venProfArr)}`)
 
     const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 
@@ -66,14 +61,14 @@ module.exports = {
 
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-      console.log(`jsdomT0d.window.document.documentElement.innerHTML==> ${JSON.stringify(jsdomT0d.window.document.documentElement.innerHTML)}`)
+      // console.log(`jsdomT0d.window.document.documentElement.innerHTML==> ${JSON.stringify(jsdomT0d.window.document.documentElement.innerHTML)}`)
       console.log(`svgsrc==> ${svgsrc}`)
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
           console.log('error saving document', err)
         } else {
           console.log('The file was saved!')
-          console.log(`JSON.stringify(venProfArr) from writeHTMLfileAndRenderPage()==> ${JSON.stringify(venProfArr)}`)
+          // console.log(`JSON.stringify(venProfArr) from writeHTMLfileAndRenderPage()==> ${JSON.stringify(venProfArr)}`)
           res.render('vw-venProf', {
             title: `Monthly profits by vendor: ${vendorName}`,
             venProfArrDisplay: venProfArr,
@@ -95,8 +90,7 @@ module.exports = {
         left: 50
       })
 
-      // var data = venProfArr
-      console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
+      // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
 
       // var x = d3.scaleLinear()
       //   .domain(d3.extent(venProfArr, d => d.date)).nice()
@@ -154,7 +148,7 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", line);
 
-      console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
+      // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
   })
 }
