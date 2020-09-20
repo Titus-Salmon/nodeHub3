@@ -226,7 +226,7 @@ module.exports = {
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
-          WsDateOnlyArr.push(WsUpdateArr['date'])
+          WsDateOnlyArr.push(WsUpdateArr[i]['date'])
         }
       }
 
