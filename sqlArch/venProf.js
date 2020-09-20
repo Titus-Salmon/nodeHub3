@@ -189,12 +189,20 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", line)
 
+      timeScaleUpdateDemarcator = d3.scaleUtc()
+        .domain(d3.extent(venProfArr, d => d.date))
+        .range([margin.left, width - margin.right])
+
+      // timeScaleUpdateDemarcator(new Date(2016, 0, 1)); // returns 0
+      // timeScaleUpdateDemarcator(new Date(2016, 6, 1)); // returns 348.00...
+      // timeScaleUpdateDemarcator(new Date(2017, 0, 1)); // returns 700
+
       svg.append('line')
         .style("stroke", "lightgreen")
         .style("stroke-width", 1.5)
-        .attr("x1", 500)
+        .attr("x1", timeScaleUpdateDemarcator(rainbowcat_update_tracker_rows[40]['date']))
         .attr("y1", 0)
-        .attr("x2", 500)
+        .attr("x2", timeScaleUpdateDemarcator(rainbowcat_update_tracker_rows[40]['date']))
         .attr("y2", 400)
 
       // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
