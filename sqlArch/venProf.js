@@ -164,7 +164,7 @@ module.exports = {
       // console.log(`y==> ${y}`)
 
       var yWS = d3.scaleLinear()
-        .domain([minYaxisUpdtDmrctr, minYaxisUpdtDmrctr]).nice()
+        .domain([minYaxisUpdtDmrctr, maxYaxisUpdtDmrctr]).nice()
         .range([height - margin.bottom, margin.top])
       // console.log(`yWS==> ${yWS}`)
 
