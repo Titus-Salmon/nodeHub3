@@ -64,6 +64,8 @@ module.exports = {
 
         updateDemarcatorArr.push(updateDemarcatorObj)
 
+        console.log(`rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()==> ${rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()}`)
+        // let edi_vend_name = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName}`) {
           WsUpdateArr.push(updateDemarcatorObj)
