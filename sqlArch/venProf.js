@@ -213,17 +213,6 @@ module.exports = {
 
       console.log(`timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])==> ${timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])}`)
 
-      // var yAxisUpdateDemarcator = g => g
-      //   .attr("transform", `translate(${margin.left},0)`)
-      //   .call(d3.axisLeft(y))
-      //   .call(g => g.select(".domain").remove())
-      //   .call(g => g.select(".tick:last-of-type text").clone()
-      //     .attr("x", 3)
-      //     .attr("text-anchor", "start")
-      //     .attr("font-weight", "bold")
-      //     .text(venProfArr.y))
-      // console.log(`yAxis==> ${yAxis}`)
-
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
           WsDateOnlyArr.push(WsUpdateArr[i]['date'])
@@ -240,6 +229,20 @@ module.exports = {
       console.log(`minWSdate==> ${minWSdate}`)
       var maxWSdate = Math.max(...WsDateOnlyArr)
       console.log(`maxWSdate==> ${maxWSdate}`)
+
+
+      var yAxisUpdateDemarcator = g => g
+        .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-50},0)`)
+        .call(d3.axisLeft(y))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.select(".tick:last-of-type text").clone()
+          .attr("x", 3)
+          .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .text(venProfArr.y))
+
+      svg.append("g")
+        .call(yAxisUpdateDemarcator)
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
