@@ -247,13 +247,13 @@ module.exports = {
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
-        .call(d3.axisLeft(y))
+        .call(d3.axis(yWS))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text('test'))
+          .text(wsPlusRtlItemsArr.yWS))
       // .text(wsPlusRtlItemsArr.yWS))
 
       svg.append("g")
