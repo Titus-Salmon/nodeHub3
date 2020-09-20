@@ -192,9 +192,9 @@ module.exports = {
       svg.append('line')
         .style("stroke", "lightgreen")
         .style("stroke-width", 1.5)
-        .attr("x1", updateDemarcatorArr[40]['date'])
+        .attr("x1", Date.parse(updateDemarcatorArr[40]['date']))
         .attr("y1", 0)
-        .attr("x2", updateDemarcatorArr[40]['date'])
+        .attr("x2", Date.parse(updateDemarcatorArr[40]['date']))
         .attr("y2", 400)
 
       // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
