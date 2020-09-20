@@ -81,8 +81,8 @@ module.exports = {
       console.log(`Object.keys(rainbowcat_update_tracker_rows)==>${Object.keys(rainbowcat_update_tracker_rows)}`)
       // console.log(`JSON.stringify(updateDemarcatorArr) from updateDemarcator()==> ${JSON.stringify(updateDemarcatorArr)}`)
 
-      console.log(`WsUpdateArr==> ${WsUpdateArr}`)
-      console.log(`RtlUpdateArr==> ${RtlUpdateArr}`)
+      console.log(`JSON.stringify(WsUpdateArr)==> ${JSON.stringify(WsUpdateArr)}`)
+      console.log(`JSON.stringify(RtlUpdateArr)==> ${JSON.stringify(RtlUpdateArr)}`)
     }
 
 
