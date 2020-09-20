@@ -212,9 +212,20 @@ module.exports = {
 
       console.log(`timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])==> ${timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])}`)
 
-      // timeScaleUpdateDemarcator(new Date(2016, 0, 1)); // returns 0
-      // timeScaleUpdateDemarcator(new Date(2016, 6, 1)); // returns 348.00...
-      // timeScaleUpdateDemarcator(new Date(2017, 0, 1)); // returns 700
+      // var yAxisUpdateDemarcator = g => g
+      //   .attr("transform", `translate(${margin.left},0)`)
+      //   .call(d3.axisLeft(y))
+      //   .call(g => g.select(".domain").remove())
+      //   .call(g => g.select(".tick:last-of-type text").clone()
+      //     .attr("x", 3)
+      //     .attr("text-anchor", "start")
+      //     .attr("font-weight", "bold")
+      //     .text(venProfArr.y))
+      // console.log(`yAxis==> ${yAxis}`)
+
+      var minWSdate = Math.min(...WsUpdateArr['date'])
+      console.log(`minWSdate==> ${minWSdate}`)
+      var maxWSdate = Math.max(...WsUpdateArr['date'])
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
