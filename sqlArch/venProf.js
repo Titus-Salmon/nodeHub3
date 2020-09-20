@@ -250,10 +250,11 @@ module.exports = {
         .call(d3.axisLeft(yWS))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          // .attr("x", 3)
+          .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text(wsPlusRtlItemsArr))
+          .text('test'))
+      // .text(wsPlusRtlItemsArr))
       // .text(wsPlusRtlItemsArr.yWS))
 
       svg.append("g")
