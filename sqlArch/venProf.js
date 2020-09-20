@@ -28,6 +28,8 @@ module.exports = {
 
     let venProfArr = []
     let updateDemarcatorArr = []
+    let WsUpdateArr = []
+    let RtlUpdateArr = []
 
     async function displayvenProf(rows) {
 
@@ -61,6 +63,16 @@ module.exports = {
         updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
 
         updateDemarcatorArr.push(updateDemarcatorObj)
+
+        if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
+          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName}`) {
+          WsUpdateArr.push(updateDemarcatorObj)
+        }
+
+        if (rainbowcat_update_tracker_rows[i]['rtlImw'] !== null &&
+          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName}`) {
+          RtlUpdateArr.push(updateDemarcatorObj)
+        }
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('rainbowcat_update_tracker_rows.length~~~>', rainbowcat_update_tracker_rows.length)
@@ -199,13 +211,31 @@ module.exports = {
       // timeScaleUpdateDemarcator(new Date(2016, 6, 1)); // returns 348.00...
       // timeScaleUpdateDemarcator(new Date(2017, 0, 1)); // returns 700
 
-      svg.append('line')
-        .style("stroke", "lightgreen")
-        .style("stroke-width", 1.5)
-        .attr("x1", timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date']))
-        .attr("y1", 0)
-        .attr("x2", timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date']))
-        .attr("y2", 400)
+      if (WsUpdateArr.length > 0) {
+        for (let i = 0; i < WsUpdateArr.length; i++) {
+          svg.append('line')
+            .style("stroke", "lightgreen")
+            .style("stroke-width", 1.5)
+            .style("stroke-dasharray", ("3, 3.5"))
+            .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
+            .attr("y1", 10)
+            .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
+            .attr("y2", 400)
+        }
+      }
+
+
+      if (RtlUpdateArr.length > 0) {
+        for (let i = 0; i < RtlUpdateArr.length; i++) {
+          svg.append('line')
+            .style("stroke", "lightgreen")
+            .style("stroke-width", 1.5)
+            .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
+            .attr("y1", 10)
+            .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
+            .attr("y2", 400)
+        }
+      }
 
       // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
