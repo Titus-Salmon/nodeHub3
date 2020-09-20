@@ -67,19 +67,22 @@ module.exports = {
         console.log(`rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()==> ${rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()}`)
         // let edi_vend_name = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
-          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName}`) {
+          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           WsUpdateArr.push(updateDemarcatorObj)
         }
 
         if (rainbowcat_update_tracker_rows[i]['rtlImw'] !== null &&
-          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName}`) {
+          rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           RtlUpdateArr.push(updateDemarcatorObj)
         }
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('rainbowcat_update_tracker_rows.length~~~>', rainbowcat_update_tracker_rows.length)
       console.log(`Object.keys(rainbowcat_update_tracker_rows)==>${Object.keys(rainbowcat_update_tracker_rows)}`)
-      console.log(`JSON.stringify(updateDemarcatorArr) from updateDemarcator()==> ${JSON.stringify(updateDemarcatorArr)}`)
+      // console.log(`JSON.stringify(updateDemarcatorArr) from updateDemarcator()==> ${JSON.stringify(updateDemarcatorArr)}`)
+
+      console.log(`WsUpdateArr==> ${WsUpdateArr}`)
+      console.log(`RtlUpdateArr==> ${RtlUpdateArr}`)
     }
 
 
