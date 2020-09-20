@@ -241,8 +241,8 @@ module.exports = {
       var minYaxisUpdtDmrctr = Math.min(...wsPlusRtlItemsArr)
       console.log(`minYaxisUpdtDmrctr==> ${minYaxisUpdtDmrctr}`)
 
-      var mmaxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
-      console.log(`mmaxYaxisUpdtDmrctr==> ${mmaxYaxisUpdtDmrctr}`)
+      var maxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
+      console.log(`mmaxYaxisUpdtDmrctr==> ${maxYaxisUpdtDmrctr}`)
 
 
       var yAxisUpdateDemarcator = g => g
