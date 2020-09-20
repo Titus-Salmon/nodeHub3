@@ -253,7 +253,7 @@ module.exports = {
           // .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text(wsPlusRtlItemsArr.yWS))
+          .text(wsPlusRtlItemsArr))
       // .text(wsPlusRtlItemsArr.yWS))
 
       svg.append("g")
