@@ -230,6 +230,9 @@ module.exports = {
         }
       }
 
+      var ws_dates_as_int = WsDateOnlyArr.map(Date.parse)
+      console.log(`ws_dates_as_int==> ${ws_dates_as_int}`)
+
       var minWSdate = Math.min(...WsDateOnlyArr)
       console.log(`minWSdate==> ${minWSdate}`)
       var maxWSdate = Math.max(...WsDateOnlyArr)
