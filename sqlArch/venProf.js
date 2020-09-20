@@ -225,7 +225,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 300)
+            .attr("y2", 350)
         }
       }
 
@@ -238,7 +238,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", 300)
+            .attr("y2", 350)
         }
       }
 
