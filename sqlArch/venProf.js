@@ -220,10 +220,10 @@ module.exports = {
         for (let i = 0; i < WsUpdateArr.length; i++) {
           svg.append('line')
             .style("stroke", "lightgreen")
-            .style("stroke-width", 1.5)
-            .style("stroke-dasharray", ("3, 3.5"))
+            .style("stroke-width", 1)
+            .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", 10)
+            .attr("y1", 30)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y2", 400)
         }
@@ -234,9 +234,9 @@ module.exports = {
         for (let i = 0; i < RtlUpdateArr.length; i++) {
           svg.append('line')
             .style("stroke", "lightgreen")
-            .style("stroke-width", 1.5)
+            .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y1", 10)
+            .attr("y1", 30)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y2", 400)
         }
