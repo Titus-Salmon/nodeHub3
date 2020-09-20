@@ -32,6 +32,8 @@ module.exports = {
     let WsDateOnlyArr = []
     let RtlUpdateArr = []
 
+    let wsPlusRtlItemsArr = []
+
     async function displayvenProf(rows) {
 
       let ois_venprof_mnth_rows = rows[0]
@@ -62,8 +64,14 @@ module.exports = {
         updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
         updateDemarcatorObj['wsImw'] = rainbowcat_update_tracker_rows[i]['wsImw']
         updateDemarcatorObj['rtlImw'] = rainbowcat_update_tracker_rows[i]['rtlImw']
+        updateDemarcatorObj['items_updtd_ws'] = rainbowcat_update_tracker_rows[i]['items_updtd_ws']
+        updateDemarcatorObj['items_updtd_rtl'] = rainbowcat_update_tracker_rows[i]['items_updtd_rtl']
 
         updateDemarcatorArr.push(updateDemarcatorObj)
+
+        //fill wsPlusRtlItemsArr with both WS & Rtl total items updated (to get range for yAxisUpdateDemarcator)
+        wsPlusRtlItemsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
+        wsPlusRtlItemsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
 
         console.log(`rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()==> ${rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()}`)
         // let edi_vend_name = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
@@ -143,7 +151,7 @@ module.exports = {
       var x = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
-      console.log(`x==> ${x}`)
+      // console.log(`x==> ${x}`)
 
       // var xWS = d3.scaleUtc()
       //   .domain(d3.extent(updateDemarcatorArr, d => d.date))
@@ -153,18 +161,18 @@ module.exports = {
       var y = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
-      console.log(`y==> ${y}`)
+      // console.log(`y==> ${y}`)
 
-      // var yWS = d3.scaleLinear()
-      //   .domain([0, 400]).nice()
-      //   .range(0, 400)
+      var yWS = d3.scaleLinear()
+        .domain([0, d3.max(WsUpdateArr, d => d.items_updtd_ws)]).nice()
+        .range([height - margin.bottom, margin.top])
       // console.log(`yWS==> ${yWS}`)
 
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
         .y(d => y(d.kehe))
-      console.log(`line==> ${line}`)
+      // console.log(`line==> ${line}`)
 
       // var lineWSupdate = d3.line()
       //   .defined(d => !isNaN(d.height))
@@ -175,7 +183,7 @@ module.exports = {
       var xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-      console.log(`xAxis==> ${xAxis}`)
+      // console.log(`xAxis==> ${xAxis}`)
 
       var yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
@@ -186,7 +194,7 @@ module.exports = {
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
           .text(venProfArr.y))
-      console.log(`yAxis==> ${yAxis}`)
+      // console.log(`yAxis==> ${yAxis}`)
 
       const svg = d3.select(el)
         .append('svg')
@@ -227,19 +235,25 @@ module.exports = {
 
       var minWSdate = Math.min(...WsDateOnlyArr)
       console.log(`minWSdate==> ${minWSdate}`)
-      var maxWSdate = Math.max(...WsDateOnlyArr)
-      console.log(`maxWSdate==> ${maxWSdate}`)
+      // var maxWSdate = Math.max(...WsDateOnlyArr)
+      // console.log(`maxWSdate==> ${maxWSdate}`)
+
+      var minYaxisUpdtDmrctr = Math.min(...wsPlusRtlItemsArr)
+      console.log(`minYaxisUpdtDmrctr==> ${minYaxisUpdtDmrctr}`)
+
+      var mmaxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
+      console.log(`mmaxYaxisUpdtDmrctr==> ${mmaxYaxisUpdtDmrctr}`)
 
 
       var yAxisUpdateDemarcator = g => g
-        .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-50},0)`)
+        .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
         .call(d3.axisLeft(y))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text(venProfArr.y))
+          .text(WsUpdateArr.yWS))
 
       svg.append("g")
         .call(yAxisUpdateDemarcator)
