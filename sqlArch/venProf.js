@@ -230,6 +230,9 @@ module.exports = {
         }
       }
 
+      console.log(`WsDateOnlyArr==> ${WsDateOnlyArr}`)
+      console.log(`typeof WsDateOnlyArr[0]==> ${typeof WsDateOnlyArr[0]}`)
+
       var ws_dates_as_int = WsDateOnlyArr.map(Date.parse)
       console.log(`ws_dates_as_int==> ${ws_dates_as_int}`)
 
