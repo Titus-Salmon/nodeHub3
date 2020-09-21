@@ -217,10 +217,10 @@ module.exports = {
       // console.log(`maxWSdate==> ${maxWSdate}`)
 
       var minYaxisUpdtDmrctrWSandRtl = Math.min(...wsPlusRtlItemsArr)
-      console.log(`minYaxisUpdtDmrctr==> ${minYaxisUpdtDmrctr}`)
+      console.log(`minYaxisUpdtDmrctrWSandRtl==> ${minYaxisUpdtDmrctrWSandRtl}`)
 
       var maxYaxisUpdtDmrctrWSandRtl = Math.max(...wsPlusRtlItemsArr)
-      console.log(`mmaxYaxisUpdtDmrctr==> ${maxYaxisUpdtDmrctr}`)
+      console.log(`maxYaxisUpdtDmrctrWSandRtl==> ${maxYaxisUpdtDmrctrWSandRtl}`)
 
       //v//Min & Max values for # of WS & Rtl items updated
       var minYvalWS = Math.min(...wsValsArr)
