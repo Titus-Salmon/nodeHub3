@@ -245,6 +245,15 @@ module.exports = {
             .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y2", 350)
+
+          svg.append('line')
+            .style("stroke", "darkgreen")
+            .style("stroke-width", 1)
+            .style("stroke-dasharray", ("3, 3"))
+            .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
+            .attr("y1", 10)
+            .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
+            .attr("y2", WsUpdateArr[i]['items_updtd_ws'])
         }
       }
 
@@ -258,6 +267,14 @@ module.exports = {
             .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y2", 350)
+
+          svg.append('line')
+            .style("stroke", "darkgreen")
+            .style("stroke-width", 1)
+            .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
+            .attr("y1", 10)
+            .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
+            .attr("y2", RtlUpdateArr[i]['items_updtd_rtl'])
         }
       }
 
