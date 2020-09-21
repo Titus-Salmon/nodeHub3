@@ -240,8 +240,12 @@ module.exports = {
       //   .domain([minYaxisUpdtDmrctrWSandRtl, maxYaxisUpdtDmrctrWSandRtl]).nice()
       //   .range([height - margin.bottom, margin.top])
 
+      // var yRtl = d3.scaleLinear()
+      //   .domain([minYvalRtl, maxYvalRtl]).nice()
+      //   .range([height - margin.bottom, margin.top])
+
       var yRtl = d3.scaleLinear()
-        .domain([minYvalRtl, maxYvalRtl]).nice()
+        .domain([0, maxYvalRtl]).nice()
         .range([height - margin.bottom, margin.top])
 
       // var yAxisUpdateDemarcator = g => g
