@@ -141,49 +141,22 @@ module.exports = {
         left: 50
       })
 
-      // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
-
-      // var x = d3.scaleLinear()
-      //   .domain(d3.extent(venProfArr, d => d.date)).nice()
-      //   .range([margin.left, width - margin.right])
-      // console.log(`x==> ${x}`)
-
       var x = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
-      // console.log(`x==> ${x}`)
-
-      // var xWS = d3.scaleUtc()
-      //   .domain(d3.extent(updateDemarcatorArr, d => d.date))
-      //   .range([margin.left, width - margin.right])
-      // console.log(`xWS==> ${xWS}`)
 
       var y = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
         .range([height - margin.bottom, margin.top])
-      // console.log(`y==> ${y}`)
-
-      var yWS = d3.scaleLinear()
-        .domain([0, 5276]).nice()
-        .range([height - margin.bottom, margin.top])
-      // console.log(`yWS==> ${yWS}`)
 
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
         .x(d => x(d.date))
         .y(d => y(d.kehe))
-      // console.log(`line==> ${line}`)
-
-      // var lineWSupdate = d3.line()
-      //   .defined(d => !isNaN(d.height))
-      //   .x(d => xWS(d.date))
-      //   .y(d => yWS(d.height))
-      // console.log(`lineWSupdate==> ${lineWSupdate}`)
 
       var xAxis = g => g
         .attr("transform", `translate(0,${height - margin.bottom})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
-      // console.log(`xAxis==> ${xAxis}`)
 
       var yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
@@ -194,7 +167,6 @@ module.exports = {
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
           .text(venProfArr.y))
-      // console.log(`yAxis==> ${yAxis}`)
 
       const svg = d3.select(el)
         .append('svg')
@@ -244,6 +216,9 @@ module.exports = {
       var maxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
       console.log(`mmaxYaxisUpdtDmrctr==> ${maxYaxisUpdtDmrctr}`)
 
+      var yWS = d3.scaleLinear()
+        .domain([minYaxisUpdtDmrctr, maxYaxisUpdtDmrctr]).nice()
+        .range([height - margin.bottom, margin.top])
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
@@ -253,9 +228,9 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .text('test'))
-      // .text(wsPlusRtlItemsArr))
-      // .text(wsPlusRtlItemsArr.yWS))
+          // .text('test'))
+          // .text(wsPlusRtlItemsArr))
+          .text(wsPlusRtlItemsArr.yWS))
 
       svg.append("g")
         .call(yAxisUpdateDemarcator)
