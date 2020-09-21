@@ -316,7 +316,7 @@ module.exports = {
             // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
             // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / maxYvalRtl)))
             // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (maxYvalRtl / maxYaxisUpdtDmrctrWSandRtl))))
-            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (350 - maxYvalRtl))))
+            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (350 + maxYvalRtl))))
         }
       }
 
