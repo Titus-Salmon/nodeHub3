@@ -33,8 +33,8 @@ module.exports = {
     let RtlUpdateArr = []
 
     let wsPlusRtlItemsArr = []
-    // let wsValsArr = []
-    // let rtlValsArr = []
+    let wsValsArr = []
+    let rtlValsArr = []
 
     async function displayvenProf(rows) {
 
@@ -80,13 +80,18 @@ module.exports = {
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           WsUpdateArr.push(updateDemarcatorObj)
-          // wsValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
+
+          //v//add # of WS items updated to it's own array (for creating WS update y-axis)<==this actually isn't being used for now;
+          //would make graph too complex
+          wsValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
         }
 
         if (rainbowcat_update_tracker_rows[i]['rtlImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           RtlUpdateArr.push(updateDemarcatorObj)
-          // rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
+
+          //v//add # of Rtl items updated to it's own array (for scaling yAxisUpdateDemarcator; we don't use the WS numbers in the scale)
+          rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
         }
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
@@ -116,14 +121,11 @@ module.exports = {
 
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-      // console.log(`jsdomT0d.window.document.documentElement.innerHTML==> ${JSON.stringify(jsdomT0d.window.document.documentElement.innerHTML)}`)
-      // console.log(`svgsrc==> ${svgsrc}`)
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
           console.log('error saving document', err)
         } else {
           console.log('The file was saved!')
-          // console.log(`JSON.stringify(venProfArr) from writeHTMLfileAndRenderPage()==> ${JSON.stringify(venProfArr)}`)
           res.render('vw-venProf', {
             title: `Monthly profits by vendor: ${vendorName}`,
             venProfArrDisplay: venProfArr,
@@ -214,26 +216,28 @@ module.exports = {
       // var maxWSdate = Math.max(...WsDateOnlyArr)
       // console.log(`maxWSdate==> ${maxWSdate}`)
 
-      var minYaxisUpdtDmrctr = Math.min(...wsPlusRtlItemsArr)
+      var minYaxisUpdtDmrctrWSandRtl = Math.min(...wsPlusRtlItemsArr)
       console.log(`minYaxisUpdtDmrctr==> ${minYaxisUpdtDmrctr}`)
 
-      var maxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
+      var maxYaxisUpdtDmrctrWSandRtl = Math.max(...wsPlusRtlItemsArr)
       console.log(`mmaxYaxisUpdtDmrctr==> ${maxYaxisUpdtDmrctr}`)
 
-      // var minYvalWS = Math.min(...wsValsArr)
-      // console.log(`minYvalWS==> ${minYvalWS}`)
+      //v//Min & Max values for # of WS & Rtl items updated
+      var minYvalWS = Math.min(...wsValsArr)
+      console.log(`minYvalWS==> ${minYvalWS}`)
 
-      // var maxYvalWS = Math.max(...wsValsArr)
-      // console.log(`maxYvalWS==> ${maxYvalWS}`)
+      var maxYvalWS = Math.max(...wsValsArr)
+      console.log(`maxYvalWS==> ${maxYvalWS}`)
 
-      // var minYvalRtl = Math.min(...rtlValsArr)
-      // console.log(`minYvalRtl==> ${minYvalRtl}`)
+      var minYvalRtl = Math.min(...rtlValsArr)
+      console.log(`minYvalRtl==> ${minYvalRtl}`)
 
-      // var maxYvalRtl = Math.max(...rtlValsArr)
-      // console.log(`maxYvalRtl==> ${maxYvalRtl}`)
+      var maxYvalRtl = Math.max(...rtlValsArr)
+      console.log(`maxYvalRtl==> ${maxYvalRtl}`)
+      //^//Min & Max values for # of WS & Rtl items updated
 
       var yWS = d3.scaleLinear()
-        .domain([minYaxisUpdtDmrctr, maxYaxisUpdtDmrctr]).nice()
+        .domain([minYaxisUpdtDmrctrWSandRtl, maxYaxisUpdtDmrctrWSandRtl]).nice()
         .range([height - margin.bottom, margin.top])
 
       var yAxisUpdateDemarcator = g => g
