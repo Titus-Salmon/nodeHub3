@@ -269,7 +269,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - WsUpdateArr[i]['items_updtd_ws'] / height)
+            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYaxisUpdtDmrctr)))
         }
       }
 
@@ -290,7 +290,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", 350 - RtlUpdateArr[i]['items_updtd_rtl'] / height)
+            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctr)))
         }
       }
 
