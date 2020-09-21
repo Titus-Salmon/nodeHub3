@@ -244,7 +244,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", maxYaxisUpdtDmrctr)
+            .attr("y2", 350)
 
           svg.append('line')
             .style("stroke", "darkgreen")
