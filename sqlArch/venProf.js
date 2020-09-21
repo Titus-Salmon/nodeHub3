@@ -264,7 +264,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - maxYaxisUpdtDmrctr)
+            .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
 
           svg.append('line')
             .style("stroke", "red")
@@ -273,7 +273,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYaxisUpdtDmrctr)))
+            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
         }
       }
 
@@ -286,7 +286,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", 350 - maxYaxisUpdtDmrctr)
+            .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
 
           svg.append('line')
             .style("stroke", "red")
@@ -294,7 +294,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctr)))
+            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
         }
       }
 
