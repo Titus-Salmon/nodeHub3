@@ -236,21 +236,33 @@ module.exports = {
       console.log(`maxYvalRtl==> ${maxYvalRtl}`)
       //^//Min & Max values for # of WS & Rtl items updated
 
-      var yWS = d3.scaleLinear()
-        .domain([minYaxisUpdtDmrctrWSandRtl, maxYaxisUpdtDmrctrWSandRtl]).nice()
+      // var yWS = d3.scaleLinear()
+      //   .domain([minYaxisUpdtDmrctrWSandRtl, maxYaxisUpdtDmrctrWSandRtl]).nice()
+      //   .range([height - margin.bottom, margin.top])
+
+      var yRtl = d3.scaleLinear()
+        .domain([minYvalRtl, maxYvalRtl]).nice()
         .range([height - margin.bottom, margin.top])
+
+      // var yAxisUpdateDemarcator = g => g
+      //   .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
+      //   .call(d3.axisLeft(yWS))
+      //   .call(g => g.select(".domain").remove())
+      //   .call(g => g.select(".tick:last-of-type text").clone()
+      //     .attr("x", 3)
+      //     .attr("text-anchor", "start")
+      //     .attr("font-weight", "bold")
+      //     .text(wsPlusRtlItemsArr.yWS))
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
-        .call(d3.axisLeft(yWS))
+        .call(d3.axisLeft(yRtl))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          // .text('test'))
-          // .text(wsPlusRtlItemsArr))
-          .text(wsPlusRtlItemsArr.yWS))
+          .text(rtlValsArr.yRtl))
 
       svg.append("g")
         .call(yAxisUpdateDemarcator)
@@ -264,7 +276,8 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
+            // .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
+            .attr("y2", 350 - maxYvalRtl)
 
           svg.append('line')
             .style("stroke", "red")
@@ -273,7 +286,8 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
+            // .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
+            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * (height / maxYvalRtl)))
         }
       }
 
