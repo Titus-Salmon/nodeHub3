@@ -80,13 +80,13 @@ module.exports = {
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           WsUpdateArr.push(updateDemarcatorObj)
-          wsValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
+          // wsValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
         }
 
         if (rainbowcat_update_tracker_rows[i]['rtlImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           RtlUpdateArr.push(updateDemarcatorObj)
-          rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
+          // rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
         }
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
