@@ -251,7 +251,7 @@ module.exports = {
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", WsUpdateArr[i]['items_updtd_ws'])
+            .attr("y1", Number(WsUpdateArr[i]['items_updtd_ws']))
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
             .attr("y2", 10)
         }
@@ -272,7 +272,7 @@ module.exports = {
             .style("stroke", "darkgreen")
             .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y1", RtlUpdateArr[i]['items_updtd_rtl'])
+            .attr("y1", Number(RtlUpdateArr[i]['items_updtd_rtl']))
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y2", 10)
         }
