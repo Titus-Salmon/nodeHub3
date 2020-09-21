@@ -33,6 +33,8 @@ module.exports = {
     let RtlUpdateArr = []
 
     let wsPlusRtlItemsArr = []
+    // let wsValsArr = []
+    // let rtlValsArr = []
 
     async function displayvenProf(rows) {
 
@@ -78,11 +80,13 @@ module.exports = {
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           WsUpdateArr.push(updateDemarcatorObj)
+          wsValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_ws'])
         }
 
         if (rainbowcat_update_tracker_rows[i]['rtlImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           RtlUpdateArr.push(updateDemarcatorObj)
+          rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
         }
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
@@ -216,6 +220,18 @@ module.exports = {
       var maxYaxisUpdtDmrctr = Math.max(...wsPlusRtlItemsArr)
       console.log(`mmaxYaxisUpdtDmrctr==> ${maxYaxisUpdtDmrctr}`)
 
+      // var minYvalWS = Math.min(...wsValsArr)
+      // console.log(`minYvalWS==> ${minYvalWS}`)
+
+      // var maxYvalWS = Math.max(...wsValsArr)
+      // console.log(`maxYvalWS==> ${maxYvalWS}`)
+
+      // var minYvalRtl = Math.min(...rtlValsArr)
+      // console.log(`minYvalRtl==> ${minYvalRtl}`)
+
+      // var maxYvalRtl = Math.max(...rtlValsArr)
+      // console.log(`maxYvalRtl==> ${maxYvalRtl}`)
+
       var yWS = d3.scaleLinear()
         .domain([minYaxisUpdtDmrctr, maxYaxisUpdtDmrctr]).nice()
         .range([height - margin.bottom, margin.top])
@@ -247,7 +263,7 @@ module.exports = {
             .attr("y2", 350 - maxYaxisUpdtDmrctr)
 
           svg.append('line')
-            .style("stroke", "darkgreen")
+            .style("stroke", "red")
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
@@ -269,7 +285,7 @@ module.exports = {
             .attr("y2", 350 - maxYaxisUpdtDmrctr)
 
           svg.append('line')
-            .style("stroke", "darkgreen")
+            .style("stroke", "red")
             .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
