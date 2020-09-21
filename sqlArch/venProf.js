@@ -242,9 +242,9 @@ module.exports = {
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", maxYaxisUpdtDmrctr)
+            .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 10)
+            .attr("y2", maxYaxisUpdtDmrctr)
 
           svg.append('line')
             .style("stroke", "darkgreen")
@@ -264,9 +264,9 @@ module.exports = {
             .style("stroke", "lightgreen")
             .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y1", maxYaxisUpdtDmrctr)
+            .attr("y1", 10)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", 10)
+            .attr("y2", maxYaxisUpdtDmrctr)
 
           svg.append('line')
             .style("stroke", "darkgreen")
