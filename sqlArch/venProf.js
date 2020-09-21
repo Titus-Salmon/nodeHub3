@@ -315,7 +315,8 @@ module.exports = {
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
             // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / maxYvalRtl)))
-            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (maxYvalRtl / maxYaxisUpdtDmrctrWSandRtl))))
+            // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (maxYvalRtl / maxYaxisUpdtDmrctrWSandRtl))))
+            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (350 - maxYvalRtl))))
         }
       }
 
