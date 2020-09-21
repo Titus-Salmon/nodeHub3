@@ -164,7 +164,7 @@ module.exports = {
       // console.log(`y==> ${y}`)
 
       var yWS = d3.scaleLinear()
-        .domain([minYaxisUpdtDmrctr, maxYaxisUpdtDmrctr]).nice()
+        .domain([0, 5276]).nice()
         .range([height - margin.bottom, margin.top])
       // console.log(`yWS==> ${yWS}`)
 
@@ -247,7 +247,7 @@ module.exports = {
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
-        .call(d3.axisRight(y))
+        .call(d3.axisLeft(yWS))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .attr("x", 3)
