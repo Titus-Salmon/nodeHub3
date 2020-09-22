@@ -40,7 +40,7 @@ module.exports = {
     let rtlValsArr = [] // holds updateDemarcatorObj['items_updtd_rtl'] instances where dates are for Rtl updates
 
 
-    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //v//displayvenProf(rows)//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function displayvenProf(rows) {
 
       let ois_venprof_mnth_rows = rows[0]
@@ -58,9 +58,9 @@ module.exports = {
       console.log(`Object.keys(ois_venprof_mnth_rows)==>${Object.keys(ois_venprof_mnth_rows)}`)
       console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
-    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //^//displayvenProf(rows)////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //v//updateDemarcator(rows)//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function updateDemarcator(rows) {
 
       let rainbowcat_update_tracker_rows = rows[1]
@@ -110,10 +110,10 @@ module.exports = {
       console.log(`JSON.stringify(WsUpdateArr)==> ${JSON.stringify(WsUpdateArr)}`)
       console.log(`JSON.stringify(RtlUpdateArr)==> ${JSON.stringify(RtlUpdateArr)}`)
     }
-    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //^//updateDemarcator(rows)////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
@@ -128,12 +128,13 @@ module.exports = {
         }
       })
     }
-    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //v//createLineChartT0d()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function createLineChartT0d() {
 
+      //v//........................................................................................
       var width = 1000
       var height = 500
 
@@ -173,7 +174,8 @@ module.exports = {
 
       const svg = d3.select(el)
         .append('svg')
-        .attr("viewBox", [0, 0, width, height]);
+        .attr("viewBox", [0, 0, width, height])
+      //^//........................................................................................
 
       svg.append("g")
         .call(xAxis)
@@ -261,20 +263,18 @@ module.exports = {
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", 350)
+            .attr("y1", height - margin.bottom)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
-          // .attr("y2", 350 - maxYvalRtl)
+            .attr("y2", (height - margin.bottom) - maxYaxisUpdtDmrctrWSandRtl)
 
           svg.append('line')
             .style("stroke", "red")
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", 350)
+            .attr("y1", height - margin.bottom)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", 350 - (WsUpdateArr[i]['items_updtd_ws'] * ((height - margin.bottom) / maxYaxisUpdtDmrctrWSandRtl)))
-          // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
+            .attr("y2", (height - margin.bottom) - (WsUpdateArr[i]['items_updtd_ws'] * ((height - margin.bottom) / maxYaxisUpdtDmrctrWSandRtl)))
         }
       }
 
@@ -285,10 +285,9 @@ module.exports = {
             .style("stroke", "lightgreen")
             .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y1", 350)
+            .attr("y1", height - margin.bottom)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            // .attr("y2", 350 - maxYaxisUpdtDmrctrWSandRtl)
-            .attr("y2", 350 - maxYvalRtl)
+            .attr("y2", (height - margin.bottom) - maxYvalRtl)
 
           svg.append('line')
             .style("stroke", "red")
@@ -296,18 +295,15 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * (height / maxYaxisUpdtDmrctrWSandRtl)))
-            // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / maxYvalRtl)))
-            // .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (maxYvalRtl / maxYaxisUpdtDmrctrWSandRtl))))
-            .attr("y2", 350 - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (350 + maxYvalRtl))))
+            .attr("y2", (height - margin.bottom) - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (height - margin.bottom + maxYvalRtl))))
         }
       }
 
     }
-    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //^//createLineChartT0d()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(`
     SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
     SELECT * FROM rainbowcat_update_tracker;
@@ -318,6 +314,6 @@ module.exports = {
         .then(createLineChartT0d())
         .then(writeHTMLfileAndRenderPage())
     })
-    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   })
 }
