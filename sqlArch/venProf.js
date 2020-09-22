@@ -145,13 +145,15 @@ module.exports = {
         left: 50
       })
 
+      let xAxis_yValue = height - margin.bottom
+
       var x = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
 
       var y = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
-        .range([height - margin.bottom, margin.top])
+        .range([xAxis_yValue, margin.top])
 
       var line = d3.line()
         .defined(d => !isNaN(d.kehe))
@@ -159,7 +161,7 @@ module.exports = {
         .y(d => y(d.kehe))
 
       var xAxis = g => g
-        .attr("transform", `translate(0,${height - margin.bottom})`)
+        .attr("transform", `translate(0,${xAxis_yValue})`)
         .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
 
       var yAxis = g => g
@@ -195,8 +197,6 @@ module.exports = {
       timeScaleUpdateDemarcator = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
-
-      console.log(`timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])==> ${timeScaleUpdateDemarcator(updateDemarcatorArr[40]['date'])}`)
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
@@ -237,11 +237,11 @@ module.exports = {
 
       // var yWS = d3.scaleLinear()
       //   .domain([0, maxYaxisUpdtDmrctrWSandRtl]).nice()
-      //   .range([height - margin.bottom, margin.top])
+      //   .range([xAxis_yValue, margin.top])
 
       var yRtl = d3.scaleLinear()
         .domain([0, maxYvalRtl]).nice()
-        .range([height - margin.bottom, margin.top])
+        .range([xAxis_yValue, margin.top])
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
@@ -263,18 +263,18 @@ module.exports = {
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", height - margin.bottom)
+            .attr("y1", xAxis_yValue)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", (height - margin.bottom) - maxYaxisUpdtDmrctrWSandRtl)
+            .attr("y2", (xAxis_yValue) - maxYaxisUpdtDmrctrWSandRtl)
 
           svg.append('line')
             .style("stroke", "red")
             .style("stroke-width", 1)
             .style("stroke-dasharray", ("3, 3"))
             .attr("x1", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y1", height - margin.bottom)
+            .attr("y1", xAxis_yValue)
             .attr("x2", timeScaleUpdateDemarcator(WsUpdateArr[i]['date']))
-            .attr("y2", (height - margin.bottom) - (WsUpdateArr[i]['items_updtd_ws'] * ((height - margin.bottom) / maxYaxisUpdtDmrctrWSandRtl)))
+            .attr("y2", (xAxis_yValue) - (WsUpdateArr[i]['items_updtd_ws'] * ((xAxis_yValue) / maxYaxisUpdtDmrctrWSandRtl)))
         }
       }
 
@@ -285,9 +285,9 @@ module.exports = {
             .style("stroke", "lightgreen")
             .style("stroke-width", 1)
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y1", height - margin.bottom)
+            .attr("y1", xAxis_yValue)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", (height - margin.bottom) - maxYvalRtl)
+            .attr("y2", (xAxis_yValue) - maxYvalRtl)
 
           svg.append('line')
             .style("stroke", "red")
@@ -295,7 +295,7 @@ module.exports = {
             .attr("x1", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
             .attr("y1", 350)
             .attr("x2", timeScaleUpdateDemarcator(RtlUpdateArr[i]['date']))
-            .attr("y2", (height - margin.bottom) - (RtlUpdateArr[i]['items_updtd_rtl'] * ((height - margin.bottom) / (height - margin.bottom + maxYvalRtl))))
+            .attr("y2", (xAxis_yValue) - (RtlUpdateArr[i]['items_updtd_rtl'] * ((xAxis_yValue) / (xAxis_yValue + maxYvalRtl))))
         }
       }
 
