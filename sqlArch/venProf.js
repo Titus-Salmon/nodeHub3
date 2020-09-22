@@ -19,6 +19,9 @@ const {
 } = jsdom
 const fs = require('fs')
 
+const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
+var el = jsdomT0d.window.document.querySelector('#dataviz-container')
+
 
 module.exports = {
   venProf: router.post('/venProf', (req, res, next) => {
@@ -26,16 +29,18 @@ module.exports = {
     let vendorName = req.body['vendorNamePost']
     console.log(`vendorName==> ${vendorName}`)
 
-    let venProfArr = []
-    let updateDemarcatorArr = []
-    let WsUpdateArr = []
-    let WsDateOnlyArr = []
-    let RtlUpdateArr = []
+    let venProfArr = [] // holds venProfObj data from ois_venprof_mnth_copy2 table
+    let updateDemarcatorArr = [] // holds updateDemarcatorObj instances (for placing secondary y-axis) data from rainbowcat_update_tracker table
+    let WsUpdateArr = [] // holds updateDemarcatorObj instances where dates are only for WS updates
+    let WsDateOnlyArr = [] // holds updateDemarcatorObj['date] instances where dates are only for WS updates
+    let RtlUpdateArr = [] // holds updateDemarcatorObj instances where dates are only for Rtl updates
 
-    let wsPlusRtlItemsArr = []
-    let wsValsArr = []
-    let rtlValsArr = []
+    let wsPlusRtlItemsArr = [] //holds updateDemarcatorObj['date] instances where dates are for WS & Rtl updates
+    let wsValsArr = [] // holds updateDemarcatorObj['items_updtd_ws'] instances where dates are for WS updates
+    let rtlValsArr = [] // holds updateDemarcatorObj['items_updtd_rtl'] instances where dates are for Rtl updates
 
+
+    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function displayvenProf(rows) {
 
       let ois_venprof_mnth_rows = rows[0]
@@ -53,7 +58,9 @@ module.exports = {
       console.log(`Object.keys(ois_venprof_mnth_rows)==>${Object.keys(ois_venprof_mnth_rows)}`)
       console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
+    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function updateDemarcator(rows) {
 
       let rainbowcat_update_tracker_rows = rows[1]
@@ -76,7 +83,8 @@ module.exports = {
         wsPlusRtlItemsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
 
         console.log(`rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()==> ${rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase()}`)
-        // let edi_vend_name = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
+
+        ///v///......................................................................................................
         if (rainbowcat_update_tracker_rows[i]['wsImw'] !== null &&
           rainbowcat_update_tracker_rows[i]['edi_vendor_name'].toLowerCase() == `edi-${vendorName.toLowerCase()}`) {
           WsUpdateArr.push(updateDemarcatorObj)
@@ -93,32 +101,19 @@ module.exports = {
           //v//add # of Rtl items updated to it's own array (for scaling yAxisUpdateDemarcator; we don't use the WS numbers in the scale)
           rtlValsArr.push(rainbowcat_update_tracker_rows[i]['items_updtd_rtl'])
         }
+        //^//......................................................................................................
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('rainbowcat_update_tracker_rows.length~~~>', rainbowcat_update_tracker_rows.length)
       console.log(`Object.keys(rainbowcat_update_tracker_rows)==>${Object.keys(rainbowcat_update_tracker_rows)}`)
-      // console.log(`JSON.stringify(updateDemarcatorArr) from updateDemarcator()==> ${JSON.stringify(updateDemarcatorArr)}`)
 
       console.log(`JSON.stringify(WsUpdateArr)==> ${JSON.stringify(WsUpdateArr)}`)
       console.log(`JSON.stringify(RtlUpdateArr)==> ${JSON.stringify(RtlUpdateArr)}`)
     }
+    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    connection.query(`
-    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
-    SELECT * FROM rainbowcat_update_tracker;
-    `, function (err, rows, fields) {
-      if (err) throw err
-      displayvenProf(rows)
-        .then(updateDemarcator(rows))
-        .then(createLineChartT0d())
-        .then(writeHTMLfileAndRenderPage())
-    })
-
-    const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
-
-    var el = jsdomT0d.window.document.querySelector('#dataviz-container')
-
+    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
@@ -133,8 +128,10 @@ module.exports = {
         }
       })
     }
+    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function createLineChartT0d() {
 
       var width = 1000
@@ -237,26 +234,12 @@ module.exports = {
       //^//Min & Max values for # of WS & Rtl items updated
 
       // var yWS = d3.scaleLinear()
-      //   .domain([minYaxisUpdtDmrctrWSandRtl, maxYaxisUpdtDmrctrWSandRtl]).nice()
-      //   .range([height - margin.bottom, margin.top])
-
-      // var yRtl = d3.scaleLinear()
-      //   .domain([minYvalRtl, maxYvalRtl]).nice()
+      //   .domain([0, maxYaxisUpdtDmrctrWSandRtl]).nice()
       //   .range([height - margin.bottom, margin.top])
 
       var yRtl = d3.scaleLinear()
         .domain([0, maxYvalRtl]).nice()
         .range([height - margin.bottom, margin.top])
-
-      // var yAxisUpdateDemarcator = g => g
-      //   .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
-      //   .call(d3.axisLeft(yWS))
-      //   .call(g => g.select(".domain").remove())
-      //   .call(g => g.select(".tick:last-of-type text").clone()
-      //     .attr("x", 3)
-      //     .attr("text-anchor", "start")
-      //     .attr("font-weight", "bold")
-      //     .text(wsPlusRtlItemsArr.yWS))
 
       var yAxisUpdateDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(minWSdate)-10},0)`)
@@ -320,7 +303,21 @@ module.exports = {
         }
       }
 
-      // console.log(`JSON.stringify(venProfArr) from createLineChartT0d()==> ${JSON.stringify(venProfArr)}`)
     }
+    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    //v////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    connection.query(`
+    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
+    SELECT * FROM rainbowcat_update_tracker;
+    `, function (err, rows, fields) {
+      if (err) throw err
+      displayvenProf(rows)
+        .then(updateDemarcator(rows))
+        .then(createLineChartT0d())
+        .then(writeHTMLfileAndRenderPage())
+    })
+    //^//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   })
 }
