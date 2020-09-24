@@ -9,7 +9,7 @@ const router = express.Router()
 
 const {
   venProf
-} = require('../sqlArch/venProf')
+} = require('../sqlArch/venProf/venProf')
 
 
 
