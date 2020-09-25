@@ -6,7 +6,8 @@ const DSN = process.env.ODBC_CONN_STRING
 
 const fs = require('fs')
 
-const catapultResArrCache = require('../nodeCacheStuff/cache1')
+// const catapultResArrCache = require('../nodeCacheStuff/cache1')
+const catapultResArrCache = require('../../nodeCacheStuff/cache1')
 
 module.exports = {
     custPlusAddr: router.post('/custPlusAddr', (req, res, next) => {
