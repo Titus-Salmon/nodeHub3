@@ -18,16 +18,16 @@ html
 		div(style="display:block")
 			form#queryInvMasterTable(action='/tsqlTableHub/queryInvMasterTable' method='POST' accept-charset="UTF-8" style="display:block")
 				div(style="display:block")
-					label.input-label-1(for='tblQry') Enter Query for Catapult v_InventoryMaster
-					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT INV_PK, INV_CPK, INV_ScanCode, ORD_SupplierStockNumber, INV_Name, INV_Size, INV_ReceiptAlias, inv_default, convert(varchar(10), POS_TimeStamp, 120), INV_DateCreated, INV_EMP_FK_CreatedBy, ord_quantityinorderunit, oup_name, sto_number, sto_name, brd_name, dpt_name, dpt_number, SIB_IdealMargin, ven_companyname, convert(varchar(10), inv_lastreceived, 120), convert(varchar(10), inv_lastsold, 120), inv_lastcost, SIB_BasePrice, inv_onhand, inv_onorder, inv_intransit, inv_memo, PI1_Description, PI2_Description, PI3_Description, PI4_Description, INV_PowerField1, INV_PowerField2, INV_PowerField3, INV_PowerField4 FROM catapult.ecrs.v_InventoryMaster WHERE trim(ven_companyname) IN ('EDI-ALOE') AND trim(dpt_number) != '999999' ORDER BY PI1_Description, PI2_Description 
+					label.input-label-1(for='tblQry1') Enter Query for Catapult v_InventoryMaster
+					textarea#tblQry1.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT INV_PK, INV_CPK, INV_ScanCode, ORD_SupplierStockNumber, INV_Name, INV_Size, INV_ReceiptAlias, inv_default, convert(varchar(10), POS_TimeStamp, 120), INV_DateCreated, INV_EMP_FK_CreatedBy, ord_quantityinorderunit, oup_name, sto_number, sto_name, brd_name, dpt_name, dpt_number, SIB_IdealMargin, ven_companyname, convert(varchar(10), inv_lastreceived, 120), convert(varchar(10), inv_lastsold, 120), inv_lastcost, SIB_BasePrice, inv_onhand, inv_onorder, inv_intransit, inv_memo, PI1_Description, PI2_Description, PI3_Description, PI4_Description, INV_PowerField1, INV_PowerField2, INV_PowerField3, INV_PowerField4 FROM catapult.ecrs.v_InventoryMaster WHERE trim(ven_companyname) IN ('EDI-ALOE') AND trim(dpt_number) != '999999' ORDER BY PI1_Description, PI2_Description 
 					button(type='submit', form='queryInvMasterTable', style="display: block; float: left") QUERY v_InventoryMaster
 
 		div(style="display:block")
-			form#queryInvMasterTable(action='/tsqlTableHub/custPlusAddr' method='POST' accept-charset="UTF-8" style="display:block")
+			form#custPlusAddr(action='/tsqlTableHub/custPlusAddr' method='POST' accept-charset="UTF-8" style="display:block")
 				div(style="display:block")
-					label.input-label-1(for='tblQry') This Query joins Catapult "v_CustomerMaster" and "addresses" tables
-					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT addr.ADD_PK, addr.ADD_StreetAddressLine1, addr.ADD_StreetAddressLine2, addr.ADD_City, addr.ADD_StateProvince, addr.ADD_Country, addr.ADD_PostalCode, addr.ADD_CUS_FK, cust.CUS_PK, cust.CUS_FirstName, cust.CUS_MiddleName, cust.CUS_LastName, cust.CUS_NickName, cust.CUS_AccountNum FROM catapult.ecrs.addresses addr inner join  catapult.ecsr.v_CustomerMaster cust on addr.ADD_CUS_FK = cust.CUS_PK
-					button(type='submit', form='queryInvMasterTable', style="display: block; float: left") POST
+					label.input-label-1(for='tblQry2') This Query joins Catapult "v_CustomerMaster" and "addresses" tables
+					textarea#tblQry2.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT addr.ADD_PK, addr.ADD_StreetAddressLine1, addr.ADD_StreetAddressLine2, addr.ADD_City, addr.ADD_StateProvince, addr.ADD_Country, addr.ADD_PostalCode, addr.ADD_CUS_FK, cust.CUS_PK, cust.CUS_FirstName, cust.CUS_MiddleName, cust.CUS_LastName, cust.CUS_NickName, cust.CUS_AccountNum FROM catapult.ecrs.addresses addr inner join  catapult.ecsr.v_CustomerMaster cust on addr.ADD_CUS_FK = cust.CUS_PK
+					button(type='submit', form='custPlusAddr', style="display: block; float: left") POST
 
 		div(style="display:block")
 			form#rbInvUpdaterTsql(action='/tsqlTableHub/rbInvUpdaterTsql' method='POST' accept-charset="UTF-8" style="display:block")

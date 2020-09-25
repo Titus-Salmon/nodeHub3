@@ -49,88 +49,40 @@ html
 				thead
 					tr
 						th ri_t0d
-						th invPK
-						th invCPK
-						th invScanCode
-						//- th ascScancode
-						th ordSupplierStockNumber
-						th invName
-						th invSize
-						th invReceiptAlias
-						th invDefault
-						th posTimeStamp
-						th invDateCreated
-						th invEmpFkCreatedBy
-						th ordQuantityInOrderUnit
-						th oupName
-						th stoNumber
-						//- th stoName
-						th brdName
-						th dptName
-						th dptNumber
-						th sibIdealMargin
-						th actualMargT0d
-						th venCompanyname
-						th invLastreceived
-						th invLastsold
-						th invLastcost
-						th sibBasePrice
-						th invOnhand
-						th invOnorder
-						th invIntransit
-						th invMemo
-						th pi1Description
-						th pi2Description
-						th pi3Description
-						th pi4Description
-						th invPowerField1
-						th invPowerField2
-						th invPowerField3
-						th invPowerField4
+						th ADD_PK
+						th ADD_StreetAddressLine1
+						th ADD_StreetAddressLine2
+						th ADD_City
+						th ADD_StateProvince
+						th ADD_Country
+						th ADD_PostalCode
+						th ADD_CUS_FK
+						th CUS_PK
+						th CUS_FirstName
+						th CUS_MiddleName
+						th CUS_LastName
+						th CUS_NickName
+						th CUS_AccountNum
 
 				tbody#resTblBdy
 					if catapultResults !== undefined
 						each elmnt in catapultResults
 							tr
 								td= elmnt.ri_t0d
-								td= elmnt.invPK
-								td= elmnt.invCPK
-								td= elmnt.invScanCode
-								//- td= elmnt.ascScancode
-								td= elmnt.ordSupplierStockNumber
-								td= elmnt.invName
-								td= elmnt.invSize
-								td= elmnt.invReceiptAlias
-								td= elmnt.invDefault
-								td= elmnt.posTimeStamp
-								td= elmnt.invDateCreated
-								td= elmnt.invEmpFkCreatedBy
-								td= elmnt.ordQuantityInOrderUnit
-								td= elmnt.oupName
-								td= elmnt.stoNumber
-								//- td= elmnt.stoName
-								td= elmnt.brdName
-								td= elmnt.dptName
-								td= elmnt.dptNumber
-								td= elmnt.sibIdealMargin
-								td= elmnt.actualMargT0d
-								td= elmnt.venCompanyname
-								td= elmnt.invLastreceived
-								td= elmnt.invLastsold
-								td= elmnt.invLastcost
-								td= elmnt.sibBasePrice
-								td= elmnt.invOnhand
-								td= elmnt.invOnorder
-								td= elmnt.invIntransit
-								td= elmnt.invMemo
-								td= elmnt.pi1Description
-								td= elmnt.pi2Description
-								td= elmnt.pi3Description
-								td= elmnt.pi4Description
-								td= elmnt.invPowerField1
-								td= elmnt.invPowerField2
-								td= elmnt.invPowerField3
-								td= elmnt.invPowerField4
+								td= elmnt.ADD_PK
+								td= elmnt.ADD_StreetAddressLine1
+								td= elmnt.ADD_StreetAddressLine2
+								td= elmnt.ADD_City
+								td= elmnt.ADD_StateProvince
+								td= elmnt.ADD_Country
+								td= elmnt.ADD_PostalCode
+								td= elmnt.ADD_CUS_FK
+								td= elmnt.CUS_PK
+								td= elmnt.CUS_FirstName
+								td= elmnt.CUS_MiddleName
+								td= elmnt.CUS_LastName
+								td= elmnt.CUS_NickName
+								td= elmnt.CUS_AccountNum
 
 
 
