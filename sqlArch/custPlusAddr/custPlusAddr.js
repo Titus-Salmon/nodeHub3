@@ -11,7 +11,7 @@ const catapultResArrCache = require('../../nodeCacheStuff/cache1')
 
 const NodeGeocoder = require('node-geocoder')
 
-const options = {
+const gcdrOptions = {
     provider: 'here',
     country: 'USA',
     state: 'KY',
@@ -20,7 +20,7 @@ const options = {
     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
 }
 
-const geocoder = NodeGeocoder(options)
+const geocoder = NodeGeocoder(gcdrOptions)
 
 module.exports = {
     custPlusAddr: router.post('/custPlusAddr', (req, res, next) => {
@@ -32,22 +32,20 @@ module.exports = {
         let catapultResArr = []
         srcRsXLS_tsql = []
 
-        function forwardGeoCode() {
-            const results = geocoder.batchGeocode([
+        async function forwardGeoCode() {
+            const gcdrResults = geocoder.batchGeocode([
                 '254 El Conquistador Place',
                 '1285 Willow Ave'
             ])
-            console.log(`results==> ${results}`)
-            console.log(`JSON.stringify(results)==> ${JSON.stringify(results)}`)
+            console.log(`gcdrResults==> ${gcdrResults}`)
+            console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
         }
 
-        forwardGeoCode()
-
-        function showcatapultResults(result) {
+        async function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
                 let catapultResObj = {}
                 catapultResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
-                //want to include INV_PK or INV_CPK in your save-to-csv results - ONLY ri_t0d... adding 1 to 'i', so we don't
+                //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
                 //start our ri_t0d with 0, as that seems to confuse MySQL...
                 catapultResObj['ADD_PK'] = result[i]['ADD_PK']
                 if (typeof result[i]['ADD_StreetAddressLine1'] == 'string') {
@@ -113,12 +111,12 @@ module.exports = {
                 catapultResArr.push(catapultResObj)
                 srcRsXLS_tsql.push(catapultResObj)
             }
-            //V// CACHE QUERY RESULTS IN BACKEND //////////////////////////////////////////////////////////////////////////////
+            //V// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
             catapultResArrCache.set('catapultResArrCache_key', catapultResArr)
             console.log(`catapultResArrCache['data']['catapultResArrCache_key']['v'].length==> ${catapultResArrCache['data']['catapultResArrCache_key']['v'].length}`)
             console.log(`catapultResArrCache['data']['catapultResArrCache_key']['v'][0]==> ${catapultResArrCache['data']['catapultResArrCache_key']['v'][0]}`)
             console.log(`JSON.stringify(catapultResArrCache['data']['catapultResArrCache_key']['v'][0])==> ${JSON.stringify(catapultResArrCache['data']['catapultResArrCache_key']['v'][0])}`)
-            //^// CACHE QUERY RESULTS IN BACKEND //////////////////////////////////////////////////////////////////////////////
+            //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
         }
 
         odbc.connect(DSN, (error, connection) => {
@@ -131,7 +129,9 @@ module.exports = {
                 console.log(`typeof queriedColumns_0==> ${typeof queriedColumns_0}`)
                 console.log(`JSON.stringify(result[0])==> ${JSON.stringify(result[0])}`)
                 console.log(`JSON.stringify(result['columns'][2])==> ${JSON.stringify(result['columns'][2])}`)
-                showcatapultResults(result)
+
+                forwardGeoCode()
+                    .then(showcatapultResults(result))
 
                 res.render('vw-custPlusAddr', { //render searchResults to vw-retailCalcPassport page
                     title: 'vw-custPlusAddr',
