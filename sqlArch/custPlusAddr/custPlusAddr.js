@@ -53,7 +53,7 @@ module.exports = {
         const url = `https://geocode.search.hereapi.com/v1/geocode`
 
         async function forwardGeoCode() {
-            const gcdrResults = geocoder.batchGeocode([
+            const gcdrResults = await geocoder.batchGeocode([
                 '254 El Conquistador Place',
                 '1285 Willow Ave'
             ])
