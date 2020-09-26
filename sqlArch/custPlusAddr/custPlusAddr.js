@@ -22,12 +22,10 @@ const gcdrOptions = {
     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
 }
 
-// let url = `https://geocode.search.hereapi.com/v1/geocode`
-
 const geocoder = NodeGeocoder({
     provider: 'here',
     fetch: function fetch(url, gcdrOptions) {
-        let url = `https://geocode.search.hereapi.com/v1/geocode`
+        // let url = `https://geocode.search.hereapi.com/v1/geocode`
         return nodeFetch(url, {
             ...gcdrOptions,
             // headers: {
@@ -50,6 +48,8 @@ module.exports = {
 
         let catapultResArr = []
         srcRsXLS_tsql = []
+
+        const url = `https://geocode.search.hereapi.com/v1/geocode`
 
         async function forwardGeoCode() {
             const gcdrResults = geocoder.batchGeocode([
