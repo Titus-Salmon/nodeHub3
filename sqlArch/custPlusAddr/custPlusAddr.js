@@ -4,10 +4,21 @@ var router = express.Router();
 const odbc = require('odbc')
 const DSN = process.env.ODBC_CONN_STRING
 
-const fs = require('fs')
+// const fs = require('fs')
 
 // const catapultResArrCache = require('../nodeCacheStuff/cache1')
 const catapultResArrCache = require('../../nodeCacheStuff/cache1')
+
+const NodeGeocoder = require('node-geocoder')
+
+const options = {
+    provider: 'here',
+
+    // Optional depending on the providers
+    apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
+}
+
+const geocoder = NodeGeocoder(options)
 
 module.exports = {
     custPlusAddr: router.post('/custPlusAddr', (req, res, next) => {
@@ -18,6 +29,15 @@ module.exports = {
 
         let catapultResArr = []
         srcRsXLS_tsql = []
+
+        function forwardGeoCode() {
+            const results = await geocoder.batchGeocode([
+                '13 rue sainte catherine',
+                'another adress'
+            ])
+        }
+
+        forwardGeoCode()
 
         function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
