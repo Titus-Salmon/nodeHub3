@@ -21,6 +21,7 @@ const gcdrOptions = {
 }
 
 const geocoder = NodeGeocoder(gcdrOptions)
+console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
 module.exports = {
     custPlusAddr: router.post('/custPlusAddr', (req, res, next) => {
