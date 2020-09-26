@@ -36,6 +36,7 @@ module.exports = {
                 '1285 Willow Ave'
             ])
             console.log(`results==> ${results}`)
+            console.log(`JSON.stringify(results)==> ${JSON.stringify(results)}`)
         }
 
         forwardGeoCode()
