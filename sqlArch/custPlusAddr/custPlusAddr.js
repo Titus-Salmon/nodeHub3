@@ -13,27 +13,28 @@ const nodeFetch = require('node-fetch')
 
 const NodeGeocoder = require('node-geocoder')
 
-const gcdrOptions = {
-    provider: 'here',
-    country: 'USA',
-    state: 'KY',
+// const gcdrOptions = {
+//     provider: 'here',
+//     country: 'USA',
+//     state: 'KY',
 
-    // Optional depending on the providers
-    apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
-}
+//     // Optional depending on the providers
+//     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
+// }
 
 const geocoder = NodeGeocoder({
     provider: 'here',
-    fetch: function fetch(url, gcdrOptions) {
+    fetch: function fetch(url, options) {
         // let url = `https://geocode.search.hereapi.com/v1/geocode`
         return nodeFetch(url, {
-            ...gcdrOptions,
+            ...options,
             // headers: {
             //   'user-agent': 'My application <email@domain.com>',
             //   'X-Specific-Header': 'Specific value'
             // }
         })
-    }
+    },
+    apiKey: process.env.HERE_API_1,
 })
 
 // const geocoder = NodeGeocoder(gcdrOptions)
