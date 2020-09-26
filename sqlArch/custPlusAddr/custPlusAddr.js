@@ -9,6 +9,8 @@ const DSN = process.env.ODBC_CONN_STRING
 // const catapultResArrCache = require('../nodeCacheStuff/cache1')
 const catapultResArrCache = require('../../nodeCacheStuff/cache1')
 
+const nodeFetch = require('node-fetch')
+
 const NodeGeocoder = require('node-geocoder')
 
 const gcdrOptions = {
@@ -20,7 +22,23 @@ const gcdrOptions = {
     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
 }
 
-const geocoder = NodeGeocoder(gcdrOptions)
+// let url = `https://geocode.search.hereapi.com/v1/geocode`
+
+const geocoder = NodeGeocoder({
+    provider: 'here',
+    fetch: function fetch(url, gcdrOptions) {
+        let url = `https://geocode.search.hereapi.com/v1/geocode`
+        return nodeFetch(url, {
+            ...gcdrOptions,
+            // headers: {
+            //   'user-agent': 'My application <email@domain.com>',
+            //   'X-Specific-Header': 'Specific value'
+            // }
+        })
+    }
+})
+
+// const geocoder = NodeGeocoder(gcdrOptions)
 console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
 module.exports = {
