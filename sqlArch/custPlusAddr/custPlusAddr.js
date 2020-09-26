@@ -13,6 +13,8 @@ const NodeGeocoder = require('node-geocoder')
 
 const options = {
     provider: 'here',
+    country: 'USA',
+    state: 'KY',
 
     // Optional depending on the providers
     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
