@@ -32,13 +32,13 @@ module.exports = {
 
         function forwardGeoCode() {
             const results = await geocoder.batchGeocode([
-                '13 rue sainte catherine',
-                'another adress'
+                '254 El Conquistador Place',
+                '1285 Willow Ave'
             ])
             console.log(`results==> ${results}`)
         }
 
-        // forwardGeoCode()
+        forwardGeoCode()
 
         function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
