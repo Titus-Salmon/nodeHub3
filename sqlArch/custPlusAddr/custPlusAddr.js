@@ -35,9 +35,10 @@ module.exports = {
                 '13 rue sainte catherine',
                 'another adress'
             ])
+            console.log(`results==> ${results}`)
         }
 
-        forwardGeoCode()
+        // forwardGeoCode()
 
         function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
