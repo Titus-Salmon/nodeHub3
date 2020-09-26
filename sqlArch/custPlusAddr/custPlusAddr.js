@@ -31,7 +31,7 @@ module.exports = {
         srcRsXLS_tsql = []
 
         function forwardGeoCode() {
-            const results = await geocoder.batchGeocode([
+            const results = geocoder.batchGeocode([
                 '254 El Conquistador Place',
                 '1285 Willow Ave'
             ])
