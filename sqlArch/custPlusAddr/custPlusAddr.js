@@ -39,20 +39,33 @@ module.exports = {
         let catapultResArr = []
         srcRsXLS_tsql = []
 
+        let frwdGeoAddr = []
+
         // const url = `https://geocode.search.hereapi.com/v1/geocode`
+
+        // async function forwardGeoCode() {
+        //     const gcdrResults = await geocoder.batchGeocode([
+        //         '254 El Conquistador Place, Louisville, KY 40220',
+        //         '1285 Willow Ave, Louisville, KY 40204'
+        //     ])
+        //     console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+        //     console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+        // }
 
         async function forwardGeoCode() {
             const gcdrResults = await geocoder.batchGeocode([
-                '254 El Conquistador Place, Louisville, KY 40220',
-                '1285 Willow Ave, Louisville, KY 40204'
+                // '254 El Conquistador Place, Louisville, KY 40220',
+                // '1285 Willow Ave, Louisville, KY 40204'
+                frwdGeoAddr
             ])
-            console.log(`gcdrResults==> ${gcdrResults}`)
-            console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
+            console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+            console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
         }
 
         async function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
                 let catapultResObj = {}
+                let frwdGeoAddrObj = {}
                 catapultResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
                 //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
                 //start our ri_t0d with 0, as that seems to confuse MySQL...
@@ -119,13 +132,31 @@ module.exports = {
 
                 catapultResArr.push(catapultResObj)
                 srcRsXLS_tsql.push(catapultResObj)
+
+                // function forwardGeoCode() {
+                //     const gcdrResults = await geocoder.batchGeocode([
+                //         `${addr1} ${addr2}, ${city}, ${state} ${zip}`,
+                //         // '254 El Conquistador Place, Louisville, KY 40220',
+                //         // '1285 Willow Ave, Louisville, KY 40204'
+                //     ])
+                //     console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+                //     console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+                // }
+                // forwardGeoCode()
             }
-            //V// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
+            //V// CACHE QUERY gcdrResults IN BACKEND ///////////IS THIS BEING USED, AND SHOULD IT???///////////////////////////////////////////////////////////////////
             catapultResArrCache.set('catapultResArrCache_key', catapultResArr)
             console.log(`catapultResArrCache['data']['catapultResArrCache_key']['v'].length==> ${catapultResArrCache['data']['catapultResArrCache_key']['v'].length}`)
             console.log(`catapultResArrCache['data']['catapultResArrCache_key']['v'][0]==> ${catapultResArrCache['data']['catapultResArrCache_key']['v'][0]}`)
             console.log(`JSON.stringify(catapultResArrCache['data']['catapultResArrCache_key']['v'][0])==> ${JSON.stringify(catapultResArrCache['data']['catapultResArrCache_key']['v'][0])}`)
             //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
+
+            for (let i = 0; i < catapultResArr.length; i++) {
+                frwdGeoAddr.push(`${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}`)
+            }
+
+            console.log(`frwdGeoAddr==> ${frwdGeoAddr}`)
+
         }
 
         odbc.connect(DSN, (error, connection) => {
@@ -139,8 +170,8 @@ module.exports = {
                 console.log(`JSON.stringify(result[0])==> ${JSON.stringify(result[0])}`)
                 console.log(`JSON.stringify(result['columns'][2])==> ${JSON.stringify(result['columns'][2])}`)
 
-                forwardGeoCode()
-                    .then(showcatapultResults(result))
+                showcatapultResults(result)
+                    .then(forwardGeoCode())
 
                 res.render('vw-custPlusAddr', { //render searchResults to vw-retailCalcPassport page
                     title: 'vw-custPlusAddr',
