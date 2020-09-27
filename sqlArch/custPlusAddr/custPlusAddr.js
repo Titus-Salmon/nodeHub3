@@ -35,6 +35,7 @@ const geocoder = NodeGeocoder({
         })
     },
     apiKey: process.env.HERE_API_1,
+    country: 'USA'
 })
 
 // const geocoder = NodeGeocoder(gcdrOptions)
