@@ -6,26 +6,15 @@ const DSN = process.env.ODBC_CONN_STRING
 
 // const fs = require('fs')
 
-// const catapultResArrCache = require('../nodeCacheStuff/cache1')
 const catapultResArrCache = require('../../nodeCacheStuff/cache1')
 
 const nodeFetch = require('node-fetch')
 
 const NodeGeocoder = require('node-geocoder')
 
-// const gcdrOptions = {
-//     provider: 'here',
-//     country: 'USA',
-//     state: 'KY',
-
-//     // Optional depending on the providers
-//     apiKey: process.env.HERE_API_1, // for Mapquest, OpenCage, Google Premier
-// }
-
 const geocoder = NodeGeocoder({
     provider: 'here',
     fetch: function fetch(url, options) {
-        // let url = `https://geocode.search.hereapi.com/v1/geocode`
         return nodeFetch(url, {
             ...options,
             // headers: {
@@ -38,7 +27,6 @@ const geocoder = NodeGeocoder({
     country: 'USA'
 })
 
-// const geocoder = NodeGeocoder(gcdrOptions)
 console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
 module.exports = {
@@ -51,7 +39,7 @@ module.exports = {
         let catapultResArr = []
         srcRsXLS_tsql = []
 
-        const url = `https://geocode.search.hereapi.com/v1/geocode`
+        // const url = `https://geocode.search.hereapi.com/v1/geocode`
 
         async function forwardGeoCode() {
             const gcdrResults = await geocoder.batchGeocode([
