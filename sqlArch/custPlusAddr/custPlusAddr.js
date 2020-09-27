@@ -55,8 +55,8 @@ module.exports = {
 
         async function forwardGeoCode() {
             const gcdrResults = await geocoder.batchGeocode([
-                '254 El Conquistador Place',
-                '1285 Willow Ave'
+                '254 El Conquistador Place, Louisville, KY 40220',
+                '1285 Willow Ave, Louisville, KY 40204'
             ])
             console.log(`gcdrResults==> ${gcdrResults}`)
             console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
