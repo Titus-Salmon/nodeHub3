@@ -153,7 +153,7 @@ module.exports = {
             //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
 
             for (let i = 0; i < catapultResArr.length; i++) {
-                frwdGeoAddrArr.push(`${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}`)
+                frwdGeoAddrArr.push(`'${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}'`)
             }
 
             console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
