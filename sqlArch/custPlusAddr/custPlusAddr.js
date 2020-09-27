@@ -39,7 +39,7 @@ module.exports = {
         let catapultResArr = []
         srcRsXLS_tsql = []
 
-        let frwdGeoAddr = []
+        let frwdGeoAddrArr = []
 
         // const url = `https://geocode.search.hereapi.com/v1/geocode`
 
@@ -56,10 +56,11 @@ module.exports = {
             const gcdrResults = await geocoder.batchGeocode([
                 // '254 El Conquistador Place, Louisville, KY 40220',
                 // '1285 Willow Ave, Louisville, KY 40204'
-                frwdGeoAddr
+                frwdGeoAddrArr
             ])
             console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
             console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+            console.log(`frwdGeoAddrArr(1)==> ${frwdGeoAddrArr}`)
         }
 
         async function showcatapultResults(result) {
@@ -152,10 +153,10 @@ module.exports = {
             //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
 
             for (let i = 0; i < catapultResArr.length; i++) {
-                frwdGeoAddr.push(`${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}`)
+                frwdGeoAddrArr.push(`${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}`)
             }
 
-            console.log(`frwdGeoAddr==> ${frwdGeoAddr}`)
+            console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
 
         }
 
