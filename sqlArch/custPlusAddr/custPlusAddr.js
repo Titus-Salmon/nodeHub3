@@ -62,9 +62,10 @@ module.exports = {
             console.log(`gcdrResults.length==> ${gcdrResults.length}`)
             console.log(`gcdrResults==> ${gcdrResults}`)
             console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
+            console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
             for (let i = 0; i < gcdrResults.length; i++) {
                 var latLongArr = gcdrResults.map(function (thingy_t0d) {
-                    return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
+                    // return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
                     // return [{
                     //     'lat_t0d': thingy_t0d['value']['latitude'],
                     //     'long_t0d': thingy_t0d['value']['longitude']
