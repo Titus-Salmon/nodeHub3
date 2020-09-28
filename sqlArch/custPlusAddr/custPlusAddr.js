@@ -67,6 +67,7 @@ module.exports = {
             console.log(`JSON.stringify(gcdrResults[0]['value'][0]['latitude])==> ${JSON.stringify(gcdrResults[0]['value'][0]['latitude'])}`)
             console.log(`JSON.stringify(gcdrResults[0]['value'][0]['longitude'])==> ${JSON.stringify(gcdrResults[0]['value'][0]['longitude'])}`)
             for (let i = 0; i < gcdrResults.length; i++) {
+                console.log(`gcdrResults[${i}]==> ${gcdrResults[i]}`)
                 let latLongObj = {}
                 latLongObj['lat_t0d'] = gcdrResults[i]['value'][0]['latitude']
                 latLongObj['long_t0d'] = gcdrResults[i]['value'][0]['longitude']
