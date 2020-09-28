@@ -10,6 +10,8 @@ html
 		p #{title}
 
 		if gcdrResults !== undefined
+			label.input-label-1(for='mapData') Map data
+					input#mapData.input-unit-1(type='text', value=gcdrResults)
 			include includes/custPlusAddrMap.html
 
 
