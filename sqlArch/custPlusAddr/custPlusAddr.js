@@ -96,7 +96,7 @@ module.exports = {
         //}, alert);
 
         var i
-        for (let ${i}=0; ${i}<${gcdrResultsArr[0].length}; ${i}++) {
+        for (${i}=0; ${i}<${gcdrResultsArr[0].length}; ${i}++) {
             map.addObject(new H.map.Marker(${gcdrResults[0][i]}.position))
         }
 
