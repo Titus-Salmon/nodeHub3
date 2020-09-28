@@ -2,8 +2,8 @@ let mapData = document.getElementById('mapData')
 console.log(`mapData.value==> ${mapData.value}`)
 
 let latLongData = document.getElementById('latLongArr')
-console.log(`latLongArr==> ${latLongArr}`)
-console.log(`JSON.parse(latLongArr)==> ${JSON.parse(latLongArr)}`)
+console.log(`latLongData==> ${latLongData}`)
+console.log(`JSON.parse(latLongData)==> ${JSON.parse(latLongData)}`)
 
 let mapData2 = [{
   'lat': '38.19119',
