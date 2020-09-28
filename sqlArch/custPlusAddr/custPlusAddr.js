@@ -95,9 +95,9 @@ module.exports = {
             //});
         //}, alert);
 
-        mapData.forEach((mapData) => {
-            map.addObject(new H.map.Marker(mapData.position))
-        })
+        // mapData.forEach((mapData) => {
+        //     map.addObject(new H.map.Marker(mapData.position))
+        // })
 
         // for (let i=0; i<mapDataArr.length; i++) {
         //     map.addObject(new H.map.Marker(mapDataArr[i].position))
@@ -117,7 +117,7 @@ module.exports = {
                     res.render('vw-custPlusAddrMap', {
                         title: `Map`,
                         catapultResults: catapultResArr,
-                        gcdrResults: gcdrResultsArr[0],
+                        gcdrResults: gcdrResultsArr,
                     })
                 }
             })
