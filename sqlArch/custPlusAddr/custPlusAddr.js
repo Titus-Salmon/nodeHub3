@@ -67,11 +67,14 @@ module.exports = {
             console.log(`JSON.stringify(gcdrResults[0]['value'][0]['latitude])==> ${JSON.stringify(gcdrResults[0]['value'][0]['latitude'])}`)
             console.log(`JSON.stringify(gcdrResults[0]['value'][0]['longitude'])==> ${JSON.stringify(gcdrResults[0]['value'][0]['longitude'])}`)
             for (let i = 0; i < gcdrResults.length; i++) {
-                console.log(`gcdrResults[${i}]==> ${gcdrResults[i]}`)
+                console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
                 let latLongObj = {}
-                latLongObj['lat_t0d'] = gcdrResults[i]['value'][0]['latitude']
-                latLongObj['long_t0d'] = gcdrResults[i]['value'][0]['longitude']
-                latLongArr.push(latLongObj)
+                if (gcdrResults[i]['value'][0] !== undefined) {
+                    latLongObj['lat_t0d'] = gcdrResults[i]['value'][0]['latitude']
+                    latLongObj['long_t0d'] = gcdrResults[i]['value'][0]['longitude']
+                    latLongArr.push(latLongObj)
+                }
+
                 // var latLongArr = gcdrResults.map(function (thingy_t0d) {
                 //     // return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
                 //     // return [{
