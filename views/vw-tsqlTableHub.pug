@@ -26,7 +26,7 @@ html
 			form#custPlusAddr(action='/tsqlTableHub/custPlusAddr' method='POST' accept-charset="UTF-8" style="display:block")
 				div(style="display:block")
 					label.input-label-1(for='tblQry2') This Query joins Catapult "v_CustomerMaster" and "addresses" tables
-					textarea#tblQry2.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT addr.ADD_PK, addr.ADD_StreetAddressLine1, addr.ADD_StreetAddressLine2, addr.ADD_City, addr.ADD_StateProvince, addr.ADD_Country, addr.ADD_PostalCode, addr.ADD_CUS_FK, cust.CUS_PK, cust.CUS_FirstName, cust.CUS_MiddleName, cust.CUS_LastName, cust.CUS_NickName, cust.CUS_AccountNum FROM catapult.ecrs.addresses addr inner join  catapult.ecrs.v_CustomerMaster cust on addr.ADD_CUS_FK = cust.CUS_PK
+					textarea#tblQry2.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT top(10) addr.ADD_PK, addr.ADD_StreetAddressLine1, addr.ADD_StreetAddressLine2, addr.ADD_City, addr.ADD_StateProvince, addr.ADD_Country, addr.ADD_PostalCode, addr.ADD_CUS_FK, cust.CUS_PK, cust.CUS_FirstName, cust.CUS_MiddleName, cust.CUS_LastName, cust.CUS_NickName, cust.CUS_AccountNum FROM catapult.ecrs.addresses addr inner join  catapult.ecrs.v_CustomerMaster cust on addr.ADD_CUS_FK = cust.CUS_PK
 					button(type='submit', form='custPlusAddr', style="display: block; float: left") POST
 
 		div(style="display:block")

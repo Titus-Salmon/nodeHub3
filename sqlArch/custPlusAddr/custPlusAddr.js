@@ -47,17 +47,77 @@ module.exports = {
         let frwdGeoAddrArr = []
         let gcdrResultsArr = []
 
-        //async function forwardGeoCode() {
-        const gcdrResults = await geocoder.batchGeocode([
-            // '254 El Conquistador Place, Louisville, KY 40220',
-            // '1285 Willow Ave, Louisville, KY 40204'
-            frwdGeoAddrArr
-        ])
-        console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
-        console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-        console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
-        gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
-        //}
+        async function forwardGeoCode() {
+            const gcdrResults = await geocoder.batchGeocode([
+                // '254 El Conquistador Place, Louisville, KY 40220',
+                // '1285 Willow Ave, Louisville, KY 40204'
+                frwdGeoAddrArr
+            ])
+            console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+            console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+            console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
+            gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
+
+            const jsdomT0d = new JSDOM(`
+<html>
+<head>
+   <title>Simple HERE Map</title>
+   <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+   <style>
+      html, body { border: 0; margin: 0; padding: 0; }
+      #map { height: 100vh; width: 100vw; }
+   </style>
+</head>
+<body>
+   <div id="map"></div>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+   <script>
+        // Instantiate a map and platform object:
+        var platform = new H.service.Platform({
+            'apikey': '${process.env.HERE_API_1}'
+        });
+        
+        // Get an instance of the geocoding service:
+        var service = platform.getSearchService();
+        
+        // Call the geocode method with the geocoding parameters,
+        // the callback and an error callback function (called if a
+        // communication error occurs):
+        //service.geocode({
+          //  q: '200 S Mathilda Ave, Sunnyvale, CA'
+        //}, (result) => {
+            // Add a marker for each location found
+          //  result.items.forEach((item) => {
+            //map.addObject(new H.map.Marker(item.position));
+            //});
+        //}, alert);
+
+        for (let i=0; i<${gcdrResultsArr[0].length}; i++) {
+            map.addObject(new H.map.Marker(${gcdrResults[0][i]}.position))
+        }
+
+   </script>
+</body>
+</html>
+`)
+
+            var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+            fs.writeFile(`${process.cwd()}/views/includes/custPlusAddr.html`, svgsrc, function (err) {
+                if (err) {
+                    console.log('error saving document', err)
+                } else {
+                    console.log('The file was saved!')
+                    res.render('vw-custPlusAddrMap', {
+                        title: `Map`,
+                        // venProfArrDisplay: venProfArr,
+                    })
+                }
+            })
+
+        }
 
         async function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
@@ -156,22 +216,22 @@ module.exports = {
 
         }
 
-        //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        async function writeHTMLfileAndRenderPage() {
-            var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-            fs.writeFile(`${process.cwd()}/views/includes/custPlusAddr.html`, svgsrc, function (err) {
-                if (err) {
-                    console.log('error saving document', err)
-                } else {
-                    console.log('The file was saved!')
-                    res.render('vw-custPlusAddrMap', {
-                        title: `Map`,
-                        // venProfArrDisplay: venProfArr,
-                    })
-                }
-            })
-        }
-        //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        // async function writeHTMLfileAndRenderPage() {
+        //     var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+        //     fs.writeFile(`${process.cwd()}/views/includes/custPlusAddr.html`, svgsrc, function (err) {
+        //         if (err) {
+        //             console.log('error saving document', err)
+        //         } else {
+        //             console.log('The file was saved!')
+        //             res.render('vw-custPlusAddrMap', {
+        //                 title: `Map`,
+        //                 // venProfArrDisplay: venProfArr,
+        //             })
+        //         }
+        //     })
+        // }
+        // //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         odbc.connect(DSN, (error, connection) => {
             connection.query(`${catapultDbQuery}`, (error, result) => {
@@ -185,13 +245,13 @@ module.exports = {
                 console.log(`JSON.stringify(result['columns'][2])==> ${JSON.stringify(result['columns'][2])}`)
 
                 showcatapultResults(result)
-                // .then(forwardGeoCode())
+                    .then(forwardGeoCode())
                 // .then(writeHTMLfileAndRenderPage())
 
-                res.render('vw-custPlusAddr', { //render searchResults to vw-retailCalcPassport page
-                    title: 'vw-custPlusAddr',
-                    catapultResults: catapultResArr,
-                })
+                // res.render('vw-custPlusAddr', { //render searchResults to vw-retailCalcPassport page
+                //     title: 'vw-custPlusAddr',
+                //     catapultResults: catapultResArr,
+                // })
             })
         })
     })
