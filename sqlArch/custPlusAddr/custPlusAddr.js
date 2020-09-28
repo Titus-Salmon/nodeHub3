@@ -118,6 +118,7 @@ module.exports = {
                         title: `Map`,
                         catapultResults: catapultResArr,
                         gcdrResults: gcdrResultsArr,
+                        apiKey: process.env.HERE_API_1
                     })
                 }
             })
