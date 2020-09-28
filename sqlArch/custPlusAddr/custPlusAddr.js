@@ -49,11 +49,11 @@ module.exports = {
         // let latLongArr = []
 
         async function forwardGeoCode() {
-            const gcdrResults = await geocoder.batchGeocode([
-                '254 El Conquistador Place, Louisville, KY 40220',
-                '1285 Willow Ave, Louisville, KY 40204'
-                // frwdGeoAddrArr
-            ])
+            const gcdrResults = await geocoder.batchGeocode(
+                // '254 El Conquistador Place, Louisville, KY 40220',
+                // '1285 Willow Ave, Louisville, KY 40204'
+                frwdGeoAddrArr
+            )
             console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
             console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
             console.log(`frwdGeoAddrArr==> ${frwdGeoAddrArr}`)
