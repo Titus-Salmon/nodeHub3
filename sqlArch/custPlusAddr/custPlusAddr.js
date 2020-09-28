@@ -77,7 +77,7 @@ module.exports = {
    <script>
         // Instantiate a map and platform object:
         var platform = new H.service.Platform({
-            'apikey': process.env.HERE_API_1
+            'apikey': '${process.env.HERE_API_1}'
         });
         
         // Get an instance of the geocoding service:
