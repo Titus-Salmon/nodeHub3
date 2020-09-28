@@ -9,12 +9,9 @@ html
 
 		p #{title}
 
-		-let mapDataArr = []
-
 		if gcdrResults !== undefined
-			-for (let i=0; i<gcdrResults.length; i++) {mapDataArr.push(gcdrResults[i])}
-			//- label.input-label-1(for='mapData') Map data
-			//- 		input#mapData.input-unit-1(type='text', value=gcdrResults)
+			label.input-label-1(for='mapData') Map data
+				input#mapData.input-unit-1(type='text', value=gcdrResults)
 			include includes/custPlusAddrMap.html
 
 
@@ -92,5 +89,5 @@ html
 		//- 						td= elmnt.CUS_NickName
 		//- 						td= elmnt.CUS_AccountNum
 
-
+		script(src='/jsModules_t0d/mapData1.js')
 

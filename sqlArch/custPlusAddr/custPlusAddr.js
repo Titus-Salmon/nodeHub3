@@ -95,9 +95,13 @@ module.exports = {
             //});
         //}, alert);
 
-        for (let i=0; i<mapDataArr.length; i++) {
-            map.addObject(new H.map.Marker(mapDataArr[i].position))
-        }
+        mapData.forEach((mapData) => {
+            map.addObject(new H.map.Marker(mapData.position))
+        })
+
+        // for (let i=0; i<mapDataArr.length; i++) {
+        //     map.addObject(new H.map.Marker(mapDataArr[i].position))
+        // }
 
    </script>
 </body>
