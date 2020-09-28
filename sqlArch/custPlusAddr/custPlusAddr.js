@@ -64,11 +64,11 @@ module.exports = {
             console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
             for (let i = 0; i < gcdrResults.length; i++) {
                 var latLongArr = gcdrResults.map(function (thingy_t0d) {
-                    // return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
-                    return [{
-                        'lat_t0d': thingy_t0d['value']['latitude'],
-                        'long_t0d': thingy_t0d['value']['longitude']
-                    }]
+                    return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
+                    // return [{
+                    //     'lat_t0d': thingy_t0d['value']['latitude'],
+                    //     'long_t0d': thingy_t0d['value']['longitude']
+                    // }]
                 })
                 console.log(`latLongArr==> ${latLongArr}`)
                 console.log(`JSON.stringify(latLongArr)==> ${JSON.stringify(latLongArr)}`)
