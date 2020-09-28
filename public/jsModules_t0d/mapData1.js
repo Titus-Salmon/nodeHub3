@@ -4,6 +4,8 @@ console.log(`mapData.value==> ${mapData.value}`)
 let latLongData = document.getElementById('latLongData')
 console.log(`latLongData==> ${latLongData}`)
 console.log(`typeof latLongData==> ${typeof latLongData}`)
+console.log(`latLongData.value==> ${latLongData.value}`)
+console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 // console.log(`JSON.parse(latLongData)==> ${JSON.parse(latLongData)}`)
 
 let mapData2 = [{
