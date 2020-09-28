@@ -60,7 +60,7 @@ module.exports = {
             gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
             for (let i = 0; i < gcdrResultsArr.length; i++) {
                 var latLongArr = gcdrResultsArr.map(function (thingy_t0d) {
-                    return thingy_t0d[i]['value'][0]['latitude'] + "," + thingy_t0d[i]['value'][0]['longitude']
+                    return [thingy_t0d[i]['value'][0]['latitude'], thingy_t0d[i]['value'][0]['longitude']]
                 })
                 console.log(`latLongArr==> ${latLongArr}`)
             }
