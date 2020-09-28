@@ -46,6 +46,7 @@ module.exports = {
 
         let frwdGeoAddrArr = []
         let gcdrResultsArr = []
+        // let latLongArr = []
 
         async function forwardGeoCode() {
             const gcdrResults = await geocoder.batchGeocode([
@@ -57,6 +58,8 @@ module.exports = {
             console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
             console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
             gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
+            const latLongArr = gcdrResultsArr.map(gcdrResultsArr => [gcdrResultsArr.value.latitude, gcdrResultsArr.value.longitude])
+            console.log(`latLongArr==> ${latLongArr}`)
 
             const jsdomT0d = new JSDOM(`
 <html>
