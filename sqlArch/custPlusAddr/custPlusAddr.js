@@ -128,7 +128,7 @@ module.exports = {
                     res.render('vw-custPlusAddrMap', {
                         title: `Map`,
                         catapultResults: catapultResArr,
-                        gcdrResults: gcdrResultsArr[0],
+                        gcdrResults: gcdrResults,
                         apiKey: process.env.HERE_API_1
                     })
                 }
