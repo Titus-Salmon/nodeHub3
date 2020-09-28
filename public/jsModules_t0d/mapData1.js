@@ -17,7 +17,7 @@ let mapData2 = [{
 function addMarkersToMap(map) {
 
 
-  for (let i = 0; i < mapData.value.length; i++) {
+  for (let i = 0; i < mapData2.length; i++) {
     let markerT0d = new H.map.Marker({
       lat: mapData2[i]['lat'],
       lng: mapData2[i]['long']
