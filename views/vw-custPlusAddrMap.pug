@@ -9,9 +9,12 @@ html
 
 		p #{title}
 
+		-let mapDataArr = []
+
 		if gcdrResults !== undefined
-			label.input-label-1(for='mapData') Map data
-					input#mapData.input-unit-1(type='text', value=gcdrResults)
+			-for (let i=0; i<gcdrResults.length; i++) {mapDataArr.push(gcdrResults[i])}
+			//- label.input-label-1(for='mapData') Map data
+			//- 		input#mapData.input-unit-1(type='text', value=gcdrResults)
 			include includes/custPlusAddrMap.html
 
 
