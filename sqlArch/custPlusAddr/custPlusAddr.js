@@ -4,7 +4,7 @@ var router = express.Router();
 const odbc = require('odbc')
 const DSN = process.env.ODBC_CONN_STRING
 
-// const fs = require('fs')
+const fs = require('fs')
 
 const catapultResArrCache = require('../../nodeCacheStuff/cache1')
 
@@ -29,6 +29,11 @@ const geocoder = NodeGeocoder({
 
 console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
+const jsdom = require('jsdom')
+const {
+    JSDOM
+} = jsdom
+
 module.exports = {
     custPlusAddr: router.post('/custPlusAddr', (req, res, next) => {
 
@@ -40,33 +45,24 @@ module.exports = {
         srcRsXLS_tsql = []
 
         let frwdGeoAddrArr = []
+        let gcdrResultsArr = []
 
-        // const url = `https://geocode.search.hereapi.com/v1/geocode`
-
-        // async function forwardGeoCode() {
-        //     const gcdrResults = await geocoder.batchGeocode([
-        //         '254 El Conquistador Place, Louisville, KY 40220',
-        //         '1285 Willow Ave, Louisville, KY 40204'
-        //     ])
-        //     console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
-        //     console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-        // }
-
-        async function forwardGeoCode() {
-            const gcdrResults = await geocoder.batchGeocode([
-                // '254 El Conquistador Place, Louisville, KY 40220',
-                // '1285 Willow Ave, Louisville, KY 40204'
-                frwdGeoAddrArr
-            ])
-            console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
-            console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-            console.log(`frwdGeoAddrArr(1)==> ${frwdGeoAddrArr}`)
-        }
+        //async function forwardGeoCode() {
+        const gcdrResults = await geocoder.batchGeocode([
+            // '254 El Conquistador Place, Louisville, KY 40220',
+            // '1285 Willow Ave, Louisville, KY 40204'
+            frwdGeoAddrArr
+        ])
+        console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+        console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+        console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
+        gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
+        //}
 
         async function showcatapultResults(result) {
             for (let i = 0; i < result.length; i++) {
                 let catapultResObj = {}
-                let frwdGeoAddrObj = {}
+                // let frwdGeoAddrObj = {}
                 catapultResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
                 //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
                 //start our ri_t0d with 0, as that seems to confuse MySQL...
@@ -156,9 +152,26 @@ module.exports = {
                 frwdGeoAddrArr.push(`'${catapultResArr[i]['ADD_StreetAddressLine1']} ${catapultResArr[i]['ADD_StreetAddressLine2']}, ${catapultResArr[i]['ADD_City']}, ${catapultResArr[i]['ADD_StateProvince']} ${catapultResArr[i]['ADD_PostalCode']}'`)
             }
 
-            console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
+            // console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
 
         }
+
+        //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        async function writeHTMLfileAndRenderPage() {
+            var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+            fs.writeFile(`${process.cwd()}/views/includes/custPlusAddr.html`, svgsrc, function (err) {
+                if (err) {
+                    console.log('error saving document', err)
+                } else {
+                    console.log('The file was saved!')
+                    res.render('vw-custPlusAddrMap', {
+                        title: `Map`,
+                        // venProfArrDisplay: venProfArr,
+                    })
+                }
+            })
+        }
+        //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
         odbc.connect(DSN, (error, connection) => {
             connection.query(`${catapultDbQuery}`, (error, result) => {
@@ -172,7 +185,8 @@ module.exports = {
                 console.log(`JSON.stringify(result['columns'][2])==> ${JSON.stringify(result['columns'][2])}`)
 
                 showcatapultResults(result)
-                    .then(forwardGeoCode())
+                // .then(forwardGeoCode())
+                // .then(writeHTMLfileAndRenderPage())
 
                 res.render('vw-custPlusAddr', { //render searchResults to vw-retailCalcPassport page
                     title: 'vw-custPlusAddr',
