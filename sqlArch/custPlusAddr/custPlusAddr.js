@@ -58,7 +58,7 @@ module.exports = {
             console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
             console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
             gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
-            const latLongArr = gcdrResultsArr.map(gcdrResultsArr => [gcdrResultsArr.value.latitude, gcdrResultsArr.value.longitude])
+            const latLongArr = gcdrResultsArr.map(latLongPairs => [latLongPairs.value.latitude, latLongPairs.value.longitude])
             console.log(`latLongArr==> ${latLongArr}`)
 
             const jsdomT0d = new JSDOM(`
