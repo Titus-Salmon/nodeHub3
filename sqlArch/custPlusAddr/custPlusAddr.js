@@ -113,7 +113,7 @@ module.exports = {
                     res.render('vw-custPlusAddrMap', {
                         title: `Map`,
                         catapultResults: catapultResArr,
-                        gcdrResults: gcdrResults[0],
+                        gcdrResults: gcdrResultsArr[0],
                     })
                 }
             })
