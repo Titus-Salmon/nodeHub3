@@ -1,0 +1,91 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+
+		include vw-dashboard.pug
+
+		p #{title}
+
+		if catapultResults !== undefined
+			include includes/custPlusAddrMap.html
+
+
+		//- div(style="display:block")
+		//- 	form#saveCSVPost(action='/tsqlTableHub/save2CSV' method='POST' accept-charset='UTF-8' style="display:block")
+		//- 		if catapultResults !== undefined
+		//- 			label.input-label-1(for='csv') filename:
+		//- 				input#csv.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+		//- 			//- label.input-label-1(for='save2CSVArr') Catapult Table Query Results Array:
+		//- 			//- 	input#save2CSVArr.input-unit-1(type='text', placeholder='enter data', name='save2CSVArrPost', readonly, style="background-color:#c2d6d6", value=catapultResults)
+		//- 			button#saveCSV(type="submit" form="saveCSVPost") Save Results as CSV - Catapult Inventory Master Query2
+
+		//- div(style="display:block")
+		//- 	form#saveCSVcreatePopPost(action='/tsqlTableHub/save2CSVcreatePop' method='POST' accept-charset='UTF-8' style="display:block")
+		//- 		if catapultResults !== undefined
+		//- 			label.input-label-1(for='csvCreatePop') filename:
+		//- 				input#csvCreatePop.input-unit-1(type='text', placeholder='enter filename here', name='csvPost', value='')
+		//- 			label.input-label-1(for='tableNameCreatePop') Table Name:
+		//- 				input#tableNameCreatePop.input-unit-1(type='text', placeholder='enter tablename here', name='tablenamePost', value='')
+		//- 			//- label.input-label-1(for='save2CSVArr2') Catapult Table Query Results Array:
+		//- 			//- 	input#save2CSVArr2.input-unit-1(type='text', placeholder='enter data', name='save2CSVArrPost', readonly, style="background-color:#c2d6d6", value=catapultResults)
+		//- 			button#saveCSVcreatePop(type="submit" form="saveCSVcreatePopPost") Save Results as CSV, Create & Pop NHCRT table
+
+		//- div(style="display:block")
+		//- 	form#saveXLSreviewPost(action='/tsqlTableHub/save2XLS_tsql' method='POST' accept-charset='UTF-8')
+		//- 		if catapultResults !== undefined
+		//- 			label.input-label-1(for='xlsReview') filename:
+		//- 			input#xlsReview.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+		//- 			button#saveXLSreview(type="submit" form="saveXLSreviewPost") Save Results as XLS - NHCRT
+
+		//- div(style="display:block")
+		//- 	form#saveXLSautoreorderPost(action='/tsqlTableHub/save2XLS_tsql_autoreorder' method='POST' accept-charset='UTF-8')
+		//- 		if catapultResults !== undefined
+		//- 			label.input-label-1(for='xlsAutoReorder') filename:
+		//- 			input#xlsAutoReorder.input-unit-1(type='text', placeholder='enter filename here', name='xlsPost', value='')
+		//- 			button#saveXLSautoreorder(type="submit" form="saveXLSautoreorderPost") Save Results as XLS - AutoReorder Master List
+
+		//- div.rslt-tbl-1
+		//- 	table#resTbl
+		//- 		thead
+		//- 			tr
+		//- 				th ri_t0d
+		//- 				th ADD_PK
+		//- 				th ADD_StreetAddressLine1
+		//- 				th ADD_StreetAddressLine2
+		//- 				th ADD_City
+		//- 				th ADD_StateProvince
+		//- 				th ADD_Country
+		//- 				th ADD_PostalCode
+		//- 				th ADD_CUS_FK
+		//- 				th CUS_PK
+		//- 				th CUS_FirstName
+		//- 				th CUS_MiddleName
+		//- 				th CUS_LastName
+		//- 				th CUS_NickName
+		//- 				th CUS_AccountNum
+
+		//- 		tbody#resTblBdy
+		//- 			if catapultResults !== undefined
+		//- 				each elmnt in catapultResults
+		//- 					tr
+		//- 						td= elmnt.ri_t0d
+		//- 						td= elmnt.ADD_PK
+		//- 						td= elmnt.ADD_StreetAddressLine1
+		//- 						td= elmnt.ADD_StreetAddressLine2
+		//- 						td= elmnt.ADD_City
+		//- 						td= elmnt.ADD_StateProvince
+		//- 						td= elmnt.ADD_Country
+		//- 						td= elmnt.ADD_PostalCode
+		//- 						td= elmnt.ADD_CUS_FK
+		//- 						td= elmnt.CUS_PK
+		//- 						td= elmnt.CUS_FirstName
+		//- 						td= elmnt.CUS_MiddleName
+		//- 						td= elmnt.CUS_LastName
+		//- 						td= elmnt.CUS_NickName
+		//- 						td= elmnt.CUS_AccountNum
+
+
+
