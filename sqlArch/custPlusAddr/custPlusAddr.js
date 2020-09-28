@@ -71,6 +71,7 @@ module.exports = {
                     }]
                 })
                 console.log(`latLongArr==> ${latLongArr}`)
+                console.log(`JSON.stringify(latLongArr)==> ${JSON.stringify(latLongArr)}`)
             }
 
             const jsdomT0d = new JSDOM(`
@@ -133,6 +134,7 @@ module.exports = {
                         title: `Map`,
                         catapultResults: catapultResArr,
                         gcdrResults: gcdrResultsArr,
+                        latLongArr: latLongArr,
                         apiKey: process.env.HERE_API_1
                     })
                 }
