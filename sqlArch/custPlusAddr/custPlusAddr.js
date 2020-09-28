@@ -66,8 +66,8 @@ module.exports = {
                 var latLongArr = gcdrResults.map(function (thingy_t0d) {
                     // return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
                     return [{
-                        'lat_t0d': thingy_t0d['value'][0]['latitude'],
-                        'long_t0d': thingy_t0d['value'][0]['longitude']
+                        'lat_t0d': thingy_t0d[0]['value'][0]['latitude'],
+                        'long_t0d': thingy_t0d[0]['value'][0]['longitude']
                     }]
                 })
                 console.log(`latLongArr==> ${latLongArr}`)
