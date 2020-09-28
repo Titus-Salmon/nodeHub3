@@ -95,8 +95,8 @@ module.exports = {
             //});
         //}, alert);
 
-        for (let i=0; i<gcdrResultsArr[0].length; i++) {
-            map.addObject(new H.map.Marker(gcdrResults[0][i].position))
+        for (let i=0; i<gcdrResults.length; i++) {
+            map.addObject(new H.map.Marker(gcdrResults[i].position))
         }
 
    </script>
@@ -113,6 +113,7 @@ module.exports = {
                     res.render('vw-custPlusAddrMap', {
                         title: `Map`,
                         catapultResults: catapultResArr,
+                        gcdrResults: gcdrResults[0],
                     })
                 }
             })
