@@ -59,7 +59,9 @@ module.exports = {
             console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
             gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
             for (let i = 0; i < gcdrResultsArr.length; i++) {
-                var latLongArr = gcdrResultsArr.map(latLongPairs, i => [latLongPairs[i].value.latitude, latLongPairs[i].value.longitude])
+                var latLongArr = gcdrResultsArr.map(function (thingy_t0d) {
+                    return [thingy_t0d['value'][0]['latitude'], thingy_t0d['value'][0]['longitude']]
+                })
                 console.log(`latLongArr==> ${latLongArr}`)
             }
 
