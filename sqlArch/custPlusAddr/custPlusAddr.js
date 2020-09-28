@@ -56,6 +56,7 @@ module.exports = {
             ])
             console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
             console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+            console.log(`frwdGeoAddrArr==> ${frwdGeoAddrArr}`)
             console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
             gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
             console.log(`gcdrResults.length==> ${gcdrResults.length}`)
