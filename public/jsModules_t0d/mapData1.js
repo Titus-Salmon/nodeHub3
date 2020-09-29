@@ -15,9 +15,12 @@ let latLongDataArr = []
 let latLongDataSani1 = latLongData.value.replace(regex1, '')
 let latLongDataSplit = latLongDataSani1.split('},{')
 for (let i = 0; i < latLongDataSplit.length; i++) {
+  // let latLongDataObj = {}
   latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '')
+  latLongDataArr.push(latLongDataSplit[i])
 }
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
+console.log(`latLongDataArr==> ${latLongDataArr}`)
 
 let mapData2 = [{
   'lat': '38.19119',
