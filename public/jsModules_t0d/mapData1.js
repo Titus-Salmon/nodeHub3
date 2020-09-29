@@ -15,8 +15,7 @@ let latLongDataArr = []
 let latLongDataSani1 = latLongData.value.replace(regex1, '')
 let latLongDataSplit = latLongDataSani1.split('},{')
 for (let i = 0; i < latLongDataSplit.length; i++) {
-  let replace1 = latLongDataSplit[i]
-  replace1.replace('{', '').replace('}', '')
+  latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '')
 }
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
 
