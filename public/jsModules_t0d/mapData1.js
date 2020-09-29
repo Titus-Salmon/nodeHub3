@@ -10,7 +10,7 @@ console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 let regex1 = /(\[|\])/g
 
 let latLongDataSani1 = latLongData.value.replace(regex1, '')
-let latLongDataSplit = latLongDataSani1.split(',')
+let latLongDataSplit = latLongDataSani1.split('},{')
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
 console.log(`latLongDataSplit.length==> ${latLongDataSplit.length}`)
 
