@@ -6,7 +6,13 @@ console.log(`latLongData==> ${latLongData}`)
 console.log(`typeof latLongData==> ${typeof latLongData}`)
 console.log(`latLongData.value==> ${latLongData.value}`)
 console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
-// console.log(`JSON.parse(latLongData)==> ${JSON.parse(latLongData)}`)
+
+let regex1 = /(\[|\])/g
+
+let latLongDataSani1 = latLongData.value.replace(regex1, '')
+let latLongDataSplit = latLongDataSani1.split(',')
+console.log(`latLongDataSplit==> ${latLongDataSplit}`)
+console.log(`latLongDataSplit.length==> ${latLongDataSplit.length}`)
 
 let mapData2 = [{
   'lat': '38.19119',
