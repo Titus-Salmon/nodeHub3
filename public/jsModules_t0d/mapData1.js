@@ -14,11 +14,10 @@ let latLongDataArr = []
 
 let latLongDataSani1 = latLongData.value.replace(regex1, '')
 let latLongDataSplit = latLongDataSani1.split('},{')
-let latLongDataSani2 = latLongData.value.replace(regex2, '')
-console.log(`latLongDataSani2==> ${latLongDataSani2}`)
-console.log(`latLongDataSani2.length==> ${latLongDataSani2.length}`)
-console.log(`latLongDataSani2[0]==> ${latLongDataSani2[0]}`)
-console.log(`JSON.parse(latLongDataSani2[0])==> ${JSON.parse(latLongDataSani2[0])}`)
+for (let i = 0; i < latLongDataSplit.length; i++) {
+  latLongDataSplit[i].replace(regex2, '')
+}
+console.log(`latLongDataSplit==> ${latLongDataSplit}`)
 
 let mapData2 = [{
   'lat': '38.19119',
