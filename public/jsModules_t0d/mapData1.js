@@ -28,7 +28,7 @@ console.log(`latLongDataArr==> ${latLongDataArr}`)
 console.log(`latLongDataArr.length==> ${latLongDataArr.length}`)
 console.log(`latLongDataArr[0]==> ${latLongDataArr[0]}`)
 console.log(`JSON.parse(latLongDataArr[0])==> ${JSON.parse(latLongDataArr[0])}`)
-for (leti = 0; i < latLongDataArr.length; i++) {
+for (let i = 0; i < latLongDataArr.length; i++) {
   latLongDataArr[i] = JSON.parse(latLongDataArr[i])
 }
 console.log(`latLongDataArr[0][lat_t0d]==> ${latLongDataArr[0][lat_t0d]}`)
