@@ -8,7 +8,7 @@ console.log(`latLongData.value==> ${latLongData.value}`)
 console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 
 let regex1 = /(\[|\])/g
-let regex2 = /({|})/g
+let regex2 = /(\{|\})/g
 
 let latLongDataArr = []
 
