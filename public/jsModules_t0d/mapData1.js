@@ -21,6 +21,8 @@ for (let i = 0; i < latLongDataSplit.length; i++) {
 }
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
 console.log(`latLongDataArr==> ${latLongDataArr}`)
+console.log(`latLongDataArr.length==> ${latLongDataArr.length}`)
+console.log(`latLongDataArr[0]==> ${latLongDataArr[0]}`)
 
 let mapData2 = [{
   'lat': '38.19119',
