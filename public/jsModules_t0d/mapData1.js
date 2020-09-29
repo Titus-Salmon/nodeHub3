@@ -58,8 +58,8 @@ function addMarkersToMap(map) {
       lng: latLongDataArr[i]['long']
     })
     map.addObject(markerT0d)
-    console.log(`markerT0d==> ${markerT0d}`)
-    console.log(`Object.keys(markerT0d)==> ${Object.keys(markerT0d)}`)
+    // console.log(`markerT0d==> ${markerT0d}`)
+    // console.log(`Object.keys(markerT0d)==> ${Object.keys(markerT0d)}`)
     // console.log(`JSON.stringify(markerT0d)==> ${JSON.stringify(markerT0d)}`)
   }
 
