@@ -17,6 +17,8 @@ let latLongDataSplit = latLongDataSani1.split('},{')
 let latLongDataSani2 = latLongData.value.replace(regex2, '')
 console.log(`latLongDataSani2==> ${latLongDataSani2}`)
 console.log(`latLongDataSani2.length==> ${latLongDataSani2.length}`)
+console.log(`latLongDataSani2[0]==> ${latLongDataSani2[0]}`)
+console.log(`JSON.parse(latLongDataSani2[0])==> ${JSON.parse(latLongDataSani2[0])}`)
 
 let mapData2 = [{
   'lat': '38.19119',
