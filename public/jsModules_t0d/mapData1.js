@@ -39,7 +39,7 @@ console.log(`latLongDataArr[0]['long']==> ${latLongDataArr[0]['long']}`)
 //   'long': '-85.64789'
 // }]
 
-let mapData2 = latLongDataArr
+// let mapData2 = latLongDataArr
 
 
 
@@ -52,10 +52,10 @@ let mapData2 = latLongDataArr
 function addMarkersToMap(map) {
 
 
-  for (let i = 0; i < mapData2.length; i++) {
+  for (let i = 0; i < latLongDataArr.length; i++) {
     let markerT0d = new H.map.Marker({
-      lat: mapData2[i]['lat'],
-      lng: mapData2[i]['long']
+      lat: latLongDataArr[i]['lat'],
+      lng: latLongDataArr[i]['long']
     })
     map.addObject(markerT0d)
     console.log(`markerT0d==> ${markerT0d}`)
