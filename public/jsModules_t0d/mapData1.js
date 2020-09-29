@@ -21,6 +21,9 @@ for (let i = 0; i < latLongDataSplit.length; i++) {
   latLongDataArr.push(latLongDataSplit[i])
 }
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
+for (let i = 0; i < latLongDataArr.length; i++) {
+  latLongDataArr[i] = `{${latLongDataArr[i]}}` //add brackets back on for JSON.parse on frontend
+}
 console.log(`latLongDataArr==> ${latLongDataArr}`)
 console.log(`latLongDataArr.length==> ${latLongDataArr.length}`)
 console.log(`latLongDataArr[0]==> ${latLongDataArr[0]}`)
