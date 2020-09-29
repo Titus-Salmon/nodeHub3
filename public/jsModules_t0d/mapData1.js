@@ -8,11 +8,15 @@ console.log(`latLongData.value==> ${latLongData.value}`)
 console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 
 let regex1 = /(\[|\])/g
+let regex2 = /({|})/g
+
+let latLongDataArr = []
 
 let latLongDataSani1 = latLongData.value.replace(regex1, '')
 let latLongDataSplit = latLongDataSani1.split('},{')
-console.log(`latLongDataSplit==> ${latLongDataSplit}`)
-console.log(`latLongDataSplit.length==> ${latLongDataSplit.length}`)
+let latLongDataSani2 = latLongData.value.replace(regex2, '')
+console.log(`latLongDataSani2==> ${latLongDataSani2}`)
+console.log(`latLongDataSani2.length==> ${latLongDataSani2.length}`)
 
 let mapData2 = [{
   'lat': '38.19119',
