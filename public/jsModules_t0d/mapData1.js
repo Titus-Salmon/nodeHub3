@@ -9,6 +9,7 @@ console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 
 let regex1 = /(\[|\])/g
 let regex2 = /(\{|\})/g
+let regex3 = /(\d+)\.(\d+)/g
 
 let latLongDataArr = []
 
@@ -16,7 +17,7 @@ let latLongDataSani1 = latLongData.value.replace(regex1, '')
 let latLongDataSplit = latLongDataSani1.split('},{')
 for (let i = 0; i < latLongDataSplit.length; i++) {
   // let latLongDataObj = {}
-  latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '')
+  latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '').replace(regex3, `${regex3}`)
   latLongDataArr.push(latLongDataSplit[i])
 }
 console.log(`latLongDataSplit==> ${latLongDataSplit}`)
