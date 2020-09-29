@@ -31,13 +31,15 @@ console.log(`JSON.parse(latLongDataArr[0])==> ${JSON.parse(latLongDataArr[0])}`)
 for (let i = 0; i < latLongDataArr.length; i++) {
   latLongDataArr[i] = JSON.parse(latLongDataArr[i])
 }
-console.log(`latLongDataArr[0]['lat_t0d']==> ${latLongDataArr[0]['lat_t0d']}`)
-console.log(`latLongDataArr[0]['long_t0d']==> ${latLongDataArr[0]['long_t0d']}`)
+console.log(`latLongDataArr[0]['lat']==> ${latLongDataArr[0]['lat']}`)
+console.log(`latLongDataArr[0]['long']==> ${latLongDataArr[0]['long']}`)
 
-let mapData2 = [{
-  'lat': '38.19119',
-  'long': '-85.64789'
-}]
+// let mapData2 = [{
+//   'lat': '38.19119',
+//   'long': '-85.64789'
+// }]
+
+let mapData2 = latLongDataArr
 
 
 

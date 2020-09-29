@@ -70,8 +70,8 @@ module.exports = {
                 console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
                 let latLongObj = {}
                 if (gcdrResults[i]['value'][0] !== undefined) {
-                    latLongObj['lat_t0d'] = `${gcdrResults[i]['value'][0]['latitude']}`
-                    latLongObj['long_t0d'] = `${gcdrResults[i]['value'][0]['longitude']}`
+                    latLongObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
+                    latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
                     latLongArr.push(latLongObj)
                 }
 
