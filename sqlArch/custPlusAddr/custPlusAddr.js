@@ -85,8 +85,8 @@ module.exports = {
                 // console.log(`latLongArr==> ${latLongArr}`)
                 // console.log(`JSON.stringify(latLongArr)==> ${JSON.stringify(latLongArr)}`)
             }
-            console.log(`latLongArr==> ${latLongArr}`)
-            console.log(`JSON.stringify(latLongArr)==> ${JSON.stringify(latLongArr)}`)
+            console.log(`latLongArr.length==> ${latLongArr.length}`)
+            console.log(`JSON.stringify(latLongArr[0])==> ${JSON.stringify(latLongArr[0])}`)
 
             const jsdomT0d = new JSDOM(`
 <html>
@@ -104,6 +104,7 @@ module.exports = {
    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+   <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
    <script>
         // Instantiate a map and platform object:
         var platform = new H.service.Platform({
