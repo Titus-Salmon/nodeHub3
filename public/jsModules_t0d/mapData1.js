@@ -129,7 +129,7 @@ function startClustering(map, data) {
       // Maximum radius of the neighbourhood
       eps: 32,
       // minimum weight of points required to form a cluster
-      minWeight: 2
+      minWeight: 10
     }
   });
 
@@ -156,7 +156,7 @@ var defaultLayers = platform.createDefaultLayers();
 // Step 2: initialize a map
 var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
   center: new H.geo.Point(38.252247, -85.659303),
-  zoom: 4,
+  zoom: 10,
   pixelRatio: window.devicePixelRatio || 1
 });
 // add a resize listener to make sure that the map occupies the whole container
