@@ -215,7 +215,7 @@ module.exports = {
     // //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    connection.query(mySqlQuery, (error, response) => {
+    connection.query(cstLstDtlQuery, (error, response) => {
       console.log(error || response);
     }).on('end', function () {
       showCstLstDtlResults(result)
