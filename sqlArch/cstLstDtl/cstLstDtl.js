@@ -190,7 +190,7 @@ module.exports = {
       //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
 
       for (let i = 0; i < cstLstDtlResArr.length; i++) {
-        frwdGeoAddrArr.push(`'${cstLstDtlResArr[i]['ADD_StreetAddressLine1']} ${cstLstDtlResArr[i]['ADD_StreetAddressLine2']}, ${cstLstDtlResArr[i]['ADD_City']}, ${cstLstDtlResArr[i]['ADD_StateProvince']} ${cstLstDtlResArr[i]['ADD_PostalCode']}'`)
+        frwdGeoAddrArr.push(`'${cstLstDtlResArr[i]['Bill_to_Address_1']} ${cstLstDtlResArr[i]['Bill_to_Address_2']}, ${cstLstDtlResArr[i]['Bill_to_City']}, ${cstLstDtlResArr[i]['Bill_to_State']} ${cstLstDtlResArr[i]['Bill_to_Zip']}'`)
       }
 
       // console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
