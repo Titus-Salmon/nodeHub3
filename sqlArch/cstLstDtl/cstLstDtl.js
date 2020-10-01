@@ -116,7 +116,7 @@ module.exports = {
           console.log('error saving document', err)
         } else {
           console.log('The file was saved!')
-          res.render('vw-cstLstDtl', {
+          res.render('vw-cstLstDtlMap', {
             title: `Map`,
             cstLstDtlResArr: cstLstDtlResArr,
             gcdrResults: gcdrResultsArr,

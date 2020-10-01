@@ -1,0 +1,30 @@
+doctype html
+html
+	head
+		link(rel="stylesheet" type="text/css" href="/stylesheets/style.css")
+
+	body
+
+		include vw-dashboard.pug
+
+		p #{title}
+
+		div(style="display:none")
+			form#cstLstDtl(action='/cstLstDtl/cstLstDtl' method='POST' accept-charset="UTF-8" style="display:block")
+				div(style="display:block")
+					label.input-label-1(for='tblQry') Query nhCstLstDtl MySQL table
+					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT * FROM ${nhCstLstDtlYYYMMDD} LIMIT 10
+					button(type='submit', form='cstLstDtl', style="display: block; float: left") POST
+
+		if gcdrResults !== undefined
+			label(style="display:none").input-label-1(for='mapData') Map data
+				input(style="display:none")#mapData.input-unit-1(type='text', value=gcdrResults)
+			label(style="display:none").input-label-1(for='latLongData') Lat/Long data
+				input(style="display:none")#latLongData.input-unit-1(type='text', value=latLongArr)
+			label(style="display:none").input-label-1(for='apiKey') API Key
+				input(style="display:none")#apiKey.input-unit-1(type='text', value=apiKey)
+			include includes/custPlusAddrMap.html
+
+
+		script(src='/jsModules_t0d/mapData1.js')
+
