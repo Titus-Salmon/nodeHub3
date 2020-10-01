@@ -128,44 +128,44 @@ module.exports = {
 
     }
 
-    async function showCstLstDtlResults(result) {
-      for (let i = 0; i < result.length; i++) {
+    async function showCstLstDtlResults(rows) {
+      for (let i = 0; i < rows.length; i++) {
         let cstLstDtlResObj = {}
         // let frwdGeoAddrObj = {}
         cstLstDtlResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
         //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
         //start our ri_t0d with 0, as that seems to confuse MySQL...
 
-        cstLstDtlResObj['Customer_ID'] = result[i]['Customer_ID']
-        cstLstDtlResObj['First_Name'] = result[i]['First_Name']
-        cstLstDtlResObj['Last_Name'] = result[i]['Last_Name']
-        cstLstDtlResObj['Company'] = result[i]['Company']
-        cstLstDtlResObj['Birth_date'] = result[i]['Birth_date']
-        cstLstDtlResObj['Terms'] = result[i]['Terms']
-        cstLstDtlResObj['Bill_to_Address_1'] = result[i]['Bill_to_Address_1']
-        cstLstDtlResObj['Bill_to_Address_2'] = result[i]['Bill_to_Address_2']
-        cstLstDtlResObj['Bill_to_City'] = result[i]['Bill_to_City']
-        cstLstDtlResObj['Bill_to_State'] = result[i]['Bill_to_State']
-        cstLstDtlResObj['Bill_to_Zip'] = result[i]['Bill_to_Zip']
-        cstLstDtlResObj['Bill_to_Email'] = result[i]['Bill_to_Email']
-        cstLstDtlResObj['Bill_to_Phone'] = result[i]['Bill_to_Phone']
-        cstLstDtlResObj['Bill_to_Fax'] = result[i]['Bill_to_Fax']
-        cstLstDtlResObj['Ship_to_Address_1'] = result[i]['Ship_to_Address_1']
-        cstLstDtlResObj['Ship_to_Address_2'] = result[i]['Ship_to_Address_2']
-        cstLstDtlResObj['Ship_to_City'] = result[i]['Ship_to_City']
-        cstLstDtlResObj['Ship_to_State'] = result[i]['Ship_to_State']
-        cstLstDtlResObj['Ship_to_Zip'] = result[i]['Ship_to_Zip']
-        cstLstDtlResObj['Ship_to_Email'] = result[i]['Ship_to_Email']
-        cstLstDtlResObj['Ship_to_Phone'] = result[i]['Ship_to_Phone']
-        cstLstDtlResObj['Ship_to_Fax'] = result[i]['Ship_to_Fax']
-        cstLstDtlResObj['Store_of_Origin'] = result[i]['Store_of_Origin']
-        cstLstDtlResObj['Gender'] = result[i]['Gender']
-        cstLstDtlResObj['PowerField_3'] = result[i]['PowerField_3']
-        cstLstDtlResObj['RB_Gives_Back'] = result[i]['RB_Gives_Back']
-        cstLstDtlResObj['customer_note'] = result[i]['customer_note']
-        cstLstDtlResObj['loyalty_flag'] = result[i]['loyalty_flag']
-        cstLstDtlResObj['record_flag'] = result[i]['record_flag']
-        cstLstDtlResObj['customer_flag'] = result[i]['customer_flag']
+        cstLstDtlResObj['Customer_ID'] = rows[i]['Customer_ID']
+        cstLstDtlResObj['First_Name'] = rows[i]['First_Name']
+        cstLstDtlResObj['Last_Name'] = rows[i]['Last_Name']
+        cstLstDtlResObj['Company'] = rows[i]['Company']
+        cstLstDtlResObj['Birth_date'] = rows[i]['Birth_date']
+        cstLstDtlResObj['Terms'] = rows[i]['Terms']
+        cstLstDtlResObj['Bill_to_Address_1'] = rows[i]['Bill_to_Address_1']
+        cstLstDtlResObj['Bill_to_Address_2'] = rows[i]['Bill_to_Address_2']
+        cstLstDtlResObj['Bill_to_City'] = rows[i]['Bill_to_City']
+        cstLstDtlResObj['Bill_to_State'] = rows[i]['Bill_to_State']
+        cstLstDtlResObj['Bill_to_Zip'] = rows[i]['Bill_to_Zip']
+        cstLstDtlResObj['Bill_to_Email'] = rows[i]['Bill_to_Email']
+        cstLstDtlResObj['Bill_to_Phone'] = rows[i]['Bill_to_Phone']
+        cstLstDtlResObj['Bill_to_Fax'] = rows[i]['Bill_to_Fax']
+        cstLstDtlResObj['Ship_to_Address_1'] = rows[i]['Ship_to_Address_1']
+        cstLstDtlResObj['Ship_to_Address_2'] = rows[i]['Ship_to_Address_2']
+        cstLstDtlResObj['Ship_to_City'] = rows[i]['Ship_to_City']
+        cstLstDtlResObj['Ship_to_State'] = rows[i]['Ship_to_State']
+        cstLstDtlResObj['Ship_to_Zip'] = rows[i]['Ship_to_Zip']
+        cstLstDtlResObj['Ship_to_Email'] = rows[i]['Ship_to_Email']
+        cstLstDtlResObj['Ship_to_Phone'] = rows[i]['Ship_to_Phone']
+        cstLstDtlResObj['Ship_to_Fax'] = rows[i]['Ship_to_Fax']
+        cstLstDtlResObj['Store_of_Origin'] = rows[i]['Store_of_Origin']
+        cstLstDtlResObj['Gender'] = rows[i]['Gender']
+        cstLstDtlResObj['PowerField_3'] = rows[i]['PowerField_3']
+        cstLstDtlResObj['RB_Gives_Back'] = rows[i]['RB_Gives_Back']
+        cstLstDtlResObj['customer_note'] = rows[i]['customer_note']
+        cstLstDtlResObj['loyalty_flag'] = rows[i]['loyalty_flag']
+        cstLstDtlResObj['record_flag'] = rows[i]['record_flag']
+        cstLstDtlResObj['customer_flag'] = rows[i]['customer_flag']
 
 
         cstLstDtlResArr.push(cstLstDtlResObj)
@@ -215,11 +215,20 @@ module.exports = {
     // //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    connection.query(cstLstDtlQuery, (error, response) => {
-      console.log(error || response);
-    }).on('end', function () {
-      showCstLstDtlResults(result)
+    // connection.query(cstLstDtlQuery, (error, response) => {
+    //   console.log(error || response);
+    // }).on('end', function () {
+    //   showCstLstDtlResults(result)
+    //     .then(forwardGeoCode())
+    // })
+
+    //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    connection.query(cstLstDtlQuery, function (err, rows, fields) {
+      if (err) throw err
+      showCstLstDtlResults(rows)
         .then(forwardGeoCode())
     })
+    //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
   })
 }
