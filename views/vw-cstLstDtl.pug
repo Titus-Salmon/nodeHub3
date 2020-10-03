@@ -13,7 +13,7 @@ html
 			form#cstLstDtl(action='/cstLstDtl/cstLstDtl' method='POST' accept-charset="UTF-8" style="display:block")
 				div(style="display:block")
 					label.input-label-1(for='tblQry') Query nhCstLstDtl MySQL table
-					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT * FROM nhCstLstDtlYYYMMDD LIMIT 10
+					textarea#tblQry.input-unit-1(name="tblQryPost", cols="30", rows="1", wrap="soft") SELECT * FROM nhCstLstDtl20200929 LIMIT 1
 					button(type='submit', form='cstLstDtl', style="display: block; float: left") POST
 
 		if gcdrResults !== undefined
