@@ -27,7 +27,7 @@ const geocoder = NodeGeocoder({
     country: 'USA'
 })
 
-console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
+// console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
 const jsdom = require('jsdom')
 const {

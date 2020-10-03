@@ -21,9 +21,9 @@ const {
 const {
   v_InventoryMasterQuery
 } = require('../sqlArch/v_InventoryMasterQuery')
-const {
-  custPlusAddr
-} = require('../sqlArch/custPlusAddr/custPlusAddr')
+// const {
+//   custPlusAddr
+// } = require('../sqlArch/custPlusAddr/custPlusAddr')
 
 const {
   rbInvUpdaterTsql
@@ -60,7 +60,7 @@ router.post('/deleteTsqlTable', deleteTsqlTableSimple)
 router.post('/queryCatapultDB', queryCatapultDB)
 router.post('/populateTsqlTable', populateTsqlTable)
 router.post('/queryInvMasterTable', v_InventoryMasterQuery)
-router.post('/custPlusAddr', custPlusAddr)
+// router.post('/custPlusAddr', custPlusAddr)
 
 router.post('/rbInvUpdaterTsql', rbInvUpdaterTsql)
 
