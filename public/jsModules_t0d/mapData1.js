@@ -1,5 +1,5 @@
 let mapData = document.getElementById('mapData')
-// console.log(`mapData.value==> ${mapData.value}`)
+console.log(`mapData.value==> ${mapData.value}`)
 
 let latLongData = document.getElementById('latLongData')
 console.log(`latLongData==> ${latLongData}`)
