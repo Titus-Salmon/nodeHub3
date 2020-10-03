@@ -127,7 +127,7 @@ function startClustering(map, data) {
   var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
     clusteringOptions: {
       // Maximum radius of the neighbourhood
-      eps: 64,
+      eps: 256,
       // minimum weight of points required to form a cluster
       minWeight: 1
     }
