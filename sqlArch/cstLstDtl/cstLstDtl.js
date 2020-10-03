@@ -82,7 +82,7 @@ module.exports = {
       const jsdomT0d = new JSDOM(`
 <html>
 <head>
-   <title>Simple HERE Map</title>
+  //  <title>Simple HERE Map</title>
    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
    <style>
       html, body { border: 0; margin: 0; padding: 0; }
@@ -110,20 +110,28 @@ module.exports = {
 </html>
 `)
 
-      var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-      fs.writeFile(`${process.cwd()}/views/includes/cstLstDtlMap.html`, svgsrc, function (err) {
-        if (err) {
-          console.log('error saving document', err)
-        } else {
-          console.log('The file was saved!')
-          res.render('vw-cstLstDtlMap', {
-            title: `Map`,
-            cstLstDtlResArr: cstLstDtlResArr,
-            gcdrResults: gcdrResultsArr,
-            latLongArr: latLongArr,
-            apiKey: process.env.HERE_API_1
-          })
-        }
+      // var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
+      // fs.writeFile(`${process.cwd()}/views/includes/cstLstDtlMap.html`, svgsrc, function (err) {
+      //   if (err) {
+      //     console.log('error saving document', err)
+      //   } else {
+      //     console.log('The file was saved!')
+      //     res.render('vw-cstLstDtlMap', {
+      //       title: `Map`,
+      //       cstLstDtlResArr: cstLstDtlResArr,
+      //       gcdrResults: gcdrResultsArr,
+      //       latLongArr: latLongArr,
+      //       apiKey: process.env.HERE_API_1
+      //     })
+      //   }
+      // })
+
+      res.render('vw-cstLstDtlMap', {
+        title: `Map`,
+        cstLstDtlResArr: cstLstDtlResArr,
+        gcdrResults: gcdrResultsArr,
+        latLongArr: latLongArr,
+        apiKey: process.env.HERE_API_1
       })
 
     }
