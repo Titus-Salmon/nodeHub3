@@ -71,9 +71,17 @@ module.exports = {
         console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
         let latLongObj = {}
         if (gcdrResults[i]['value'][0] !== undefined) {
-          latLongObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
-          latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
-          latLongArr.push(latLongObj)
+          if (gcdrResults[i]['value'][0]['latitude'] !== undefined && gcdrResults[i]['value'][0]['longitude'] !== undefined) {
+            if (gcdrResults[i]['value'][0]['latitude'] !== '' && gcdrResults[i]['value'][0]['longitude'] !== '') {
+              latLongObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
+              latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
+              latLongArr.push(latLongObj)
+            } else {
+              console.log(`gcdrResults[${i}]['value'][0]['latitude']==> ${gcdrResults[i]['value'][0]['latitude']}`)
+              console.log(`gcdrResults[${i}]['value'][0]['longitude']==> ${gcdrResults[i]['value'][0]['longitude']}`)
+            }
+          }
+
         }
       }
       console.log(`latLongArr.length==> ${latLongArr.length}`)
