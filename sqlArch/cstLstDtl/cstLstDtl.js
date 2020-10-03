@@ -103,7 +103,7 @@ module.exports = {
         // });
         
         // Get an instance of the geocoding service:
-        var service = platform.getSearchService();
+        // var service = platform.getSearchService();
 
    </script>
 </body>
