@@ -129,7 +129,7 @@ function startClustering(map, data) {
       // Maximum radius of the neighbourhood
       eps: 32,
       // minimum weight of points required to form a cluster
-      minWeight: 10
+      minWeight: 1
     }
   });
 
