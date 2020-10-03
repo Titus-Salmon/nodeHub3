@@ -21,13 +21,14 @@ html
 					button(type='submit', form='cstLstDtl', style="display: block; float: left") POST
 
 		if gcdrResults !== undefined
+			div#map
 			label(style="display:none", for='mapData') Map data
 				input(style="display:none", type='text', value=gcdrResults)#mapData
 			label(style="display:none", for='latLongData') Lat/Long data
 				input(style="display:none", type='text', value=latLongArr)#latLongData
 			label(style="display:none", for='apiKey') API Key
 				input(style="display:none", type='text', value=apiKey)#apiKey
-			include includes/custPlusAddrMap.html
+			//- include includes/custPlusAddrMap.html
 
 
 		script(src='https://js.api.here.com/v3/3.1/mapsjs-core.js')

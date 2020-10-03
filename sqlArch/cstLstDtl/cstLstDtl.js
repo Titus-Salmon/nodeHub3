@@ -79,36 +79,36 @@ module.exports = {
       console.log(`latLongArr.length==> ${latLongArr.length}`)
       console.log(`JSON.stringify(latLongArr[0])==> ${JSON.stringify(latLongArr[0])}`)
 
-      const jsdomT0d = new JSDOM(`
-<html>
-<head>
-  //  <title>Simple HERE Map</title>
-   <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-   <style>
-      html, body { border: 0; margin: 0; padding: 0; }
-      #map { height: 100vh; width: 100vw; }
-   </style>
-</head>
-<body>
-   <div id="map"></div>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-   <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
-   <script>
-        // Instantiate a map and platform object:
-        // var platform = new H.service.Platform({
-        //     'apikey': '${process.env.HERE_API_1}'
-        // });
-        
-        // Get an instance of the geocoding service:
-        // var service = platform.getSearchService();
+      //       const jsdomT0d = new JSDOM(`
+      // <html>
+      // <head>
+      //   //  <title>Simple HERE Map</title>
+      //    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+      //    <style>
+      //       html, body { border: 0; margin: 0; padding: 0; }
+      //       #map { height: 100vh; width: 100vw; }
+      //    </style>
+      // </head>
+      // <body>
+      //    <div id="map"></div>
+      //    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+      //    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+      //    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+      //    <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+      //    <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+      //    <script>
+      //         // Instantiate a map and platform object:
+      //         // var platform = new H.service.Platform({
+      //         //     'apikey': '${process.env.HERE_API_1}'
+      //         // });
 
-   </script>
-</body>
-</html>
-`)
+      //         // Get an instance of the geocoding service:
+      //         // var service = platform.getSearchService();
+
+      //    </script>
+      // </body>
+      // </html>
+      // `)
 
       // var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       // fs.writeFile(`${process.cwd()}/views/includes/cstLstDtlMap.html`, svgsrc, function (err) {
