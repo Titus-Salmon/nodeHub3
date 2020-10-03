@@ -1,11 +1,11 @@
 let mapData = document.getElementById('mapData')
-console.log(`mapData.value==> ${mapData.value}`)
+// console.log(`mapData.value==> ${mapData.value}`)
 
 let latLongData = document.getElementById('latLongData')
-console.log(`latLongData==> ${latLongData}`)
-console.log(`typeof latLongData==> ${typeof latLongData}`)
-console.log(`latLongData.value==> ${latLongData.value}`)
-console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
+// console.log(`latLongData==> ${latLongData}`)
+// console.log(`typeof latLongData==> ${typeof latLongData}`)
+// console.log(`latLongData.value==> ${latLongData.value}`)
+// console.log(`typeof latLongData.value==> ${typeof latLongData.value}`)
 
 let regex1 = /(\[|\])/g
 let regex2 = /(\{|\})/g
@@ -20,11 +20,11 @@ for (let i = 0; i < latLongDataSplit.length; i++) {
   latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '')
   latLongDataArr.push(latLongDataSplit[i])
 }
-console.log(`latLongDataSplit==> ${latLongDataSplit}`)
+// console.log(`latLongDataSplit==> ${latLongDataSplit}`)
 for (let i = 0; i < latLongDataArr.length; i++) {
   latLongDataArr[i] = `{${latLongDataArr[i]}}` //add brackets back on for JSON.parse on frontend
 }
-console.log(`latLongDataArr==> ${latLongDataArr}`)
+// console.log(`latLongDataArr==> ${latLongDataArr}`)
 console.log(`latLongDataArr.length==> ${latLongDataArr.length}`)
 console.log(`latLongDataArr[0]==> ${latLongDataArr[0]}`)
 console.log(`JSON.parse(latLongDataArr[0])==> ${JSON.parse(latLongDataArr[0])}`)
