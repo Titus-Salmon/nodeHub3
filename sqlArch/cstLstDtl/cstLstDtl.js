@@ -61,14 +61,14 @@ module.exports = {
       console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
       gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
       console.log(`gcdrResults.length==> ${gcdrResults.length}`)
-      console.log(`gcdrResults==> ${gcdrResults}`)
-      console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
+      // console.log(`gcdrResults==> ${gcdrResults}`)
+      // console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
       console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
       console.log(`JSON.stringify(gcdrResults[0]['value'])==> ${JSON.stringify(gcdrResults[0]['value'])}`)
       console.log(`JSON.stringify(gcdrResults[0]['value'][0]['latitude])==> ${JSON.stringify(gcdrResults[0]['value'][0]['latitude'])}`)
       console.log(`JSON.stringify(gcdrResults[0]['value'][0]['longitude'])==> ${JSON.stringify(gcdrResults[0]['value'][0]['longitude'])}`)
       for (let i = 0; i < gcdrResults.length; i++) {
-        console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
+        // console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
         let latLongObj = {}
         if (gcdrResults[i]['value'][0] !== undefined) {
           if (gcdrResults[i]['value'][0]['latitude'] !== undefined && gcdrResults[i]['value'][0]['longitude'] !== undefined) {
