@@ -30,7 +30,7 @@ const geocoder = NodeGeocoder({
   country: 'USA'
 })
 
-console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
+// console.log(`JSON.stringify(geocoder)==> ${JSON.stringify(geocoder)}`)
 
 const jsdom = require('jsdom')
 const {
@@ -50,26 +50,28 @@ module.exports = {
     let frwdGeoAddrArr = []
     let gcdrResultsArr = []
     let latLongArr = []
+    let latLongBlanksArr = []
 
     async function forwardGeoCode() {
       const gcdrResults = await geocoder.batchGeocode(
         frwdGeoAddrArr
       )
-      console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
-      console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-      console.log(`frwdGeoAddrArr==> ${frwdGeoAddrArr}`)
+      // console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
+      // console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+      // console.log(`frwdGeoAddrArr==> ${frwdGeoAddrArr}`)
       console.log(`frwdGeoAddrArr[0]==> ${frwdGeoAddrArr[0]}`)
       gcdrResultsArr.push(gcdrResults) //push gcdrResults into gcdrResultsArr for "global" use
       console.log(`gcdrResults.length==> ${gcdrResults.length}`)
       // console.log(`gcdrResults==> ${gcdrResults}`)
       // console.log(`JSON.stringify(gcdrResults)==> ${JSON.stringify(gcdrResults)}`)
-      console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-      console.log(`JSON.stringify(gcdrResults[0]['value'])==> ${JSON.stringify(gcdrResults[0]['value'])}`)
+      // console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
+      // console.log(`JSON.stringify(gcdrResults[0]['value'])==> ${JSON.stringify(gcdrResults[0]['value'])}`)
       console.log(`JSON.stringify(gcdrResults[0]['value'][0]['latitude])==> ${JSON.stringify(gcdrResults[0]['value'][0]['latitude'])}`)
       console.log(`JSON.stringify(gcdrResults[0]['value'][0]['longitude'])==> ${JSON.stringify(gcdrResults[0]['value'][0]['longitude'])}`)
       for (let i = 0; i < gcdrResults.length; i++) {
         // console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
         let latLongObj = {}
+        let latLongBlanksObj = {}
         if (gcdrResults[i]['value'][0] !== undefined) {
           if (gcdrResults[i]['value'][0]['latitude'] !== undefined && gcdrResults[i]['value'][0]['longitude'] !== undefined) {
             if (gcdrResults[i]['value'][0]['latitude'] !== '' && gcdrResults[i]['value'][0]['longitude'] !== '') {
@@ -77,8 +79,11 @@ module.exports = {
               latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
               latLongArr.push(latLongObj)
             } else {
-              console.log(`gcdrResults[${i}]['value'][0]['latitude']==> ${gcdrResults[i]['value'][0]['latitude']}`)
-              console.log(`gcdrResults[${i}]['value'][0]['longitude']==> ${gcdrResults[i]['value'][0]['longitude']}`)
+              // console.log(`gcdrResults[${i}]['value'][0]['latitude']==> ${gcdrResults[i]['value'][0]['latitude']}`)
+              // console.log(`gcdrResults[${i}]['value'][0]['longitude']==> ${gcdrResults[i]['value'][0]['longitude']}`)
+              latLongBlanksObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
+              latLongBlanksObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
+              latLongBlanksArr.push(latLongBlanksObj)
             }
           }
 
@@ -86,6 +91,9 @@ module.exports = {
       }
       console.log(`latLongArr.length==> ${latLongArr.length}`)
       console.log(`JSON.stringify(latLongArr[0])==> ${JSON.stringify(latLongArr[0])}`)
+
+      console.log(`latLongBlanksArr.length==> ${latLongBlanksArr.length}`)
+      console.log(`JSON.stringify(latLongBlanksArr[0])==> ${JSON.stringify(latLongBlanksArr[0])}`)
 
       //       const jsdomT0d = new JSDOM(`
       // <html>
@@ -200,9 +208,9 @@ module.exports = {
       }
       //V// CACHE QUERY gcdrResults IN BACKEND ///////////IS THIS BEING USED, AND SHOULD IT???///////////////////////////////////////////////////////////////////
       cstLstDtlResArrCache.set('cstLstDtlResArrCache_key', cstLstDtlResArr)
-      console.log(`cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'].length==> ${cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'].length}`)
-      console.log(`cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0]==> ${cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0]}`)
-      console.log(`JSON.stringify(cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0])==> ${JSON.stringify(cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0])}`)
+      // console.log(`cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'].length==> ${cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'].length}`)
+      // console.log(`cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0]==> ${cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0]}`)
+      // console.log(`JSON.stringify(cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0])==> ${JSON.stringify(cstLstDtlResArrCache['data']['cstLstDtlResArrCache_key']['v'][0])}`)
       //^// CACHE QUERY gcdrResults IN BACKEND //////////////////////////////////////////////////////////////////////////////
 
       for (let i = 0; i < cstLstDtlResArr.length; i++) {
