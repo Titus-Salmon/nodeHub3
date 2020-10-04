@@ -305,7 +305,7 @@ module.exports = {
 
     //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(`
-    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2;
+    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2 ORDER BY date;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
