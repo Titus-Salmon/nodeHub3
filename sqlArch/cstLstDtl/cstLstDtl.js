@@ -155,9 +155,9 @@ module.exports = {
            var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
              clusteringOptions: {
                // Maximum radius of the neighbourhood
-               eps: 256,
+               eps: 64,
                // minimum weight of points required to form a cluster
-               minWeight: 1
+               minWeight: 10
              }
            });
          
@@ -215,7 +215,7 @@ module.exports = {
         // referrer: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
         contentType: "text/html",
         includeNodeLocations: true,
-        storageQuota: 10000000
+        storageQuota: 10000000000
       })
 
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
