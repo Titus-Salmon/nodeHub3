@@ -52,7 +52,9 @@ module.exports = {
     let latLongArr = []
     let latLongBlanksArr = []
 
-    async function forwardGeoCode() {
+    //async function forwardGeoCode() {
+
+    async function forwardGeoCodeSub1() {
       const gcdrResults = await geocoder.batchGeocode(
         frwdGeoAddrArr
       )
@@ -72,20 +74,19 @@ module.exports = {
         // console.log(`JSON.stringify(gcdrResults[${i}])==> ${JSON.stringify(gcdrResults[i])}`)
         let latLongObj = {}
         let latLongBlanksObj = {}
-        if (gcdrResults[i]['value'] !== null && gcdrResults[i]['value'] !== undefined) {
-          if (gcdrResults[i]['value'][0] !== undefined) {
-            if (gcdrResults[i]['value'][0]['latitude'] !== undefined && gcdrResults[i]['value'][0]['longitude'] !== undefined) {
-              if (gcdrResults[i]['value'][0]['latitude'] !== '' && gcdrResults[i]['value'][0]['longitude'] !== '') {
-                latLongObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
-                latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
-                latLongArr.push(latLongObj)
-              } else {
-                // console.log(`gcdrResults[${i}]['value'][0]['latitude']==> ${gcdrResults[i]['value'][0]['latitude']}`)
-                // console.log(`gcdrResults[${i}]['value'][0]['longitude']==> ${gcdrResults[i]['value'][0]['longitude']}`)
-                latLongBlanksObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
-                latLongBlanksObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
-                latLongBlanksArr.push(latLongBlanksObj)
-              }
+        if (gcdrResults[i]['value'] !== null &&
+          gcdrResults[i]['value'] !== undefined &&
+          gcdrResults[i]['value'] !== '') {
+          if (gcdrResults[i]['value'][0] !== null &&
+            gcdrResults[i]['value'][0] !== undefined &&
+            gcdrResults[i]['value'][0] !== '') {
+            if (gcdrResults[i]['value'][0]['latitude'] !== null && gcdrResults[i]['value'][0]['longitude'] !== null &&
+              gcdrResults[i]['value'][0]['latitude'] !== undefined && gcdrResults[i]['value'][0]['longitude'] !== undefined &&
+              gcdrResults[i]['value'][0]['latitude'] !== '' && gcdrResults[i]['value'][0]['longitude'] !== '') {
+
+              latLongObj['lat'] = `${gcdrResults[i]['value'][0]['latitude']}`
+              latLongObj['long'] = `${gcdrResults[i]['value'][0]['longitude']}`
+              latLongArr.push(latLongObj)
             }
           }
         }
@@ -96,123 +97,126 @@ module.exports = {
 
       console.log(`latLongBlanksArr.length==> ${latLongBlanksArr.length}`)
       console.log(`JSON.stringify(latLongBlanksArr[0])==> ${JSON.stringify(latLongBlanksArr[0])}`)
+    }
 
+
+    async function forwardGeoCodeSub2() {
       const jsdomT0d = new JSDOM(`
-      <html>
-      <head>
-         <title>JSDOMified Map</title>
-         <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-         <style>
-            html, body { border: 0; margin: 0; padding: 0; }
-            #map { height: 100vh; width: 100vw; }
-         </style>
-      </head>
-      <body>
-         <div id="map"></div>
-         <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
-         <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
-         <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-         <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-         <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
-         <script>
-         /**
-          * Adds markers to the map highlighting the locations of the captials of
-          * France, Italy, Germany, Spain and the United Kingdom.
-          *
-          * @param  {H.Map} map      A HERE Map instance within the application
-          */
-         function addMarkersToMap(map) {
-         
-         
-           for (let i = 0; i < latLongArr.length; i++) {
-             let markerT0d = new H.map.Marker({
-               lat: latLongArr[i]['lat'],
-               lng: latLongArr[i]['long']
-             })
-             map.addObject(markerT0d)
-           }
-         
-         }
-         
-         //*************************************************************************************************************** */
-         
-         //v//HERE clustered marker placement//////////////////////////////////////////////////////////// 
-         /**
-          * Display clustered markers on a map
-          *
-          * Note that the maps clustering module https://js.api.here.com/v3/3.1/mapsjs-clustering.js
-          * must be loaded to use the Clustering
-         
-          * @param {H.Map} map A HERE Map instance within the application
-          * @param {Object[]} data Raw data that contains {locations to cluster} coordinates
-         */
-         function startClustering(map, data) {
-           // First we need to create an array of DataPoint objects,
-           // for the ClusterProvider
-           var dataPoints = data.map(function (item) {
-             return new H.clustering.DataPoint(item.lat, item.long);
-           });
-         
-           // Create a clustering provider with custom options for clusterizing the input
-           var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
-             clusteringOptions: {
-               // Maximum radius of the neighbourhood
-               eps: 64,
-               // minimum weight of points required to form a cluster
-               minWeight: 10
+        <html>
+        <head>
+           <title>JSDOMified Map</title>
+           <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+           <style>
+              html, body { border: 0; margin: 0; padding: 0; }
+              #map { height: 100vh; width: 100vw; }
+           </style>
+        </head>
+        <body>
+           <div id="map"></div>
+           <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+           <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+           <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+           <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+           <script src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
+           <script>
+           /**
+            * Adds markers to the map highlighting the locations of the captials of
+            * France, Italy, Germany, Spain and the United Kingdom.
+            *
+            * @param  {H.Map} map      A HERE Map instance within the application
+            */
+           function addMarkersToMap(map) {
+           
+           
+             for (let i = 0; i < latLongArr.length; i++) {
+               let markerT0d = new H.map.Marker({
+                 lat: latLongArr[i]['lat'],
+                 lng: latLongArr[i]['long']
+               })
+               map.addObject(markerT0d)
              }
+           
+           }
+           
+           //*************************************************************************************************************** */
+           
+           //v//HERE clustered marker placement//////////////////////////////////////////////////////////// 
+           /**
+            * Display clustered markers on a map
+            *
+            * Note that the maps clustering module https://js.api.here.com/v3/3.1/mapsjs-clustering.js
+            * must be loaded to use the Clustering
+           
+            * @param {H.Map} map A HERE Map instance within the application
+            * @param {Object[]} data Raw data that contains {locations to cluster} coordinates
+           */
+           function startClustering(map, data) {
+             // First we need to create an array of DataPoint objects,
+             // for the ClusterProvider
+             var dataPoints = data.map(function (item) {
+               return new H.clustering.DataPoint(item.lat, item.long);
+             });
+           
+             // Create a clustering provider with custom options for clusterizing the input
+             var clusteredDataProvider = new H.clustering.Provider(dataPoints, {
+               clusteringOptions: {
+                 // Maximum radius of the neighbourhood
+                 eps: 64,
+                 // minimum weight of points required to form a cluster
+                 minWeight: 10
+               }
+             });
+           
+             // Create a layer tha will consume objects from our clustering provider
+             var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
+           
+             // To make objects from clustering provder visible,
+             // we need to add our layer to the map
+             map.addLayer(clusteringLayer);
+           }
+           
+           /**
+            * Boilerplate map initialization code starts below:
+            */
+           
+           // Step 1: initialize communication with the platform
+           // In your own code, replace variable window.apikey with your own apikey
+           var platform = new H.service.Platform({
+             // apikey: apiKey.value
+             apikey: '${process.env.HERE_API_1}'
            });
-         
-           // Create a layer tha will consume objects from our clustering provider
-           var clusteringLayer = new H.map.layer.ObjectLayer(clusteredDataProvider);
-         
-           // To make objects from clustering provder visible,
-           // we need to add our layer to the map
-           map.addLayer(clusteringLayer);
-         }
-         
-         /**
-          * Boilerplate map initialization code starts below:
-          */
-         
-         // Step 1: initialize communication with the platform
-         // In your own code, replace variable window.apikey with your own apikey
-         var platform = new H.service.Platform({
-           // apikey: apiKey.value
-           apikey: '${process.env.HERE_API_1}'
-         });
-         
-         var defaultLayers = platform.createDefaultLayers();
-         
-         // Step 2: initialize a map
-         var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
-           center: new H.geo.Point(38.252247, -85.659303),
-           zoom: 8,
-           pixelRatio: window.devicePixelRatio || 1
-         });
-         // add a resize listener to make sure that the map occupies the whole container
-         window.addEventListener('resize', () => map.getViewPort().resize());
-         
-         // Step 3: make the map interactive
-         // MapEvents enables the event system
-         // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-         var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-         
-         
-         // Step 4: create the default UI component, for displaying bubbles
-         var ui = H.ui.UI.createDefault(map, defaultLayers);
-         
-         // Step 5: cluster data about latLongArr's coordinates
-         startClustering(map, ${JSON.stringify(latLongArr)});
-         //^//HERE clustered marker placement//////////////////////////////////////////////////////////// 
-         </script>
-      </body>
-      </html>
-      `, {
+           
+           var defaultLayers = platform.createDefaultLayers();
+           
+           // Step 2: initialize a map
+           var map = new H.Map(document.getElementById('map'), defaultLayers.vector.normal.map, {
+             center: new H.geo.Point(38.252247, -85.659303),
+             zoom: 8,
+             pixelRatio: window.devicePixelRatio || 1
+           });
+           // add a resize listener to make sure that the map occupies the whole container
+           window.addEventListener('resize', () => map.getViewPort().resize());
+           
+           // Step 3: make the map interactive
+           // MapEvents enables the event system
+           // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+           var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+           
+           
+           // Step 4: create the default UI component, for displaying bubbles
+           var ui = H.ui.UI.createDefault(map, defaultLayers);
+           
+           // Step 5: cluster data about latLongArr's coordinates
+           startClustering(map, ${JSON.stringify(latLongArr)});
+           //^//HERE clustered marker placement//////////////////////////////////////////////////////////// 
+           </script>
+        </body>
+        </html>
+        `, {
         runScripts: "dangerously",
         resources: "usable",
         // url: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
-        url: "http://localhost:3000/cstLstDtl/cstLstDtl",
+        // url: "http://localhost:3000/cstLstDtl/cstLstDtl",
         // referrer: "http://localhost:3000/cstLstDtl/cstLstDtl",
         // referrer: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
         contentType: "text/html",
@@ -236,15 +240,9 @@ module.exports = {
         }
       })
 
-      // res.render('vw-cstLstDtlMap', {
-      //   title: `Map`,
-      //   cstLstDtlResArr: cstLstDtlResArr,
-      //   gcdrResults: gcdrResultsArr,
-      //   latLongArr: latLongArr,
-      //   apiKey: process.env.HERE_API_1
-      // })
-
     }
+
+    //}
 
     async function showCstLstDtlResults(rows) {
       for (let i = 0; i < rows.length; i++) {
@@ -326,6 +324,8 @@ module.exports = {
     connection.query(cstLstDtlQuery, function (err, rows, fields) {
       if (err) throw err
       showCstLstDtlResults(rows)
+        .then(forwardGeoCodeSub1())
+        .then(forwardGeoCodeSub2())
       // .then(forwardGeoCode())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
