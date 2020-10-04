@@ -250,55 +250,56 @@ module.exports = {
       for (let i = 0; i < rows.length; i++) {
         let cstLstDtlResObj = {}
         // let frwdGeoAddrObj = {}
-        cstLstDtlResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
-        //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
-        //start our ri_t0d with 0, as that seems to confuse MySQL...
+        if (
+          rows[i]['Customer_ID'] !== undefined && rows[i]['Customer_ID'] !== null && rows[i]['Customer_ID'] !== '' &&
+          rows[i]['First_Name'] !== undefined && rows[i]['First_Name'] !== null && rows[i]['First_Name'] !== '' &&
+          rows[i]['Last_Name'] !== undefined && rows[i]['Last_Name'] !== null && rows[i]['Last_Name'] !== '' &&
+          rows[i]['Bill_to_Address_1'] !== undefined && rows[i]['Bill_to_Address_1'] !== null && rows[i]['Bill_to_Address_1'] !== '' &&
+          rows[i]['Bill_to_City'] !== undefined && rows[i]['Bill_to_City'] !== null && rows[i]['Bill_to_City'] !== '' &&
+          rows[i]['Bill_to_State'] !== undefined && rows[i]['Bill_to_State'] !== null && rows[i]['Bill_to_State'] !== '' &&
+          rows[i]['Bill_to_Zip'] !== undefined && rows[i]['Bill_to_Zip'] !== null && rows[i]['Bill_to_Zip'] !== ''
+        ) {
+          cstLstDtlResObj['ri_t0d'] = i + 1 //create sequential record id (ri_t0d) column for saving as csv; you will NOT
+          //want to include INV_PK or INV_CPK in your save-to-csv gcdrResults - ONLY ri_t0d... adding 1 to 'i', so we don't
+          //start our ri_t0d with 0, as that seems to confuse MySQL...
 
-        cstLstDtlResObj['Customer_ID'] = rows[i]['Customer_ID']
-        cstLstDtlResObj['First_Name'] = rows[i]['First_Name']
-        cstLstDtlResObj['Last_Name'] = rows[i]['Last_Name']
-        cstLstDtlResObj['Company'] = rows[i]['Company']
-        cstLstDtlResObj['Birth_date'] = rows[i]['Birth_date']
-        cstLstDtlResObj['Terms'] = rows[i]['Terms']
-        cstLstDtlResObj['Bill_to_Address_1'] = rows[i]['Bill_to_Address_1']
-        cstLstDtlResObj['Bill_to_Address_2'] = rows[i]['Bill_to_Address_2']
-        cstLstDtlResObj['Bill_to_City'] = rows[i]['Bill_to_City']
-        cstLstDtlResObj['Bill_to_State'] = rows[i]['Bill_to_State']
-        cstLstDtlResObj['Bill_to_Zip'] = rows[i]['Bill_to_Zip']
-        cstLstDtlResObj['Bill_to_Email'] = rows[i]['Bill_to_Email']
-        cstLstDtlResObj['Bill_to_Phone'] = rows[i]['Bill_to_Phone']
-        cstLstDtlResObj['Bill_to_Fax'] = rows[i]['Bill_to_Fax']
-        cstLstDtlResObj['Ship_to_Address_1'] = rows[i]['Ship_to_Address_1']
-        cstLstDtlResObj['Ship_to_Address_2'] = rows[i]['Ship_to_Address_2']
-        cstLstDtlResObj['Ship_to_City'] = rows[i]['Ship_to_City']
-        cstLstDtlResObj['Ship_to_State'] = rows[i]['Ship_to_State']
-        cstLstDtlResObj['Ship_to_Zip'] = rows[i]['Ship_to_Zip']
-        cstLstDtlResObj['Ship_to_Email'] = rows[i]['Ship_to_Email']
-        cstLstDtlResObj['Ship_to_Phone'] = rows[i]['Ship_to_Phone']
-        cstLstDtlResObj['Ship_to_Fax'] = rows[i]['Ship_to_Fax']
-        cstLstDtlResObj['Store_of_Origin'] = rows[i]['Store_of_Origin']
-        cstLstDtlResObj['Gender'] = rows[i]['Gender']
-        cstLstDtlResObj['PowerField_3'] = rows[i]['PowerField_3']
-        cstLstDtlResObj['RB_Gives_Back'] = rows[i]['RB_Gives_Back']
-        cstLstDtlResObj['customer_note'] = rows[i]['customer_note']
-        cstLstDtlResObj['loyalty_flag'] = rows[i]['loyalty_flag']
-        cstLstDtlResObj['record_flag'] = rows[i]['record_flag']
-        cstLstDtlResObj['customer_flag'] = rows[i]['customer_flag']
+          cstLstDtlResObj['Customer_ID'] = rows[i]['Customer_ID']
+          cstLstDtlResObj['First_Name'] = rows[i]['First_Name']
+          cstLstDtlResObj['Last_Name'] = rows[i]['Last_Name']
+          cstLstDtlResObj['Company'] = rows[i]['Company']
+          cstLstDtlResObj['Birth_date'] = rows[i]['Birth_date']
+          cstLstDtlResObj['Terms'] = rows[i]['Terms']
+          cstLstDtlResObj['Bill_to_Address_1'] = rows[i]['Bill_to_Address_1']
+          cstLstDtlResObj['Bill_to_Address_2'] = rows[i]['Bill_to_Address_2']
+          cstLstDtlResObj['Bill_to_City'] = rows[i]['Bill_to_City']
+          cstLstDtlResObj['Bill_to_State'] = rows[i]['Bill_to_State']
+          cstLstDtlResObj['Bill_to_Zip'] = rows[i]['Bill_to_Zip']
+          cstLstDtlResObj['Bill_to_Email'] = rows[i]['Bill_to_Email']
+          cstLstDtlResObj['Bill_to_Phone'] = rows[i]['Bill_to_Phone']
+          cstLstDtlResObj['Bill_to_Fax'] = rows[i]['Bill_to_Fax']
+          cstLstDtlResObj['Ship_to_Address_1'] = rows[i]['Ship_to_Address_1']
+          cstLstDtlResObj['Ship_to_Address_2'] = rows[i]['Ship_to_Address_2']
+          cstLstDtlResObj['Ship_to_City'] = rows[i]['Ship_to_City']
+          cstLstDtlResObj['Ship_to_State'] = rows[i]['Ship_to_State']
+          cstLstDtlResObj['Ship_to_Zip'] = rows[i]['Ship_to_Zip']
+          cstLstDtlResObj['Ship_to_Email'] = rows[i]['Ship_to_Email']
+          cstLstDtlResObj['Ship_to_Phone'] = rows[i]['Ship_to_Phone']
+          cstLstDtlResObj['Ship_to_Fax'] = rows[i]['Ship_to_Fax']
+          cstLstDtlResObj['Store_of_Origin'] = rows[i]['Store_of_Origin']
+          cstLstDtlResObj['Gender'] = rows[i]['Gender']
+          cstLstDtlResObj['PowerField_3'] = rows[i]['PowerField_3']
+          cstLstDtlResObj['RB_Gives_Back'] = rows[i]['RB_Gives_Back']
+          cstLstDtlResObj['customer_note'] = rows[i]['customer_note']
+          cstLstDtlResObj['loyalty_flag'] = rows[i]['loyalty_flag']
+          cstLstDtlResObj['record_flag'] = rows[i]['record_flag']
+          cstLstDtlResObj['customer_flag'] = rows[i]['customer_flag']
 
 
-        cstLstDtlResArr.push(cstLstDtlResObj)
-        srcRsXLS_tsql.push(cstLstDtlResObj)
+          cstLstDtlResArr.push(cstLstDtlResObj)
+          srcRsXLS_tsql.push(cstLstDtlResObj)
+        }
 
-        // function forwardGeoCode() {
-        //     const gcdrResults = await geocoder.batchGeocode([
-        //         `${addr1} ${addr2}, ${city}, ${state} ${zip}`,
-        //         // '254 El Conquistador Place, Louisville, KY 40220',
-        //         // '1285 Willow Ave, Louisville, KY 40204'
-        //     ])
-        //     console.log(`gcdrResults[0]==> ${gcdrResults[0]}`)
-        //     console.log(`JSON.stringify(gcdrResults[0])==> ${JSON.stringify(gcdrResults[0])}`)
-        // }
-        // forwardGeoCode()
+
       }
       //V// CACHE QUERY gcdrResults IN BACKEND ///////////IS THIS BEING USED, AND SHOULD IT???///////////////////////////////////////////////////////////////////
       cstLstDtlResArrCache.set('cstLstDtlResArrCache_key', cstLstDtlResArr)
@@ -310,45 +311,22 @@ module.exports = {
       for (let i = 0; i < cstLstDtlResArr.length; i++) {
         if (cstLstDtlResArr[i]['Bill_to_State'].toLowerCase() == 'in' || //select only for IN & KY
           cstLstDtlResArr[i]['Bill_to_State'].toLowerCase() == 'ky') {
-          frwdGeoAddrArr.push(`'${cstLstDtlResArr[i]['Bill_to_Address_1']} ${cstLstDtlResArr[i]['Bill_to_Address_2']}, ${cstLstDtlResArr[i]['Bill_to_City']}, ${cstLstDtlResArr[i]['Bill_to_State']} ${cstLstDtlResArr[i]['Bill_to_Zip']}'`)
+          // frwdGeoAddrArr.push(`'${cstLstDtlResArr[i]['Bill_to_Address_1']} ${cstLstDtlResArr[i]['Bill_to_Address_2']}, ${cstLstDtlResArr[i]['Bill_to_City']}, ${cstLstDtlResArr[i]['Bill_to_State']} ${cstLstDtlResArr[i]['Bill_to_Zip']}'`)
+          frwdGeoAddrArr.push(`'${cstLstDtlResArr[i]['Bill_to_Address_1']}, ${cstLstDtlResArr[i]['Bill_to_City']}, ${cstLstDtlResArr[i]['Bill_to_State']} ${cstLstDtlResArr[i]['Bill_to_Zip']}'`)
         }
 
       }
 
       // console.log(`frwdGeoAddrArr(2)==> ${frwdGeoAddrArr}`)
+      console.log(`frwdGeoAddrArr.length==> ${frwdGeoAddrArr.length}`)
 
     }
-
-    // //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // async function writeHTMLfileAndRenderPage() {
-    //     var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
-    //     fs.writeFile(`${process.cwd()}/views/includes/cstLstDtl.html`, svgsrc, function (err) {
-    //         if (err) {
-    //             console.log('error saving document', err)
-    //         } else {
-    //             console.log('The file was saved!')
-    //             res.render('vw-cstLstDtlMap', {
-    //                 title: `Map`,
-    //                 // venProfArrDisplay: venProfArr,
-    //             })
-    //         }
-    //     })
-    // }
-    // //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-    // connection.query(cstLstDtlQuery, (error, response) => {
-    //   console.log(error || response);
-    // }).on('end', function () {
-    //   showCstLstDtlResults(result)
-    //     .then(forwardGeoCode())
-    // })
 
     //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(cstLstDtlQuery, function (err, rows, fields) {
       if (err) throw err
       showCstLstDtlResults(rows)
-        .then(forwardGeoCode())
+      // .then(forwardGeoCode())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
