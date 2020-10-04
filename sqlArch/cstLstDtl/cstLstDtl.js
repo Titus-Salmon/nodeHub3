@@ -212,7 +212,7 @@ module.exports = {
         // url: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
         url: "http://localhost:3000/cstLstDtl/cstLstDtl",
         // referrer: "http://localhost:3000/cstLstDtl/cstLstDtl",
-        referrer: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
+        // referrer: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
         contentType: "text/html",
         includeNodeLocations: true,
         storageQuota: 10000000
