@@ -208,7 +208,12 @@ module.exports = {
       </html>
       `, {
         runScripts: "dangerously",
-        resources: "usable"
+        resources: "usable",
+        url: "localhost:3000/cstLstDtl/cstLstDtl",
+        // referrer: "https://example.com/",
+        contentType: "text/html",
+        includeNodeLocations: true,
+        storageQuota: 10000000
       })
 
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
