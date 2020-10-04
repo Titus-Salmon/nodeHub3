@@ -210,8 +210,8 @@ module.exports = {
         runScripts: "dangerously",
         resources: "usable",
         // url: "http://localhost:3000/cstLstDtl/cstLstDtl",
-        url: "http://localhost:3000",
-        // referrer: "https://example.com/",
+        // url: "http://localhost:3000",
+        referrer: "http://localhost:3000/cstLstDtl/cstLstDtl",
         contentType: "text/html",
         includeNodeLocations: true,
         storageQuota: 10000000
