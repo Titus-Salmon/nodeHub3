@@ -1,43 +1,3 @@
-let mapData = document.getElementById('mapData')
-
-let latLongData = document.getElementById('latLongData')
-
-let regex1 = /(\[|\])/g
-let regex2 = /(\{|\})/g
-let regex3 = /(\d+)\.(\d+)/g
-
-let latLongDataArr = []
-
-let latLongDataSani1 = latLongData.value.replace(regex1, '')
-let latLongDataSplit = latLongDataSani1.split('},{')
-for (let i = 0; i < latLongDataSplit.length; i++) {
-  // let latLongDataObj = {}
-  latLongDataSplit[i] = latLongDataSplit[i].replace('{', '').replace('}', '')
-  latLongDataArr.push(latLongDataSplit[i])
-}
-// console.log(`latLongDataSplit==> ${latLongDataSplit}`)
-for (let i = 0; i < latLongDataArr.length; i++) {
-  latLongDataArr[i] = `{${latLongDataArr[i]}}` //add brackets back on for JSON.parse on frontend
-}
-// console.log(`latLongDataArr==> ${latLongDataArr}`)
-console.log(`latLongDataArr.length==> ${latLongDataArr.length}`)
-console.log(`latLongDataArr[0]==> ${latLongDataArr[0]}`)
-console.log(`JSON.parse(latLongDataArr[0])==> ${JSON.parse(latLongDataArr[0])}`)
-for (let i = 0; i < latLongDataArr.length; i++) {
-  latLongDataArr[i] = JSON.parse(latLongDataArr[i])
-}
-console.log(`latLongDataArr[0]['lat']==> ${latLongDataArr[0]['lat']}`)
-console.log(`latLongDataArr[0]['long']==> ${latLongDataArr[0]['long']}`)
-
-// let mapData2 = [{
-//   'lat': '38.19119',
-//   'long': '-85.64789'
-// }]
-
-// let mapData2 = latLongDataArr
-
-
-
 /**
  * Adds markers to the map highlighting the locations of the captials of
  * France, Italy, Germany, Spain and the United Kingdom.
@@ -47,15 +7,12 @@ console.log(`latLongDataArr[0]['long']==> ${latLongDataArr[0]['long']}`)
 function addMarkersToMap(map) {
 
 
-  for (let i = 0; i < latLongDataArr.length; i++) {
+  for (let i = 0; i < latLongArr.length; i++) {
     let markerT0d = new H.map.Marker({
-      lat: latLongDataArr[i]['lat'],
-      lng: latLongDataArr[i]['long']
+      lat: latLongArr[i]['lat'],
+      lng: latLongArr[i]['long']
     })
     map.addObject(markerT0d)
-    // console.log(`markerT0d==> ${markerT0d}`)
-    // console.log(`Object.keys(markerT0d)==> ${Object.keys(markerT0d)}`)
-    // console.log(`JSON.stringify(markerT0d)==> ${JSON.stringify(markerT0d)}`)
   }
 
 }
@@ -104,7 +61,8 @@ function startClustering(map, data) {
 // Step 1: initialize communication with the platform
 // In your own code, replace variable window.apikey with your own apikey
 var platform = new H.service.Platform({
-  apikey: apiKey.value
+  // apikey: apiKey.value
+  apikey: process.env.HERE_API_1
 });
 
 var defaultLayers = platform.createDefaultLayers();
@@ -127,6 +85,6 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 // Step 4: create the default UI component, for displaying bubbles
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-// Step 5: cluster data about latLongDataArr's coordinates
-startClustering(map, latLongDataArr);
+// Step 5: cluster data about latLongArr's coordinates
+startClustering(map, latLongArr);
 //^//HERE clustered marker placement//////////////////////////////////////////////////////////// 
