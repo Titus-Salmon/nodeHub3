@@ -145,7 +145,7 @@ module.exports = {
         left: 50
       })
 
-      let xAxis_yValue = height - margin.bottom
+      let xAxis_yValue = height - margin.bottom // vertical location of x-axis
 
       var x = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
@@ -239,7 +239,7 @@ module.exports = {
       //   .domain([0, maxYaxisUpdtDmrctrWSandRtl]).nice()
       //   .range([xAxis_yValue, margin.top])
 
-      var yRtl = d3.scaleLinear()
+      var yRtl = d3.scaleLinear() //vertical line for retail update
         .domain([0, maxYvalRtl]).nice()
         .range([xAxis_yValue, margin.top])
 
@@ -255,6 +255,19 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisUpdateDemarcator)
+
+      var covidStartDemarcator = g => g
+        .attr("transform", `translate(${Date.parse('2020-02-11')},0)`)
+        .call(d3.axisLeft(yRtl))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.select(".tick:last-of-type text").clone()
+          .attr("x", 3)
+          .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .text('covid'))
+
+      svg.append("g")
+        .call(covidStartDemarcator)
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
