@@ -52,9 +52,9 @@ module.exports = {
     let latLongArr = []
     let latLongBlanksArr = []
 
-    //async function forwardGeoCode() {
+    async function forwardGeoCode() {
 
-    async function forwardGeoCodeSub1() {
+      //async function forwardGeoCodeSub1() {
       const gcdrResults = await geocoder.batchGeocode(
         frwdGeoAddrArr
       )
@@ -97,10 +97,10 @@ module.exports = {
 
       console.log(`latLongBlanksArr.length==> ${latLongBlanksArr.length}`)
       console.log(`JSON.stringify(latLongBlanksArr[0])==> ${JSON.stringify(latLongBlanksArr[0])}`)
-    }
+      //}
 
 
-    async function forwardGeoCodeSub2() {
+      //async function forwardGeoCodeSub2() {
       const jsdomT0d = new JSDOM(`
         <html>
         <head>
@@ -240,9 +240,9 @@ module.exports = {
         }
       })
 
-    }
+      //}
 
-    //}
+    }
 
     async function showCstLstDtlResults(rows) {
       for (let i = 0; i < rows.length; i++) {
@@ -324,9 +324,9 @@ module.exports = {
     connection.query(cstLstDtlQuery, function (err, rows, fields) {
       if (err) throw err
       showCstLstDtlResults(rows)
-        .then(forwardGeoCodeSub1())
-        .then(forwardGeoCodeSub2())
-      // .then(forwardGeoCode())
+        // .then(forwardGeoCodeSub1())
+        // .then(forwardGeoCodeSub2())
+        .then(forwardGeoCode())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
