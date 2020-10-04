@@ -177,7 +177,7 @@ module.exports = {
          // In your own code, replace variable window.apikey with your own apikey
          var platform = new H.service.Platform({
            // apikey: apiKey.value
-           apikey: ${process.env.HERE_API_1}
+           apikey: '${process.env.HERE_API_1}'
          });
          
          var defaultLayers = platform.createDefaultLayers();
