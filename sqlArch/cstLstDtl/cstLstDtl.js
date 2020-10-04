@@ -201,7 +201,7 @@ module.exports = {
          var ui = H.ui.UI.createDefault(map, defaultLayers);
          
          // Step 5: cluster data about latLongArr's coordinates
-         startClustering(map, ${latLongArr});
+         startClustering(map, ${JSON.stringify(latLongArr)});
          //^//HERE clustered marker placement//////////////////////////////////////////////////////////// 
          </script>
       </body>
