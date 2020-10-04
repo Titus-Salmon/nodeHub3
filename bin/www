@@ -28,7 +28,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-server.timeout = 3600000 //set server timeout to 1 hour to avoid timing out on large catalogs --t0d
+// server.timeout = 3600000 //set server timeout to 1 hour to avoid timing out on large catalogs --t0d
+server.timeout = 21600000 //set server timeout to 6 hours to avoid timing out on very large HERE marker numbers --t0d
 
 /**
  * Normalize a port into a number, string, or false.
