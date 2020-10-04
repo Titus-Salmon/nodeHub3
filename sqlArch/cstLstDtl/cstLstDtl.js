@@ -209,7 +209,8 @@ module.exports = {
       `, {
         runScripts: "dangerously",
         resources: "usable",
-        url: "http://localhost:3000/cstLstDtl/cstLstDtl",
+        // url: "http://localhost:3000/cstLstDtl/cstLstDtl",
+        url: "http://localhost:3000",
         // referrer: "https://example.com/",
         contentType: "text/html",
         includeNodeLocations: true,
