@@ -209,7 +209,7 @@ module.exports = {
       `, {
         runScripts: "dangerously",
         resources: "usable",
-        // url: "http://localhost:3000/cstLstDtl/cstLstDtl",
+        url: "https://js.api.here.com/v3/3.1/mapsjs-core.js",
         // url: "http://localhost:3000",
         referrer: "http://localhost:3000/cstLstDtl/cstLstDtl",
         contentType: "text/html",
