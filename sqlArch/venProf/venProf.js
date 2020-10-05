@@ -260,7 +260,10 @@ module.exports = {
       var covidStartDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
         .call(d3.axisLeft(yRtl))
-        .call(g => g.select(".domain").remove())
+        // .call(g => g.select(".domain").remove())
+        .attr("x", 3)
+        .attr("text-anchor", "start")
+        .attr("font-weight", "bold")
         .attr("transform", "rotate(-90)")
         .text('covid')
       // .call(g => g.select(".tick:last-of-type text").clone()
