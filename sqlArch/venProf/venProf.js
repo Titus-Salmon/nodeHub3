@@ -256,6 +256,7 @@ module.exports = {
       svg.append("g")
         .call(yAxisUpdateDemarcator)
 
+      console.log(`Date.parse('2020-02-11')==> ${Date.parse('2020-02-11')}`)
       var covidStartDemarcator = g => g
         .attr("transform", `translate(${Date.parse('2020-02-11')},0)`)
         .call(d3.axisLeft(yRtl))
