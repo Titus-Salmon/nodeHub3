@@ -270,7 +270,7 @@ module.exports = {
         //   .attr("transform", "rotate(-90)")
         .call(g => g.select("text")
           .attr("x", timeScaleUpdateDemarcator(Date.parse('2020-02-11')))
-          // .attr("y", 75)
+          .attr("y", 75)
           .attr("text-anchor", "middle")
           .attr("font-weight", "bold")
           .text('covid')
