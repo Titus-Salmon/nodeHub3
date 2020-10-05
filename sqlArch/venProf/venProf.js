@@ -256,10 +256,15 @@ module.exports = {
       svg.append("g")
         .call(yAxisUpdateDemarcator)
 
+      var yRtlInvis = d3.scaleLinear() //vertical line for retail update
+        .domain([0, 0]).nice()
+        .range([0, 0])
+
       console.log(`Date.parse('2020-02-11')==> ${Date.parse('2020-02-11')}`)
       var covidStartDemarcator = g => g
         .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
-        .call(d3.axisLeft(yRtl))
+        // .call(d3.axisLeft(yRtl))
+        .call(d3.axisLeft(yRtlInvis))
         .call(g => g.select(".domain").remove())
         // .call(g => g.select(".tick:last-of-type text").clone()
         // .call(g => g.select("text").clone()
