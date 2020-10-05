@@ -269,7 +269,7 @@ module.exports = {
         //   .text('covid')
         //   .attr("transform", "rotate(-90)")
         .call(g => g.select("text")
-          .attr("x", 3)
+          // .attr("x", 3)
           .attr("text-anchor", "middle")
           .attr("font-weight", "bold")
           .text('covid')
