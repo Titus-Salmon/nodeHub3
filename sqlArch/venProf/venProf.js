@@ -282,6 +282,22 @@ module.exports = {
         .attr("y2", (xAxis_yValue) - maxYaxisUpdtDmrctrWSandRtl)
 
 
+      covidData = [{
+        date: Date.parse('2020-02-11'),
+        yValue: (margin.bottom - margin.top) / 2,
+        notes: '~~~~~~~~~~~~covid start 2020-02-11~~~~~~~~~>'
+      }]
+
+      svg.append("g").selectAll("text")
+        .data(covidData)
+        .enter()
+        .append("text")
+        .attr("x", covidData.date)
+        .attr("y", covidData.yValue)
+        .attr("fill", "red")
+        .text(`${covidData.notes}`)
+
+
       svg.append("g")
         .call(covidStartDemarcator)
 
