@@ -288,9 +288,7 @@ module.exports = {
         notes: '~~~~~~~~~~~~covid start 2020-02-11~~~~~~~~~>'
       }]
 
-      svg.append("g").selectAll("text")
-        .data(covidData)
-        .enter()
+      svg.append("g")
         .append("text")
         .attr("x", covidData.date)
         .attr("y", covidData.yValue)
