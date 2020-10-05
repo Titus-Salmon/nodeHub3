@@ -194,7 +194,7 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", line)
 
-      timeScaleUpdateDemarcator = d3.scaleUtc()
+      timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
 
@@ -258,7 +258,7 @@ module.exports = {
 
       console.log(`Date.parse('2020-02-11')==> ${Date.parse('2020-02-11')}`)
       var covidStartDemarcator = g => g
-        .attr("transform", `translate(${Date.parse('2020-02-11')},0)`)
+        .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
         .call(d3.axisLeft(yRtl))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
