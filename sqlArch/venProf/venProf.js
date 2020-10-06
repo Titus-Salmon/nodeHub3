@@ -293,8 +293,8 @@ module.exports = {
         .text(`${covidData[0].notes}`)
         .attr("text-anchor", "start")
         .attr("transform", `translate(${covidData[0].date},${covidData[0].yValue})rotate(-90)`)
-        .style('font-size', '8px')
-        .style('font-weight', 'bold')
+        .style('font-size', '10px')
+        .style('font-weight', 'normal')
 
 
 
