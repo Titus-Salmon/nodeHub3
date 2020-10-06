@@ -261,17 +261,17 @@ module.exports = {
       //   .range([0, 0])
 
       console.log(`Date.parse('2020-02-11')==> ${Date.parse('2020-02-11')}`)
-      var covidStartDemarcator = g => g
-        .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
-        // .call(d3.axisLeft(yRtl))
-        // .call(g => g.select(".domain").remove())
-        .call(g => g.select("text")
-          .attr("x", 0)
-          .attr("text-anchor", "start")
-          .attr("font-weight", "lighter")
-          .text('------------covid start 2020-02-11--------->')
-          .attr("transform", "rotate(-90)")
-        )
+      // var covidStartDemarcator = g => g
+      //   .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
+      //   // .call(d3.axisLeft(yRtl))
+      //   // .call(g => g.select(".domain").remove())
+      //   .call(g => g.select("text")
+      //     .attr("x", 0)
+      //     .attr("text-anchor", "start")
+      //     .attr("font-weight", "lighter")
+      //     .text('------------covid start 2020-02-11--------->')
+      //     .attr("transform", "rotate(-90)")
+      //   )
 
       svg.append('line')
         .style("stroke", "orange")
@@ -295,6 +295,7 @@ module.exports = {
         .attr("y", covidData[0].yValue)
         .attr("fill", "red")
         .text(`${covidData[0].notes}`)
+        .attr("transform", "rotate(-90)")
 
 
       svg.append("g")
