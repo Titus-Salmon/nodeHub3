@@ -284,26 +284,17 @@ module.exports = {
         date: timeScaleUpdateDemarcator(Date.parse('2020-02-11')),
         // yValue: (margin.bottom - margin.top) / 2,
         yValue: xAxis_yValue,
-        notes: '~~~~~~~~~~~~covid start 2020-02-11~~~~~~~~~>'
+        notes: '------------covid start 2020-02-11--------->'
       }]
 
       console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
 
       svg.append("text")
-        // .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},${xAxis_yValue})rotate(-10)`)
-        // .attr("translate(" + xText + "," + yText + ") rotate(90)")
-        // .attr("transform", "rotate(-15)")
-        // .attr("translate", "rotate(-15)")
         .text(`${covidData[0].notes}`)
         .attr("text-anchor", "start")
         .attr("transform", `translate(${covidData[0].date},${covidData[0].yValue})rotate(-90)`)
-        // .attr("x", covidData[0].date)
-        // .attr("y", covidData[0].yValue)
-        // .attr("transform", "rotate(-15)")
-
-        // .attr("transform", "rotate(-5)")
-        // .attr("fill", "red")
         .style('font-size', '8px')
+        .style('font-weight', 'darker')
 
 
 
