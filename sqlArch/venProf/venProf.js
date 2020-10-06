@@ -284,7 +284,7 @@ module.exports = {
         date: timeScaleUpdateDemarcator(Date.parse('2020-02-11')),
         // yValue: (margin.bottom - margin.top) / 2,
         yValue: xAxis_yValue,
-        notes: '------------covid start 2020-02-11--------->'
+        notes: '------------COVID-19 start 2020-02-11--------->'
       }]
 
       console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
