@@ -291,10 +291,11 @@ module.exports = {
       console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
 
       svg.append("text")
+        .text(`${covidData[0].notes}`)
         .attr("x", covidData[0].date)
         .attr("y", covidData[0].yValue)
         .attr("fill", "red")
-        .text(`${covidData[0].notes}`)
+        // .text(`${covidData[0].notes}`)
         .style('font', '4px')
 
 
