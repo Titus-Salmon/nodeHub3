@@ -295,7 +295,7 @@ module.exports = {
         .attr("y", covidData[0].yValue)
         .attr("fill", "red")
         .text(`${covidData[0].notes}`)
-        .attr("transform", "rotate(-90)")
+
 
 
       svg.append("g")
