@@ -290,11 +290,12 @@ module.exports = {
       console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
 
       svg.append("text")
+        .attr("transform", "rotate(-15)")
         .text(`${covidData[0].notes}`)
         .attr("text-anchor", "start")
         .attr("x", covidData[0].date)
         .attr("y", covidData[0].yValue)
-        .attr("transform", "rotate(-15)")
+        // .attr("transform", "rotate(-15)")
 
         // .attr("transform", "rotate(-5)")
         // .attr("fill", "red")
