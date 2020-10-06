@@ -292,9 +292,8 @@ module.exports = {
         .text(`${covidData[0].notes}`)
         .attr("x", covidData[0].date)
         .attr("y", covidData[0].yValue)
-        .attr("fill", "red")
-        // .text(`${covidData[0].notes}`)
-        .style('font-size', '4px')
+        // .attr("fill", "red")
+        .style('font-size', '12px')
 
 
 
