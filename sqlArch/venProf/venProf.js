@@ -296,8 +296,9 @@ module.exports = {
         // .attr("translate", "rotate(-15)")
         .text(`${covidData[0].notes}`)
         .attr("text-anchor", "start")
-        .attr("x", covidData[0].date)
-        .attr("y", covidData[0].yValue)
+        .attr("transform", `translate(${covidData[0].date},${covidData[0].yValue})rotate(-10)`)
+        // .attr("x", covidData[0].date)
+        // .attr("y", covidData[0].yValue)
         // .attr("transform", "rotate(-15)")
 
         // .attr("transform", "rotate(-5)")
