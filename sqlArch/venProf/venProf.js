@@ -290,9 +290,10 @@ module.exports = {
       console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
 
       svg.append("text")
+        .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},${xAxis_yValue})rotate(-90)`)
         // .attr("translate(" + xText + "," + yText + ") rotate(90)")
         // .attr("transform", "rotate(-15)")
-        .attr("translate", "rotate(-15)")
+        // .attr("translate", "rotate(-15)")
         .text(`${covidData[0].notes}`)
         .attr("text-anchor", "start")
         .attr("x", covidData[0].date)
