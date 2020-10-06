@@ -153,13 +153,13 @@ module.exports = {
         .range([margin.left, width - margin.right])
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(venProfArr, d => `${d.vendorName}_profit`)]).nice()
+        .domain([0, d3.max(venProfArr, d => d.kehe_profit)]).nice()
         .range([xAxis_yValue, margin.top])
 
       var line = d3.line()
-        .defined(d => !isNaN(`${d.vendorName}_profit`))
+        .defined(d => !isNaN(d.kehe_profit))
         .x(d => x(d.date))
-        .y(d => y(`${d.vendorName}_profit`))
+        .y(d => y(d.vendorName_profit))
 
       var xAxis = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
