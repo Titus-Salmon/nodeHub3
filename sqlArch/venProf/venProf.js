@@ -49,7 +49,8 @@ module.exports = {
         let venProfObj = {}
         venProfObj['ri_t0d'] = i + 1
         venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfObj['kehe'] = ois_venprof_mnth_rows[i]['kehe']
+        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
+        venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
 
         venProfArr.push(venProfObj)
       }
@@ -152,13 +153,13 @@ module.exports = {
         .range([margin.left, width - margin.right])
 
       var y = d3.scaleLinear()
-        .domain([0, d3.max(venProfArr, d => d.kehe)]).nice()
+        .domain([0, d3.max(venProfArr, d => `${d.vendorName}_profit`)]).nice()
         .range([xAxis_yValue, margin.top])
 
       var line = d3.line()
-        .defined(d => !isNaN(d.kehe))
+        .defined(d => !isNaN(`${d.vendorName}_profit`))
         .x(d => x(d.date))
-        .y(d => y(d.kehe))
+        .y(d => y(`${d.vendorName}_profit`))
 
       var xAxis = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
@@ -350,7 +351,7 @@ module.exports = {
 
     //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(`
-    SELECT date, ${vendorName} FROM ois_venprof_mnth_copy2 ORDER BY date;
+    SELECT date, ${vendorName}_profit, ${vendorName}_sales FROM ois_venprof_mnth_copy2 ORDER BY date;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
