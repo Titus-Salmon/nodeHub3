@@ -291,9 +291,11 @@ module.exports = {
 
       svg.append("text")
         .text(`${covidData[0].notes}`)
-        .attr("transform", "rotate(-15)")
+        .attr("text-anchor", "start")
         .attr("x", covidData[0].date)
         .attr("y", covidData[0].yValue)
+        .attr("transform", "rotate(-15)")
+
         // .attr("transform", "rotate(-5)")
         // .attr("fill", "red")
         .style('font-size', '8px')
