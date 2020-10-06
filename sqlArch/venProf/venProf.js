@@ -288,12 +288,13 @@ module.exports = {
         notes: '~~~~~~~~~~~~covid start 2020-02-11~~~~~~~~~>'
       }]
 
-      svg.append("g")
-        .append("text")
-        .attr("x", covidData.date)
-        .attr("y", covidData.yValue)
+      console.log(`JSON.stringify(covidData[0])==> ${JSON.stringify(covidData[0])}`)
+
+      svg.append("text")
+        .attr("x", covidData[0].date)
+        .attr("y", covidData[0].yValue)
         .attr("fill", "red")
-        .text(`${covidData.notes}`)
+        .text(`${covidData[0].notes}`)
 
 
       svg.append("g")
