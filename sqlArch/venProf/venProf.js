@@ -65,10 +65,10 @@ module.exports = {
         venSalesArr.push(venSalesObj)
 
         let venProfitOverSalesObj = {}
-        venProfitOverSalesObj['ri_t0d'] = i + 1
-        venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
-        venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+        // venProfitOverSalesObj['ri_t0d'] = i + 1
+        // venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
+        // venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
+        // venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
         venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
         venProfitOverSalesArr.push(venProfitOverSalesObj)
@@ -197,6 +197,8 @@ module.exports = {
         .defined(d => !isNaN(d.kehe_profit_over_sales))
         .x(d => xDate(d.date))
         .y(d => yProfitOverSales(d.kehe_profit_over_sales))
+
+      console.log(`JSON.stringify(venProfitOverSalesArr)==> ${JSON.stringify(venProfitOverSalesArr)}`)
 
       var xAxisDate = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
