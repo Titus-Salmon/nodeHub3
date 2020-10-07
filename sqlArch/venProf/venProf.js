@@ -225,6 +225,12 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales))
 
+      yAxisProfitOverSales.selectAll(".tick text")
+        .attr("fill", "red")
+      // .attr("font-size", "20")
+      // .attr("rotate", "15")
+      // .attr("font-family", "cursive")
+
       const svg = d3.select(el)
         .append('svg')
         .attr("viewBox", [0, 0, width, height])
