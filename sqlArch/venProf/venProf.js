@@ -29,7 +29,8 @@ module.exports = {
     let vendorName = req.body['vendorNamePost']
     console.log(`vendorName==> ${vendorName}`)
 
-    let venProfArr = [] // holds venProfObj data from ois_venprof_mnth_copy2 table
+    let venProfArr = [] // holds venProfObj data from ois_venprof_mnth_ table
+    let venSalesArr = [] // holds venSalesObj data from ois_venprof_mnth_ table
     let updateDemarcatorArr = [] // holds updateDemarcatorObj instances (for placing secondary y-axis) data from rainbowcat_update_tracker table
     let WsUpdateArr = [] // holds updateDemarcatorObj instances where dates are only for WS updates
     let WsDateOnlyArr = [] // holds updateDemarcatorObj['date] instances where dates are only for WS updates
@@ -53,6 +54,14 @@ module.exports = {
         venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
 
         venProfArr.push(venProfObj)
+
+        let venSalesObj = {}
+        venSalesObj['ri_t0d'] = i + 1
+        venSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
+        venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
+        venSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+
+        venSalesArr.push(venSalesObj)
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
@@ -156,10 +165,19 @@ module.exports = {
         .domain([0, d3.max(venProfArr, d => d.kehe_profit)]).nice()
         .range([xAxis_yValue, margin.top])
 
+      var ySales = d3.scaleLinear()
+        .domain([0, d3.max(venSalesArr, d => d.kehe_sales)]).nice()
+        .range([xAxis_yValue, margin.top])
+
       var lineProfit = d3.line()
         .defined(d => !isNaN(d.kehe_profit))
         .x(d => xDate(d.date))
         .y(d => yProfit(d.kehe_profit))
+
+      var lineSales = d3.line()
+        .defined(d => !isNaN(d.kehe_sales))
+        .x(d => xDate(d.date))
+        .y(d => ySales(d.kehe_sales))
 
       var xAxisDate = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
@@ -175,6 +193,16 @@ module.exports = {
           .attr("font-weight", "bold")
           .text(venProfArr.yProfit))
 
+      var yAxisSales = g => g
+        .attr("transform", `translate(${margin.right},0)`)
+        .call(d3.axisRight(ySales))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.select(".tick:last-of-type text").clone()
+          .attr("x", 3)
+          .attr("text-anchor", "start")
+          .attr("font-weight", "bold")
+          .text(venSalesArr.ySales))
+
       const svg = d3.select(el)
         .append('svg')
         .attr("viewBox", [0, 0, width, height])
@@ -186,6 +214,9 @@ module.exports = {
       svg.append("g")
         .call(yAxisProfit)
 
+      svg.append("g")
+        .call(yAxisSales)
+
       svg.append("path")
         .datum(venProfArr)
         .attr("fill", "none")
@@ -194,6 +225,15 @@ module.exports = {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", lineProfit)
+
+      svg.append("path")
+        .datum(venSalesArr)
+        .attr("fill", "none")
+        .attr("stroke", "green")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", lineSales)
 
       timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
