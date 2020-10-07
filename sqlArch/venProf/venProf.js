@@ -158,7 +158,7 @@ module.exports = {
 
       var lineProfit = d3.line()
         .defined(d => !isNaN(d.kehe_profit))
-        .x(d => x(d.date))
+        .x(d => xDate(d.date))
         .y(d => yProfit(d.kehe_profit))
 
       var xAxis = g => g
