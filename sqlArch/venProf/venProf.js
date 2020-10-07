@@ -65,10 +65,10 @@ module.exports = {
         venSalesArr.push(venSalesObj)
 
         let venProfitOverSalesObj = {}
-        // venProfitOverSalesObj['ri_t0d'] = i + 1
-        // venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        // venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
-        // venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+        venProfitOverSalesObj['ri_t0d'] = i + 1
+        venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
+        venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
+        venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
         venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
         venProfitOverSalesArr.push(venProfitOverSalesObj)
@@ -242,28 +242,28 @@ module.exports = {
       svg.append("g")
         .call(yAxisProfitOverSales)
 
-      // svg.append("path")
-      //   .datum(venProfArr)
-      //   .attr("fill", "none")
-      //   .attr("stroke", "purple")
-      //   .attr("stroke-width", 1.5)
-      //   .attr("stroke-linejoin", "round")
-      //   .attr("stroke-linecap", "round")
-      //   .attr("d", lineProfit)
+      svg.append("path")
+        .datum(venProfArr)
+        .attr("fill", "none")
+        .attr("stroke", "purple")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", lineProfit)
 
-      // svg.append("path")
-      //   .datum(venSalesArr)
-      //   .attr("fill", "none")
-      //   .attr("stroke", "green")
-      //   .attr("stroke-width", 1.5)
-      //   .attr("stroke-linejoin", "round")
-      //   .attr("stroke-linecap", "round")
-      //   .attr("d", lineSales)
+      svg.append("path")
+        .datum(venSalesArr)
+        .attr("fill", "none")
+        .attr("stroke", "green")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", lineSales)
 
       svg.append("path")
         .datum(venProfitOverSalesArr)
         .attr("fill", "none")
-        .attr("stroke", "purple")
+        .attr("stroke", "red")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
