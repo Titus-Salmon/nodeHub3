@@ -191,18 +191,18 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .attr("color", "green")
+          .attr("fill", "green")
           .text(venProfArr.yProfit))
 
       var yAxisSales = g => g
         .attr("transform", `translate(${margin.left*1.3},0)`)
-        .call(d3.axisRight(ySales))
+        .call(d3.axisLeft(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .attr("color", "red")
+          .attr("fill", "red")
           .text(venSalesArr.ySales))
 
       const svg = d3.select(el)
