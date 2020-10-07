@@ -168,6 +168,7 @@ module.exports = {
       var ySales = d3.scaleLinear()
         .domain([0, d3.max(venSalesArr, d => d.kehe_sales)]).nice()
         .range([xAxis_yValue, margin.top])
+        .attr("fill", "green")
 
       var lineProfit = d3.line()
         .defined(d => !isNaN(d.kehe_profit))
