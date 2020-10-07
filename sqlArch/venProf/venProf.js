@@ -161,11 +161,11 @@ module.exports = {
         .x(d => xDate(d.date))
         .y(d => yProfit(d.kehe_profit))
 
-      var xAxis = g => g
+      var xAxisDate = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
         .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
-      var yAxis = g => g
+      var yAxisDate = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(yProfit))
         .call(g => g.select(".domain").remove())
@@ -181,10 +181,10 @@ module.exports = {
       //^//........................................................................................
 
       svg.append("g")
-        .call(xAxis)
+        .call(xAxisDate)
 
       svg.append("g")
-        .call(yAxis)
+        .call(yAxisDate)
 
       svg.append("path")
         .datum(venProfArr)
