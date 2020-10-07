@@ -194,7 +194,7 @@ module.exports = {
           .text(venProfArr.yProfit))
 
       var yAxisSales = g => g
-        .attr("transform", `translate(${width-margin.right},0)`)
+        .attr("transform", `translate(${width-(margin.right)*2},0)`)
         .call(d3.axisRight(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
