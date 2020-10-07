@@ -191,7 +191,7 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .attr("fill", "green")
+          .attr("color", "green")
           .text(venProfArr.yProfit))
 
       var yAxisSales = g => g
@@ -202,7 +202,7 @@ module.exports = {
           .attr("x", 3)
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
-          .attr("fill", "red")
+          .attr("color", "red")
           .text(venSalesArr.ySales))
 
       const svg = d3.select(el)
