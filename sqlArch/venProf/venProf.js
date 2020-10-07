@@ -241,11 +241,11 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisProfit).selectAll(".tick text")
-        .attr("fill", "purple")
+        .attr("fill", "#cc66ff")
 
       svg.append("g")
         .call(yAxisSales).selectAll(".tick text")
-        .attr("fill", "blue")
+        .attr("fill", "#00ffff")
 
       svg.append("g")
         .call(yAxisProfitOverSales).selectAll(".tick text")
@@ -254,7 +254,7 @@ module.exports = {
       svg.append("path")
         .datum(venProfArr)
         .attr("fill", "none")
-        .attr("stroke", "purple")
+        .attr("stroke", "#cc66ff")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -263,7 +263,7 @@ module.exports = {
       svg.append("path")
         .datum(venSalesArr)
         .attr("fill", "none")
-        .attr("stroke", "blue")
+        .attr("stroke", "#00ffff")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -345,7 +345,7 @@ module.exports = {
         .attr("transform", `translate(${timeScaleUpdateDemarcator(Date.parse('2020-02-11'))},0)`)
 
       svg.append('line')
-        .style("stroke", "orange")
+        .style("stroke", "#b3b3b3")
         .style("stroke-width", 1)
         .attr("x1", timeScaleUpdateDemarcator(Date.parse('2020-02-11')))
         .attr("y1", xAxis_yValue)
