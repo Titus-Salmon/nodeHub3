@@ -69,7 +69,7 @@ module.exports = {
         venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
         venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
         venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
-        venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}profit_over_sales`]
+        venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
         venProfitOverSalesArr.push(venProfitOverSalesObj)
       }
