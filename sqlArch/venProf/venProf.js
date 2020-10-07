@@ -185,6 +185,7 @@ module.exports = {
 
       var yAxisProfit = g => g
         .attr("transform", `translate(${margin.left},0)`)
+        .attr("fill", "green")
         .call(d3.axisLeft(yProfit))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
@@ -192,11 +193,11 @@ module.exports = {
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
           // .attr("fill", "green")
-          .text(venProfArr.yProfit)
-          .attr("fill", "green"))
+          .text(venProfArr.yProfit))
 
       var yAxisSales = g => g
-        .attr("transform", `translate(${margin.left*2},0)`)
+        .attr("transform", `translate(${margin.left*2.3},0)`)
+        .attr("fill", "red")
         .call(d3.axisLeft(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
@@ -204,8 +205,7 @@ module.exports = {
           .attr("text-anchor", "start")
           .attr("font-weight", "bold")
           // .attr("fill", "red")
-          .text(venSalesArr.ySales)
-          .attr("fill", "red"))
+          .text(venSalesArr.ySales))
 
       const svg = d3.select(el)
         .append('svg')
