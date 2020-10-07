@@ -225,8 +225,8 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales))
 
-      yAxisProfitOverSales.selectAll(".tick text")
-        .attr("fill", "red")
+      // yAxisProfitOverSales.selectAll(".tick text")
+      //   .attr("fill", "red")
       // .attr("font-size", "20")
       // .attr("rotate", "15")
       // .attr("font-family", "cursive")
@@ -246,7 +246,8 @@ module.exports = {
         .call(yAxisSales)
 
       svg.append("g")
-        .call(yAxisProfitOverSales)
+        .call(yAxisProfitOverSales).selectAll(".tick text")
+        .attr("fill", "red")
 
       svg.append("path")
         .datum(venProfArr)
