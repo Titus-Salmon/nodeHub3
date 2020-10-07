@@ -240,14 +240,16 @@ module.exports = {
         .call(xAxisDate)
 
       svg.append("g")
-        .call(yAxisProfit)
+        .call(yAxisProfit).selectAll(".tick text")
+        .attr("fill", "purple")
 
       svg.append("g")
-        .call(yAxisSales)
+        .call(yAxisSales).selectAll(".tick text")
+        .attr("fill", "blue")
 
       svg.append("g")
         .call(yAxisProfitOverSales).selectAll(".tick text")
-        .attr("fill", "red")
+        .attr("fill", "orange")
 
       svg.append("path")
         .datum(venProfArr)
@@ -261,7 +263,7 @@ module.exports = {
       svg.append("path")
         .datum(venSalesArr)
         .attr("fill", "none")
-        .attr("stroke", "green")
+        .attr("stroke", "blue")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
@@ -270,7 +272,7 @@ module.exports = {
       svg.append("path")
         .datum(venProfitOverSalesArr)
         .attr("fill", "none")
-        .attr("stroke", "red")
+        .attr("stroke", "orange")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
