@@ -262,8 +262,8 @@ module.exports = {
 
       svg.append("path")
         .datum(venProfitOverSalesArr)
-        .attr("fill", "purple")
-        .attr("stroke", "black")
+        .attr("fill", "none")
+        .attr("stroke", "purple")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
