@@ -180,7 +180,7 @@ module.exports = {
         .range([xAxis_yValue, margin.top])
 
       var yProfitOverSales = d3.scaleLinear()
-        .domain([0, d3.max(venProfitOverSalesArr, d => d.keheprofit_over_sales)]).nice()
+        .domain([0, d3.max(venProfitOverSalesArr, d => d.kehe_profit_over_sales)]).nice()
         .range([xAxis_yValue, margin.top])
 
       var lineProfit = d3.line()
