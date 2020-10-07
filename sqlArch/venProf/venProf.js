@@ -148,7 +148,7 @@ module.exports = {
 
       let xAxis_yValue = height - margin.bottom // vertical location of x-axis
 
-      var x = d3.scaleUtc()
+      var xDate = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left, width - margin.right])
 
@@ -163,7 +163,7 @@ module.exports = {
 
       var xAxis = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
-        .call(d3.axisBottom(x).ticks(width / 80).tickSizeOuter(0))
+        .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
       var yAxis = g => g
         .attr("transform", `translate(${margin.left},0)`)
