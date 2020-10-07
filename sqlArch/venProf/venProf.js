@@ -194,7 +194,7 @@ module.exports = {
         .y(d => ySales(d.kehe_sales))
 
       var lineProfitOverSales = d3.line()
-        .defined(d => !isNaN(d.keheprofit_over_sales))
+        .defined(d => !isNaN(d.kehe_profit_over_sales))
         .x(d => xDate(d.date))
         .y(d => yProfitOverSales(d.kehe_profit_over_sales))
 
