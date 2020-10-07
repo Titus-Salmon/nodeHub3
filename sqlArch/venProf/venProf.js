@@ -156,7 +156,7 @@ module.exports = {
         .domain([0, d3.max(venProfArr, d => d.kehe_profit)]).nice()
         .range([xAxis_yValue, margin.top])
 
-      var line = d3.line()
+      var lineProfit = d3.line()
         .defined(d => !isNaN(d.kehe_profit))
         .x(d => x(d.date))
         .y(d => yProfit(d.kehe_profit))
@@ -193,7 +193,7 @@ module.exports = {
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
-        .attr("d", line)
+        .attr("d", lineProfit)
 
       timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
