@@ -235,8 +235,7 @@ module.exports = {
         .call(d3.axisLeft(yProfitOverSales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venProfitOverSalesArr.yProfitOverSales)
-          .style('font-size', '4px'))
+          .text(venProfitOverSalesArr.yProfitOverSales))
       //^//........................................................................................
 
       svg.append("g")
@@ -251,6 +250,7 @@ module.exports = {
         .attr("fill", "#00ffff")
 
       svg.append("g")
+        .style("font", "4px times")
         .call(yAxisProfitOverSales).selectAll(".tick text")
         .attr("fill", "orange")
 
