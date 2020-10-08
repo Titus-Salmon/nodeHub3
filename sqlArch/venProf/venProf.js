@@ -236,7 +236,7 @@ module.exports = {
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales)
-          .attr('font-size', '4px'))
+          .style('font-size', '4px'))
       //^//........................................................................................
 
       svg.append("g")
