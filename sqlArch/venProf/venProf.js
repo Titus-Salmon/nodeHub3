@@ -174,7 +174,7 @@ module.exports = {
 
       var xDate = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
-        .range([margin.left, width - margin.right])
+        .range([margin.left + 40, width - margin.right]) //move x-axis to the right by 40px to clear space for the triple y-axis
 
       var yProfit = d3.scaleLinear()
         .domain([0, d3.max(venProfArr, d => d.kehe_profit)]).nice()
@@ -206,7 +206,7 @@ module.exports = {
       console.log(`JSON.stringify(venProfitOverSalesArr)==> ${JSON.stringify(venProfitOverSalesArr)}`)
 
       var xAxisDate = g => g
-        .attr("transform", `translate(60,${xAxis_yValue})`)
+        .attr("transform", `translate(40,${xAxis_yValue})`) //move x-axis to the right by 40px to clear space for the triple y-axis
         .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
       svg.append("rect")
