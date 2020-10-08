@@ -233,8 +233,8 @@ module.exports = {
       var yAxisProfitOverSales = g => g
         .attr("transform", `translate(${margin.left*3.3},0)`)
         .call(d3.axisLeft(yProfitOverSales))
-        .call(g => g.select("text").style('font-size', '4px'))
         .call(g => g.select(".domain").remove())
+        .call(g => g.select("text").style('font-size', '4px'))
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales))
       //^//........................................................................................
