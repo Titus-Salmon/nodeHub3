@@ -217,22 +217,22 @@ module.exports = {
           .text(venSalesArr.ySales))
 
       var yAxisProfit = g => g
-        .attr("transform", `translate(${margin.left + 15},0)`)
+        .attr("transform", `translate(${margin.left + 20},0)`)
         .call(d3.axisLeft(yProfit))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfArr.yProfit))
 
       svg.append("rect")
-        .attr("x", -25)
+        .attr("x", -12.5)
         .attr("y", margin.top)
-        .attr("width", 50)
+        .attr("width", 25)
         .attr("height", xAxis_yValue - 20)
         .attr("fill", "orange")
-        .attr("transform", `translate(${margin.left + 30},0)`)
+        .attr("transform", `translate(${margin.left + 40},0)`)
 
       var yAxisProfitOverSales = g => g
-        .attr("transform", `translate(${margin.left + 30},0)`)
+        .attr("transform", `translate(${margin.left + 40},0)`)
         .call(d3.axisLeft(yProfitOverSales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
