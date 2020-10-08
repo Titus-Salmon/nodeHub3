@@ -251,8 +251,8 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisProfitOverSales).selectAll(".tick text")
-        .style("font", "4px times")
         .attr("fill", "orange")
+        .style('font-size', '4px')
 
       svg.append("path")
         .datum(venProfArr)
