@@ -218,7 +218,7 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venSalesArr.ySales))
 
-      svg.append("rect").append("rect")
+      d3.select(el).append("rect")
         .attr("x", 0)
         .attr("y", 0)
         .attr("width", 50)
