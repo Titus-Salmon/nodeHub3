@@ -213,14 +213,14 @@ module.exports = {
         .call(d3.axisLeft(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venSalesArr.ySales))
+          .text(venSalesArr.ySales / 1000))
 
       var yAxisProfit = g => g
         .attr("transform", `translate(${margin.left + 15},0)`)
         .call(d3.axisLeft(yProfit))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venProfArr.yProfit))
+          .text(venProfArr.yProfit / 1000))
 
       svg.append("rect")
         .attr("x", -25)
