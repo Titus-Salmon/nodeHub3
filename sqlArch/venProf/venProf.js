@@ -219,12 +219,12 @@ module.exports = {
           .text(venSalesArr.ySales))
 
       d3.select(el).append("rect")
-        .attr("x", 0)
-        .attr("y", 0)
+        .attr("x", 100)
+        .attr("y", 100)
         .attr("width", 50)
         .attr("height", height)
         .attr("fill", "orange")
-        .attr("transform", `translate(${margin.left*3.3},0)`)
+      // .attr("transform", `translate(${margin.left*3.3},0)`)
 
       var yAxisProfitOverSales = g => g
         // .append("rect")
