@@ -214,7 +214,7 @@ module.exports = {
         .attr("y", margin.top)
         .attr("width", 25)
         .attr("height", xAxis_yValue - 20)
-        .attr("fill", "#00ffff")
+        .attr("fill", "#80dfff")
         .attr("transform", `translate(${margin.left},0)`)
 
       var yAxisSales = g => g
@@ -285,7 +285,7 @@ module.exports = {
       svg.append("path")
         .datum(venSalesArr)
         .attr("fill", "none")
-        .attr("stroke", "#00ffff")
+        .attr("stroke", "#80dfff")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
