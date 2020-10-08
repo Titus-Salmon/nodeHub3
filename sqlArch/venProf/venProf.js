@@ -208,19 +208,19 @@ module.exports = {
         .attr("transform", `translate(0,${xAxis_yValue})`)
         .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
-      var yAxisProfit = g => g
-        .attr("transform", `translate(${margin.left},0)`)
-        .call(d3.axisLeft(yProfit))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venProfArr.yProfit))
-
       var yAxisSales = g => g
-        .attr("transform", `translate(${margin.left*2.3},0)`)
+        .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venSalesArr.ySales))
+
+      var yAxisProfit = g => g
+        .attr("transform", `translate(${margin.left + 15},0)`)
+        .call(d3.axisLeft(yProfit))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.select(".tick:last-of-type text").clone()
+          .text(venProfArr.yProfit))
 
       svg.append("rect")
         .attr("x", -25)
@@ -228,7 +228,7 @@ module.exports = {
         .attr("width", 50)
         .attr("height", xAxis_yValue - 20)
         .attr("fill", "orange")
-        .attr("transform", `translate(${margin.left*3.3},0)`)
+        .attr("transform", `translate(${margin.left + 30},0)`)
 
       var yAxisProfitOverSales = g => g
         .attr("transform", `translate(${margin.left*3.3},0)`)
@@ -242,13 +242,13 @@ module.exports = {
         .call(xAxisDate)
 
       svg.append("g")
-        .call(yAxisProfit).selectAll(".tick text")
-        .attr("fill", "#cc66ff")
+        .call(yAxisSales).selectAll(".tick text")
+        .attr("fill", "#00ffff")
         .style('font-size', '6px')
 
       svg.append("g")
-        .call(yAxisSales).selectAll(".tick text")
-        .attr("fill", "#00ffff")
+        .call(yAxisProfit).selectAll(".tick text")
+        .attr("fill", "#cc66ff")
         .style('font-size', '6px')
 
       svg.append("g")
