@@ -209,6 +209,14 @@ module.exports = {
         .attr("transform", `translate(0,${xAxis_yValue})`)
         .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
+      svg.append("rect")
+        .attr("x", -20)
+        .attr("y", margin.top)
+        .attr("width", 25)
+        .attr("height", xAxis_yValue - 20)
+        .attr("fill", "#00ffff")
+        .attr("transform", `translate(${margin.left},0)`)
+
       var yAxisSales = g => g
         .attr("transform", `translate(${margin.left},0)`)
         .call(d3.axisLeft(ySales))
@@ -252,7 +260,7 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisSales).selectAll(".tick text")
-        .attr("fill", "#00ffff")
+        .attr("fill", "black")
         .style('font-size', '6px')
 
       svg.append("g")
