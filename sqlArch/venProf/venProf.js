@@ -224,7 +224,7 @@ module.exports = {
 
       svg.append("rect")
         .attr("x", -25)
-        .attr("y", 0)
+        .attr("y", xAxis_yValue)
         .attr("width", 50)
         .attr("height", height)
         .attr("fill", "orange")
