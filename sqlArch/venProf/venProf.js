@@ -206,7 +206,7 @@ module.exports = {
       console.log(`JSON.stringify(venProfitOverSalesArr)==> ${JSON.stringify(venProfitOverSalesArr)}`)
 
       var xAxisDate = g => g
-        .attr("transform", `translate(0,${xAxis_yValue})`)
+        .attr("transform", `translate(60,${xAxis_yValue})`)
         .call(d3.axisBottom(xDate).ticks(width / 80).tickSizeOuter(0))
 
       svg.append("rect")
