@@ -165,6 +165,10 @@ module.exports = {
         left: 50
       })
 
+      const svg = d3.select(el)
+        .append('svg')
+        .attr("viewBox", [0, 0, width, height])
+
       let xAxis_yValue = height - margin.bottom // vertical location of x-axis
 
       var xDate = d3.scaleUtc()
@@ -218,13 +222,13 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venSalesArr.ySales))
 
-      d3.select(el).append("rect")
-        .attr("x", 100)
-        .attr("y", 100)
+      svg.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
         .attr("width", 50)
         .attr("height", height)
         .attr("fill", "orange")
-      // .attr("transform", `translate(${margin.left*3.3},0)`)
+        .attr("transform", `translate(${margin.left*3.3},0)`)
 
       var yAxisProfitOverSales = g => g
         // .append("rect")
@@ -245,9 +249,9 @@ module.exports = {
       // .attr("rotate", "15")
       // .attr("font-family", "cursive")
 
-      const svg = d3.select(el)
-        .append('svg')
-        .attr("viewBox", [0, 0, width, height])
+      // const svg = d3.select(el)
+      //   .append('svg')
+      //   .attr("viewBox", [0, 0, width, height])
       //^//........................................................................................
 
       svg.append("g")
