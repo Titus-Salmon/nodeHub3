@@ -51,24 +51,25 @@ module.exports = {
         let venProfObj = {}
         venProfObj['ri_t0d'] = i + 1
         venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
-        venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
+        //make room for 3 y-axes
+        venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
 
         venProfArr.push(venProfObj)
 
         let venSalesObj = {}
         venSalesObj['ri_t0d'] = i + 1
         venSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
-        venSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+        venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        venSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
 
         venSalesArr.push(venSalesObj)
 
         let venProfitOverSalesObj = {}
         venProfitOverSalesObj['ri_t0d'] = i + 1
         venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`]
-        venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`]
+        venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
         venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
         venProfitOverSalesArr.push(venProfitOverSalesObj)
@@ -213,14 +214,14 @@ module.exports = {
         .call(d3.axisLeft(ySales))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venSalesArr.ySales / 1000))
+          .text(venSalesArr.ySales))
 
       var yAxisProfit = g => g
         .attr("transform", `translate(${margin.left + 15},0)`)
         .call(d3.axisLeft(yProfit))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venProfArr.yProfit / 1000))
+          .text(venProfArr.yProfit))
 
       svg.append("rect")
         .attr("x", -25)
