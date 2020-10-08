@@ -219,6 +219,12 @@ module.exports = {
           .text(venSalesArr.ySales))
 
       var yAxisProfitOverSales = g => g
+        .append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", 50)
+        .attr("height", height)
+        .attr("fill", "orange")
         .attr("transform", `translate(${margin.left*3.3},0)`)
         .call(d3.axisLeft(yProfitOverSales))
         .call(g => g.select(".domain").remove())
