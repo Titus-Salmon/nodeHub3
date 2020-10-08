@@ -224,7 +224,7 @@ module.exports = {
           .text(venProfArr.yProfit))
 
       svg.append("rect")
-        .attr("x", -12.5)
+        .attr("x", -15)
         .attr("y", margin.top)
         .attr("width", 25)
         .attr("height", xAxis_yValue - 20)
