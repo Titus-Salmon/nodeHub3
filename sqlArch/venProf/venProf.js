@@ -216,6 +216,14 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venSalesArr.ySales))
 
+      svg.append("rect")
+        .attr("x", -20)
+        .attr("y", margin.top)
+        .attr("width", 25)
+        .attr("height", xAxis_yValue - 20)
+        .attr("fill", "#cc66ff")
+        .attr("transform", `translate(${margin.left + 20},0)`)
+
       var yAxisProfit = g => g
         .attr("transform", `translate(${margin.left + 20},0)`)
         .call(d3.axisLeft(yProfit))
@@ -249,7 +257,7 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisProfit).selectAll(".tick text")
-        .attr("fill", "#cc66ff")
+        .attr("fill", "black")
         .style('font-size', '6px')
 
       svg.append("g")
