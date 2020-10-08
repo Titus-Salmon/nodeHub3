@@ -226,7 +226,7 @@ module.exports = {
         .attr("x", -25)
         .attr("y", margin.top)
         .attr("width", 50)
-        .attr("height", xAxis_yValue - margin.bottom)
+        .attr("height", xAxis_yValue)
         .attr("fill", "orange")
         .attr("transform", `translate(${margin.left*3.3},0)`)
 
