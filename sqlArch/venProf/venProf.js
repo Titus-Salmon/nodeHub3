@@ -10,7 +10,7 @@ const connection = mysql.createConnection({
   multipleStatements: true
 })
 
-// const venProfArrCache = require('../nodeCacheStuff/cache1')
+// const venProfArrCache = require('../nodeCacheStuff/cache1') //no need for backend caching for now...
 
 const d3 = require('d3')
 const jsdom = require('jsdom')
@@ -49,24 +49,24 @@ module.exports = {
 
       for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
         let venProfObj = {}
-        venProfObj['ri_t0d'] = i + 1
+        // venProfObj['ri_t0d'] = i + 1
         venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
         venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
         //make room for 3 y-axes
-        venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
+        // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
 
         venProfArr.push(venProfObj)
 
         let venSalesObj = {}
-        venSalesObj['ri_t0d'] = i + 1
+        // venSalesObj['ri_t0d'] = i + 1
         venSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        // venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
         venSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
 
         venSalesArr.push(venSalesObj)
 
         let venProfitOverSalesObj = {}
-        venProfitOverSalesObj['ri_t0d'] = i + 1
+        // venProfitOverSalesObj['ri_t0d'] = i + 1
         venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
         venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
         venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
