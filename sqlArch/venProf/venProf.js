@@ -30,8 +30,8 @@ module.exports = {
     console.log(`vendorName==> ${vendorName}`)
 
     let venProfArr = [] // holds venProfObj data from ois_venprof_mnth_ table
-    let venSalesArr = [] // holds venSalesObj data from ois_venprof_mnth_ table
-    let venProfitOverSalesArr = [] // holds venProfitOverSalesObj data from ois_venprof_mnth_ table
+    let venSalesArr = [] // holds venProfObj data from ois_venprof_mnth_ table
+    let venProfitOverSalesArr = [] // holds venProfObj data from ois_venprof_mnth_ table
     let updateDemarcatorArr = [] // holds updateDemarcatorObj instances (for placing secondary y-axis) data from rainbowcat_update_tracker table
     let WsUpdateArr = [] // holds updateDemarcatorObj instances where dates are only for WS updates
     let WsDateOnlyArr = [] // holds updateDemarcatorObj['date] instances where dates are only for WS updates
@@ -48,31 +48,33 @@ module.exports = {
       let ois_venprof_mnth_rows = rows[0]
 
       for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
+        // let venProfObj = {}
+        // // venProfObj['ri_t0d'] = i + 1
+        // venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
+        // venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
+        // //make room for 3 y-axes
+        // // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
+
+        // venProfArr.push(venProfObj)
+
+        // let venProfObj = {}
+        // // venProfObj['ri_t0d'] = i + 1
+        // venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
+        // // venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
+
+        // venSalesArr.push(venProfObj)
+
         let venProfObj = {}
         // venProfObj['ri_t0d'] = i + 1
         venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
-        //make room for 3 y-axes
-        // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
+        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
+        venProfObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
         venProfArr.push(venProfObj)
-
-        let venSalesObj = {}
-        // venSalesObj['ri_t0d'] = i + 1
-        venSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        // venSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
-        venSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
-
-        venSalesArr.push(venSalesObj)
-
-        let venProfitOverSalesObj = {}
-        // venProfitOverSalesObj['ri_t0d'] = i + 1
-        venProfitOverSalesObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfitOverSalesObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
-        venProfitOverSalesObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
-        venProfitOverSalesObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
-
-        venProfitOverSalesArr.push(venProfitOverSalesObj)
+        venSalesArr.push(venProfObj)
+        venProfitOverSalesArr.push(venProfObj)
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
