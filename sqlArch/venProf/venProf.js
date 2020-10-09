@@ -48,27 +48,12 @@ module.exports = {
       let ois_venprof_mnth_rows = rows[0]
 
       for (let i = 0; i < ois_venprof_mnth_rows.length; i++) {
-        // let venProfObj = {}
-        // // venProfObj['ri_t0d'] = i + 1
-        // venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        // venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
-        // //make room for 3 y-axes
-        // // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
-
-        // venProfArr.push(venProfObj)
-
-        // let venProfObj = {}
-        // // venProfObj['ri_t0d'] = i + 1
-        // venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        // // venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
-        // venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
-
-        // venSalesArr.push(venProfObj)
 
         let venProfObj = {}
         // venProfObj['ri_t0d'] = i + 1
         venProfObj['date'] = ois_venprof_mnth_rows[i]['date']
-        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000
+        venProfObj[`${vendorName}_profit`] = ois_venprof_mnth_rows[i][`${vendorName}_profit`] / 1000 //divide by 1000 to reduce zeros &
+        //make room for 3 y-axes
         venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
         venProfObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
 
@@ -79,7 +64,6 @@ module.exports = {
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
       console.log(`Object.keys(ois_venprof_mnth_rows)==>${Object.keys(ois_venprof_mnth_rows)}`)
-      console.log(`JSON.stringify(venProfArr) from displayvenProf()==> ${JSON.stringify(venProfArr)}`)
     }
     //^//displayvenProf(rows)////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -90,7 +74,7 @@ module.exports = {
 
       for (let i = 0; i < rainbowcat_update_tracker_rows.length; i++) {
         let updateDemarcatorObj = {}
-        updateDemarcatorObj['ri_t0d'] = i + 1
+        // updateDemarcatorObj['ri_t0d'] = i + 1
         // updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date'].split('T', 1)[0]
         updateDemarcatorObj['date'] = rainbowcat_update_tracker_rows[i]['date']
         updateDemarcatorObj['edi_vendor_name'] = rainbowcat_update_tracker_rows[i]['edi_vendor_name']
