@@ -199,7 +199,7 @@ module.exports = {
       var linedjia = d3.line()
         .defined(d => !isNaN(d.djia_date_plus_one))
         .x(d => xDate(d.date))
-        .y(d => yProfitOverSales(d.djia_date_plus_one))
+        .y(d => ydjia(d.djia_date_plus_one))
 
       console.log(`JSON.stringify(venProfitOverSalesArr[0])==> ${JSON.stringify(venProfitOverSalesArr[0])}`)
       console.log(`JSON.stringify(vendjiaArr[0])==> ${JSON.stringify(vendjiaArr[0])}`)
