@@ -62,6 +62,7 @@ module.exports = {
         venProfArr.push(venProfObj)
         venSalesArr.push(venProfObj)
         venProfitOverSalesArr.push(venProfObj)
+        venDIJAArr.push(venProfObj)
       }
       // venProfArrCache.set('venProfArrCache_key', venProfArr)
       console.log('ois_venprof_mnth_rows.length~~~>', ois_venprof_mnth_rows.length)
