@@ -264,7 +264,7 @@ module.exports = {
         .call(d3.axisLeft(yAxisDIJA))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
-          .text(venProfitOverSalesArr.yDIJA))
+          .text(venDIJAArr.yDIJA))
       //^//........................................................................................
 
       svg.append("g")
