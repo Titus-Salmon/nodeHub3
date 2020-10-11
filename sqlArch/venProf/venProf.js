@@ -261,7 +261,7 @@ module.exports = {
 
       var yAxisDIJA = g => g
         .attr("transform", `translate(${margin.left + 60},0)`)
-        .call(d3.axisLeft(yAxisDIJA))
+        .call(d3.axisLeft(yDIJA))
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venDIJAArr.yDIJA))
