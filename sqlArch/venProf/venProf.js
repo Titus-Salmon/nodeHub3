@@ -178,7 +178,7 @@ module.exports = {
         .range([xAxis_yValue, margin.top])
 
       var ydjia = d3.scaleLinear()
-        .domain([0, d3.max(venProfitOverSalesArr, d => d.djia_date_plus_one)]).nice()
+        .domain([0, d3.max(vendjiaArr, d => d.djia_date_plus_one)]).nice()
         .range([xAxis_yValue, margin.top])
 
       var lineProfit = d3.line()
