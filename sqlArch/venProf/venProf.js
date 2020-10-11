@@ -32,6 +32,7 @@ module.exports = {
     let venProfArr = [] // holds venProfObj data from ois_venprof_mnth_ table
     let venSalesArr = [] // holds venProfObj data from ois_venprof_mnth_ table
     let venProfitOverSalesArr = [] // holds venProfObj data from ois_venprof_mnth_ table
+    let venDIJAArr = [] // holds venProfObj data from ois_venprof_mnth_ table
     let updateDemarcatorArr = [] // holds updateDemarcatorObj instances (for placing secondary y-axis) data from rainbowcat_update_tracker table
     let WsUpdateArr = [] // holds updateDemarcatorObj instances where dates are only for WS updates
     let WsDateOnlyArr = [] // holds updateDemarcatorObj['date] instances where dates are only for WS updates
@@ -56,6 +57,7 @@ module.exports = {
         //make room for 3 y-axes
         venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
         venProfObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
+        venProfObj[`dija_date_plus_one`] = ois_venprof_mnth_rows[i][`dija_date_plus_one`]
 
         venProfArr.push(venProfObj)
         venSalesArr.push(venProfObj)
@@ -174,6 +176,10 @@ module.exports = {
         .domain([0, d3.max(venProfitOverSalesArr, d => d.kehe_profit_over_sales)]).nice()
         .range([xAxis_yValue, margin.top])
 
+      var yDIJA = d3.scaleLinear()
+        .domain([0, d3.max(venProfitOverSalesArr, d => d.dija_date_plus_one)]).nice()
+        .range([xAxis_yValue, margin.top])
+
       var lineProfit = d3.line()
         .defined(d => !isNaN(d.kehe_profit))
         .x(d => xDate(d.date))
@@ -188,6 +194,11 @@ module.exports = {
         .defined(d => !isNaN(d.kehe_profit_over_sales))
         .x(d => xDate(d.date))
         .y(d => yProfitOverSales(d.kehe_profit_over_sales))
+
+      var lineDIJA = d3.line()
+        .defined(d => !isNaN(d.dija_date_plus_one))
+        .x(d => xDate(d.date))
+        .y(d => yProfitOverSales(d.dija_date_plus_one))
 
       console.log(`JSON.stringify(venProfitOverSalesArr)==> ${JSON.stringify(venProfitOverSalesArr)}`)
 
@@ -239,6 +250,21 @@ module.exports = {
         .call(g => g.select(".domain").remove())
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales))
+
+      svg.append("rect")
+        .attr("x", -20)
+        .attr("y", margin.top)
+        .attr("width", 25)
+        .attr("height", xAxis_yValue - 20)
+        .attr("fill", "#aec08c")
+        .attr("transform", `translate(${margin.left + 60},0)`)
+
+      var yAxisDIJA = g => g
+        .attr("transform", `translate(${margin.left + 60},0)`)
+        .call(d3.axisLeft(yAxisDIJA))
+        .call(g => g.select(".domain").remove())
+        .call(g => g.select(".tick:last-of-type text").clone()
+          .text(venProfitOverSalesArr.yDIJA))
       //^//........................................................................................
 
       svg.append("g")
@@ -256,6 +282,11 @@ module.exports = {
 
       svg.append("g")
         .call(yAxisProfitOverSales).selectAll(".tick text")
+        .attr("fill", "black")
+        .style('font-size', '6px')
+
+      svg.append("g")
+        .call(yAxisDIJA).selectAll(".tick text")
         .attr("fill", "black")
         .style('font-size', '6px')
 
@@ -285,6 +316,15 @@ module.exports = {
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
         .attr("d", lineProfitOverSales)
+
+      svg.append("path")
+        .datum(venDIJAArr)
+        .attr("fill", "none")
+        .attr("stroke", "#aec08c")
+        .attr("stroke-width", 1.5)
+        .attr("stroke-linejoin", "round")
+        .attr("stroke-linecap", "round")
+        .attr("d", lineDIJA)
 
       timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
