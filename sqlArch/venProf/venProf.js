@@ -200,7 +200,8 @@ module.exports = {
         .x(d => xDate(d.date))
         .y(d => yProfitOverSales(d.dija_date_plus_one))
 
-      console.log(`JSON.stringify(venProfitOverSalesArr)==> ${JSON.stringify(venProfitOverSalesArr)}`)
+      console.log(`JSON.stringify(venProfitOverSalesArr[0])==> ${JSON.stringify(venProfitOverSalesArr[0])}`)
+      console.log(`JSON.stringify(venDIJAArr[0])==> ${JSON.stringify(venDIJAArr[0])}`)
 
       var xAxisDate = g => g
         .attr("transform", `translate(0,${xAxis_yValue})`)
