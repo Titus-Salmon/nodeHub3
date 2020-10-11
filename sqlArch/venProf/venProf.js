@@ -57,7 +57,7 @@ module.exports = {
         //make room for 3 y-axes
         venProfObj[`${vendorName}_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_sales`] / 1000
         venProfObj[`${vendorName}_profit_over_sales`] = ois_venprof_mnth_rows[i][`${vendorName}_profit_over_sales`]
-        venProfObj[`djia_date_plus_one`] = ois_venprof_mnth_rows[i][`djia_date_plus_one`]
+        venProfObj[`djia_date_plus_one`] = ois_venprof_mnth_rows[i][`djia_date_plus_one`] / 1000
 
         venProfArr.push(venProfObj)
         venSalesArr.push(venProfObj)
