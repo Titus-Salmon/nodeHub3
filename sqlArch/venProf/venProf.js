@@ -258,7 +258,7 @@ module.exports = {
         .attr("y", margin.top)
         .attr("width", 25)
         .attr("height", xAxis_yValue - 20)
-        .attr("fill", "#aec08c")
+        .attr("fill", "#d0dbbd")
         .attr("transform", `translate(${margin.left + 60},0)`)
 
       var yAxisdjia = g => g
@@ -322,7 +322,7 @@ module.exports = {
       svg.append("path")
         .datum(vendjiaArr)
         .attr("fill", "none")
-        .attr("stroke", "#aec08c")
+        .attr("stroke", "#d0dbbd")
         .attr("stroke-width", 1.5)
         .attr("stroke-linejoin", "round")
         .attr("stroke-linecap", "round")
