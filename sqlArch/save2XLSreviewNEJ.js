@@ -170,7 +170,7 @@ module.exports = {
     }
 
 
-    wb.write(`${process.cwd()}/public/csv/${req.body['xlsPost']}.xlxs`)
+    wb.write(`${process.cwd()}/public/csv/${req.body['xlsPost']}.xlsx`)
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //v//Automatically add note to rainbowcat table that Retail Review has been generated//////////////////////////////////////
@@ -186,11 +186,11 @@ module.exports = {
 
     function updateRbCat() {
       connection.query(
-        `UPDATE rainbowcat SET RtlRvw = '${req.body['xlsPost']}.xlxs' WHERE ediName = '${ediVendorName}'`,
+        `UPDATE rainbowcat SET RtlRvw = '${req.body['xlsPost']}.xlsx' WHERE ediName = '${ediVendorName}'`,
         function (err, rows, fields) {
           if (err) throw err
           res.render('vw-MySqlTableHub', {
-            title: `<<${process.cwd()}/public/csv/${req.body['xlsPost']}.xlxs SAVED, and rainbowcat updated>>`
+            title: `<<${process.cwd()}/public/csv/${req.body['xlsPost']}.xlsx SAVED, and rainbowcat updated>>`
           })
         })
     }
@@ -201,7 +201,7 @@ module.exports = {
 
 
     // res.render('vw-MySqlTableHub', {
-    //   title: `<<${process.cwd()}/public/csv/${req.body['xlsPost']}.xlxs SAVED>>`
+    //   title: `<<${process.cwd()}/public/csv/${req.body['xlsPost']}.xlsx SAVED>>`
     // });
 
   })
