@@ -106,6 +106,7 @@ module.exports = {
           console.log(`nejRowsPagin.length (BEFORE gpet handling)==> ${nejRowsPagin.length}`)
           // console.log(`JSON.stringify(nejRowsPagin[0])==> ${JSON.stringify(nejRowsPagin[0])}`)
           let edlpRows = rows[1] //targets 2nd query on rb_edlp_data table
+          console.log(`edlpRows[0]==> ${edlpRows[0]}`)
           let nejRowsNonPagin = rows[2] //targets 3rd query on NEJ table
           console.log(`nejRowsNonPagin.length (BEFORE gpet handling)==> ${nejRowsNonPagin.length}`)
           let countRows = rows[3]
