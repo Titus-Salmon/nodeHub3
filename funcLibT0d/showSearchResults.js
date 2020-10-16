@@ -307,9 +307,9 @@ module.exports = {
             srcRsObj['reqdRetail'] = reviewObj['reqdRetail'] = Math.round((-(srcRsObj['ediCostMod'] - srcRsObj['ediCostMod'] * rtlDiscoVar) / (departmentMargin - 1)) * 100) / 100 //applies margin to WS
             //^//Retail applied vendor discount (math is dependent on these variables)
 
-            console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod']==> ${srcRsObj['ediCostMod']}`)
-            console.log(`calcCharm() from showSearchResults.js says: rtlDiscoVar==> ${rtlDiscoVar}`)
-            console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod'] * rtlDiscoVar==> ${srcRsObj['ediCostMod'] * rtlDiscoVar}`)
+            // console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod']==> ${srcRsObj['ediCostMod']}`)
+            // console.log(`calcCharm() from showSearchResults.js says: rtlDiscoVar==> ${rtlDiscoVar}`)
+            // console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod'] * rtlDiscoVar==> ${srcRsObj['ediCostMod'] * rtlDiscoVar}`)
             //v//ACTUALLY, IT APPEARS WE DO NOT want to apply ongoing discount (discountToApply) OR edplDisco at the RETAIL level/////////////////////
             //BUT SOMETIMES WE DO WANT TO APPLY THE DISCOUNT AT THE RETAIL LEVEL ALSO; THAT IS WHEN WE'RE PASSING THE SAVINGS ON TO THE CUSTOMER
             // if (srcRsObj['edlpVar'] !== 'EDLP') { //we actually DO want to apply ongoing discount (discountToApply) OR edplDisco
@@ -436,6 +436,7 @@ module.exports = {
 
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      console.log(`edlpRows.length==> ${edlpRows.length}`)
       for (let j = 0; j < edlpRows.length; j++) {
         srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
@@ -443,6 +444,8 @@ module.exports = {
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
           srcRsObj['edlpVar'] = "EDLP"
           reviewObj['edlpVar'] = "EDLP"
+          console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
         } else {
           srcRsObj['edlpVar'] = ""
           reviewObj['edlpVar'] = ""
