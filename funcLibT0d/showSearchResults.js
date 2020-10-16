@@ -579,9 +579,9 @@ module.exports = {
       // console.log(`cleanedNameTest==> ${cleanedNameTest}`)
       var cleanedName2 = nejRowsToggle[i][genericHeaderObj.nameHeader].replace(',', '')
       srcRsObj['name'] = cleanedName2
-      console.log(`srcRsObj['name']==> ${srcRsObj['name']}`)
+      // console.log(`srcRsObj['name']==> ${srcRsObj['name']}`)
       reviewObj['name'] = cleanedName2
-      console.log(`reviewObj['name']==> ${reviewObj['name']}`)
+      // console.log(`reviewObj['name']==> ${reviewObj['name']}`)
       // console.log(`cleanedName2 <<${i}>>==> ${cleanedName2}`)
 
       // reviewObj['name'] = nejRowsToggle[i][genericHeaderObj.nameHeader]
