@@ -861,7 +861,7 @@ module.exports = {
         }
 
 
-        async function populateResultsObj_Rtl() {
+        function populateResultsObj_Rtl() {
           skuMismatchFlagOptionHandler()
           if (srcRsObj['charm'] !== "" && Math.round((srcRsObj['charm']) * 100) / 100 !== Math.round((srcRsObj['sibBasePrice']) * 100) / 100) { // only push results that have some
             //value for "charm" column, AND ALSO select only items whose updated price is different than the exist. price in cplt
@@ -912,7 +912,7 @@ module.exports = {
       function edlpHandler() {
         //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
         // console.log(`edlpRows.length==> ${edlpRows.length}`)
-        console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
+        // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
         for (let j = 0; j < edlpRows.length; j++) {
           srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
           reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
