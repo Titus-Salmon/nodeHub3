@@ -436,10 +436,10 @@ module.exports = {
       // console.log('calcResults says: srcRsObj[\'upc\']~~~>', srcRsObj['upc'])
       reviewObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
 
-      console.log(`searchResults.length==> ${searchResults.length}`)
-      console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
+      // console.log(`searchResults.length==> ${searchResults.length}`)
+      // console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
 
-      console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
+      // console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
 
       // function edlpHandler() {
       //   //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
