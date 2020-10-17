@@ -441,24 +441,28 @@ module.exports = {
 
       console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
 
-      //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      // console.log(`edlpRows.length==> ${edlpRows.length}`)
-      console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
-      for (let j = 0; j < edlpRows.length; j++) {
-        srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-        reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+      async function edlpHandler() {
+        //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+        // console.log(`edlpRows.length==> ${edlpRows.length}`)
+        console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
+        for (let j = 0; j < edlpRows.length; j++) {
+          srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+          reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
-        if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          srcRsObj['edlpVar'] = "EDLP"
-          searchResults.push(srcRsObj)
-          // searchResults[i]['edlpVar'] = "EDLP"
-        } else {
-          srcRsObj['edlpVar'] = ""
-          searchResults.push(srcRsObj)
-          // searchResults[i]['edlpVar'] = ""
+          if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+            // srcRsObj['edlpVar'] = "EDLP"
+            // searchResults.push(srcRsObj)
+            searchResults[i]['edlpVar'] = "EDLP"
+          } else {
+            // srcRsObj['edlpVar'] = ""
+            // searchResults.push(srcRsObj)
+            searchResults[i]['edlpVar'] = ""
+          }
         }
+        //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       }
-      //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+
+
 
       srcRsObj['cpltCost'] = reviewObj['cpltCost'] = nejRowsToggle[i][genericHeaderObj.invLastcostHeader]
 
@@ -857,7 +861,7 @@ module.exports = {
         }
 
 
-        function populateResultsObj_Rtl() {
+        async function populateResultsObj_Rtl() {
           skuMismatchFlagOptionHandler()
           if (srcRsObj['charm'] !== "" && Math.round((srcRsObj['charm']) * 100) / 100 !== Math.round((srcRsObj['sibBasePrice']) * 100) / 100) { // only push results that have some
             //value for "charm" column, AND ALSO select only items whose updated price is different than the exist. price in cplt
@@ -897,10 +901,10 @@ module.exports = {
         //v//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
         if (frmInptsObj.edlpSwitch == 'no') {
           if (srcRsObj['edlpVar'] !== 'EDLP') {
-            populateResultsObj_Rtl()
+            populateResultsObj_Rtl().then(edlpHandler())
           }
         } else {
-          populateResultsObj_Rtl()
+          populateResultsObj_Rtl().then(edlpHandler())
         }
         //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
       }
