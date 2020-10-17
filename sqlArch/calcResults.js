@@ -161,9 +161,10 @@ module.exports = {
                 if (searchResultsNonPag[k]['upc'] == edlpRows[j]['edlp_upc']) {
                   searchResultsNonPag[k]['edlpVar'] = 'EDLP'
                   console.log(`JSON.stringify(searchResultsNonPag[${k}]['edlpVar'])==> ${JSON.stringify(searchResultsNonPag[k]['edlpVar'])}`)
-                } else {
-                  searchResultsNonPag[k]['edlpVar'] = 'crikey'
                 }
+                // else {
+                //   searchResultsNonPag[k]['edlpVar'] = 'crikey'
+                // }
               }
               // srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
               // reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
