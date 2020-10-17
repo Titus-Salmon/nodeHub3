@@ -446,13 +446,13 @@ module.exports = {
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-          console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
+          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
           srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
           edlpHandlerArr.push(srcRsObj['edlpVar'])
         } else {
-          console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-          console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
+          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
           srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
           edlpHandlerArr.push(srcRsObj['edlpVar'])
         }
