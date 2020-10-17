@@ -162,7 +162,7 @@ module.exports = {
                   searchResultsNonPag[k]['edlpVar'] = 'EDLP'
                   console.log(`JSON.stringify(searchResultsNonPag[${k}]['edlpVar'])==> ${JSON.stringify(searchResultsNonPag[k]['edlpVar'])}`)
                 } else {
-                  searchResultsNonPag[k]['edlpVar'] = 'EDLP'
+                  searchResultsNonPag[k]['edlpVar'] = ''
                 }
               }
               // srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
