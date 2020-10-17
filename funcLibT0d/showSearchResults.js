@@ -449,9 +449,11 @@ module.exports = {
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          // searchResults[i]['edlpVar'] = "EDLP"
+          srcRsObj['edlpVar'] = "EDLP"
+          searchResults[i]['edlpVar'] = "EDLP"
         } else {
-          // searchResults[i]['edlpVar'] = ""
+          srcRsObj['edlpVar'] = "EDLP"
+          searchResults[i]['edlpVar'] = ""
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
