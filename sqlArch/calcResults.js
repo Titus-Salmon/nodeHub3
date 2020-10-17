@@ -160,6 +160,7 @@ module.exports = {
               for (let k = 0; k < searchResultsNonPag.length; k++) {
                 if (searchResultsNonPag[k]['upc'] == edlpRows[j]['edlp_upc']) {
                   searchResultsNonPag[k]['edlpVar'] = 'EDLP'
+                  srcRsXLS_nonPag[k]['edlpVar'] = 'EDLP'
                   console.log(`JSON.stringify(searchResultsNonPag[${k}]['edlpVar'])==> ${JSON.stringify(searchResultsNonPag[k]['edlpVar'])}`)
                 }
                 // else {
