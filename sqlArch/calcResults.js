@@ -187,10 +187,11 @@ module.exports = {
             }
             //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
           }
-          edlpHandler()
+          // edlpHandler()
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
             srcRsXLS_nonPag, edlpRows, nejRowsNonPagin)
+          edlpHandler()
           cacheMain.set('searchResultsNonPagCache_key', searchResultsNonPag)
 
           function paginFirstResultSet() {
