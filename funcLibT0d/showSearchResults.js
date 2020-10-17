@@ -924,7 +924,7 @@ module.exports = {
             searchResultsForCSV[i]['edlpVar'] = "EDLP"
             searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
             searchResultsForXLS[i]['edlpVar'] = "EDLP"
-            // console.log(`JSON.stringify(searchResults[${i}])==> ${JSON.stringify(searchResults[i])}`)
+            console.log(`JSON.stringify(searchResults[${i}]['edlpVar'])==> ${JSON.stringify(searchResults[i]['edlpVar'])}`)
           } else {
             // srcRsObj['edlpVar'] = ""
             // edlpHandlerArr.push(srcRsObj)
