@@ -443,22 +443,15 @@ module.exports = {
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       // console.log(`edlpRows.length==> ${edlpRows.length}`)
+      console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
       for (let j = 0; j < edlpRows.length; j++) {
         srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          searchResults[i]['edlpVar'] = "EDLP"
-          // srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
-          // edlpHandlerArr.push(srcRsObj['edlpVar'])
+          // searchResults[i]['edlpVar'] = "EDLP"
         } else {
-          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          searchResults[i]['edlpVar'] = ""
-          // srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
-          // edlpHandlerArr.push(srcRsObj['edlpVar'])
+          // searchResults[i]['edlpVar'] = ""
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
