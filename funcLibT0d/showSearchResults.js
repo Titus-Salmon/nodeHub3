@@ -13,6 +13,8 @@ module.exports = {
 
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
 
+    let edlpHandlerArr = []
+
     for (let i = 0; i < nejRowsToggle.length; i++) { //Add searched-for table entries from db to searchResults array, for
       //displaying in the dynamic DOM table. Also add margin data, & retail & charm calcs to display in DOM table
       let srcRsObj = {}
@@ -434,6 +436,8 @@ module.exports = {
       // console.log('calcResults says: srcRsObj[\'upc\']~~~>', srcRsObj['upc'])
       reviewObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
 
+      console.log(`searchResults.length==> ${searchResults.length}`)
+      console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults.length)}`)
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       console.log(`edlpRows.length==> ${edlpRows.length}`)
@@ -444,11 +448,13 @@ module.exports = {
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
           console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          return srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
+          srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
+          edlpHandlerArr.push(srcRsObj['edlpVar'])
         } else {
           console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          return srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
+          srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
+          edlpHandlerArr.push(srcRsObj['edlpVar'])
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
