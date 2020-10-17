@@ -436,11 +436,11 @@ module.exports = {
       // console.log('calcResults says: srcRsObj[\'upc\']~~~>', srcRsObj['upc'])
       reviewObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
 
-      console.log(`searchResults.length==> ${searchResults.length}`)
-      console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
+      // console.log(`searchResults.length==> ${searchResults.length}`)
+      // console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      console.log(`edlpRows.length==> ${edlpRows.length}`)
+      // console.log(`edlpRows.length==> ${edlpRows.length}`)
       for (let j = 0; j < edlpRows.length; j++) {
         srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
