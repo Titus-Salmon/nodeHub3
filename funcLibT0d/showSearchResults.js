@@ -441,26 +441,26 @@ module.exports = {
 
       console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
 
-      async function edlpHandler() {
-        //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-        // console.log(`edlpRows.length==> ${edlpRows.length}`)
-        console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
-        for (let j = 0; j < edlpRows.length; j++) {
-          srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-          reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+      // function edlpHandler() {
+      //   //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      //   // console.log(`edlpRows.length==> ${edlpRows.length}`)
+      //   console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
+      //   for (let j = 0; j < edlpRows.length; j++) {
+      //     srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+      //     reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
-          if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-            // srcRsObj['edlpVar'] = "EDLP"
-            // searchResults.push(srcRsObj)
-            searchResults[i]['edlpVar'] = "EDLP"
-          } else {
-            // srcRsObj['edlpVar'] = ""
-            // searchResults.push(srcRsObj)
-            searchResults[i]['edlpVar'] = ""
-          }
-        }
-        //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      }
+      //     if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+      //       srcRsObj['edlpVar'] = "EDLP"
+      //       edlpHandlerArr.push(srcRsObj)
+      //       // searchResults[i]['edlpVar'] = "EDLP"
+      //     } else {
+      //       srcRsObj['edlpVar'] = ""
+      //       edlpHandlerArr.push(srcRsObj)
+      //       // searchResults[i]['edlpVar'] = ""
+      //     }
+      //   }
+      //   //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      // }
 
 
 
@@ -901,10 +901,10 @@ module.exports = {
         //v//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
         if (frmInptsObj.edlpSwitch == 'no') {
           if (srcRsObj['edlpVar'] !== 'EDLP') {
-            populateResultsObj_Rtl().then(edlpHandler())
+            populateResultsObj_Rtl()
           }
         } else {
-          populateResultsObj_Rtl().then(edlpHandler())
+          populateResultsObj_Rtl()
         }
         //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
       }
@@ -913,5 +913,27 @@ module.exports = {
     console.log('showSearchResults says: searchResults.length from showSearchResults()==->', searchResults.length)
     console.log('showSearchResults says: searchResults[0] from showSearchResults()==>', searchResults[0])
     // console.log('showSearchResults says: searchResultsForCSVreview[0] from showSearchResults()==>', searchResultsForCSVreview[0])
+
+    function edlpHandler() {
+      //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      // console.log(`edlpRows.length==> ${edlpRows.length}`)
+      console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
+      for (let j = 0; j < edlpRows.length; j++) {
+        srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+        reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+
+        if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+          // srcRsObj['edlpVar'] = "EDLP"
+          // edlpHandlerArr.push(srcRsObj)
+          searchResults[i]['edlpVar'] = "EDLP"
+        } else {
+          // srcRsObj['edlpVar'] = ""
+          // edlpHandlerArr.push(srcRsObj)
+          searchResults[i]['edlpVar'] = ""
+        }
+      }
+      //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+    }
+    edlpHandler()
   }
 }
