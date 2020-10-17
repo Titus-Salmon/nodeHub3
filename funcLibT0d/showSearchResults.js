@@ -450,10 +450,12 @@ module.exports = {
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
           srcRsObj['edlpVar'] = "EDLP"
-          searchResults[i]['edlpVar'] = "EDLP"
+          searchResults.push(srcRsObj)
+          // searchResults[i]['edlpVar'] = "EDLP"
         } else {
-          srcRsObj['edlpVar'] = "EDLP"
-          searchResults[i]['edlpVar'] = ""
+          srcRsObj['edlpVar'] = ""
+          searchResults.push(srcRsObj)
+          // searchResults[i]['edlpVar'] = ""
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
