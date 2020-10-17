@@ -909,34 +909,34 @@ module.exports = {
         //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
       }
 
-      function edlpHandler() {
-        //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-        // console.log(`edlpRows.length==> ${edlpRows.length}`)
-        // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
-        for (let j = 0; j < edlpRows.length; j++) {
-          srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-          reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+      // function edlpHandler() {
+      //   //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      //   // console.log(`edlpRows.length==> ${edlpRows.length}`)
+      //   // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
+      //   for (let j = 0; j < edlpRows.length; j++) {
+      //     srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+      //     reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
-          if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-            // srcRsObj['edlpVar'] = "EDLP"
-            // edlpHandlerArr.push(srcRsObj)
-            searchResults[i]['edlpVar'] = "EDLP"
-            searchResultsForCSV[i]['edlpVar'] = "EDLP"
-            searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
-            searchResultsForXLS[i]['edlpVar'] = "EDLP"
-            console.log(`JSON.stringify(searchResults[${i}]['edlpVar'])==> ${JSON.stringify(searchResults[i]['edlpVar'])}`)
-          } else {
-            // srcRsObj['edlpVar'] = ""
-            // edlpHandlerArr.push(srcRsObj)
-            searchResults[i]['edlpVar'] = ""
-            searchResultsForCSV[i]['edlpVar'] = ""
-            searchResultsForCSVreview[i]['edlpVar'] = ""
-            searchResultsForXLS[i]['edlpVar'] = ""
-          }
-        }
-        //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      }
-      edlpHandler()
+      //     if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+      //       // srcRsObj['edlpVar'] = "EDLP"
+      //       // edlpHandlerArr.push(srcRsObj)
+      //       searchResults[i]['edlpVar'] = "EDLP"
+      //       searchResultsForCSV[i]['edlpVar'] = "EDLP"
+      //       searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
+      //       searchResultsForXLS[i]['edlpVar'] = "EDLP"
+      //       console.log(`JSON.stringify(searchResults[${i}]['edlpVar'])==> ${JSON.stringify(searchResults[i]['edlpVar'])}`)
+      //     } else {
+      //       // srcRsObj['edlpVar'] = ""
+      //       // edlpHandlerArr.push(srcRsObj)
+      //       searchResults[i]['edlpVar'] = ""
+      //       searchResultsForCSV[i]['edlpVar'] = ""
+      //       searchResultsForCSVreview[i]['edlpVar'] = ""
+      //       searchResultsForXLS[i]['edlpVar'] = ""
+      //     }
+      //   }
+      //   //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+      // }
+      // edlpHandler()
 
     }
     console.log('showSearchResults says: searchResults.length from showSearchResults()==->', searchResults.length)
