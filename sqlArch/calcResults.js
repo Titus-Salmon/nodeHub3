@@ -155,6 +155,7 @@ module.exports = {
             //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
             // console.log(`edlpRows.length==> ${edlpRows.length}`)
             // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
+            console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
             for (let j = 0; j < edlpRows.length; j++) {
               for (let k = 0; k < searchResultsNonPag.length; k++) {
                 if (searchResultsNonPag[k]['UPC'] == edlpRows[j]['edlp_upc']) {
