@@ -442,13 +442,13 @@ module.exports = {
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          srcRsObj['edlpVar'] = "EDLP"
-          reviewObj['edlpVar'] = "EDLP"
           console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
+          return srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
         } else {
-          srcRsObj['edlpVar'] = ""
-          reviewObj['edlpVar'] = ""
+          console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
+          return srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
