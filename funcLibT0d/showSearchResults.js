@@ -437,7 +437,7 @@ module.exports = {
       reviewObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
 
       console.log(`searchResults.length==> ${searchResults.length}`)
-      console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults.length)}`)
+      console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       console.log(`edlpRows.length==> ${edlpRows.length}`)
