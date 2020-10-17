@@ -439,6 +439,8 @@ module.exports = {
       console.log(`searchResults.length==> ${searchResults.length}`)
       console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
 
+      console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
+
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       // console.log(`edlpRows.length==> ${edlpRows.length}`)
       for (let j = 0; j < edlpRows.length; j++) {
