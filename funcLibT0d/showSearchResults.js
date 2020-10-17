@@ -448,13 +448,15 @@ module.exports = {
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
           // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
-          edlpHandlerArr.push(srcRsObj['edlpVar'])
+          searchResults[i]['edlpVar'] = "EDLP"
+          // srcRsObj['edlpVar'] = reviewObj['edlpVar'] = "EDLP"
+          // edlpHandlerArr.push(srcRsObj['edlpVar'])
         } else {
           // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-          srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
-          edlpHandlerArr.push(srcRsObj['edlpVar'])
+          searchResults[i]['edlpVar'] = ""
+          // srcRsObj['edlpVar'] = reviewObj['edlpVar'] = ""
+          // edlpHandlerArr.push(srcRsObj['edlpVar'])
         }
       }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
