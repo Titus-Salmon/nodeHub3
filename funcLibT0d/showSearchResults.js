@@ -921,11 +921,17 @@ module.exports = {
             // srcRsObj['edlpVar'] = "EDLP"
             // edlpHandlerArr.push(srcRsObj)
             searchResults[i]['edlpVar'] = "EDLP"
-            console.log(`JSON.stringify(searchResults[${i}])==> ${JSON.stringify(searchResults[i])}`)
+            searchResultsForCSV[i]['edlpVar'] = "EDLP"
+            searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
+            searchResultsForXLS[i]['edlpVar'] = "EDLP"
+            // console.log(`JSON.stringify(searchResults[${i}])==> ${JSON.stringify(searchResults[i])}`)
           } else {
             // srcRsObj['edlpVar'] = ""
             // edlpHandlerArr.push(srcRsObj)
             searchResults[i]['edlpVar'] = ""
+            searchResultsForCSV[i]['edlpVar'] = ""
+            searchResultsForCSVreview[i]['edlpVar'] = ""
+            searchResultsForXLS[i]['edlpVar'] = ""
           }
         }
         //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
