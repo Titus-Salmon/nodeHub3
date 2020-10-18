@@ -13,7 +13,7 @@ module.exports = {
 
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
 
-    let edlpHandlerArr = []
+    let edlpHandlerObj = {}
 
     for (let i = 0; i < nejRowsToggle.length; i++) { //Add searched-for table entries from db to searchResults array, for
       //displaying in the dynamic DOM table. Also add margin data, & retail & charm calcs to display in DOM table
@@ -444,13 +444,15 @@ module.exports = {
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          edlpHandlerArr.push('EDLP')
+          edlpHandlerObj[`${i}_${j}`]['edlpVar'] = 'EDLP'
+          // edlpHandlerArr.push('EDLP')
           // srcRsObj['edlpVar'] = "EDLP"
           // reviewObj['edlpVar'] = "EDLP"
           // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
         } else {
-          edlpHandlerArr.push('NON-EDLP')
+          edlpHandlerObj[`${i}_${j}`]['edlpVar'] = '---'
+          // edlpHandlerArr.push('NON-EDLP')
           // srcRsObj['edlpVar'] = ""
           // reviewObj['edlpVar'] = ""
         }
@@ -920,12 +922,12 @@ module.exports = {
 
     }
 
-    for (let m = 0; m < searchResults.length; m++) {
-      searchResults[m]['edlpVar'] = edlpHandlerArr[m]
-    }
+    // for (let m = 0; m < searchResults.length; m++) {
+    //   searchResults[m]['edlpVar'] = edlpHandlerArr[m]
+    // }
     console.log('showSearchResults says: searchResults.length from showSearchResults()==->', searchResults.length)
     console.log('showSearchResults says: searchResults[0] from showSearchResults()==>', searchResults[0])
-    console.log(`edlpHandlerArr==> ${edlpHandlerArr}`)
+    console.log(`JSON.stringify(edlpHandlerObj)==> ${JSON.stringify(edlpHandlerObj)}`)
     // console.log('showSearchResults says: searchResultsForCSVreview[0] from showSearchResults()==>', searchResultsForCSVreview[0])
   }
 }
