@@ -438,16 +438,16 @@ module.exports = {
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
       // console.log(`edlpRows.length==> ${edlpRows.length}`)
       for (let j = 0; j < edlpRows.length; j++) {
-        // srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-        // reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+        srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+        reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
-        // if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+        if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
 
-        //   srcRsObj['edlpVar'] = "EDLP"
-        //   reviewObj['edlpVar'] = "EDLP"
-        //   // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-        //   // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-        // }
+          srcRsObj['edlpVar'] = "EDLP"
+          reviewObj['edlpVar'] = "EDLP"
+          console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
+        }
         // else {
         //   srcRsObj['edlpVar'] = ""
         //   reviewObj['edlpVar'] = ""
