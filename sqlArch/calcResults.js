@@ -165,7 +165,10 @@ module.exports = {
             }
             //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
           }
-          edlpHandler()
+          if (frmInptsObj.edlpSwitch == 'no') {
+            edlpHandler()
+          }
+
           console.log(`nejRowsNonPagin.length (AFTER edlpHandler())==> ${nejRowsNonPagin.length}`)
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
