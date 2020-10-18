@@ -72,15 +72,13 @@ module.exports = {
     function queryNejTablePaginated() {
       //v//retrieve info from database table to display in DOM table/////////////////////////////////////////////////////////
       //filters by UPC & catapult cost (want to grab any differing cost items & make decision on what to do in showSearchResults())
-      connection.query( //1st query is pagination query; 2nd query is getting EDLP data; 3rd query is non-paginated query;
-        //4th query is for getting COUNT (# of total rows)
+      connection.query( //1st query is pagination query; 2nd query is non-paginated query;
+        //3rd query is for getting COUNT (# of total rows)
         `SELECT * FROM ${frmInptsObj.formInput0}
         WHERE dptName != 'RB_CLEANUP' GROUP BY ${genericHeaderObj.upcHeader},
       ${genericHeaderObj.invLastcostHeader} ORDER BY
       ${genericHeaderObj.rbDeptHeader} ASC, ${genericHeaderObj.pi1Description} ASC, ${genericHeaderObj.pi2Description} ASC
       LIMIT ${paginPostObj['offsetPost']},${paginPostObj['numQueryRes']};
-
-      SELECT * FROM rb_edlp_data;
       
       SELECT * FROM ${frmInptsObj.formInput0}
       WHERE dptName != 'RB_CLEANUP' GROUP BY ${genericHeaderObj.upcHeader},
@@ -105,21 +103,21 @@ module.exports = {
           // console.log(`nejRowsPagin[0]==> ${nejRowsPagin[0]}`)
           console.log(`nejRowsPagin.length (BEFORE gpet handling)==> ${nejRowsPagin.length}`)
           // console.log(`JSON.stringify(nejRowsPagin[0])==> ${JSON.stringify(nejRowsPagin[0])}`)
-          let edlpRows = rows[1] //targets 2nd query on rb_edlp_data table
-          console.log(`JSON.stringify(edlpRows[0])==> ${JSON.stringify(edlpRows[0])}`)
-          let nejRowsNonPagin = rows[2] //targets 3rd query on NEJ table
+          // let edlpRows = rows[1] //targets 2nd query on rb_edlp_data table
+          // console.log(`JSON.stringify(edlpRows[0])==> ${JSON.stringify(edlpRows[0])}`)
+          let nejRowsNonPagin = rows[1] //targets 3rd query on NEJ table
           console.log(`nejRowsNonPagin.length (BEFORE gpet handling)==> ${nejRowsNonPagin.length}`)
-          let countRows = rows[3]
+          let countRows = rows[2]
           console.log(`JSON.stringify(countRows) from calcResults.js==> ${JSON.stringify(countRows)}`)
-          let gpetGrocRows = rows[4]
+          let gpetGrocRows = rows[3]
           // console.log(`JSON.stringify(gpetGrocRows[0])==> ${JSON.stringify(gpetGrocRows[0])}`)
-          let gpetRefRows = rows[5]
-          let gpetFrzRows = rows[6]
-          let gpetGenMerchRows = rows[7]
-          let gpetINFRArows = rows[8]
-          let gpetCaseStackRows = rows[9]
-          let gpetNegoEDLProws = rows[10]
-          let gpetCadiaRows = rows[11]
+          let gpetRefRows = rows[4]
+          let gpetFrzRows = rows[5]
+          let gpetGenMerchRows = rows[6]
+          let gpetINFRArows = rows[7]
+          let gpetCaseStackRows = rows[8]
+          let gpetNegoEDLProws = rows[9]
+          let gpetCadiaRows = rows[10]
 
           //v////////handle gpet tables ==> if UPC is in gpet table, ignore it in showSearchResults calcs
           function gpetUPCremover(gpetTableRows) {
@@ -152,7 +150,7 @@ module.exports = {
           //^////////handle gpet tables ==> if UPC is in gpet table, ignore it in showSearchResults calcs
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
-            srcRsXLS_nonPag, edlpRows, nejRowsNonPagin)
+            srcRsXLS_nonPag, nejRowsNonPagin)
           cacheMain.set('searchResultsNonPagCache_key', searchResultsNonPag)
 
           function paginFirstResultSet() {
@@ -165,9 +163,6 @@ module.exports = {
           paginFirstResultSet()
 
           console.log(`calcResults says firstResultSet.length from paginFirstResultSet==> ${firstResultSet.length}`)
-
-          // showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsPag, srcRsCSV_Pag, srcRsCSVrvwPag,
-          //   edlpRows, nejRowsPagin)
 
           let totalRows = searchResultsNonPag.length //use length of non-paginated results from showSearchResults for total # of rows,
           console.log(`totalRows==> ${totalRows}`)

@@ -1,19 +1,9 @@
 module.exports = {
   showSearchResults: function (rows, genericHeaderObj, frmInptsObj, searchResults, searchResultsForCSV,
-    searchResultsForCSVreview, searchResultsForXLS, edlpRows, nejRowsToggle) {
+    searchResultsForCSVreview, searchResultsForXLS, nejRowsToggle) {
 
     console.log(`rows.length==>${rows.length}`)
-    // let nejRows = rows[0] //targets 1st query on NEJ table
-    // let edlpRows = rows[1] //targets 2nd query on rb_edlp_data table
-    // // let rainbowCatRows = rows[2] //targets 3rd query on rcth (rainbow--cat table hub) table
-    // let nejRowsNonPagin = rows[2] //targets 3rd query on NEJ table
-
-    // console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
-    // console.log(`JSON.stringify(edlpRows[0])==> ${JSON.stringify(edlpRows[0])}`)
-
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
-
-    let edlpHandlerObj = {}
 
     for (let i = 0; i < nejRowsToggle.length; i++) { //Add searched-for table entries from db to searchResults array, for
       //displaying in the dynamic DOM table. Also add margin data, & retail & charm calcs to display in DOM table
@@ -73,28 +63,16 @@ module.exports = {
 
       //v//Wholesale applied vendor discount (math is dependent on these variables)****************************************************
       function wsDiscoVarSetter() {
-        if (srcRsObj['edlpVar'] !== 'EDLP') { //we actually don't want to apply ongoing discount (discountToApply) OR edplDisco
-          //at the RETAIL level, since we should have already applied it at the WHOLESALE level. VERY IMPORTANT!!!
-          wsDiscoVar = frmInptsObj.discountToApply_WS
-        } else {
-          wsDiscoVar = frmInptsObj.edlpDisco
-        }
+        wsDiscoVar = frmInptsObj.discountToApply_WS
       }
       //^//Wholesale applied vendor discount (math is dependent on these variables)****************************************************
 
       //v//Retail applied vendor discount (math is dependent on these variables)****************************************************
       function rtlDiscoVarSetter() {
-        if (srcRsObj['edlpVar'] !== 'EDLP') { //we actually don't want to apply ongoing discount (discountToApply) OR edplDisco
-          //at the RETAIL level, since we should have already applied it at the WHOLESALE level. VERY IMPORTANT!!!
-          //BUT SOMETIMES WE WANT TO APPLY DISCOUNT AT BOTH WS AND RTL LEVELS (THIS IS WHEN WE PASS THE SAVINGS ON TO CUSTOMER)
-          //IN SUCH CASES, WE UTILIZE BOTH wsDiscoVarSetter() at the WS level, and rtlDiscoVarSetter() at the retail level
-          rtlDiscoVar = frmInptsObj.discountToApply_Rtl
-          console.log(`showSearchResults.js says: rtlDiscoVar==> ${rtlDiscoVar}`)
-          if (rtlDiscoVar == null) {
-            rtlDiscoVar = 0
-          }
-        } else {
-          rtlDiscoVar = frmInptsObj.edlpDisco
+        rtlDiscoVar = frmInptsObj.discountToApply_Rtl
+        console.log(`showSearchResults.js says: rtlDiscoVar==> ${rtlDiscoVar}`)
+        if (rtlDiscoVar == null) {
+          rtlDiscoVar = 0
         }
       }
       //v//Retail applied vendor discount (math is dependent on these variables)****************************************************
@@ -309,24 +287,6 @@ module.exports = {
             srcRsObj['reqdRetail'] = reviewObj['reqdRetail'] = Math.round((-(srcRsObj['ediCostMod'] - srcRsObj['ediCostMod'] * rtlDiscoVar) / (departmentMargin - 1)) * 100) / 100 //applies margin to WS
             //^//Retail applied vendor discount (math is dependent on these variables)
 
-            // console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod']==> ${srcRsObj['ediCostMod']}`)
-            // console.log(`calcCharm() from showSearchResults.js says: rtlDiscoVar==> ${rtlDiscoVar}`)
-            // console.log(`calcCharm() from showSearchResults.js says: srcRsObj['ediCostMod'] * rtlDiscoVar==> ${srcRsObj['ediCostMod'] * rtlDiscoVar}`)
-            //v//ACTUALLY, IT APPEARS WE DO NOT want to apply ongoing discount (discountToApply) OR edplDisco at the RETAIL level/////////////////////
-            //BUT SOMETIMES WE DO WANT TO APPLY THE DISCOUNT AT THE RETAIL LEVEL ALSO; THAT IS WHEN WE'RE PASSING THE SAVINGS ON TO THE CUSTOMER
-            // if (srcRsObj['edlpVar'] !== 'EDLP') { //we actually DO want to apply ongoing discount (discountToApply) OR edplDisco
-            //   //at the RETAIL level, since even though we should have already applied it at the WHOLESALE level, we are using
-            //   //cost from the EDI Vendor catalog (which has not yet had the disco applied) to calc updated retail VERY IMPORTANT!!!
-            //   srcRsObj['reqdRetail'] = reviewObj['reqdRetail'] = Math.round((-(srcRsObj['ediCostMod'] - srcRsObj['ediCostMod'] * discountToApply) / (departmentMargin - 1)) * 100) / 100
-            //   //applies margin to WS for NON-EDLP
-            // } else {
-            //   srcRsObj['reqdRetail'] = reviewObj['reqdRetail'] = Math.round((-(srcRsObj['ediCostMod'] - srcRsObj['ediCostMod'] * edlpDisco) / (departmentMargin - 1)) * 100) / 100 //applies margin to WS
-            //   //applies margin to WS for EDLP
-            // }
-            //^//ACTUALLY, IT APPEARS WE DO NOT want to apply ongoing discount (discountToApply) OR edplDisco at the RETAIL level/////////////////////
-            // srcRsObj['reqdRetail'] = reviewObj['reqdRetail'] = Math.round((-(srcRsObj['ediCostMod'] - srcRsObj['ediCostMod'] * discountToApply) / (departmentMargin - 1)) * 100) / 100 //applies margin to WS
-            //AND also applies any % discount; discountToApply is set at default 0
-            //Finally, Math.round(number*100)/100 converts the result to a number with just 2 decimal places.
             if (srcRsObj['reqdRetail'] % 1 < .10 && srcRsObj['reqdRetail'] > 0) { //change charm price to (#-1).99 if req'd rtl is #.00 -> #.10
               dbl0Or10CharmResult = srcRsObj['reqdRetail'] - srcRsObj['reqdRetail'] % 1 - .01
               // reviewObj['charm'] = srcRsObj['charm'] = '"' + dbl0Or10CharmResult + '"'
@@ -435,45 +395,6 @@ module.exports = {
       srcRsObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
       // console.log('calcResults says: srcRsObj[\'upc\']~~~>', srcRsObj['upc'])
       reviewObj['upc'] = nejRowsToggle[i][genericHeaderObj.upcHeader] //Item ID
-
-
-      //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      // console.log(`edlpRows.length==> ${edlpRows.length}`)
-      for (let j = 0; j < edlpRows.length; j++) {
-        srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-        reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-        if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          edlpHandlerObj[`${i}_${j}_edlpVar`] = 'EDLP'
-          // edlpHandlerArr.push('EDLP')
-          // srcRsObj['edlpVar'] = "EDLP"
-          // reviewObj['edlpVar'] = "EDLP"
-          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-        } else {
-          edlpHandlerObj[`${i}_${j}_edlpVar`] = '---'
-          // edlpHandlerArr.push('NON-EDLP')
-          // srcRsObj['edlpVar'] = ""
-          // reviewObj['edlpVar'] = ""
-        }
-      }
-
-      // for (let j = 0; j < edlpRows.length; j++) {
-      //   srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-      //   reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-      //   switch (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-      //     case true:
-      //       srcRsObj['edlpVar'] = "EDLP"
-      //       reviewObj['edlpVar'] = "EDLP"
-      //       break
-
-      //     default:
-      //       srcRsObj['edlpVar'] = ""
-      //       reviewObj['edlpVar'] = ""
-      //   }
-      // }
-      //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
 
       srcRsObj['cpltCost'] = reviewObj['cpltCost'] = nejRowsToggle[i][genericHeaderObj.invLastcostHeader]
 
@@ -909,25 +830,16 @@ module.exports = {
             }
           }
         }
-        //v//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
-        if (frmInptsObj.edlpSwitch == 'no') {
-          if (srcRsObj['edlpVar'] !== 'EDLP') {
-            populateResultsObj_Rtl()
-          }
-        } else {
-          populateResultsObj_Rtl()
-        }
-        //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
+
+        populateResultsObj_Rtl()
+
+
       }
 
     }
 
-    // for (let m = 0; m < searchResults.length; m++) {
-    //   searchResults[m]['edlpVar'] = edlpHandlerArr[m]
-    // }
     console.log('showSearchResults says: searchResults.length from showSearchResults()==->', searchResults.length)
     console.log('showSearchResults says: searchResults[0] from showSearchResults()==>', searchResults[0])
-    console.log(`JSON.stringify(edlpHandlerObj)==> ${JSON.stringify(edlpHandlerObj)}`)
     // console.log('showSearchResults says: searchResultsForCSVreview[0] from showSearchResults()==>', searchResultsForCSVreview[0])
   }
 }
