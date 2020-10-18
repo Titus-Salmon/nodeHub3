@@ -436,38 +436,39 @@ module.exports = {
 
 
       //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      console.log(`edlpRows.length==> ${edlpRows.length}`)
-      // for (let j = 0; j < edlpRows.length; j++) {
-      //   srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-      //   reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-      //   if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-
-      //     srcRsObj['edlpVar'] = "EDLP"
-      //     reviewObj['edlpVar'] = "EDLP"
-      //     console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
-      //     console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
-      //   } else {
-      //     srcRsObj['edlpVar'] = ""
-      //     reviewObj['edlpVar'] = ""
-      //   }
-      // }
-
+      // console.log(`edlpRows.length==> ${edlpRows.length}`)
       for (let j = 0; j < edlpRows.length; j++) {
         srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
-        switch (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          case true:
-            srcRsObj['edlpVar'] = "EDLP"
-            reviewObj['edlpVar'] = "EDLP"
-            break
+        if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
 
-          default:
-            srcRsObj['edlpVar'] = ""
-            reviewObj['edlpVar'] = ""
+          srcRsObj['edlpVar'] = "EDLP"
+          reviewObj['edlpVar'] = "EDLP"
+          // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
+          // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
         }
+        // else {
+        //   srcRsObj['edlpVar'] = ""
+        //   reviewObj['edlpVar'] = ""
+        // }
       }
+
+      // for (let j = 0; j < edlpRows.length; j++) {
+      //   srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
+      //   reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
+
+      //   switch (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
+      //     case true:
+      //       srcRsObj['edlpVar'] = "EDLP"
+      //       reviewObj['edlpVar'] = "EDLP"
+      //       break
+
+      //     default:
+      //       srcRsObj['edlpVar'] = ""
+      //       reviewObj['edlpVar'] = ""
+      //   }
+      // }
       //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
 
       srcRsObj['cpltCost'] = reviewObj['cpltCost'] = nejRowsToggle[i][genericHeaderObj.invLastcostHeader]
