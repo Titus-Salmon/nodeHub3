@@ -151,49 +151,26 @@ module.exports = {
           console.log(`nejRowsNonPagin.length (AFTER gpet handling)==> ${nejRowsNonPagin.length}`)
           //^////////handle gpet tables ==> if UPC is in gpet table, ignore it in showSearchResults calcs
 
+          console.log(`nejRowsNonPagin.length (BEFORE edlpHandler())==> ${nejRowsNonPagin.length}`)
+
           function edlpHandler() {
             //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-            // console.log(`edlpRows.length==> ${edlpRows.length}`)
-            // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
-            console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
+            // console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
             for (let j = 0; j < edlpRows.length; j++) {
-              for (let k = 0; k < searchResultsNonPag.length; k++) {
-                if (searchResultsNonPag[k]['upc'] == edlpRows[j]['edlp_upc']) {
-                  searchResultsNonPag[k]['edlpVar'] = 'EDLP'
-                  srcRsXLS_nonPag[k]['edlpVar'] = 'EDLP'
-                  console.log(`JSON.stringify(searchResultsNonPag[${k}]['edlpVar'])==> ${JSON.stringify(searchResultsNonPag[k]['edlpVar'])}`)
+              for (let k = 0; k < nejRowsNonPagin.length; k++) {
+                if (nejRowsNonPagin[k]['invScanCode'] == edlpRows[j]['edlp_upc']) {
+                  nejRowsNonPagin.splice(k, 1)
                 }
-                // else {
-                //   searchResultsNonPag[k]['edlpVar'] = 'crikey'
-                // }
               }
-              // srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-              // reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-              // if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-              //   // srcRsObj['edlpVar'] = "EDLP"
-              //   // edlpHandlerArr.push(srcRsObj)
-              //   searchResults[i]['edlpVar'] = "EDLP"
-              //   searchResultsForCSV[i]['edlpVar'] = "EDLP"
-              //   searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
-              //   searchResultsForXLS[i]['edlpVar'] = "EDLP"
-              //   console.log(`JSON.stringify(searchResults[${i}]['edlpVar'])==> ${JSON.stringify(searchResults[i]['edlpVar'])}`)
-              // } else {
-              //   // srcRsObj['edlpVar'] = ""
-              //   // edlpHandlerArr.push(srcRsObj)
-              //   searchResults[i]['edlpVar'] = ""
-              //   searchResultsForCSV[i]['edlpVar'] = ""
-              //   searchResultsForCSVreview[i]['edlpVar'] = ""
-              //   searchResultsForXLS[i]['edlpVar'] = ""
-              // }
             }
             //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
           }
-          // edlpHandler()
+          edlpHandler()
+          console.log(`nejRowsNonPagin.length (AFTER edlpHandler())==> ${nejRowsNonPagin.length}`)
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
             srcRsXLS_nonPag, edlpRows, nejRowsNonPagin)
-          edlpHandler()
+          // edlpHandler()
           cacheMain.set('searchResultsNonPagCache_key', searchResultsNonPag)
 
           function paginFirstResultSet() {
