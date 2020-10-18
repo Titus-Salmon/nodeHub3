@@ -13,7 +13,7 @@ module.exports = {
 
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
 
-    edlpHandlerObj = {}
+    let edlpHandlerObj = {}
 
     for (let i = 0; i < nejRowsToggle.length; i++) { //Add searched-for table entries from db to searchResults array, for
       //displaying in the dynamic DOM table. Also add margin data, & retail & charm calcs to display in DOM table
@@ -444,14 +444,14 @@ module.exports = {
         reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
 
         if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-          edlpHandlerObj[`${i}_${j}`]['edlpVar'] = 'EDLP'
+          edlpHandlerObj[`${i}_${j}_edlpVar`] = 'EDLP'
           // edlpHandlerArr.push('EDLP')
           // srcRsObj['edlpVar'] = "EDLP"
           // reviewObj['edlpVar'] = "EDLP"
           // console.log(`srcRsObj['upc']==> ${srcRsObj['upc']}`)
           // console.log(`srcRsObj['edlpUPC']==> ${srcRsObj['edlpUPC']}`)
         } else {
-          edlpHandlerObj[`${i}_${j}`]['edlpVar'] = '---'
+          edlpHandlerObj[`${i}_${j}_edlpVar`] = '---'
           // edlpHandlerArr.push('NON-EDLP')
           // srcRsObj['edlpVar'] = ""
           // reviewObj['edlpVar'] = ""
