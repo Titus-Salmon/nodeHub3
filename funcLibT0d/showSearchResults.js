@@ -13,8 +13,6 @@ module.exports = {
 
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
 
-    let edlpHandlerArr = []
-
     for (let i = 0; i < nejRowsToggle.length; i++) { //Add searched-for table entries from db to searchResults array, for
       //displaying in the dynamic DOM table. Also add margin data, & retail & charm calcs to display in DOM table
       let srcRsObj = {}
@@ -438,31 +436,6 @@ module.exports = {
 
       // console.log(`searchResults.length==> ${searchResults.length}`)
       // console.log(`JSON.stringify(searchResults[0])==> ${JSON.stringify(searchResults[0])}`)
-
-      // console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
-
-      // function edlpHandler() {
-      //   //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      //   // console.log(`edlpRows.length==> ${edlpRows.length}`)
-      //   console.log(`JSON.stringify(searchResults[0]==> ${JSON.stringify(searchResults[0])}`)
-      //   for (let j = 0; j < edlpRows.length; j++) {
-      //     srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-      //     reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-      //     if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-      //       srcRsObj['edlpVar'] = "EDLP"
-      //       edlpHandlerArr.push(srcRsObj)
-      //       // searchResults[i]['edlpVar'] = "EDLP"
-      //     } else {
-      //       srcRsObj['edlpVar'] = ""
-      //       edlpHandlerArr.push(srcRsObj)
-      //       // searchResults[i]['edlpVar'] = ""
-      //     }
-      //   }
-      //   //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      // }
-
-
 
       srcRsObj['cpltCost'] = reviewObj['cpltCost'] = nejRowsToggle[i][genericHeaderObj.invLastcostHeader]
 
@@ -908,35 +881,6 @@ module.exports = {
         //}
         //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
       }
-
-      // function edlpHandler() {
-      //   //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      //   // console.log(`edlpRows.length==> ${edlpRows.length}`)
-      //   // console.log(`JSON.stringify(searchResults[0] from edlpHandler()==> ${JSON.stringify(searchResults[0])}`)
-      //   for (let j = 0; j < edlpRows.length; j++) {
-      //     srcRsObj['edlpUPC'] = edlpRows[j]['edlp_upc']
-      //     reviewObj['edlpUPC'] = edlpRows[j]['edlp_upc'] //INCLUDE in save2CSVreview export data
-
-      //     if (srcRsObj['upc'] == srcRsObj['edlpUPC']) {
-      //       // srcRsObj['edlpVar'] = "EDLP"
-      //       // edlpHandlerArr.push(srcRsObj)
-      //       searchResults[i]['edlpVar'] = "EDLP"
-      //       searchResultsForCSV[i]['edlpVar'] = "EDLP"
-      //       searchResultsForCSVreview[i]['edlpVar'] = "EDLP"
-      //       searchResultsForXLS[i]['edlpVar'] = "EDLP"
-      //       console.log(`JSON.stringify(searchResults[${i}]['edlpVar'])==> ${JSON.stringify(searchResults[i]['edlpVar'])}`)
-      //     } else {
-      //       // srcRsObj['edlpVar'] = ""
-      //       // edlpHandlerArr.push(srcRsObj)
-      //       searchResults[i]['edlpVar'] = ""
-      //       searchResultsForCSV[i]['edlpVar'] = ""
-      //       searchResultsForCSVreview[i]['edlpVar'] = ""
-      //       searchResultsForXLS[i]['edlpVar'] = ""
-      //     }
-      //   }
-      //   //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-      // }
-      // edlpHandler()
 
     }
     console.log('showSearchResults says: searchResults.length from showSearchResults()==->', searchResults.length)

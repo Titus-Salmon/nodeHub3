@@ -151,10 +151,10 @@ module.exports = {
           console.log(`nejRowsNonPagin.length (AFTER gpet handling)==> ${nejRowsNonPagin.length}`)
           //^////////handle gpet tables ==> if UPC is in gpet table, ignore it in showSearchResults calcs
 
-          console.log(`nejRowsNonPagin.length (BEFORE edlpHandler())==> ${nejRowsNonPagin.length}`)
+          console.log(`nejRowsNonPagin.length (BEFORE edlpRemover())==> ${nejRowsNonPagin.length}`)
 
-          function edlpHandler() {
-            //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+          function edlpRemover() {
+            //v//EDLP REMOVER///////////////////////////////////////////////////////////////////////////////////////
             console.log(`JSON.stringify(nejRowsNonPagin[0])==> ${JSON.stringify(nejRowsNonPagin[0])}`)
             // console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
             for (let j = 0; j < edlpRows.length; j++) {
@@ -164,17 +164,35 @@ module.exports = {
                 }
               }
             }
-            //^//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
+            //^//EDLP REMOVER///////////////////////////////////////////////////////////////////////////////////////
           }
           if (frmInptsObj.edlpSwitch == 'no') {
-            edlpHandler()
+            edlpRemover()
           }
 
-          console.log(`nejRowsNonPagin.length (AFTER edlpHandler())==> ${nejRowsNonPagin.length}`)
+          console.log(`nejRowsNonPagin.length (AFTER edlpRemover())==> ${nejRowsNonPagin.length}`)
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
             srcRsXLS_nonPag, edlpRows, nejRowsNonPagin)
-          // edlpHandler()
+          // edlpRemover()
+
+          function edlpAllow() {
+            //v//ALLOW EDLP///////////////////////////////////////////////////////////////////////////////////////
+            console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
+            // console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
+            for (let j = 0; j < edlpRows.length; j++) {
+              for (let k = 0; k < searchResultsNonPag.length; k++) {
+                if (searchResultsNonPag[k]['upc'] == edlpRows[j]['edlp_upc']) {
+                  searchResultsNonPag[k]['edlpVar'] = "EDLP"
+                }
+              }
+            }
+            //^//ALLOW EDLP///////////////////////////////////////////////////////////////////////////////////////
+          }
+          if (frmInptsObj.edlpSwitch == 'yes') {
+            edlpAllow()
+          }
+
           cacheMain.set('searchResultsNonPagCache_key', searchResultsNonPag)
 
           function paginFirstResultSet() {
@@ -187,9 +205,6 @@ module.exports = {
           paginFirstResultSet()
 
           console.log(`calcResults says firstResultSet.length from paginFirstResultSet==> ${firstResultSet.length}`)
-
-          // showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsPag, srcRsCSV_Pag, srcRsCSVrvwPag,
-          //   edlpRows, nejRowsPagin)
 
           let totalRows = searchResultsNonPag.length //use length of non-paginated results from showSearchResults for total # of rows,
           console.log(`totalRows==> ${totalRows}`)
