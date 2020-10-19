@@ -899,13 +899,13 @@ module.exports = {
           }
         }
         //v//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
-        if (frmInptsObj.edlpSwitch == 'no') {
-          if (srcRsObj['edlpVar'] !== 'EDLP') {
-            populateResultsObj_Rtl()
-          }
-        } else {
-          populateResultsObj_Rtl()
-        }
+        // if (frmInptsObj.edlpSwitch == 'no') {
+        //   if (srcRsObj['edlpVar'] !== 'EDLP') {
+        //     populateResultsObj_Rtl()
+        //   }
+        // } else {
+        populateResultsObj_Rtl()
+        //}
         //^//EDLP switch handler. This should exclude EDLPS from calcCharm results if switch is set to 'no', but include them if set to 'yes'
       }
 
