@@ -129,14 +129,12 @@ module.exports = {
     ]
 
     console.log(`Object.keys(formInputsObj.deptFilterArr[0])==> ${Object.keys(formInputsObj.deptFilterArr[0])}`)
-    console.log(`formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])]==> ${formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])]}`)
+    console.log(`JSON.stringify(formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])])==> ${JSON.stringify(formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])])}`)
     console.log(`formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])]['dfltMrg']==> ${formInputsObj.deptFilterArr[0][Object.keys(formInputsObj.deptFilterArr[0])]['dfltMrg']}`)
 
-    // console.log(`calcResFormInputs says: JSON.stringify(formInputsObj)==> ${JSON.stringify(formInputsObj)}`)
-
     console.log('calcResFormInputs says: postBodyData==>', postBodyData)
-    console.log('calcResFormInputs says: postBodyData[\'fldArrToPostPost\']==>', postBodyData['fldArrToPostPost'])
-    console.log('calcResFormInputs says: postBodyData[\'fldArrToPostPost\'][0]==>', postBodyData['fldArrToPostPost'][0])
+    console.log(`calcResFormInputs says: postBodyData['fldArrToPostPost']==> ${postBodyData['fldArrToPostPost']}`)
+    console.log(`calcResFormInputs says: postBodyData['fldArrToPostPost'][0]==> ${postBodyData['fldArrToPostPost'][0]}`)
 
     //v//create variables for form POST data from #retailCalcUniversal form ('Search Loaded Table')
     // let formInput0 = Object.values(postBodyData)[0] = loadedSqlTbl = postBodyData['tblNameToPostPost'] //tblNameToPostPost (damage control revert1)
@@ -255,7 +253,7 @@ module.exports = {
 
     for (let k = 0; k < formInputsObj.deptFilterArr.length; k++) {
       console.log(`Object.keys(formInputsObj.deptFilterArr[${k}]==> ${Object.keys(formInputsObj.deptFilterArr[k])}`)
-      if (Object.keys(formInputsObj.deptFilterArr[k]) == formInputsObj.deptFilter) {
+      if (Object.keys(formInputsObj.deptFilterArr[k]) == formInputsObj.deptFilter) { //sets department filter (by dept #)
         formInputsObj.deptFilterToApply = formInputsObj.deptFilter
       }
     }

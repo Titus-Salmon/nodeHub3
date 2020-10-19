@@ -342,9 +342,34 @@ html
 				option(value='allowMismatch') Allow SKU Mismatches
 				option(value='matchOnly') Require SKU Match
 
+			//- div(style="display:block")
+			//- 	label.input-label-1(for='deptFilter') Dept Filter
+			//- 	input#deptFilter.input-unit-1(type='text', name='deptFilterPost' value='')
+
 			div(style="display:block")
 				label.input-label-1(for='deptFilter') Dept Filter
-				input#deptFilter.input-unit-1(type='text', name='deptFilterPost' value='')
+				select#deptFilter.input-unit-1(name='deptFilterPost')
+					option(value='54') Beer & Alcohol
+					option(value='152') Body Care
+					option(value='9') Books
+					option(value='19') Bulk
+					option(value='30') Bulk & Herb Prepack
+					option(value='175') CBD - Grocery
+					option(value='176') CBD - Supplements
+					option(value='177') CBD - Topicals
+					option(value='148') Consignments
+					option(value='150') General Merchandise
+					option(value='13') Gift Items
+					option(value='62') Grab & Go
+					option(value='25') Grocery
+					option(value='179') Grocery - Local
+					option(value='38') Grocery - Local Meat
+					option(value='12') HBA
+					option(value='158') Herbs & Homeopathic
+					option(value='80') LifeBar
+					option(value='151') Other
+					option(value='155') Refrigerated
+					option(value='157') Vitamins & Supplements
 
 			div(style="display:block")
 				label.input-label-1(for='edlpSwitch') Include EDLP?

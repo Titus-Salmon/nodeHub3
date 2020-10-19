@@ -40,15 +40,15 @@ module.exports = {
       cacheMain.del('searchResultsNonPagCache_key')
     }
 
-    formInputsObjCacheChecker = formInputsObjCache.get('formInputsObjCache_key');
+    formInputsObjCacheChecker = formInputsObjCache.get('formInputsObjCache_key')
     if (formInputsObjCacheChecker !== undefined) { //clear formInputsObjCache_key if it exists
       formInputsObjCache.del('formInputsObjCache_key')
     }
-    genericHeaderObjCacheChecker = genericHeaderObjCache.get('genericHeaderObjCache_key');
+    genericHeaderObjCacheChecker = genericHeaderObjCache.get('genericHeaderObjCache_key')
     if (genericHeaderObjCacheChecker !== undefined) { //clear genericHeaderObjCache_key if it exists
       genericHeaderObjCache.del('genericHeaderObjCache_key')
     }
-    totalRowsCacheChecker = totalRowsCache.get('totalRowsCache_key');
+    totalRowsCacheChecker = totalRowsCache.get('totalRowsCache_key')
     if (totalRowsCacheChecker !== undefined) { //clear totalRowsCache_key if it exists
       totalRowsCache.del('totalRowsCache_key')
     }
@@ -174,7 +174,6 @@ module.exports = {
 
           showSearchResults.showSearchResults(rows, genericHeaderObj, frmInptsObj, searchResultsNonPag, srcRsCSV_nonPag, srcRsCSVrvw_nonPag,
             srcRsXLS_nonPag, edlpRows, nejRowsNonPagin)
-          // edlpRemover()
 
           function edlpAllow() {
             //v//ALLOW EDLP///////////////////////////////////////////////////////////////////////////////////////
