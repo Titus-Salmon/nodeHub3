@@ -155,7 +155,7 @@ module.exports = {
 
           function edlpHandler() {
             //v//EDLP HANDLER///////////////////////////////////////////////////////////////////////////////////////
-            console.log(`nejRowsNonPagin[0]==> ${nejRowsNonPagin[0]}`)
+            console.log(`JSON.stringify(nejRowsNonPagin[0])==> ${JSON.stringify(nejRowsNonPagin[0])}`)
             // console.log(`JSON.stringify(searchResultsNonPag[0])==> ${JSON.stringify(searchResultsNonPag[0])}`)
             for (let j = 0; j < edlpRows.length; j++) {
               for (let k = 0; k < nejRowsNonPagin.length; k++) {
