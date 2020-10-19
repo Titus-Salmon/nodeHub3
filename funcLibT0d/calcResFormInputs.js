@@ -261,6 +261,9 @@ module.exports = {
     console.log(`formInputsObj.deptFilterToApply==> ${formInputsObj.deptFilterToApply}`)
     console.log(`calcResFormInputs says: JSON.stringify(formInputsObj)==> ${JSON.stringify(formInputsObj)}`)
 
+    console.log(`postBodyData.length==> ${postBodyData.length}`)
+    console.log(`Object.keys(postBodyData).length==> ${Obkect.keys(postBodyData).length}`)
+
     for (let i = 0; i < postBodyData.length; i++) {
       console.log(`Object.keys(postBodyData)[${i}] **>> Object.values(postBodyData)[${i}]==> ${Object.keys(postBodyData)[i]} **>> ${Object.values(postBodyData)[i]}`)
     }
