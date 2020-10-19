@@ -3,13 +3,6 @@ module.exports = {
     searchResultsForCSVreview, searchResultsForXLS, edlpRows, nejRowsToggle) {
 
     console.log(`rows.length==>${rows.length}`)
-    // let nejRows = rows[0] //targets 1st query on NEJ table
-    // let edlpRows = rows[1] //targets 2nd query on rb_edlp_data table
-    // // let rainbowCatRows = rows[2] //targets 3rd query on rcth (rainbow--cat table hub) table
-    // let nejRowsNonPagin = rows[2] //targets 3rd query on NEJ table
-
-    // console.log(`JSON.stringify(nejRowsToggle[0])==> ${JSON.stringify(nejRowsToggle[0])}`)
-    // console.log(`JSON.stringify(edlpRows[0])==> ${JSON.stringify(edlpRows[0])}`)
 
     console.log(`nejRowsToggle.length from showSearchResults==> ${nejRowsToggle.length}`)
 
@@ -57,10 +50,6 @@ module.exports = {
             // console.log(`frmInptsObj.skuMismatchOption==> ${frmInptsObj.skuMismatchOption}`)
             // srcRsObj['imwSKU'] = reviewObj['imwSKU'] = "" //ACTUALLY, CATAPULT WONT UPDATE RECORD UNLESS SKU IS INCLUDED, SO CAN'T LEAVE SKU BLANK -t0d
             srcRsObj['pf7'] = reviewObj['pf7'] = "skuMismatch"
-            // console.log(`nejRowsToggle[${i}][genericHeaderObj.cpltSKUHeader]==> ${nejRowsToggle[i][genericHeaderObj.cpltSKUHeader]}`)
-            // console.log(`nejRowsToggle[${i}][genericHeaderObj.ediSKUHeader]==> ${nejRowsToggle[i][genericHeaderObj.ediSKUHeader]}`)
-            // console.log(`srcRsObj['imwSKU']==> ${srcRsObj['imwSKU']}`)
-            // console.log(`srcRsObj['pf7']==> ${srcRsObj['pf7']}`)
           }
         }
       }
