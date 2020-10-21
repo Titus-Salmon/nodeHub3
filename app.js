@@ -45,11 +45,11 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 
 app.use(express.json({
-  limit: '500mb' //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
+  limit: '500000mb' //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
   //originally had it set at 50mb, but even that wasn't high enough for KEKE
 }));
 app.use(express.urlencoded({
-  limit: '500mb', //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
+  limit: '500000mb', //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
   extended: true
 }));
 app.use(cookieParser());
