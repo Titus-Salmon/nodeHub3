@@ -123,9 +123,9 @@ module.exports = {
     //^//updateDemarcator(rows)////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    async function writeHTMLfileAndRenderPage() {
-      //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
+    //v//clearPrevHtmlFile()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
+    async function clearPrevHtmlFile() {
       fs.writefile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
         if (err) {
           console.log(`err==> ${err}`)
@@ -133,6 +133,11 @@ module.exports = {
           console.log(`${process.cwd()}/views/includes/venProfResults.html cleared of previous graph`)
         }
       })
+    }
+
+
+    //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    async function writeHTMLfileAndRenderPage() {
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
@@ -488,6 +493,7 @@ module.exports = {
       displayvenProf(rows)
         .then(updateDemarcator(rows))
         .then(createLineChartT0d())
+        .then(clearPrevHtmlFile())
         .then(writeHTMLfileAndRenderPage())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
