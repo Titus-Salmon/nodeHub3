@@ -123,17 +123,17 @@ module.exports = {
     //^//updateDemarcator(rows)////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    //v//clearPrevHtmlFile()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
-    async function clearPrevHtmlFile() {
-      fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
-        if (err) {
-          console.log(`err==> ${err}`)
-        } else {
-          console.log(`${process.cwd()}/views/includes/venProfResults.html cleared of previous graph`)
-        }
-      })
-    }
+    // //v//clearPrevHtmlFile()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
+    // async function clearPrevHtmlFile() {
+    //   fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
+    //     if (err) {
+    //       console.log(`err==> ${err}`)
+    //     } else {
+    //       console.log(`${process.cwd()}/views/includes/venProfResults.html cleared of previous graph`)
+    //     }
+    //   })
+    // }
 
 
     //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -490,10 +490,10 @@ module.exports = {
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
-      clearPrevHtmlFile()
-        .then(displayvenProf(rows))
+      displayvenProf(rows)
         .then(updateDemarcator(rows))
         .then(createLineChartT0d())
+        // .then(clearPrevHtmlFile())
         .then(writeHTMLfileAndRenderPage())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
