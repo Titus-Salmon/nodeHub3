@@ -22,6 +22,8 @@ const fs = require('fs')
 const jsdomT0d = new JSDOM(`<!DOCTYPE html><body><div id="dataviz-container"></div></body>`)
 var el = jsdomT0d.window.document.querySelector('#dataviz-container')
 
+d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
+
 
 module.exports = {
   venProf: router.post('/venProf', (req, res, next) => {
@@ -168,7 +170,7 @@ module.exports = {
         left: 50
       })
 
-      d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
+      // d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
 
       const svg = d3.select(el)
         .append('svg')
