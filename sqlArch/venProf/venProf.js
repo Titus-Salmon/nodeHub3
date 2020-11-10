@@ -153,6 +153,10 @@ module.exports = {
     }
     //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    async function clearSVG() {
+      d3.selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
+      console.log(`***SVG CLEARED***`)
+    }
 
     //v//createLineChartT0d()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function createLineChartT0d() {
@@ -172,7 +176,7 @@ module.exports = {
       // d3.selectAll("svg").remove() //1st, remove previous svg, so they don't get appended in a chain
 
       const svg = d3.select(el)
-        .selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
+        // .selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
         .append('svg')
         .attr("viewBox", [0, 0, width, height])
 
@@ -495,6 +499,7 @@ module.exports = {
     `, function (err, rows, fields) {
       if (err) throw err
       displayvenProf(rows)
+        .then(clearSVG())
         .then(updateDemarcator(rows))
         .then(createLineChartT0d())
         // .then(clearPrevHtmlFile())
