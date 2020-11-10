@@ -126,7 +126,7 @@ module.exports = {
     //v//clearPrevHtmlFile()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
     async function clearPrevHtmlFile() {
-      fs.writefile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
+      fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
         if (err) {
           console.log(`err==> ${err}`)
         } else {
