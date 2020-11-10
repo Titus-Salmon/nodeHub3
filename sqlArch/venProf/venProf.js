@@ -490,10 +490,10 @@ module.exports = {
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
-      displayvenProf(rows)
+      clearPrevHtmlFile()
+        .then(displayvenProf(rows))
         .then(updateDemarcator(rows))
         .then(createLineChartT0d())
-        .then(clearPrevHtmlFile())
         .then(writeHTMLfileAndRenderPage())
     })
     //^//connection.query()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
