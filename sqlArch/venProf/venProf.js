@@ -169,9 +169,10 @@ module.exports = {
       })
 
       // d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
-      d3.selectAll("svg").remove() //1st, remove previous svg, so they don't get appended in a chain
+      // d3.selectAll("svg").remove() //1st, remove previous svg, so they don't get appended in a chain
 
       const svg = d3.select(el)
+        .selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
         .append('svg')
         .attr("viewBox", [0, 0, width, height])
 
