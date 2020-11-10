@@ -42,7 +42,6 @@ module.exports = {
     let wsValsArr = [] // holds updateDemarcatorObj['items_updtd_ws'] instances where dates are for WS updates
     let rtlValsArr = [] // holds updateDemarcatorObj['items_updtd_rtl'] instances where dates are for Rtl updates
 
-    d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
 
     //v//displayvenProf(rows)//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function displayvenProf(rows) {
@@ -168,6 +167,8 @@ module.exports = {
         bottom: 150,
         left: 50
       })
+
+      d3.selectAll("svg > *").remove() //1st, remove previous svg, so they don't get appended in a chain
 
       const svg = d3.select(el)
         .append('svg')
