@@ -125,6 +125,14 @@ module.exports = {
 
     //v//writeHTMLfileAndRenderPage()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     async function writeHTMLfileAndRenderPage() {
+      //1st, clear previous venProfResults.html file, so we don't keep appending additional graphs below the previous one
+      fs.writefile(`${process.cwd()}/views/includes/venProfResults.html`, '', function (err) {
+        if (err) {
+          console.log(`err==> ${err}`)
+        } else {
+          console.log(`${process.cwd()}/views/includes/venProfResults.html cleared of previous graph`)
+        }
+      })
       var svgsrc = jsdomT0d.window.document.documentElement.innerHTML
       fs.writeFile(`${process.cwd()}/views/includes/venProfResults.html`, svgsrc, function (err) {
         if (err) {
