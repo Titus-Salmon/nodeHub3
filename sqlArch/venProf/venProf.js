@@ -154,7 +154,8 @@ module.exports = {
     //^//writeHTMLfileAndRenderPage()////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     async function clearSVG() {
-      d3.selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
+      d3.select(el).selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
+      // d3.selectAll("svg").remove() //1st, remove any previous svgs, so they don't get appended in a chain
       console.log(`***SVG CLEARED***`)
     }
 
