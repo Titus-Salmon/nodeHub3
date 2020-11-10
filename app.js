@@ -48,7 +48,7 @@ app.use(express.json({
   limit: '500000mb' //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
   //originally had it set at 50mb, but even that wasn't high enough for KEKE
   //then set it to 500mb, and that worked for large catalogs. However, when bringing HERE geolocation into play for 15,000+
-  //geodata points on a map, frontend hangs, so trying setting to absurdly high 500000mb...
+  //geodata points on a map, frontend hangs, so trying setting to absurdly high 500000mb... but that didn't work...
 }));
 app.use(express.urlencoded({
   limit: '500000mb', //MUST SET THIS HIGH, OTHERWISE LARGE CATALOGS (KEHE) WILL THROW error-request entity too large
