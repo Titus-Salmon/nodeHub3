@@ -245,10 +245,10 @@ module.exports = {
       //   .x(d => xDate(d.date))
       //   .y(d => yProfitOverSales(`${d}.${vendorName}_profit_over_sales`))
 
-      var linedjia = d3.line()
-        .defined(d => !isNaN(d.djia_date_plus_one))
-        .x(d => xDate(d.date))
-        .y(d => ydjia(d.djia_date_plus_one))
+      // var linedjia = d3.line()
+      //   .defined(d => !isNaN(d.djia_date_plus_one))
+      //   .x(d => xDate(d.date))
+      //   .y(d => ydjia(d.djia_date_plus_one))
 
       console.log(`JSON.stringify(venProfitOverSalesArr[0])==> ${JSON.stringify(venProfitOverSalesArr[0])}`)
       console.log(`JSON.stringify(vendjiaArr[0])==> ${JSON.stringify(vendjiaArr[0])}`)
