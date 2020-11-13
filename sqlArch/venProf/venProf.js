@@ -187,29 +187,29 @@ module.exports = {
         .domain(d3.extent(venProfArr, d => d.date))
         .range([margin.left + 40, width - margin.right]) //move x-axis to the right by 40px to clear space for the triple y-axis
 
-      var yProfit = d3.scaleLinear()
-        .domain([0, d3.max(venProfArr, d => d.unfi_profit)]).nice()
-        .range([xAxis_yValue, margin.top])
-
       // var yProfit = d3.scaleLinear()
-      //   .domain([0, d3.max(venProfArr, d => `${d}.${vendorName}_profit`)]).nice()
+      //   .domain([0, d3.max(venProfArr, d => d.unfi_profit)]).nice()
       //   .range([xAxis_yValue, margin.top])
 
-      var ySales = d3.scaleLinear()
-        .domain([0, d3.max(venSalesArr, d => d.unfi_sales)]).nice()
+      var yProfit = d3.scaleLinear()
+        .domain([d3.min(venProfArr, d => d.unfi_profit), d3.max(venProfArr, d => d.unfi_profit)]).nice()
         .range([xAxis_yValue, margin.top])
 
       // var ySales = d3.scaleLinear()
-      //   .domain([0, d3.max(venSalesArr, d => `${d}.${vendorName}_sales`)]).nice()
+      //   .domain([0, d3.max(venSalesArr, d => d.unfi_sales)]).nice()
       //   .range([xAxis_yValue, margin.top])
 
-      var yProfitOverSales = d3.scaleLinear()
-        .domain([0, d3.max(venProfitOverSalesArr, d => d.unfi_profit_over_sales)]).nice()
+      var ySales = d3.scaleLinear()
+        .domain([d3.min(venSalesArr, d => d.unfi_sales), d3.max(venSalesArr, d => d.unfi_sales)]).nice()
         .range([xAxis_yValue, margin.top])
 
       // var yProfitOverSales = d3.scaleLinear()
-      //   .domain([0, d3.max(venProfitOverSalesArr, d => `${d}.${vendorName}profit_over_sales`)]).nice()
+      //   .domain([0, d3.max(venProfitOverSalesArr, d => d.unfi_profit_over_sales)]).nice()
       //   .range([xAxis_yValue, margin.top])
+
+      var yProfitOverSales = d3.scaleLinear()
+        .domain([d3.min(venProfitOverSalesArr, d => d.unfi_profit_over_sales), d3.max(venProfitOverSalesArr, d => d.unfi_profit_over_sales)]).nice()
+        .range([xAxis_yValue, margin.top])
 
       var ydjia = d3.scaleLinear()
         .domain([0, d3.max(vendjiaArr, d => d.djia_date_plus_one)]).nice()
