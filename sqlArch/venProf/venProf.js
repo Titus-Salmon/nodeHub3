@@ -302,20 +302,20 @@ module.exports = {
         .call(g => g.select(".tick:last-of-type text").clone()
           .text(venProfitOverSalesArr.yProfitOverSales))
 
-      svg.append("rect")
-        .attr("x", -20)
-        .attr("y", margin.top)
-        .attr("width", 25)
-        .attr("height", xAxis_yValue - 20)
-        .attr("fill", "#d0dbbd")
-        .attr("transform", `translate(${margin.left + 60},0)`)
+      // svg.append("rect")
+      //   .attr("x", -20)
+      //   .attr("y", margin.top)
+      //   .attr("width", 25)
+      //   .attr("height", xAxis_yValue - 20)
+      //   .attr("fill", "#d0dbbd")
+      //   .attr("transform", `translate(${margin.left + 60},0)`)
 
-      var yAxisdjia = g => g
-        .attr("transform", `translate(${margin.left + 60},0)`)
-        .call(d3.axisLeft(ydjia))
-        .call(g => g.select(".domain").remove())
-        .call(g => g.select(".tick:last-of-type text").clone()
-          .text(vendjiaArr.ydjia))
+      // var yAxisdjia = g => g
+      //   .attr("transform", `translate(${margin.left + 60},0)`)
+      //   .call(d3.axisLeft(ydjia))
+      //   .call(g => g.select(".domain").remove())
+      //   .call(g => g.select(".tick:last-of-type text").clone()
+      //     .text(vendjiaArr.ydjia))
       //^//........................................................................................
 
       svg.append("g")
@@ -336,10 +336,10 @@ module.exports = {
         .attr("fill", "black")
         .style('font-size', '6px')
 
-      svg.append("g")
-        .call(yAxisdjia).selectAll(".tick text")
-        .attr("fill", "black")
-        .style('font-size', '6px')
+      // svg.append("g")
+      //   .call(yAxisdjia).selectAll(".tick text")
+      //   .attr("fill", "black")
+      //   .style('font-size', '6px')
 
       svg.append("path")
         .datum(venProfArr)
@@ -368,14 +368,14 @@ module.exports = {
         .attr("stroke-linecap", "round")
         .attr("d", lineProfitOverSales)
 
-      svg.append("path")
-        .datum(vendjiaArr)
-        .attr("fill", "none")
-        .attr("stroke", "#d0dbbd")
-        .attr("stroke-width", 1.5)
-        .attr("stroke-linejoin", "round")
-        .attr("stroke-linecap", "round")
-        .attr("d", linedjia)
+      // svg.append("path")
+      //   .datum(vendjiaArr)
+      //   .attr("fill", "none")
+      //   .attr("stroke", "#d0dbbd")
+      //   .attr("stroke-width", 1.5)
+      //   .attr("stroke-linejoin", "round")
+      //   .attr("stroke-linecap", "round")
+      //   .attr("d", linedjia)
 
       timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
