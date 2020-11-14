@@ -185,7 +185,7 @@ module.exports = {
 
       var xDate = d3.scaleUtc()
         .domain(d3.extent(venProfArr, d => d.date))
-        .range([margin.left + 60, width - margin.right]) //move x-axis to the right by 40px to clear space for the triple y-axis
+        .range([margin.left + 40, width - margin.right]) //move x-axis to the right by 40px to clear space for the triple y-axis
 
       // var yProfit = d3.scaleLinear()
       //   .domain([0, d3.max(venProfArr, d => d.unfi_profit)]).nice()
@@ -379,7 +379,7 @@ module.exports = {
 
       timeScaleUpdateDemarcator = d3.scaleUtc() //domain/range for the timescale of catalog updates
         .domain(d3.extent(venProfArr, d => d.date))
-        .range([margin.left, width - margin.right])
+        .range([margin.left + 40, width - margin.right]) //add the 40px to range to clear triple y-axis
 
       if (WsUpdateArr.length > 0) {
         for (let i = 0; i < WsUpdateArr.length; i++) {
