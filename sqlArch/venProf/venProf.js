@@ -522,7 +522,7 @@ module.exports = {
 
     //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(`
-    SELECT * FROM ois_unfi_20200621_to_20201108 ORDER BY date;
+    SELECT * FROM ois_venprof_mnth_unfi ORDER BY date;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
