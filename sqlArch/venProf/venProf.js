@@ -188,27 +188,27 @@ module.exports = {
         .range([margin.left + 40, width - margin.right]) //move x-axis to the right by 40px to clear space for the triple y-axis
 
       // var yProfit = d3.scaleLinear()
-      //   .domain([0, d3.max(venProfArr, d => d.unfi_profit)]).nice()
+      //   .domain([0, d3.max(venProfArr, d => d.kehe_profit)]).nice()
       //   .range([xAxis_yValue, margin.top])
 
       var yProfit = d3.scaleLinear()
-        .domain([d3.min(venProfArr, d => d.unfi_profit), d3.max(venProfArr, d => d.unfi_profit)]).nice()
+        .domain([d3.min(venProfArr, d => d.kehe_profit), d3.max(venProfArr, d => d.kehe_profit)]).nice()
         .range([xAxis_yValue, margin.top])
 
       // var ySales = d3.scaleLinear()
-      //   .domain([0, d3.max(venSalesArr, d => d.unfi_sales)]).nice()
+      //   .domain([0, d3.max(venSalesArr, d => d.kehe_sales)]).nice()
       //   .range([xAxis_yValue, margin.top])
 
       var ySales = d3.scaleLinear()
-        .domain([d3.min(venSalesArr, d => d.unfi_sales), d3.max(venSalesArr, d => d.unfi_sales)]).nice()
+        .domain([d3.min(venSalesArr, d => d.kehe_sales), d3.max(venSalesArr, d => d.kehe_sales)]).nice()
         .range([xAxis_yValue, margin.top])
 
       // var yProfitOverSales = d3.scaleLinear()
-      //   .domain([0, d3.max(venProfitOverSalesArr, d => d.unfi_profit_over_sales)]).nice()
+      //   .domain([0, d3.max(venProfitOverSalesArr, d => d.kehe_profit_over_sales)]).nice()
       //   .range([xAxis_yValue, margin.top])
 
       var yProfitOverSales = d3.scaleLinear()
-        .domain([d3.min(venProfitOverSalesArr, d => d.unfi_profit_over_sales), d3.max(venProfitOverSalesArr, d => d.unfi_profit_over_sales)]).nice()
+        .domain([d3.min(venProfitOverSalesArr, d => d.kehe_profit_over_sales), d3.max(venProfitOverSalesArr, d => d.kehe_profit_over_sales)]).nice()
         .range([xAxis_yValue, margin.top])
 
       var ydjia = d3.scaleLinear()
@@ -216,9 +216,9 @@ module.exports = {
         .range([xAxis_yValue, margin.top])
 
       var lineProfit = d3.line()
-        .defined(d => !isNaN(d.unfi_profit))
+        .defined(d => !isNaN(d.kehe_profit))
         .x(d => xDate(d.date))
-        .y(d => yProfit(d.unfi_profit))
+        .y(d => yProfit(d.kehe_profit))
 
       // var lineProfit = d3.line()
       //   .defined(d => !isNaN(`${d}.${vendorName}_profit`))
@@ -226,9 +226,9 @@ module.exports = {
       //   .y(d => yProfit(`${d}.${vendorName}_profit`))
 
       var lineSales = d3.line()
-        .defined(d => !isNaN(d.unfi_sales))
+        .defined(d => !isNaN(d.kehe_sales))
         .x(d => xDate(d.date))
-        .y(d => ySales(d.unfi_sales))
+        .y(d => ySales(d.kehe_sales))
 
       // var lineSales = d3.line()
       //   .defined(d => !isNaN(`${d}.${vendorName}_sales`))
@@ -236,9 +236,9 @@ module.exports = {
       //   .y(d => ySales(`${d}.${vendorName}_sales`))
 
       var lineProfitOverSales = d3.line()
-        .defined(d => !isNaN(d.unfi_profit_over_sales))
+        .defined(d => !isNaN(d.kehe_profit_over_sales))
         .x(d => xDate(d.date))
-        .y(d => yProfitOverSales(d.unfi_profit_over_sales))
+        .y(d => yProfitOverSales(d.kehe_profit_over_sales))
 
       // var lineProfitOverSales = d3.line()
       //   .defined(d => !isNaN(`${d}.${vendorName}_profit_over_sales`))
@@ -522,7 +522,7 @@ module.exports = {
 
     //v//connection.query()//////////////////////////////////////////////////////////////////////////////////////////////////////////////
     connection.query(`
-    SELECT * FROM ois_venprof_mnth_unfi ORDER BY date;
+    SELECT * FROM ois_venprof_mnth_kehe ORDER BY date;
     SELECT * FROM rainbowcat_update_tracker;
     `, function (err, rows, fields) {
       if (err) throw err
