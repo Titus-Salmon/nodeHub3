@@ -170,6 +170,7 @@ module.exports = {
       let searchResultsToString = searchResultsToStringPreSani.replace(saniRegex2, "").replace(saniRegex3, "").replace(saniRegex4, "")
       //for some reason, we sometimes get the following format for searchResultsToStringPreSani:
       // {},,{}, so we need to convert that to {},{}
+
       console.log(`searchResultsToString==> ${searchResultsToString}`)
       searchResultsSplit = searchResultsToString.split(splitRegex1)
       console.log(`searchResultsSplit.length==> ${searchResultsSplit.length}`)
