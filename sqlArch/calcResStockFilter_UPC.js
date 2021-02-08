@@ -75,6 +75,8 @@ module.exports = {
     // {},,{} so we need to convert that to {},{}
     let saniRegex3 = /(,$)/g //for some reason, we sometimes get the following format for searchResultsToStringPreSani:
     // {}, so we need to convert that to {}; $ = end of string anchor (^ = beginning of string anchor)
+    let saniRegex4 = /(^,)/g //if a store doesn't carry all items in set, we get the following format for searchResultsToStringPreSani:
+    // ,{} so we need to convert that to {}; $ = end of string anchor (^ = beginning of string anchor)
 
     /* X(?=Y) 	Positive lookahead 	X if followed by Y
      * (?<=Y)X 	Positive lookbehind 	X if after Y
@@ -165,7 +167,8 @@ module.exports = {
         srcRsGLstockedSani, srcRsGL_NOTstockedSani)
 
       let searchResultsToStringPreSani = searchResults.toString()
-      let searchResultsToString = searchResultsToStringPreSani.replace(saniRegex2, "").replace(saniRegex3, "") //for some reason, we sometimes get the following format for searchResultsToStringPreSani:
+      let searchResultsToString = searchResultsToStringPreSani.replace(saniRegex2, "").replace(saniRegex3, "").replace(saniRegex4, "")
+      //for some reason, we sometimes get the following format for searchResultsToStringPreSani:
       // {},,{}, so we need to convert that to {},{}
       console.log(`searchResultsToString==> ${searchResultsToString}`)
       searchResultsSplit = searchResultsToString.split(splitRegex1)
